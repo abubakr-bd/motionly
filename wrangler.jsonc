@@ -1,0 +1,12 @@
+{
+  "name": "motionly-media",
+  "compatibility_date": "2024-03-20",
+  "pages_build_output_dir": "./dist",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "motionly_db",
+      "database_id": "4e7807ab-b9f1-4a73-8e10-4f139877b3ed"
+    }
+  ]
+}

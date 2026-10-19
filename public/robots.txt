@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /team/
+Disallow: /invoice/
+
+Sitemap: https://motionly.media/sitemap.xml

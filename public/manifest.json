@@ -1,0 +1,21 @@
+{
+  "name": "Motionly Media",
+  "short_name": "Motionly",
+  "description": "Premium Video Marketing & High-Retention Editing Agency",
+  "icons": [
+    {
+      "src": "/favicon-small.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-small.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff"
+}
