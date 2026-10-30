@@ -173,7 +173,7 @@ const PAGES = [
   {
     path: "/",
     title: "Motionly Media | Premier Video Editing, Video Marketing & Production Agency",
-    description: "Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency. Serving market leaders across the US, UK, Canada, Australia, and worldwide. Scale your brand with VSLs, SaaS product videos, and founder-led content.",
+    description: "Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency. Serving market leaders across the US, UK, Canada, Australia, and worldwide.",
     keywords: "video editing agency, video marketing agency, video production company, high-retention video editing, video editing agency in Bangladesh, video production BD, SaaS video production, YouTube video editor, VSL production, commercial video agency, Motionly Media",
     h1: "Global High-Retention Video Editing, Video Marketing & Video Production Agency",
     bodyContent: `
@@ -195,13 +195,13 @@ const PAGES = [
             <span style="color:#3b82f6">&rsaquo;</span>
           </div>
           <h1 class="crit-h1">
-            Product videos <span class="crit-gradient-text">that just work</span>
+            Creative videos. <span class="crit-gradient-text">Built to move brands.</span>
           </h1>
           <p class="crit-lede">
-            Story-led video editing, B2B SaaS video marketing, and high-retention commercial video production for market leaders worldwide.
+            We combine strategic storytelling, high-end video editing, motion graphics, and creative production to help SaaS companies, founders, creators, and ambitious brands stand out.
           </p>
           <div>
-            <a href="/contact" class="crit-cta-btn">GET YOUR PRODUCT VIDEO</a>
+            <a href="/contact" class="crit-cta-btn">LET'S WORK TOGETHER</a>
           </div>
           <div class="crit-video-card">
             <img src="https://img.youtube.com/vi/q7hCvbfvRPU/maxresdefault.jpg" alt="Motionly Media showreel video thumbnail" width="1280" height="720" style="width:100%;height:100%;object-fit:cover" fetchpriority="high" decoding="async" />

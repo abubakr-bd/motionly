@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useSiteSettings, DEFAULT_PROCESS } from "../../lib/useSiteData";
 import {
   Rocket,
@@ -69,13 +70,21 @@ export const OurProcess = () => {
             HEADER & SUBTITLE
         ========================================================================= */}
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-3"
+          >
+            {settings.process.subtitle || "OUR CREATIVE FRAMEWORK"}
+          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-950 dark:text-white mb-3 leading-[1.08]"
           >
-            {settings.process.title || "The Motionly Framework."}
+            {settings.process.title || "From idea to impact."}
           </motion.h2>
 
           <motion.p
@@ -85,7 +94,7 @@ export const OurProcess = () => {
             transition={{ delay: 0.1 }}
             className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium"
           >
-            {settings.process.subtitle || "A simple 3 step framework we follow in every video."}
+            {settings.process.description || "A clear creative process designed to take your vision from concept to final delivery."}
           </motion.p>
         </div>
 
@@ -291,10 +300,10 @@ export const OurProcess = () => {
                     {/* Bottom Status Caption */}
                     <div className="mt-6 text-center">
                       <span className="text-[11px] font-mono font-bold tracking-widest text-slate-800 dark:text-slate-200 uppercase block">
-                        AUDIENCE ATTENTION ENGINE // STRATEGY
+                        AUDIENCE CONTEXT // STRATEGIC DIRECTION
                       </span>
                       <span className="text-xs font-mono font-bold text-blue-600 dark:text-cyan-400">
-                        First 3-Second Retention Target: 85%+
+                        Objective Defined &amp; Creative Direction Established
                       </span>
                     </div>
                   </motion.div>
@@ -314,10 +323,10 @@ export const OurProcess = () => {
                   >
                     <div className="text-center mb-2">
                       <span className="text-[10px] font-mono uppercase tracking-widest text-blue-600 dark:text-cyan-400 font-bold block">
-                        PRECISION NLE PRODUCTION
+                        STORY &amp; MOTION PRODUCTION
                       </span>
                       <span className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
-                        Multi-Track Sprints &amp; Motion Polish
+                        Visual Storytelling &amp; Creative Execution
                       </span>
                     </div>
 
@@ -325,7 +334,7 @@ export const OurProcess = () => {
                     <div className="p-3.5 rounded-xl bg-white border border-blue-200 shadow-sm dark:bg-blue-950/40 dark:border-blue-500/30 flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-blue-400" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white">Track 01: 3D Camera &amp; UI Motion</span>
+                        <span className="text-xs font-bold text-slate-900 dark:text-white">Track 01: Visual Story &amp; Motion Graphics</span>
                       </div>
                       <span className="text-[10px] font-mono text-blue-600 dark:text-cyan-300 font-bold">60 FPS</span>
                     </div>
@@ -334,7 +343,7 @@ export const OurProcess = () => {
                     <div className="p-3.5 rounded-xl bg-white border border-indigo-200 shadow-sm dark:bg-indigo-950/40 dark:border-indigo-500/30 flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="w-2.5 h-2.5 rounded-full bg-indigo-600 dark:bg-indigo-400" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white">Track 02: Kinetic Captions &amp; Hooks</span>
+                        <span className="text-xs font-bold text-slate-900 dark:text-white">Track 02: Kinetic Hooks &amp; Brand Narrative</span>
                       </div>
                       <span className="text-[10px] font-mono text-indigo-600 dark:text-indigo-300 font-bold">Word Sync</span>
                     </div>
@@ -343,7 +352,7 @@ export const OurProcess = () => {
                     <div className="p-3.5 rounded-xl bg-white border border-sky-200 shadow-sm dark:bg-sky-950/40 dark:border-sky-500/30 flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white">Track 03: Spatial Foley &amp; Side-chain</span>
+                        <span className="text-xs font-bold text-slate-900 dark:text-white">Track 03: Sound Design &amp; Cinematic Polish</span>
                       </div>
                       <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-300 font-bold">48kHz Master</span>
                     </div>
@@ -374,7 +383,7 @@ export const OurProcess = () => {
                         <Rocket className="w-8 h-8 text-white -rotate-12" />
                       </div>
                       <span className="text-xs font-mono font-bold tracking-widest text-slate-900 dark:text-white uppercase">
-                        2-WEEK TURNAROUND
+                        REFINED &amp; LAUNCH READY
                       </span>
                       <span className="text-xs text-blue-600 dark:text-cyan-400 font-bold mt-0.5">
                         Multi-Platform Distribution Ready
@@ -386,6 +395,39 @@ export const OurProcess = () => {
             </div>
           </div>
         </div>
+
+        {/* =========================================================================
+            SECTION 9: OPTIONAL PRODUCTION SUPPORT (BEYOND THE EDIT)
+        ========================================================================= */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-14 sm:mt-20 p-8 sm:p-10 rounded-3xl bg-slate-50/80 dark:bg-[#080D1A]/80 border border-slate-200/90 dark:border-white/10 relative overflow-hidden backdrop-blur-md"
+        >
+          <div className="pointer-events-none absolute -right-20 -bottom-20 w-80 h-80 bg-blue-500/10 dark:bg-blue-600/15 rounded-full blur-3xl" />
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-2 block">
+                BEYOND THE EDIT
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white mb-3 tracking-tight">
+                Need more than post-production?
+              </h3>
+              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+                We can extend creative execution with professional filming, cinematography, studio shoots, and on-location production when your project needs it.
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] transition-all shrink-0 cursor-pointer"
+            >
+              <span>DISCUSS YOUR PRODUCTION NEEDS</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </motion.div>
       </div>
 
       {/* =========================================================================

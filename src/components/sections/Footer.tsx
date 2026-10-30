@@ -54,7 +54,7 @@ export const Footer = () => {
               />
             </Link>
             <p className="text-sm text-slate-700 dark:text-slate-200 max-w-md leading-relaxed font-medium">
-              Story-led video editing, 3D motion design, and high-retention launch videos for high-growth software brands and creators.
+              Motionly is a creative and video marketing agency helping SaaS companies, founders, creators, and ambitious brands turn ideas into impactful visual experiences.
             </p>
             <div>
               <a

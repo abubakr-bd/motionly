@@ -75,7 +75,7 @@ export const Difference = () => {
             viewport={{ once: true }}
             className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 dark:text-white mb-4 sm:mb-6"
           >
-            {title || "What Goes Into Every Video."}
+            {title || "The Motionly approach."}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -83,7 +83,7 @@ export const Difference = () => {
             viewport={{ once: true }}
             className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed font-medium"
           >
-            {description || "A battle-tested production standard built for speed, retention, and undeniable brand authority."}
+            {description || "Strategy, creativity, and execution come together to create videos that make a difference."}
           </motion.p>
         </div>
 

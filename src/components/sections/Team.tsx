@@ -50,11 +50,11 @@ const Team = () => {
               The Collective
             </p>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight">
-              Meet the minds behind the cuts.
+              Meet the minds behind the creativity.
             </h2>
           </div>
           <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 max-w-sm font-medium">
-            Story strategists, 3D animators, and sound designers engineering attention for world-class brands.
+            A multidisciplinary team of creative thinkers, strategists, editors, designers, and production professionals bringing ideas to life.
           </p>
         </div>
 

@@ -20,10 +20,10 @@ export const Pricing = () => {
             Pricing &amp; Retainers
           </p>
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 dark:text-white mb-4">
-            Predictable terms. Relentless execution.
+            Flexible partnerships. Consistent creative execution.
           </h2>
           <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
-            Choose a plan that fits your publishing rhythm. Every engagement starts with a clear scope and transparent turnaround.
+            From individual creative projects to ongoing content partnerships, we build an engagement around your goals, scope, and workflow.
           </p>
         </div>
 

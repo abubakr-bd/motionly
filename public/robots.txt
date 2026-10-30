@@ -2,6 +2,7 @@
 # Permitting standard search engines and modern AI generative search crawlers
 
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /admin/
 Disallow: /team/
@@ -9,33 +10,42 @@ Disallow: /invoice/
 
 # Explicit permissions for AI & Generative Search Engines (AEO & GEO)
 User-agent: GPTBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /admin/
 Disallow: /team/
 Disallow: /invoice/
 
 User-agent: ChatGPT-User
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: PerplexityBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: ClaudeBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: anthropic-ai
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: Google-Extended
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: Applebot-Extended
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: Bingbot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: CCBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 # XML Sitemap

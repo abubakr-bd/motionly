@@ -14,15 +14,24 @@ export const Testimonials = () => {
   return (
     <section id="testimonials" className="relative pt-6 pb-20 sm:pb-28 bg-white dark:bg-[#05070F] text-slate-900 dark:text-white transition-colors duration-300 overflow-hidden">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        {/* 'Get Yours Next' Link */}
-        <div className="text-center mb-6">
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-white transition-colors group"
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-3"
           >
-            <span>Get Yours Next</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
+            PARTNER EXPERIENCES
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 dark:text-white mb-3"
+          >
+            Creative work. Real relationships.
+          </motion.h2>
         </div>
 
         {/* Laser Horizon Line (Thin glowing blue separator as in inspiration) */}

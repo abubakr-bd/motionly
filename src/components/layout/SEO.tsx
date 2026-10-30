@@ -25,12 +25,12 @@ const SEO: React.FC<SEOProps> = ({
 }) => {
   const { settings } = useSiteSettings();
   const siteName = settings.global.siteName || "Motionly Media";
-  const siteDesc = settings.global.siteDescription || "Premier high-retention video editing, video marketing, and commercial video production agency serving global market leaders.";
+  const siteDesc = settings.global.siteDescription || "Motionly is a creative and video marketing agency helping SaaS companies, founders, creators, and ambitious brands turn ideas into impactful visual experiences.";
   
   const finalTitle = title || siteName;
   const finalDescription = description || siteDesc;
   const fullTitle = finalTitle.includes(siteName) ? finalTitle : `${finalTitle} | ${siteName}`;
-  const metaKeywords = keywords || "video editing agency, video marketing agency, video production company, high-retention video editing, video editing agency in Bangladesh, video production BD, SaaS video production, YouTube video editor, VSL production, commercial video agency, Motionly Media";
+  const metaKeywords = keywords || "creative agency, video marketing agency, SaaS video production, motion graphics, video editing, personal branding, commercial video, Motionly Media";
   
   // Clean canonical URL without search query params or hashes
   const rawUrl = url || (typeof window !== "undefined" ? (window.location.origin + window.location.pathname) : "https://motionly.media/");

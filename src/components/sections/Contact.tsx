@@ -21,11 +21,11 @@ export const Contact = () => (
         </span>
 
         <h2 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6">
-          Make the next video count.
+          Let&apos;s make something that matters.
         </h2>
 
         <p className="text-base sm:text-lg md:text-xl text-blue-100 dark:text-slate-300 max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed font-normal">
-          Tell us what you are building. We will analyze your goals, outline high-retention hooks, and map out a practical timeline.
+          Tell us what you&apos;re building. We&apos;ll explore your goals, understand your vision, and find the right creative direction to bring it to life.
         </p>
 
         <Link
@@ -33,7 +33,7 @@ export const Contact = () => (
           className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-4 sm:py-4.5 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase bg-white text-slate-950 hover:bg-slate-100 dark:hover:bg-slate-200 transition-all active:scale-95 shadow-xl shadow-black/20 dark:shadow-[0_0_35px_rgba(255,255,255,0.25)] mb-4 cursor-pointer"
         >
           <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-blue-600/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
-          <span className="relative z-10">Talk to the studio</span>
+          <span className="relative z-10">START A PROJECT</span>
           <ArrowUpRight className="w-4 h-4 relative z-10 text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
 

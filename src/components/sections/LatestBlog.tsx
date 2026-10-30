@@ -26,7 +26,7 @@ export const LatestBlog = () => {
               The Journal &amp; Strategy
             </p>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Ideas for making better video.
+              Perspectives on creativity, content, and growth.
             </h2>
           </div>
           <Link
