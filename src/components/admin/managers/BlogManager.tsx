@@ -5,7 +5,8 @@ import { AdminButton, AdminInput, AdminTextarea, AdminBadge, AdminPageHeader, Ad
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
 import ReactQuill from "react-quill-new";
-import { Edit2, Trash2, Plus, ArrowLeft, Image as ImageIcon, Calendar, Globe, Loader2 } from "lucide-react";
+import { Edit2, Trash2, Plus, ArrowLeft, Image as ImageIcon, Calendar, Globe, Loader2, Sparkles, RotateCcw } from "lucide-react";
+import { STATIC_BLOGS } from "../../../lib/staticBlogs";
 
 export const BlogManager = ({ notify }: any) => {
   const { user } = useAuth();
@@ -103,6 +104,39 @@ export const BlogManager = ({ notify }: any) => {
     } catch {
       notify("Delete failed", "err");
     }
+  };
+
+  const handleSeedDefaults = async () => {
+    if (!confirm("Populate your blog with the 10 Motionly Master SEO articles (SaaS launch, YC pitch, VSLs, 3-second hooks, 3D motion, audio branding, etc.)?")) return;
+    setSaving(true);
+    try {
+      const db = await getDb();
+      for (let i = 0; i < STATIC_BLOGS.length; i++) {
+        const item = STATIC_BLOGS[i];
+        const payload = {
+          title: item.title,
+          summary: item.summary,
+          content: item.content,
+          imageUrl: item.imageUrl,
+          category: item.category,
+          status: "published",
+          seoTitle: item.seoTitle || item.title,
+          seoDescription: item.seoDescription || item.summary,
+          date: item.date,
+          publishDate: item.date,
+          order: i + 1,
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now()
+        };
+        await setDoc(doc(db, "blogs", item.id), payload, { merge: true });
+      }
+      logActivity(user, "created", "blog", "Seeded 10 SEO Master Articles", "batch");
+      notify("10 SEO Master Articles loaded successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to seed articles", "err");
+    }
+    setSaving(false);
   };
 
   const filteredItems = useMemo(() => {
@@ -229,13 +263,18 @@ export const BlogManager = ({ notify }: any) => {
         title="Articles & Blog Posts"
         description="Publish editorial insights, video production breakdowns, and creator strategy guides."
         action={
-          <AdminButton onClick={() => {
-            setForm({ title: "", summary: "", content: "", imageUrl: "", category: "Strategy", status: "draft", seoTitle: "", seoDescription: "", publishDate: "" });
-            setEditingId(null);
-            setView("editor");
-          }}>
-            <Plus className="w-4 h-4" /> New Article
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleSeedDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" /> Reset to 10 SEO Articles
+            </AdminButton>
+            <AdminButton onClick={() => {
+              setForm({ title: "", summary: "", content: "", imageUrl: "", category: "Strategy", status: "draft", seoTitle: "", seoDescription: "", publishDate: "" });
+              setEditingId(null);
+              setView("editor");
+            }}>
+              <Plus className="w-4 h-4" /> New Article
+            </AdminButton>
+          </div>
         }
       />
 
@@ -293,14 +332,14 @@ export const BlogManager = ({ notify }: any) => {
           description={
             search || categoryFilter !== "All"
               ? "Try adjusting your search query or category filter."
-              : "Share insights and build SEO traffic with your first article."
+              : "Share insights and build SEO traffic by loading the 10 Motionly Master SEO blueprints or writing a new article."
           }
-          actionLabel="Write Article"
-          onAction={() => {
+          actionLabel={search || categoryFilter !== "All" ? "Write Article" : "Load 10 SEO Master Articles"}
+          onAction={search || categoryFilter !== "All" ? () => {
             setForm({ title: "", summary: "", content: "", imageUrl: "", category: "Strategy", status: "draft", seoTitle: "", seoDescription: "", publishDate: "" });
             setEditingId(null);
             setView("editor");
-          }}
+          } : handleSeedDefaults}
         />
       ) : (
         <div className="bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-sm">

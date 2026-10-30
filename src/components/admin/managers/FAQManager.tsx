@@ -23,6 +23,7 @@ import {
   ArrowUp,
   ArrowDown,
   Sparkles,
+  RotateCcw,
 } from "lucide-react";
 
 export const FAQManager = ({ notify }: { notify: (msg: string, type?: "ok" | "err") => void }) => {
@@ -130,7 +131,7 @@ export const FAQManager = ({ notify }: { notify: (msg: string, type?: "ok" | "er
   };
 
   const handleSeedDefaults = async () => {
-    if (faqs.length > 0 && !confirm("Replace current FAQs with 8 curated Video Agency FAQs?")) {
+    if (!confirm("Reset FAQ knowledgebase to Motionly's default questions & answers? This will overwrite custom FAQs.")) {
       return;
     }
     setSaving(true);
@@ -148,8 +149,8 @@ export const FAQManager = ({ notify }: { notify: (msg: string, type?: "ok" | "er
           createdAt: Timestamp.now(),
         });
       }
-      logActivity(user, "created", "faq", "Reset with 8 Curated Video Agency FAQs");
-      notify("8 Curated Video Agency FAQs loaded successfully");
+      logActivity(user, "created", "faq", "Reset with Default Video Agency FAQs");
+      notify("Default FAQ questions restored successfully!");
     } catch (err) {
       console.error(err);
       notify("Failed to seed FAQs", "err");
@@ -179,8 +180,8 @@ export const FAQManager = ({ notify }: { notify: (msg: string, type?: "ok" | "er
         badge={`${faqs.length} Active`}
         action={
           <div className="flex items-center gap-3">
-            <AdminButton variant="secondary" icon={Sparkles} onClick={handleSeedDefaults} loading={saving}>
-              Load Curated FAQs
+            <AdminButton variant="secondary" icon={RotateCcw} onClick={handleSeedDefaults} loading={saving}>
+              Reset to Defaults
             </AdminButton>
             <AdminButton icon={Plus} onClick={handleOpenAdd}>
               Add Question

@@ -102,7 +102,14 @@ const Blog = () => {
                   <Link to={`/blog/${post.id}`}>
                     <div className="site-journal-card__image">
                       {post.imageUrl ? (
-                        <img src={post.imageUrl} alt="" width="900" height="600" loading="lazy" />
+                        <img 
+                          src={post.imageUrl} 
+                          alt={post.title ? `${post.title} - Motionly Media Blog` : "Motionly article cover"} 
+                          width="900" 
+                          height="600" 
+                          loading="lazy" 
+                          decoding="async"
+                        />
                       ) : (
                         <div className="site-journal-card__placeholder"><span>{post.category || "Motionly Journal"}</span></div>
                       )}

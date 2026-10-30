@@ -42,148 +42,152 @@ export interface CMSSection {
   shortName: string;
   path: string;
   icon: React.ComponentType<{ className?: string }>;
-  category: "core" | "story" | "social" | "config";
+  category: "growth" | "content" | "story" | "system";
   description: string;
   badge?: string;
 }
 
 export const CMS_SECTIONS: CMSSection[] = [
-  // 1. Core Content
+  // 1. Commercials & Showcase (Primary Core Hub)
   {
-    name: "Dashboard",
+    name: "Dashboard Overview",
     shortName: "Overview",
     path: "/admin",
     icon: LayoutDashboard,
-    category: "core",
-    description: "Website overview, live status & quick actions",
+    category: "growth",
+    description: "Website performance, live D1 sync & quick jump links",
   },
   {
-    name: "Homepage Hero",
-    shortName: "Hero",
-    path: "/admin/hero",
-    icon: Sparkles,
-    category: "core",
-    description: "Main headline, CTA & video showreel",
-    badge: "Hero",
-  },
-  {
-    name: "Portfolio",
+    name: "Portfolio & Showreel",
     shortName: "Portfolio",
     path: "/admin/portfolio",
     icon: Film,
-    category: "core",
-    description: "Video projects & client case studies",
+    category: "growth",
+    description: "Featured video projects, client case studies & YouTube embeds",
     badge: "Key",
   },
   {
-    name: "Journal (Blog)",
-    shortName: "Blog",
-    path: "/admin/blogs",
-    icon: BookOpen,
-    category: "core",
-    description: "Articles, editorial posts & case writeups",
-  },
-  {
-    name: "Personal Branding",
-    shortName: "Branding",
-    path: "/admin/personal-branding",
-    icon: Compass,
-    category: "core",
-    description: "Founder & creator personal branding",
-  },
-
-  // 2. Story & Conversion
-  {
-    name: "How It Works",
-    shortName: "Process",
-    path: "/admin/process",
-    icon: GitMerge,
-    category: "story",
-    description: "Production workflow steps & timeline",
-  },
-  {
-    name: "The Difference",
-    shortName: "Difference",
-    path: "/admin/difference",
-    icon: Split,
-    category: "story",
-    description: "Agency USPs & comparison value props",
-  },
-  {
-    name: "Pain Points",
-    shortName: "Pain Points",
-    path: "/admin/pain-points",
-    icon: ZapOff,
-    category: "story",
-    description: "Client video problems & solutions",
-  },
-  {
-    name: "Pricing & Packages",
+    name: "Pricing & Retainers",
     shortName: "Pricing",
     path: "/admin/pricing",
     icon: Layers,
-    category: "story",
-    description: "Service tiers, deliverables & package rates",
+    category: "growth",
+    description: "Service tiers, deliverables & monthly package rates",
+    badge: "Plans",
   },
-
-  // 3. Social Proof & Trust
   {
-    name: "Client Reviews",
+    name: "Client Reviews & Proof",
     shortName: "Reviews",
     path: "/admin/reviews",
     icon: MessageSquareQuote,
-    category: "social",
-    description: "Testimonials, ratings & client quotes",
-  },
-  {
-    name: "Team Members",
-    shortName: "Team",
-    path: "/admin/team",
-    icon: Users,
-    category: "social",
-    description: "Agency roster, editors & leadership",
-  },
-  {
-    name: "Partners & Brands",
-    shortName: "Brands",
-    path: "/admin/partners",
-    icon: Building2,
-    category: "social",
-    description: "Client logo marquee & layer configuration",
+    category: "growth",
+    description: "Testimonials, founder quotes & 5-star ratings",
+    badge: "Trust",
   },
 
-  // 4. Site Configuration
+  // 2. Editorial & Brand Social Proof
+  {
+    name: "Journal (Blog SEO)",
+    shortName: "Blog",
+    path: "/admin/blogs",
+    icon: BookOpen,
+    category: "content",
+    description: "10 SEO master guides, article editor & drafts",
+    badge: "SEO",
+  },
+  {
+    name: "Brand Partners & Logos",
+    shortName: "Partners",
+    path: "/admin/partners",
+    icon: Building2,
+    category: "content",
+    description: "Client logo marquee & multi-tier layer configuration",
+  },
   {
     name: "FAQ Knowledgebase",
     shortName: "FAQs",
     path: "/admin/faqs",
     icon: HelpCircle,
-    category: "config",
-    description: "Frequently asked questions & answers",
+    category: "content",
+    description: "Frequently asked questions & objection handling",
+  },
+
+  // 3. Homepage Story & Narrative
+  {
+    name: "Homepage Hero",
+    shortName: "Hero",
+    path: "/admin/hero",
+    icon: Sparkles,
+    category: "story",
+    description: "Main headline, prestige badge & showreel video",
+    badge: "Hero",
   },
   {
-    name: "Site Settings",
+    name: "The 3-Step Framework",
+    shortName: "Framework",
+    path: "/admin/process",
+    icon: GitMerge,
+    category: "story",
+    description: "Strategy, Build & Launch production steps",
+    badge: "3-Step",
+  },
+  {
+    name: "The Difference (USPs)",
+    shortName: "Difference",
+    path: "/admin/difference",
+    icon: Split,
+    category: "story",
+    description: "Comparison vs freelancers & traditional agencies",
+  },
+  {
+    name: "Client Pain Points",
+    shortName: "Pain Points",
+    path: "/admin/pain-points",
+    icon: ZapOff,
+    category: "story",
+    description: "Say Goodbye to Bad Editing bullet points",
+  },
+  {
+    name: "Personal Branding Page",
+    shortName: "Branding",
+    path: "/admin/personal-branding",
+    icon: Compass,
+    category: "story",
+    description: "Founder & creator personal branding landing page",
+  },
+
+  // 4. Studio Administration & Security
+  {
+    name: "Team Members",
+    shortName: "Team",
+    path: "/admin/team",
+    icon: Users,
+    category: "system",
+    description: "Agency roster, leadership & editor profiles",
+  },
+  {
+    name: "Site Settings & SEO",
     shortName: "Settings",
     path: "/admin/settings",
     icon: Settings,
-    category: "config",
-    description: "Global SEO, identity & contact metadata",
+    category: "system",
+    description: "Global metadata, social channels & brand info",
   },
   {
-    name: "Access & Audit",
+    name: "Access & Security Audit",
     shortName: "Security",
     path: "/admin/access",
     icon: ShieldCheck,
-    category: "config",
-    description: "Admin whitelist & security audit history",
+    category: "system",
+    description: "Authorized admin emails & workspace audit trail",
   },
 ];
 
 const CATEGORIES = [
-  { id: "core", title: "Core Website Content", count: 5 },
-  { id: "story", title: "Story & Conversion", count: 4 },
-  { id: "social", title: "Social Proof & Trust", count: 3 },
-  { id: "config", title: "Site Configuration", count: 3 },
+  { id: "growth", title: "Commercials & Showcase", count: 4 },
+  { id: "content", title: "Editorial & Proof", count: 3 },
+  { id: "story", title: "Homepage Story & Narrative", count: 5 },
+  { id: "system", title: "Studio Administration", count: 3 },
 ] as const;
 
 export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, onSignOut }) => {
@@ -422,6 +426,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, onSignOut })
               <ChevronRight className="w-3.5 h-3.5 text-slate-300" />
               <span className="text-slate-900 font-bold bg-slate-100 px-2.5 py-0.5 rounded-lg border border-slate-200/70">
                 {currentSection.name}
+              </span>
+              <span className="inline-flex items-center gap-1.5 ml-2 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Live Sync
               </span>
             </div>
           </div>

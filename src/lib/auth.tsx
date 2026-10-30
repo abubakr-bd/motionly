@@ -28,6 +28,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     let unsubscribe: (() => void) | null = null;
 
     const initAuth = async () => {
+      // Only load Firebase Auth on admin/team pages or when there is an active session
+      const path = typeof window !== "undefined" ? window.location.pathname : "";
+      const isAdminRoute = path.startsWith("/admin") || path.startsWith("/team");
+      const hasSavedAuth = typeof localStorage !== "undefined" && Object.keys(localStorage).some(k => k.startsWith("firebase:authUser"));
+
+      if (!isAdminRoute && !hasSavedAuth) {
+        setLoading(false);
+        return;
+      }
+
       const { getAuth, onAuthStateChanged } = await import("firebase/auth");
       const { getFirestore, doc, getDoc } = await import("firebase/firestore");
       const { initializeApp, getApps } = await import("firebase/app");

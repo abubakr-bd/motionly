@@ -4,7 +4,8 @@ import { getDb } from "../../../lib/firebaseLazy";
 import { AdminButton, AdminInput, AdminSelect, AdminBadge, AdminPageHeader, AdminSearchBar, AdminModal, AdminEmptyState } from "../ui/AdminUI";
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
-import { Edit2, Trash2, Plus, Loader2, Play, ExternalLink, Video } from "lucide-react";
+import { Edit2, Trash2, Plus, Loader2, Play, ExternalLink, Video, Sparkles, RotateCcw } from "lucide-react";
+import { DEFAULT_PORTFOLIO } from "../../../lib/useSiteData";
 
 export const PortfolioManager = ({ notify }: any) => {
   const { user } = useAuth();
@@ -19,7 +20,8 @@ export const PortfolioManager = ({ notify }: any) => {
   const [form, setForm] = useState({
     title: "",
     videoId: "",
-    category: "Short-form",
+    description: "",
+    category: "Product Release",
     labels: "",
     status: "published",
     order: 0
@@ -56,6 +58,7 @@ export const PortfolioManager = ({ notify }: any) => {
       const payload = {
         title: form.title.trim(),
         videoId: form.videoId.trim(),
+        description: (form.description || "").trim(),
         category: form.category.trim(),
         labels: Array.isArray(form.labels)
           ? form.labels
@@ -87,7 +90,8 @@ export const PortfolioManager = ({ notify }: any) => {
     setForm({
       title: item.title || "",
       videoId: item.videoId || "",
-      category: item.category || "Short-form",
+      description: item.description || "",
+      category: item.category || "Product Release",
       labels: Array.isArray(item.labels) ? item.labels.join(", ") : item.labels || "",
       status: item.status || "published",
       order: item.order ?? items.length
@@ -108,9 +112,38 @@ export const PortfolioManager = ({ notify }: any) => {
     }
   };
 
+  const handleSeedDefaults = async () => {
+    if (!confirm("Reset portfolio to Motionly's default showcase projects? This will restore the baseline videos shown on the website.")) return;
+    setSaving(true);
+    try {
+      const db = await getDb();
+      for (let i = 0; i < DEFAULT_PORTFOLIO.length; i++) {
+        const item = DEFAULT_PORTFOLIO[i];
+        const payload = {
+          title: item.title,
+          videoId: item.videoId,
+          description: item.description || "",
+          category: item.category,
+          labels: item.labels || [],
+          status: "published",
+          order: item.order ?? (i + 1),
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now()
+        };
+        await setDoc(doc(db, "portfolio", item.id), payload, { merge: true });
+      }
+      logActivity(user, "created", "portfolio", "Reset to Default Showcase Videos", "batch");
+      notify("Default showcase projects restored successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to seed portfolio items", "err");
+    }
+    setSaving(false);
+  };
+
   // Derive all unique categories
   const categories = useMemo(() => {
-    const defaultCats = ["Short-form", "Long-form", "Commercial", "Documentary", "YouTube"];
+    const defaultCats = ["Product Release", "Launch Video", "In-Person Demo", "Others", "Short-form", "Long-form", "Commercial", "YouTube"];
     const found = items.map(i => i.category).filter(Boolean);
     return Array.from(new Set([...defaultCats, ...found]));
   }, [items]);
@@ -135,22 +168,28 @@ export const PortfolioManager = ({ notify }: any) => {
         title="Portfolio Showcase"
         description="Manage case studies, video showpieces, categories, and tags displayed across the site."
         action={
-          <AdminButton
-            onClick={() => {
-              setForm({
-                title: "",
-                videoId: "",
-                category: "Short-form",
-                labels: "",
-                status: "published",
-                order: items.length
-              });
-              setEditingId(null);
-              setIsAdding(true);
-            }}
-          >
-            <Plus className="w-4 h-4" /> Add Project
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleSeedDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" /> Reset to Defaults
+            </AdminButton>
+            <AdminButton
+              onClick={() => {
+                setForm({
+                  title: "",
+                  videoId: "",
+                  description: "",
+                  category: "Product Release",
+                  labels: "",
+                  status: "published",
+                  order: items.length
+                });
+                setEditingId(null);
+                setIsAdding(true);
+              }}
+            >
+              <Plus className="w-4 h-4" /> Add Project
+            </AdminButton>
+          </div>
         }
       />
 
@@ -207,21 +246,22 @@ export const PortfolioManager = ({ notify }: any) => {
           description={
             search || selectedCategory !== "All"
               ? "Try adjusting your search query or category filter."
-              : "Showcase your best video edits and case studies to prospects."
+              : "Showcase your best video edits and case studies, or populate the default showcase projects with one click."
           }
-          actionLabel="Add Project"
-          onAction={() => {
+          actionLabel={search || selectedCategory !== "All" ? "Add Project" : "Load Showcase Projects"}
+          onAction={search || selectedCategory !== "All" ? () => {
             setForm({
               title: "",
               videoId: "",
-              category: "Short-form",
+              description: "",
+              category: "Product Release",
               labels: "",
               status: "published",
               order: items.length
             });
             setEditingId(null);
             setIsAdding(true);
-          }}
+          } : handleSeedDefaults}
         />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -316,9 +356,16 @@ export const PortfolioManager = ({ notify }: any) => {
         <div className="space-y-5">
           <AdminInput
             label="Project Title"
-            placeholder="e.g. Behind The Scenes: 10M View Case Study"
+            placeholder="e.g. Bolto, ClickUp, or Apple SaaS Explainer"
             value={form.title}
             onChange={(e: any) => setForm({ ...form, title: e.target.value })}
+          />
+
+          <AdminInput
+            label="Short Description / Tagline"
+            placeholder="e.g. YC-backed AI-native platform that unifies recruiting and HR."
+            value={form.description}
+            onChange={(e: any) => setForm({ ...form, description: e.target.value })}
           />
 
           <div className="space-y-2">

@@ -243,7 +243,22 @@ export const GlobalSettingsManager = ({ notify }: any) => {
                   <h3 className="text-xl font-black text-slate-900 mb-6">Contact Links</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <AdminInput label="Support Email" value={form.contact.email} onChange={(e: any) => setForm({ ...form, contact: { ...form.contact, email: e.target.value } })} />
-                    <AdminInput label="Calendly URL" value={form.contact.calendlyUrl} onChange={(e: any) => setForm({ ...form, contact: { ...form.contact, calendlyUrl: e.target.value } })} />
+                    <AdminInput 
+                      label="Cal.com Booking Slug or URL" 
+                      value={form.contact.calLink || form.contact.calendlyUrl} 
+                      onChange={(e: any) => {
+                        const val = e.target.value.trim().replace(/^https?:\/\/cal\.com\//i, "");
+                        setForm({ 
+                          ...form, 
+                          contact: { 
+                            ...form.contact, 
+                            calLink: val,
+                            calendlyUrl: e.target.value 
+                          } 
+                        });
+                      }} 
+                      placeholder="motionly-media-rdgfxc/30min"
+                    />
                     <AdminInput label="LinkedIn" value={form.contact.linkedin} onChange={(e: any) => setForm({ ...form, contact: { ...form.contact, linkedin: e.target.value } })} />
                     <AdminInput label="Instagram" value={form.contact.instagram} onChange={(e: any) => setForm({ ...form, contact: { ...form.contact, instagram: e.target.value } })} />
                   </div>

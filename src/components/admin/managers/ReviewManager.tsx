@@ -7,7 +7,8 @@ import {
 } from "../ui/AdminUI";
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
-import { Edit2, Trash2, Plus, Loader2, Play, Star, CheckCircle, MessageSquare } from "lucide-react";
+import { Edit2, Trash2, Plus, Loader2, Play, Star, CheckCircle, MessageSquare, Sparkles, RotateCcw } from "lucide-react";
+import { DEFAULT_TESTIMONIALS } from "../../../lib/useSiteData";
 
 export const ReviewManager = ({ notify }: any) => {
   const { user } = useAuth();
@@ -22,6 +23,8 @@ export const ReviewManager = ({ notify }: any) => {
   const [form, setForm] = useState({
     name: "",
     role: "",
+    company: "",
+    avatar: "",
     content: "",
     videoId: "",
     rating: 5,
@@ -61,6 +64,8 @@ export const ReviewManager = ({ notify }: any) => {
       const payload = {
         name: form.name.trim(),
         role: form.role.trim(),
+        company: (form.company || "").trim(),
+        avatar: (form.avatar || "").trim(),
         content: form.content.trim(),
         videoId: form.videoId.trim(),
         rating: Number(form.rating) || 5,
@@ -92,6 +97,8 @@ export const ReviewManager = ({ notify }: any) => {
     setForm({
       name: item.name || "",
       role: item.role || "",
+      company: item.company || "",
+      avatar: item.avatar || "",
       content: item.content || "",
       videoId: item.videoId || "",
       rating: item.rating ?? 5,
@@ -115,6 +122,38 @@ export const ReviewManager = ({ notify }: any) => {
     }
   };
 
+  const handleSeedDefaults = async () => {
+    if (!confirm("Reset reviews to Motionly's default founder testimonials (Sean Dorje, Nikhil Reddy, Chris Cunningham, etc.)? This will restore baseline reviews.")) return;
+    setSaving(true);
+    try {
+      const db = await getDb();
+      for (let i = 0; i < DEFAULT_TESTIMONIALS.length; i++) {
+        const item = DEFAULT_TESTIMONIALS[i];
+        const payload = {
+          name: item.name,
+          role: item.role,
+          company: item.company || "",
+          avatar: item.avatar || "",
+          content: item.content,
+          videoId: item.videoId || "",
+          rating: item.rating || 5,
+          status: "published",
+          featured: Boolean(item.featured),
+          order: item.order ?? (i + 1),
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now()
+        };
+        await setDoc(doc(db, "testimonials", item.id), payload, { merge: true });
+      }
+      logActivity(user, "created", "testimonial", "Seeded Default Founder Reviews", "batch");
+      notify("Founder reviews loaded successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to seed reviews", "err");
+    }
+    setSaving(false);
+  };
+
   const filteredItems = useMemo(() => {
     return items.filter(item => {
       if (filter === "featured" && !item.featured) return false;
@@ -135,24 +174,31 @@ export const ReviewManager = ({ notify }: any) => {
         title="Client Reviews & Testimonials"
         description="Manage partner testimonials, video reviews, and social proof shown on the homepage."
         action={
-          <AdminButton
-            onClick={() => {
-              setForm({
-                name: "",
-                role: "",
-                content: "",
-                videoId: "",
-                rating: 5,
-                status: "published",
-                featured: false,
-                order: items.length
-              });
-              setEditingId(null);
-              setIsAdding(true);
-            }}
-          >
-            <Plus className="w-4 h-4" /> Add Review
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleSeedDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" /> Reset to Defaults
+            </AdminButton>
+            <AdminButton
+              onClick={() => {
+                setForm({
+                  name: "",
+                  role: "",
+                  company: "",
+                  avatar: "",
+                  content: "",
+                  videoId: "",
+                  rating: 5,
+                  status: "published",
+                  featured: false,
+                  order: items.length
+                });
+                setEditingId(null);
+                setIsAdding(true);
+              }}
+            >
+              <Plus className="w-4 h-4" /> Add Review
+            </AdminButton>
+          </div>
         }
       />
 
@@ -211,13 +257,15 @@ export const ReviewManager = ({ notify }: any) => {
           description={
             search || filter !== "all"
               ? "Try adjusting your search query or filter."
-              : "Add your first client testimonial to build credibility and trust."
+              : "Add your first client testimonial, or load default founder reviews with one click."
           }
-          actionLabel="Add Review"
-          onAction={() => {
+          actionLabel={search || filter !== "all" ? "Add Review" : "Load Default Reviews"}
+          onAction={search || filter !== "all" ? () => {
             setForm({
               name: "",
               role: "",
+              company: "",
+              avatar: "",
               content: "",
               videoId: "",
               rating: 5,
@@ -227,7 +275,7 @@ export const ReviewManager = ({ notify }: any) => {
             });
             setEditingId(null);
             setIsAdding(true);
-          }}
+          } : handleSeedDefaults}
         />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -322,15 +370,30 @@ export const ReviewManager = ({ notify }: any) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <AdminInput
               label="Client Name"
-              placeholder="e.g. John Doe"
+              placeholder="e.g. Sean Dorje"
               value={form.name}
               onChange={(e: any) => setForm({ ...form, name: e.target.value })}
             />
             <AdminInput
-              label="Role or Company"
-              placeholder="e.g. Founder at TechScale"
+              label="Role"
+              placeholder="e.g. Founder"
               value={form.role}
               onChange={(e: any) => setForm({ ...form, role: e.target.value })}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <AdminInput
+              label="Company Name"
+              placeholder="e.g. Naïve"
+              value={form.company}
+              onChange={(e: any) => setForm({ ...form, company: e.target.value })}
+            />
+            <AdminInput
+              label="Avatar URL (Optional)"
+              placeholder="https://... (leave blank for initials)"
+              value={form.avatar}
+              onChange={(e: any) => setForm({ ...form, avatar: e.target.value })}
             />
           </div>
 

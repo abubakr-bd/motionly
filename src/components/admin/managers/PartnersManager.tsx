@@ -6,7 +6,7 @@ import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
 import { 
   Edit2, Trash2, Plus, Loader2, Building2, ChevronUp, ChevronDown, 
-  ExternalLink, Eye, EyeOff, Globe, Tag, Image as ImageIcon, Info, CheckCircle2, AlertCircle, Sliders
+  ExternalLink, Eye, EyeOff, Globe, Tag, Image as ImageIcon, Info, CheckCircle2, AlertCircle, Sliders, RotateCcw
 } from "lucide-react";
 import { DEFAULT_PARTNERS, type PartnerItem } from "../../../lib/useSiteData";
 
@@ -239,6 +239,38 @@ export const PartnersManager = ({ notify }: { notify: (msg: string, type?: "ok" 
     await setDoc(doc(db, "partners", swapWith.id), { order: index + 1 }, { merge: true });
   };
 
+  const handleResetDefaults = async () => {
+    if (!confirm("Reset partners and brand logos to Motionly's default brands (EquiSaaS BD, Samner BD, Graduation Gate, Varnox)? This will restore default brand logos.")) return;
+    setSaving(true);
+    try {
+      const db = await getDb();
+      for (const existing of items) {
+        if (existing.id) {
+          await deleteDoc(doc(db, "partners", existing.id));
+        }
+      }
+      for (const partner of DEFAULT_PARTNERS) {
+        await setDoc(doc(db, "partners", partner.id), {
+          name: partner.name,
+          logoUrl: partner.logoUrl || "",
+          websiteUrl: partner.websiteUrl || "",
+          description: partner.description || "",
+          category: partner.category || "",
+          enabled: partner.enabled !== undefined ? partner.enabled : true,
+          order: partner.order ?? 1,
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now(),
+        });
+      }
+      logActivity(user, "updated", "partners", "Reset Partner Brands to Defaults");
+      notify("Default partner brand logos restored successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to reset partners", "err");
+    }
+    setSaving(false);
+  };
+
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       {/* Header */}
@@ -249,25 +281,31 @@ export const PartnersManager = ({ notify }: { notify: (msg: string, type?: "ok" 
             Manage partner logos, descriptions, category tags, and external website links.
           </p>
         </div>
-        <AdminButton
-          onClick={() => {
-            if (isAdding) {
-              setIsAdding(false);
-              resetForm();
-            } else {
-              resetForm();
-              setIsAdding(true);
-            }
-          }}
-        >
-          {isAdding ? (
-            "Cancel"
-          ) : (
-            <>
-              <Plus className="w-4 h-4" /> Add Partner
-            </>
-          )}
-        </AdminButton>
+        <div className="flex items-center gap-2.5">
+          <AdminButton variant="secondary" onClick={handleResetDefaults} loading={saving}>
+            <RotateCcw className="w-3.5 h-3.5 text-blue-600" />
+            <span>Reset to Defaults</span>
+          </AdminButton>
+          <AdminButton
+            onClick={() => {
+              if (isAdding) {
+                setIsAdding(false);
+                resetForm();
+              } else {
+                resetForm();
+                setIsAdding(true);
+              }
+            }}
+          >
+            {isAdding ? (
+              "Cancel"
+            ) : (
+              <>
+                <Plus className="w-4 h-4" /> Add Partner
+              </>
+            )}
+          </AdminButton>
+        </div>
       </div>
 
       {/* Carousel Layer Configuration Card */}

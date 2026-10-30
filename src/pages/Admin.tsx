@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route, Navigate, Link } from "react-router-dom";
-import { useAuth } from "../lib/auth";
+import { useAuth, AuthProvider } from "../lib/auth";
 import { getLegacyAuth } from "../lib/firebase";
 import { AdminLayout } from "../components/admin/layout/AdminLayout";
 import { BlogManager } from "../components/admin/managers/BlogManager";
@@ -89,7 +89,7 @@ const AdminLogin = () => {
   );
 };
 
-const Admin = () => {
+const AdminInner = () => {
   const { user, loading, role } = useAuth();
   const [toast, setToast] = useState<{ msg: string; type: "ok" | "err" } | null>(null);
 
@@ -148,7 +148,7 @@ const Admin = () => {
           <Route path="/pain-points" element={<PainPointsManager notify={showToast} />} />
           <Route path="/faqs" element={<FAQManager notify={showToast} />} />
           <Route path="/blogs" element={<BlogManager notify={showToast} />} />
-          <Route path="/media" element={<div className="text-2xl font-black">Media Library (Coming Soon)</div>} />
+          <Route path="/media" element={<Navigate to="/admin/portfolio" replace />} />
           <Route path="/portfolio" element={<PortfolioManager notify={showToast} />} />
           <Route path="/reviews" element={<ReviewManager notify={showToast} />} />
           <Route path="/team" element={<TeamManager notify={showToast} />} />
@@ -174,6 +174,14 @@ const Admin = () => {
         {toast && <Toast msg={toast.msg} type={toast.type} />}
       </AnimatePresence>
     </>
+  );
+};
+
+const Admin = () => {
+  return (
+    <AuthProvider>
+      <AdminInner />
+    </AuthProvider>
   );
 };
 

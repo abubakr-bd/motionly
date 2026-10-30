@@ -59,8 +59,8 @@ const schemas = [
 const Services = () => (
   <Layout>
     <SEO
-      title="Video Editing & Content Marketing Services | Motionly Media"
-      description="High-retention video editing, VSL production, channel strategy, and content packaging services built to grow your brand. Explore Motionly Media's services."
+      title="Video Editing, Video Marketing & Production Services | Motionly Media"
+      description="High-retention video editing, B2B SaaS video marketing, commercial video production, and VSL creation. Serving the US, UK, Canada, Australia, and ambitious brands worldwide."
       url="https://motionly.media/services"
       schema={schemas}
     />
@@ -68,10 +68,10 @@ const Services = () => (
     <section className="site-page-hero site-page-hero--compact">
       <div className="site-container">
         <div className="site-page-hero__copy site-page-hero__copy--wide">
-          <p className="site-kicker">Creative Agency Services</p>
-          <h1>Video Editing &amp; Content Marketing Services</h1>
+          <p className="site-kicker">Full-Cycle Production &bull; Global Video Systems</p>
+          <h1>Video Editing, Video Marketing &amp; Production Services</h1>
           <p className="site-page-hero__lede">
-            From the first idea to the final cut, we bring the creative and practical pieces of your video operation together with deliberate pacing, clean sound, and story-led visual direction.
+            From the first idea to the final cut, we bring the creative and practical pieces of your video operation together with deliberate pacing, clean sound, and story-led visual direction. Serving clients across the United States, United Kingdom, Canada, Australia, and ambitious brands worldwide.
           </p>
           <p className="mt-4 text-sm text-slate-500">
             Want to see these services in action? <Link to="/portfolio" className="text-blue-600 hover:underline font-medium">Browse our video portfolio &amp; case studies &rarr;</Link>

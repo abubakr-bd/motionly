@@ -5,7 +5,7 @@ import { AdminButton, AdminInput, AdminTextarea, AdminPageHeader, AdminCard } fr
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
 import { DEFAULT_DIFFERENCE, type DifferenceSettings } from "../../../lib/useSiteData";
-import { Save, Loader2, Plus, Trash2, Split, Check, X } from "lucide-react";
+import { Save, Loader2, Plus, Trash2, Split, Check, X, RotateCcw } from "lucide-react";
 
 export const DifferenceManager = ({ notify }: { notify: (msg: string, type?: "ok" | "err") => void }) => {
   const { user } = useAuth();
@@ -45,6 +45,25 @@ export const DifferenceManager = ({ notify }: { notify: (msg: string, type?: "ok
     } catch (err) {
       console.error(err);
       notify("Failed to save difference settings", "err");
+    }
+    setSaving(false);
+  };
+
+  const handleResetDefaults = async () => {
+    if (!confirm("Reset The Difference section to Motionly's default comparison points? This will overwrite custom points.")) return;
+    setSaving(true);
+    setForm(DEFAULT_DIFFERENCE);
+    try {
+      const db = await getDb();
+      await setDoc(doc(db, "settings", "site"), {
+        difference: DEFAULT_DIFFERENCE,
+        updatedAt: Timestamp.now(),
+      }, { merge: true });
+      logActivity(user, "updated", "settings", "Reset Difference to Defaults");
+      notify("The Difference section reset to defaults successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to reset difference settings", "err");
     }
     setSaving(false);
   };
@@ -92,9 +111,15 @@ export const DifferenceManager = ({ notify }: { notify: (msg: string, type?: "ok
         subtitle="Manage the side-by-side comparison section comparing the status quo vs the Motionly approach."
         badge="Live Sync"
         action={
-          <AdminButton onClick={handleSave} loading={saving} icon={Save}>
-            Save Changes
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleResetDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" />
+              <span>Reset to Defaults</span>
+            </AdminButton>
+            <AdminButton onClick={handleSave} loading={saving} icon={Save}>
+              Save Changes
+            </AdminButton>
+          </div>
         }
       />
 

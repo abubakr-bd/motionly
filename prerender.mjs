@@ -12,76 +12,84 @@ const BASE_URL = 'https://motionly.media';
 // Static Blogs
 const BLOG_DATA = [
   {
-    id: "seo-1",
-    title: "Mastering High-Retention Video Editing for Maximum Reach",
-    category: "Editing",
-    date: "2025-05-10",
-    description: "In the age of 3-second attention spans, high-retention editing isn't just a luxury—it's a requirement. This guide breaks down the psychological triggers and editing techniques.",
-    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "seo-2",
-    title: "The Strategic Guide to VSLs (Video Sales Letters) in 2025",
-    category: "Strategy",
-    date: "2025-05-08",
-    description: "A great Video Sales Letter (VSL) can be the difference between a failing funnel and a multi-million dollar business. Explore modern direct-response video frameworks.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "seo-3",
-    title: "Why Short-Form Video is the #1 Growth Lever for Brands",
-    category: "Short-form",
-    date: "2025-05-05",
-    description: "TikTok, Reels, and Shorts have fundamentally changed how brands acquire customers. Discover why organic short-form is the best customer acquisition channel.",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "seo-4",
-    title: "Scaling SaaS with Strategic Video Marketing Content",
+    id: "saas-launch-video-guide",
+    title: "The Anatomy of a High-Retention SaaS Product Launch Video",
     category: "SaaS",
-    date: "2025-05-02",
-    description: "Software companies often struggle to explain complex products quickly. Learn how high-retention product explainers reduce churn and drive monthly recurring revenue.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+    date: "2025-05-24",
+    description: "Discover the exact 60-second launch video blueprint used by top Product Hunt #1 products and high-growth SaaS startups to turn viewers into paying users.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    id: "seo-5",
-    title: "The Anatomy of a High-Converting Video Marketing Funnel",
+    id: "yc-demo-pitch-videos",
+    title: "How YC Startups Use 60-Second Videos to Close Multi-Million Dollar Seed Rounds",
     category: "Strategy",
-    date: "2025-04-28",
-    description: "Stop treating video as a one-off asset and start treating it as a comprehensive system. A multi-stage video funnel that converts cold prospects into clients.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+    date: "2025-05-22",
+    description: "How top venture-backed startups structure 60-second pitch videos to convince Tier-1 investors, ignite FOMO, and secure oversubscribed investment rounds.",
+    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    id: "short-form-roi",
-    title: "Maximizing ROI with Short-Form Content on TikTok and Reels",
-    category: "Short-form",
-    date: "2025-05-12",
-    description: "Organic growth on TikTok, Instagram Reels, and YouTube Shorts is the most cost-effective way to scale brand awareness. Learn platform-specific editing frameworks.",
-    image: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?auto=format&fit=crop&w=800&q=80"
+    id: "vsl-vs-product-demo",
+    title: "VSL vs. Product Demo: Which Video Format Converts Highest for B2B Software?",
+    category: "Strategy",
+    date: "2025-05-19",
+    description: "Compare VSLs and B2B product demos: conversion rates, audience intent, funnel placement, sales velocity, and production frameworks.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    id: "video-editing-trends-2025",
-    title: "Video Editing Trends for 2025: Staying Ahead of the Algorithm",
+    id: "science-of-the-first-3-seconds",
+    title: "The Science of the First 3 Seconds: Cold Hooks That Stop the Scroll",
     category: "Editing",
-    date: "2025-05-15",
-    description: "Algorithms reward retention, and retention is driven by exceptional editing. Explore cutting-edge pacing, micro-animations, and dynamic sound design trends.",
-    image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80"
+    date: "2025-05-16",
+    description: "Master the psychology of scroll-stopping video hooks: pattern interrupts, auditory cues, cognitive dissonance, and frame pacing.",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    id: "youtube-growth-secrets",
-    title: "YouTube Channel Growth Secrets: From Zero to 100k Subscribers",
-    category: "Strategy",
-    date: "2025-05-18",
-    description: "Discover our proven framework for thumbnail design, A/B testing, CTR optimization, and average view duration (AVD) retention strategies for YouTube channels.",
-    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=800&q=80"
+    id: "3d-motion-graphics-software-demos",
+    title: "3D Motion Graphics vs Screen Capture: How to Showcase Complex Software Visually",
+    category: "Production",
+    date: "2025-05-13",
+    description: "Why leading technology brands use 3D motion design over screen recordings to showcase developer tools, cloud infrastructure, and fintech software.",
+    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    id: "short-form-fails",
-    title: "Why Most Short-Form Content Fails in the First 3 Seconds",
+    id: "repurpose-long-form-to-viral-shorts",
+    title: "How to Repurpose 1 Long-Form YouTube Video into 15 High-Performing Shorts",
+    category: "Growth",
+    date: "2025-05-10",
+    description: "Step-by-step strategy to extract 15 high-retention micro-videos from one long-form episode, optimizing for TikTok, Instagram Reels, and YouTube Shorts.",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "sound-design-video-retention",
+    title: "Audio Branding in Video Marketing: Why Sound Design Accounts for 50% of Retention",
+    category: "Production",
+    date: "2025-05-07",
+    description: "Why audio is 50% of the video experience: explore psychoacoustics, spatial audio, sub-bass impacts, UI foley, and brand soundmarks.",
+    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "kinetic-typography-best-practices",
+    title: "Kinetic Typography Best Practices: Designing Captions People Actually Read",
+    category: "Editing",
+    date: "2025-05-04",
+    description: "Master kinetic typography: typography hierarchy, word-level keyframing, color theory for text overlays, and mobile accessibility standards.",
+    image: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "founder-led-video-growth",
+    title: "The Founder-Led Video Strategy: Building a Personal Brand That Drives Pipeline",
+    category: "Growth",
+    date: "2025-04-29",
+    description: "How tech founders and CEOs use personal brand video marketing on LinkedIn, YouTube, and X to attract enterprise buyers and top-tier talent.",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "b2b-video-marketing-roi-metrics",
+    title: "Video Marketing ROI: The Exact Metrics Every High-Growth SaaS Should Track",
     category: "Strategy",
-    date: "2025-05-20",
-    description: "The modern consumer swipes in seconds. Discover how to create irresistible visual and auditory hooks that overcome the consideration threshold.",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+    date: "2025-04-25",
+    description: "Move beyond vanity metrics: calculate the true ROI of B2B video marketing with view retention curves, pipeline velocity, CAC reduction, and demo conversion.",
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80"
   }
 ];
 
@@ -164,63 +172,262 @@ const PORTFOLIO_DATA = [
 const PAGES = [
   {
     path: "/",
-    title: "Motionly Media | High-Retention Video Marketing & Editing Agency",
-    description: "Scale your brand with high-retention video editing, VSL production, and content marketing systems. Explore Motionly Media's work, client stories, and creative services.",
-    keywords: "video marketing agency, high-retention video editing, VSL production, YouTube video editor, content marketing agency, Motionly Media",
-    h1: "High-Retention Video Editing & Creative Direction for Ambitious Brands",
+    title: "Motionly Media | Premier Video Editing, Video Marketing & Production Agency",
+    description: "Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency. Serving market leaders across the US, UK, Canada, Australia, and worldwide. Scale your brand with VSLs, SaaS product videos, and founder-led content.",
+    keywords: "video editing agency, video marketing agency, video production company, high-retention video editing, video editing agency in Bangladesh, video production BD, SaaS video production, YouTube video editor, VSL production, commercial video agency, Motionly Media",
+    h1: "Global High-Retention Video Editing, Video Marketing & Video Production Agency",
     bodyContent: `
-      <section class="site-page-hero">
-        <p class="site-kicker">Video Editing &amp; Creative Direction Agency</p>
-        <h1>High-Retention Video Editing &amp; Creative Direction for Ambitious Brands</h1>
-        <p class="site-page-hero__lede">Story-led video editing, motion design, and creative direction for creators, market leaders, and ambitious brands worldwide.</p>
-        <div>
-          <a href="/contact" class="site-button">Start a project</a>
-          <a href="/portfolio" class="site-button">Explore our work</a>
+      <header class="crit-nav" aria-label="Main Navigation">
+        <a href="/" aria-label="Motionly Media Home">
+          <picture>
+            <source srcset="/nav_logo.webp" type="image/webp" />
+            <img src="/nav_logo.webp" alt="Motionly Media" width="120" height="28" fetchpriority="high" />
+          </picture>
+        </a>
+        <a href="/contact" class="talk-btn">LET'S TALK! &nearr;</a>
+      </header>
+
+      <section class="crit-hero">
+        <div class="site-container">
+          <div class="crit-badge">
+            <span class="crit-badge-dot"></span>
+            <span>High-Retention Video Agency &bull; Global Reach</span>
+            <span style="color:#3b82f6">&rsaquo;</span>
+          </div>
+          <h1 class="crit-h1">
+            Product videos <span class="crit-gradient-text">that just work</span>
+          </h1>
+          <p class="crit-lede">
+            Story-led video editing, B2B SaaS video marketing, and high-retention commercial video production for market leaders worldwide.
+          </p>
+          <div>
+            <a href="/contact" class="crit-cta-btn">GET YOUR PRODUCT VIDEO</a>
+          </div>
+          <div class="crit-video-card">
+            <picture>
+              <source media="(max-width: 640px)" srcset="/hero-thumb-mobile.webp" type="image/webp" />
+              <source srcset="/hero-thumb.webp" type="image/webp" />
+              <img src="/hero-thumb.webp" alt="Motionly Media showreel video thumbnail" width="1280" height="720" fetchpriority="high" decoding="async" />
+            </picture>
+            <div class="crit-play-btn">
+              <div class="crit-play-circle">
+                <div class="crit-play-icon"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <section class="site-services-preview">
-        <h2>What We Do</h2>
-        <p>Motionly Media engineers high-retention video systems across four core creative pillars:</p>
-        <ul>
-          <li><strong>Video Editing:</strong> Deliberate pacing, clean sound design, kinetic captions, and story-led visual choices for YouTube, short-form, and commercials.</li>
-          <li><strong>Channel Strategy:</strong> Purposeful release calendars, audience research, publishing systems, and YouTube retention optimization.</li>
-          <li><strong>Packaging &amp; Discovery:</strong> High-CTR thumbnail concepts, search metadata, and hook-hold frameworks that capture attention.</li>
-          <li><strong>Creative Direction:</strong> Consistent brand visual identity, scripting development, and continuous performance refinement.</li>
-        </ul>
-        <p><a href="/services">View all video services &rarr;</a> | <a href="/portfolio">Browse client portfolio &rarr;</a></p>
+
+      <section class="site-services-overview">
+        <h2>Core Creative &amp; Production Pillars</h2>
+        <p>Motionly Media bridges strategic video marketing with Hollywood-caliber post-production. Our core systems are designed to maximize viewer hold rate, watch time, and conversion velocity:</p>
+        
+        <article>
+          <h3>01. High-Retention Video Editing</h3>
+          <p>Deliberate pacing, psychoacoustic sound design, kinetic typography, and story-led visual choices. Built specifically for YouTube long-form, viral short-form (Reels, TikTok, Shorts), and commercial advertisements. Every cut is engineered using audience psychology to eliminate drop-off points in the first 3 seconds and maintain viewer attention until the final frame.</p>
+          <ul>
+            <li>Frame-accurate pacing and pattern interrupts</li>
+            <li>Custom 2D/3D kinetic typography and captions</li>
+            <li>Multi-layer Foley, sub-bass impacts, and cinematic sound design</li>
+            <li>Commercial color grading calibrated for OLED and mobile screens</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>02. Full-Cycle Video Marketing &amp; VSL Production</h3>
+          <p>Video built to drive measurable revenue, sales pipeline, and brand authority. We develop high-converting Video Sales Letters (VSLs), product launch videos, software feature explainers, and founder-led video marketing engines that turn cold traffic into paying customers.</p>
+          <ul>
+            <li>High-converting B2B SaaS Product Launch Videos</li>
+            <li>Video Sales Letters (VSLs) engineered for high checkout conversion</li>
+            <li>YouTube Channel Growth and Content Distribution Systems</li>
+            <li>Founder-Led Personal Brand Video Systems on LinkedIn and YouTube</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>03. Commercial Video Production &amp; 3D Motion Graphics</h3>
+          <p>From scriptwriting and creative direction to 3D software walk-throughs and visual effects, we bring complex digital products to life. We specialize in transforming abstract SaaS platforms, fintech solutions, and developer tools into visually arresting, easy-to-understand motion narratives.</p>
+          <ul>
+            <li>3D Product Renders and UI Motion Design</li>
+            <li>Broadcast-quality Commercial Video Finishing</li>
+            <li>Scriptwriting, Storyboarding, and Narrative Direction</li>
+            <li>Venture Pitch Videos and Demo Day Presentations</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="site-geographic-authority">
+        <h2>Global Reach &amp; High-Retention Video Production</h2>
+        <p>Motionly Media operates as a global creative engine with its primary production hub headquartered in Dhaka, Bangladesh (BD), serving enterprise brands and venture-backed startups across Tier-1 markets worldwide.</p>
+        
+        <article>
+          <h3>Premier Video Editing &amp; Video Production Agency in Bangladesh (BD)</h3>
+          <p>Motionly Media pairs elite homegrown directorial, editorial, and motion design talent with Silicon Valley production standards. Our team provides global enterprises, fast-growing startups, and local innovators with global-standard video assets that compete on the world stage.</p>
+        </article>
+
+        <article>
+          <h3>Dedicated International Hubs: US, UK, Canada, Australia &amp; Europe</h3>
+          <p>Our remote-first infrastructure is calibrated for seamless global delivery. We work directly with marketing teams, founders, and creators across New York, San Francisco, London, Toronto, Sydney, and Berlin. With 24/7 asynchronous workflows, guaranteed 24-48 hour sprint turnaround times, and frame-accurate review systems via Frame.io, collaborating with Motionly feels like having an in-house studio right down the hall.</p>
+        </article>
+      </section>
+
+      <section class="site-comparison-matrix">
+        <h2>The Motionly Difference: Comparison Matrix</h2>
+        <p>Why market leaders choose Motionly Media over traditional agencies or freelance marketplaces:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature &amp; Standard</th>
+              <th>Motionly Media</th>
+              <th>Freelance Video Editors</th>
+              <th>Traditional Legacy Agencies</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Creative Direction</strong></td>
+              <td>Dedicated Creative Director &amp; Story Strategist on every project</td>
+              <td>Rarely offered; execution only without narrative strategy</td>
+              <td>Assigned to junior account managers with heavy overhead</td>
+            </tr>
+            <tr>
+              <td><strong>Retention Engineering</strong></td>
+              <td>Audience psychology, cold hooks, and pattern interrupts built-in</td>
+              <td>Basic jump-cuts without retention data analysis</td>
+              <td>Slow broadcast pacing unsuited for digital platforms</td>
+            </tr>
+            <tr>
+              <td><strong>Turnaround Speed</strong></td>
+              <td>Guaranteed 24-48 hours for short-form; 3-5 days for long-form</td>
+              <td>Unpredictable delays and frequent ghosting</td>
+              <td>Weeks to months of bureaucratic revision cycles</td>
+            </tr>
+            <tr>
+              <td><strong>Sound &amp; Motion Polish</strong></td>
+              <td>Multi-track SFX Foley, licensed score, 3D motion graphics included</td>
+              <td>Stock music with minimal or generic sound effects</td>
+              <td>Billed as expensive add-on line items</td>
+            </tr>
+            <tr>
+              <td><strong>Pricing Structure</strong></td>
+              <td>Transparent flat-rate monthly retainers or fixed project sprints</td>
+              <td>Variable hourly billing with uncertain totals</td>
+              <td>Inflated five-figure minimum retainers and hidden fees</td>
+            </tr>
+            <tr>
+              <td><strong>Revision Workflow</strong></td>
+              <td>Frame-accurate feedback via Frame.io with rapid turnaround</td>
+              <td>Messy email chains and mismatched timestamps</td>
+              <td>Protracted meetings and committee sign-offs</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="site-faq-section">
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <dl>
+          <dt><strong>What makes Motionly Media the premier video editing and video marketing agency?</strong></dt>
+          <dd>Motionly Media combines audience psychology, high-retention editing frameworks, custom 3D motion design, and cinematic sound engineering. Rather than simply trimming footage, Motionly engineers videos to maximize viewer hold rate, watch time, and conversion velocity for YouTube creators, B2B SaaS brands, and venture-backed startups.</dd>
+
+          <dt><strong>How does Motionly Media maintain global production standards?</strong></dt>
+          <dd>Motionly Media pairs elite homegrown creative direction and technical talent with global Silicon Valley production standards. Operating from Bangladesh with an international reach, Motionly produces world-class work for clients across the United States, United Kingdom, Canada, Australia, and Europe with 24/7 dedicated workflows.</dd>
+
+          <dt><strong>Which countries and timezones does Motionly Media support?</strong></dt>
+          <dd>Motionly Media serves clients worldwide, with dedicated client bases across the United States (EST, CST, PST), United Kingdom (GMT), Canada, Australia (AEST), Germany, and Bangladesh (BST). Our streamlined asynchronous communication ensures seamless turnaround regardless of your local timezone.</dd>
+
+          <dt><strong>What video formats and deliverables do you produce?</strong></dt>
+          <dd>We specialize in YouTube long-form documentary and talking-head videos, high-converting VSLs (Video Sales Letters), B2B SaaS product launch videos, viral short-form clips (TikTok, Instagram Reels, YouTube Shorts), 3D software explainer animations, and founder-led personal branding content.</dd>
+
+          <dt><strong>What is the typical turnaround time for video projects?</strong></dt>
+          <dd>For short-form videos and micro-content, our standard turnaround is 24 to 48 hours. For complex long-form YouTube episodes, VSLs, and product walk-throughs, turnaround is typically 3 to 5 business days, with sprint options available.</dd>
+
+          <dt><strong>How does high-retention video editing increase revenue and ROI?</strong></dt>
+          <dd>High-retention editing directly increases average view duration (AVD) and engagement signals, which triggers search and social algorithms to distribute your content to larger audiences. For B2B software and commercial products, retention-engineered VSLs and explainer videos keep prospects engaged until the call-to-action, significantly lowering customer acquisition costs (CAC) and increasing sales conversion rates.</dd>
+        </dl>
+      </section>
+
+      <section class="site-cta-banner">
+        <h2>Ready to Scale Your Brand with High-Retention Video?</h2>
+        <p>Book a discovery strategy call with our creative directors or explore our client case studies today.</p>
+        <p><a href="/contact">Book a discovery call &rarr;</a> | <a href="/portfolio">Browse video case studies &rarr;</a> | <a href="/services">Explore creative services &rarr;</a></p>
       </section>
     `
   },
   {
     path: "/services",
-    title: "Video Editing & Content Marketing Services | Motionly Media",
-    description: "High-retention video editing, VSL production, channel strategy, and content packaging services built to grow your brand. Explore Motionly Media's services.",
-    keywords: "video editing services, VSL production, channel strategy, video packaging, YouTube growth agency, motion graphics, Motionly Media",
-    h1: "Video Editing & Content Marketing Services",
+    title: "Video Editing, Video Marketing & Production Services | Motionly Media",
+    description: "High-retention video editing, B2B SaaS video marketing, commercial video production, and VSL creation. Serving the US, UK, Canada, Australia, and ambitious brands worldwide.",
+    keywords: "video editing services, video marketing agency, commercial video production, VSL production, YouTube video editor, 3D motion graphics, SaaS explainer video, Motionly Media",
+    h1: "Full-Cycle Video Editing, Video Marketing & Commercial Video Production Services",
     bodyContent: `
       <section class="site-page-hero">
-        <p class="site-kicker">Creative Agency Services</p>
-        <h1>Video Editing &amp; Content Marketing Services</h1>
-        <p class="site-page-hero__lede">From the first idea to the final cut, we bring the creative and practical pieces of your video operation together with deliberate pacing, clean sound, and story-led visual direction.</p>
+        <p class="site-kicker">End-to-End Video Production &amp; Marketing Solutions</p>
+        <h1>Full-Cycle Video Editing, Video Marketing &amp; Commercial Video Production Services</h1>
+        <p class="site-page-hero__lede">From the first idea to the final master render, Motionly Media unifies strategic video marketing with Hollywood-level post-production. Serving ambitious brands in the United States, United Kingdom, Canada, Australia, and market leaders worldwide.</p>
+        <div>
+          <a href="/contact" class="site-button">Discuss a video project</a>
+          <a href="/portfolio" class="site-button">View video case studies</a>
+        </div>
       </section>
+
       <section class="site-services-list">
         <article>
-          <h2>01. Video Editing</h2>
-          <p>Build a stronger viewing experience with deliberate pacing, clean sound, and story-led visual choices. Includes long-form and short-form editing, sound design, color finishing, and motion graphics.</p>
+          <h2>01. High-Retention Video Editing (YouTube &amp; Viral Short-Form)</h2>
+          <p>We craft high-retention video edits engineered specifically for YouTube long-form, podcasts, talking-head authority channels, Instagram Reels, TikTok, and YouTube Shorts. Our editors apply cognitive retention hooks, pattern interrupts, and psychoacoustic audio mastery to ensure maximum view duration.</p>
+          <ul>
+            <li>Long-form YouTube video editing and documentary pacing</li>
+            <li>Viral short-form micro-content editing (Reels, TikTok, Shorts)</li>
+            <li>Custom 2D/3D kinetic typography and subtitle styling</li>
+            <li>Cinematic color grading and OLED mobile optimization</li>
+          </ul>
         </article>
+
         <article>
-          <h2>02. Channel Strategy</h2>
-          <p>Give each release a clear audience, purpose, and path from idea to publication. Includes format planning, audience research, and review systems.</p>
+          <h2>02. B2B SaaS Video Marketing &amp; High-Converting VSLs</h2>
+          <p>We engineer Video Sales Letters (VSLs) and software product videos that solve customer objections and accelerate sales pipeline. Perfect for Product Hunt launches, demo pages, and venture pitch decks.</p>
+          <ul>
+            <li>High-converting SaaS product walkthroughs and feature demos</li>
+            <li>Direct-response Video Sales Letters (VSLs) for customer acquisition</li>
+            <li>Product launch teasers and social campaign cutdowns</li>
+            <li>Conversion-optimized scripting and storytelling frameworks</li>
+          </ul>
         </article>
+
         <article>
-          <h2>03. Packaging and Discovery</h2>
-          <p>Help the right viewer understand why a video is worth their time before they press play. Titles, descriptions, thumbnail concepts, and search metadata.</p>
+          <h2>03. Commercial Video Production &amp; 3D Motion Graphics</h2>
+          <p>For brands needing broadcast-quality visual identity and sophisticated motion design. We create 3D product animations, UI mockups, and commercial video advertisements that command respect.</p>
+          <ul>
+            <li>3D product modeling, rendering, and visual effects</li>
+            <li>Kinetic UI/UX interface mockups for web and mobile software</li>
+            <li>Commercial audio design, Foley, and licensed music licensing</li>
+            <li>Broadcast-standard finishing and delivery formats</li>
+          </ul>
         </article>
+
         <article>
-          <h2>04. Creative Direction</h2>
-          <p>Bring a consistent visual and editorial language to the content people associate with your brand. Script development, brand identity, and retention feedback.</p>
+          <h2>04. Founder-Led Personal Branding Systems</h2>
+          <p>We build turnkey video creation engines for CEOs, founders, and industry leaders. We help you establish undeniable authority on LinkedIn and YouTube without spending hours editing or scripting.</p>
+          <ul>
+            <li>Podcast and interview repurposing into high-performing video clips</li>
+            <li>Executive content calendar, hook drafting, and editorial direction</li>
+            <li>Multi-platform distribution packaging (YouTube, LinkedIn, X, TikTok)</li>
+            <li>Audience retention analysis and ongoing format optimization</li>
+          </ul>
         </article>
       </section>
+
+      <section class="site-service-locations">
+        <h2>Global Availability &amp; Regional Hubs</h2>
+        <p>Motionly Media provides full-cycle video editing and marketing services to clients worldwide, including:</p>
+        <ul>
+          <li><strong>North America:</strong> United States (New York, San Francisco, Austin, Los Angeles) &amp; Canada (Toronto, Vancouver).</li>
+          <li><strong>Europe &amp; UK:</strong> United Kingdom (London, Manchester), Germany (Berlin, Munich), and across the EU.</li>
+          <li><strong>Asia-Pacific &amp; Australia:</strong> Australia (Sydney, Melbourne) and global tech ecosystems.</li>
+          <li><strong>Bangladesh (Dhaka Headquarters):</strong> Creative operations hub delivering Silicon Valley quality standards locally and internationally.</li>
+        </ul>
+      </section>
+
       <p><a href="/contact">Book a strategy call &rarr;</a> | <a href="/portfolio">View video portfolio &rarr;</a></p>
     `
   },
@@ -253,24 +460,37 @@ const PAGES = [
   },
   {
     path: "/about",
-    title: "About Motionly Media | Video Marketing Agency",
-    description: "Meet Motionly Media—an elite team of video editors, directors, and strategists crafting retention-engineered video systems for market leaders worldwide.",
-    keywords: "about Motionly Media, video editing agency team, creative video studio, video directors, Abu Bakar Siddique",
-    h1: "About Motionly Media | Creative Video Agency",
+    title: "About Motionly Media | Global Video Marketing & Production Studio",
+    description: "Meet Motionly Media—an elite team of video editors, directors, and strategists. Operating from Bangladesh with global Silicon Valley standards for clients in the US, UK, Canada, Australia, and Europe.",
+    keywords: "about Motionly Media, video editing agency in Bangladesh, top video production BD, video editors Dhaka, global video marketing agency, Motionly Media team, Abu Bakar Siddique",
+    h1: "About Motionly Media | Global Video Marketing & Production Studio",
     bodyContent: `
       <section class="site-page-hero">
-        <p class="site-kicker">About Motionly Media</p>
-        <h1>About Motionly Media | Creative Video Agency</h1>
-        <p class="site-page-hero__lede">Good video starts with a clear point of view. We are an independent creative agency and production studio partnering with creators and brands who have something meaningful to say.</p>
+        <p class="site-kicker">About Motionly Media &bull; Elite Global Video Studio</p>
+        <h1>About Motionly Media | Global Video Marketing &amp; Production Studio</h1>
+        <p class="site-page-hero__lede">Motionly Media is an independent creative agency and production studio partnering with creators, tech leaders, and growing brands worldwide. Born with an international ambition, we operate from Dhaka, Bangladesh with Silicon Valley production standards, serving market leaders across the United States, United Kingdom, Canada, Australia, and Europe.</p>
+        <div>
+          <a href="/contact" class="site-button">Connect with our team</a>
+          <a href="/portfolio" class="site-button">Explore our work</a>
+        </div>
       </section>
+
       <section class="site-about-content">
-        <h2>Our Creative Pillars</h2>
+        <h2>Why Motionly Media Exists</h2>
+        <p>Publishing more videos is not a strategy on its own. The concept, the hook, the psychological pacing, and the visual execution dictate whether a viewer keeps watching and remembers the brand behind it. Motionly brings those pieces together into one seamless, high-velocity creative operation.</p>
+
+        <h2>Our Core Pillars</h2>
         <ol>
-          <li><strong>Editorial Judgment:</strong> Every cut serves the story. We shape pacing, sound, and visuals around the audience you need to reach.</li>
-          <li><strong>A Dependable Team:</strong> Editors and strategists work as one team, with clear ownership from brief to final delivery.</li>
-          <li><strong>Measured Improvement:</strong> We use performance signals and watch-time data to make each release clearer, more relevant, and more effective.</li>
+          <li><strong>Editorial Judgment:</strong> Every cut serves the narrative. We shape pacing, psychoacoustic audio, and visual dynamics around the specific audience you need to convert.</li>
+          <li><strong>A Dependable, High-Velocity Team:</strong> Editors, motion designers, and strategists work as one unified team, with clear ownership from initial brief to final master delivery.</li>
+          <li><strong>Measured Improvement:</strong> We study retention curves and watch-time drop-offs to make every subsequent release sharper, more engaging, and more profitable.</li>
+          <li><strong>Global Standards, Homegrown Excellence:</strong> Proudly based in Bangladesh, we prove that world-class creative production, technical innovation, and customer experience can originate from BD to serve Tier-1 global markets.</li>
         </ol>
-        <p><a href="/services">View our services &rarr;</a> | <a href="/portfolio">Browse our portfolio &rarr;</a> | <a href="/contact">Meet the team &rarr;</a></p>
+
+        <h2>Worldwide Collaboration</h2>
+        <p>Whether you are a SaaS founder in San Francisco, an e-commerce brand in London, or an enterprise in Dhaka, our asynchronous Frame.io review loops and 24-48 hour sprint timelines make working together frictionless.</p>
+
+        <p><a href="/services">View our services &rarr;</a> | <a href="/portfolio">Browse our portfolio &rarr;</a> | <a href="/contact">Book a strategy call &rarr;</a></p>
       </section>
     `
   },
@@ -339,8 +559,9 @@ const PAGES = [
     bodyContent: `
       <section class="site-page-hero">
         <p class="site-kicker">Get in Touch with Motionly Media</p>
-        <h1>Contact Motionly Media | Book a Discovery Call</h1>
-        <p class="site-page-hero__lede">Let's talk about what comes next. Share your goals, the work you are making, and where you want it to go. Email us at <a href="mailto:hello@motionly.media">hello@motionly.media</a>.</p>
+        <h1>Contact Motionly Media | Book a Video Strategy Call</h1>
+        <p class="site-page-hero__lede">Schedule a 30-minute high-retention video strategy call with Motionly Media or write directly to <a href="mailto:hello@motionly.media">hello@motionly.media</a>.</p>
+        <p><a href="https://cal.com/motionly-media-rdgfxc/30min" class="site-button">Book Strategy Session on Cal.com &rarr;</a></p>
       </section>
     `
   },
@@ -485,11 +706,53 @@ async function prerender() {
   const baseHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
   console.log(`Starting pre-rendering for ${PAGES.length} routes...`);
 
+  // Inlined Critical CSS for instant FCP and zero layout shift
+  const criticalCss = `
+  :root { --paper: #ffffff; --ink: #0f172a; --brand: #2563eb; --body: #475569; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #05070f; --ink: #f8fafc; --brand: #38bdf8; --body: #94a3b8; } }
+  html { scroll-behavior: smooth; font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  body { margin: 0; padding: 0; background-color: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  * { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  .site-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+  @media (min-width: 640px) { .site-container { padding: 0 1.5rem; } }
+  .crit-nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); width: calc(100% - 2rem); max-width: 1120px; height: 64px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 9999px; display: flex; align-items: center; justify-content: space-between; padding: 0 1.25rem; z-index: 50; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04); }
+  .crit-nav img { height: 28px; width: auto; display: block; }
+  .crit-nav .talk-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 1.25rem; background: #2563eb; color: #ffffff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; border-radius: 9999px; text-transform: uppercase; }
+  .crit-hero { position: relative; padding-top: 6.5rem; padding-bottom: 3.5rem; text-align: center; }
+  @media (min-width: 640px) { .crit-hero { padding-top: 8.5rem; padding-bottom: 5rem; } }
+  .crit-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.025em; color: #1e3a8a; background: rgba(239, 246, 255, 0.8); border: 1px solid rgba(191, 219, 254, 0.8); border-radius: 9999px; margin-bottom: 1.5rem; }
+  .crit-badge-dot { width: 6px; height: 6px; border-radius: 9999px; background: #2563eb; }
+  .crit-h1 { font-size: 2.25rem; line-height: 1.08; font-weight: 900; letter-spacing: -0.03em; margin: 0 auto 1.25rem auto; max-width: 56rem; color: #020617; }
+  @media (min-width: 640px) { .crit-h1 { font-size: 3.75rem; margin-bottom: 1.5rem; } }
+  @media (min-width: 768px) { .crit-h1 { font-size: 4.5rem; } }
+  @media (min-width: 1024px) { .crit-h1 { font-size: 5rem; } }
+  .crit-gradient-text { background: linear-gradient(to right, #1d4ed8, #2563eb, #4f46e5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .crit-lede { font-size: 1rem; line-height: 1.6; color: #475569; max-width: 42rem; margin: 0 auto 2rem auto; font-weight: 400; }
+  @media (min-width: 640px) { .crit-lede { font-size: 1.15rem; margin-bottom: 2.5rem; } }
+  .crit-cta-btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.875rem 2.25rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; background: #2563eb; color: #ffffff; box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35); }
+  .crit-video-card { position: relative; width: 100%; max-width: 64rem; margin: 2.5rem auto 0 auto; aspect-ratio: 16 / 9; border-radius: 1rem; overflow: hidden; background: #0f172a; border: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12); }
+  @media (min-width: 640px) { .crit-video-card { border-radius: 1.5rem; } }
+  .crit-video-card picture, .crit-video-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .crit-play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.2); }
+  .crit-play-circle { width: 4rem; height: 4rem; border-radius: 9999px; background: rgba(255, 255, 255, 0.95); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+  @media (min-width: 640px) { .crit-play-circle { width: 5rem; height: 5rem; } }
+  .crit-play-icon { width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid #2563eb; margin-left: 4px; }
+  `;
+
+  // Apply critical CSS and convert render-blocking stylesheet to async preload
+  let optimizedBaseHtml = baseHtml
+    .replace('</head>', `<style id="motionly-critical-css">${criticalCss}</style>\n  </head>`)
+    .replace(
+      /<link rel="stylesheet" crossorigin href="(\/assets\/index-[^"]+\.css)">/i,
+      '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="$1"></noscript>'
+    );
+
   for (const page of PAGES) {
     const canonicalUrl = `${BASE_URL}${page.path === '/' ? '/' : page.path}`;
     const pageImage = page.image || 'https://motionly.media/og-image-v2.png';
 
-    let html = baseHtml;
+    let html = optimizedBaseHtml;
 
     // 1. Replace Title
     html = html.replace(/<title>.*?<\/title>/i, `<title>${page.title}</title>`);
@@ -530,7 +793,7 @@ async function prerender() {
         <div id="root">
           <!-- SSR Pre-rendered Content for Search Engines & Accessibility -->
           <div class="ssr-pre-rendered" style="display:contents">
-            <header class="ssr-nav" style="display:none">
+            <header class="ssr-nav sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
               <nav aria-label="Main Navigation">
                 <a href="/">Home</a>
                 <a href="/services">Services</a>

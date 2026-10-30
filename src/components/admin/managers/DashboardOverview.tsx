@@ -256,10 +256,17 @@ export const DashboardOverview = () => {
                 <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" />
               </Link>
               <Link
-                to="/admin/faqs"
+                to="/admin/pricing"
                 className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs transition-colors group"
               >
-                <span>Manage FAQ Knowledgebase</span>
+                <span>Manage Pricing & Retainers</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" />
+              </Link>
+              <Link
+                to="/admin/process"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs transition-colors group"
+              >
+                <span>Update 3-Step Framework</span>
                 <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" />
               </Link>
               <Link

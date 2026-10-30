@@ -50,8 +50,8 @@ const About = () => {
   return (
   <Layout>
     <SEO
-      title="About Motionly Media | Video Marketing Agency"
-      description="Meet Motionly Media—an elite team of video editors, directors, and strategists crafting retention-engineered video systems for market leaders worldwide."
+      title="About Motionly Media | Global Video Marketing & Production Studio"
+      description="Meet Motionly Media—an elite team of video editors, directors, and strategists delivering Silicon Valley-grade production for clients across the US, UK, Canada, Australia, and worldwide."
       url="https://motionly.media/about"
       schema={aboutSchema}
     />
@@ -59,10 +59,10 @@ const About = () => {
     <section className="site-page-hero">
       <div className="site-container site-page-hero__grid">
         <div className="site-page-hero__copy">
-          <p className="site-kicker">About Motionly Media</p>
-          <h1>About Motionly Media | Creative Video Agency</h1>
+          <p className="site-kicker">Global Video Agency &bull; High-Retention Production Studio</p>
+          <h1>About Motionly Media | Global Video Marketing &amp; Production Studio</h1>
           <p className="site-page-hero__lede">
-            Good video starts with a clear point of view. We are an independent creative agency and production studio partnering with creators and brands who have something meaningful to say and want more people to hear it.
+            Good video starts with a clear point of view. We are an independent creative agency and production studio partnering with creators and brands who have something meaningful to say and want more people to hear it. Headquartered in Dhaka, Bangladesh, we deliver Silicon Valley-grade production and high-retention video systems to market leaders across the US, UK, Canada, Australia, and Europe.
           </p>
           <div className="flex flex-wrap items-center gap-4 mt-6">
             <Link to="/contact" className="site-button">Meet the team</Link>

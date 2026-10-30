@@ -4,24 +4,84 @@
 
 :root {
   color-scheme: light;
-  --paper: #f5f4ef;
-  --surface: #fffefa;
-  --surface-muted: #eeeee8;
-  --ink: #171a17;
-  --body: #4d544d;
-  --muted: #687068;
-  --line: #dedfd7;
-  --brand: #194ac0;
-  --brand-strong: #153a99;
-  --brand-soft: #edf2ff;
-  --positive: #23664c;
-  --danger: #b42318;
-  --shadow-card: 0 8px 30px rgba(23, 26, 23, 0.07);
-  --shadow-small: 0 2px 8px rgba(23, 26, 23, 0.05);
-  --radius-small: 6px;
-  --radius-card: 12px;
-  --radius-panel: 18px;
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --ink: #0f172a;
+  --body: #475569;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --brand: #2563eb;
+  --brand-strong: #1d4ed8;
+  --brand-soft: #eff6ff;
+  --positive: #059669;
+  --danger: #dc2626;
+  --shadow-card: 0 8px 30px rgba(15, 23, 42, 0.06);
+  --shadow-small: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --radius-small: 8px;
+  --radius-card: 16px;
+  --radius-panel: 24px;
   --page-width: 1280px;
+}
+
+:root.dark,
+html.dark {
+  color-scheme: dark;
+  --paper: #05070f;
+  --surface: #0a0e1a;
+  --surface-muted: #111728;
+  --ink: #f8fafc;
+  --body: #94a3b8;
+  --muted: #64748b;
+  --line: rgba(255, 255, 255, 0.1);
+  --brand: #38bdf8;
+  --brand-strong: #60a5fa;
+  --brand-soft: rgba(56, 189, 248, 0.12);
+  --positive: #10b981;
+  --danger: #ef4444;
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes pipelinePulse {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes playheadScan {
+  0%, 100% {
+    left: 6%;
+  }
+  50% {
+    left: 92%;
+  }
+}
+
+.animate-pipeline-pulse {
+  animation: pipelinePulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-playhead-scan {
+  animation: playheadScan 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pipeline-pulse,
+  .animate-playhead-scan {
+    animation: none !important;
+  }
 }
 
 *,
@@ -3226,7 +3286,7 @@ iframe {
 }
 
 .site-article__body {
-  color: #353c35;
+  color: var(--body);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.12rem;
   line-height: 1.85;

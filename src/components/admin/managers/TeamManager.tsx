@@ -4,7 +4,8 @@ import { getDb } from "../../../lib/firebaseLazy";
 import { AdminButton, AdminInput, AdminPageHeader, AdminSearchBar, AdminModal, AdminEmptyState } from "../ui/AdminUI";
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
-import { Edit2, Trash2, Plus, Loader2, Users, ChevronUp, ChevronDown } from "lucide-react";
+import { Edit2, Trash2, Plus, Loader2, Users, ChevronUp, ChevronDown, RotateCcw } from "lucide-react";
+import { DEFAULT_TEAM } from "../../../lib/useSiteData";
 
 export const TeamManager = ({ notify }: any) => {
   const { user } = useAuth();
@@ -109,6 +110,35 @@ export const TeamManager = ({ notify }: any) => {
     await setDoc(doc(db, "team", swapWith.fid), { order: index }, { merge: true });
   };
 
+  const handleResetDefaults = async () => {
+    if (!confirm("Reset team roster to Motionly's default team members? This will restore default member profiles.")) return;
+    setSaving(true);
+    try {
+      const db = await getDb();
+      for (const existing of items) {
+        if (existing.fid) {
+          await deleteDoc(doc(db, "team", existing.fid));
+        }
+      }
+      for (const member of DEFAULT_TEAM) {
+        await setDoc(doc(db, "team", member.id), {
+          name: member.name,
+          role: member.role,
+          img: member.img,
+          order: member.order,
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now(),
+        });
+      }
+      logActivity(user, "updated", "team", "Reset Team Roster to Defaults");
+      notify("Default team members restored successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to reset team", "err");
+    }
+    setSaving(false);
+  };
+
   const filteredItems = useMemo(() => {
     if (!search) return items;
     const s = search.toLowerCase();
@@ -123,15 +153,21 @@ export const TeamManager = ({ notify }: any) => {
         title="Team Roster"
         description="Manage team members, roles, avatars, and display ordering shown on the public site."
         action={
-          <AdminButton
-            onClick={() => {
-              setForm({ name: "", role: "", img: "", order: items.length });
-              setEditingId(null);
-              setIsAdding(true);
-            }}
-          >
-            <Plus className="w-4 h-4" /> Add Member
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleResetDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" />
+              <span>Reset to Defaults</span>
+            </AdminButton>
+            <AdminButton
+              onClick={() => {
+                setForm({ name: "", role: "", img: "", order: items.length });
+                setEditingId(null);
+                setIsAdding(true);
+              }}
+            >
+              <Plus className="w-4 h-4" /> Add Member
+            </AdminButton>
+          </div>
         }
       />
 

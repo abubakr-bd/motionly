@@ -34,10 +34,7 @@ async function getApp() {
 
 export async function getDb() {
   if (!_dbPromise) {
-    _dbPromise = Promise.all([
-      getApp(),
-      import("firebase/firestore"),
-    ]).then(([app, { getFirestore }]) => getFirestore(app));
+    _dbPromise = import("firebase/firestore").then(({ getFirestore }) => getFirestore(null as any));
   }
   return _dbPromise;
 }

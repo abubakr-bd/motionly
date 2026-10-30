@@ -5,7 +5,7 @@ import { AdminButton, AdminInput, AdminTextarea, AdminPageHeader, AdminCard } fr
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
 import { DEFAULT_HERO, type HeroSettings } from "../../../lib/useSiteData";
-import { Save, Loader2, Play, Sparkles, ExternalLink } from "lucide-react";
+import { Save, Loader2, Play, Sparkles, ExternalLink, RotateCcw } from "lucide-react";
 
 export const HeroManager = ({ notify }: { notify: (msg: string, type?: "ok" | "err") => void }) => {
   const { user } = useAuth();
@@ -35,16 +35,49 @@ export const HeroManager = ({ notify }: { notify: (msg: string, type?: "ok" | "e
     if (e) e.preventDefault();
     setSaving(true);
     try {
+      const rawId = (form.showreelVideoId || "").trim();
+      const match = rawId.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+      const cleanVideoId = match ? match[1] : rawId;
+      const cleanForm = { ...form, showreelVideoId: cleanVideoId };
+
       const db = await getDb();
       await setDoc(doc(db, "settings", "site"), {
-        hero: form,
+        hero: cleanForm,
         updatedAt: Timestamp.now(),
       }, { merge: true });
+
+      try {
+        localStorage.setItem("motionly_hero_settings", JSON.stringify(cleanForm));
+      } catch {}
+
+      setForm(cleanForm);
       logActivity(user, "updated", "settings", "Homepage Hero Section");
       notify("Homepage Hero settings saved successfully");
     } catch (err) {
       console.error(err);
       notify("Failed to save hero settings", "err");
+    }
+    setSaving(false);
+  };
+
+  const handleResetDefaults = async () => {
+    if (!confirm("Reset homepage Hero to Motionly's default headlines, 'Served 30+ Startups & Businesses' badge, and showreel video?")) return;
+    setSaving(true);
+    setForm(DEFAULT_HERO);
+    try {
+      const db = await getDb();
+      await setDoc(doc(db, "settings", "site"), {
+        hero: DEFAULT_HERO,
+        updatedAt: Timestamp.now(),
+      }, { merge: true });
+      try {
+        localStorage.setItem("motionly_hero_settings", JSON.stringify(DEFAULT_HERO));
+      } catch {}
+      logActivity(user, "updated", "settings", "Reset Homepage Hero to Defaults");
+      notify("Homepage Hero reset to defaults successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to reset hero settings", "err");
     }
     setSaving(false);
   };
@@ -57,7 +90,9 @@ export const HeroManager = ({ notify }: { notify: (msg: string, type?: "ok" | "e
     );
   }
 
-  const showreelId = form.showreelVideoId || "_1VaQCNUdnU";
+  const rawShowreel = (form.showreelVideoId || "q7hCvbfvRPU").trim();
+  const match = rawShowreel.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+  const showreelId = match ? match[1] : (rawShowreel || "q7hCvbfvRPU");
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
@@ -66,9 +101,15 @@ export const HeroManager = ({ notify }: { notify: (msg: string, type?: "ok" | "e
         subtitle="Manage the primary landing headlines, call-to-actions, and main showreel video."
         badge="Live Sync"
         action={
-          <AdminButton onClick={handleSave} loading={saving} icon={Save}>
-            Save Changes
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleResetDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" />
+              <span>Reset to Defaults</span>
+            </AdminButton>
+            <AdminButton onClick={handleSave} loading={saving} icon={Save}>
+              Save Changes
+            </AdminButton>
+          </div>
         }
       />
 
@@ -155,11 +196,16 @@ export const HeroManager = ({ notify }: { notify: (msg: string, type?: "ok" | "e
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <div className="space-y-4">
               <AdminInput
-                label="YouTube Video ID"
+                label="YouTube Video ID or Link"
                 value={form.showreelVideoId || ""}
-                onChange={(e) => setForm({ ...form, showreelVideoId: e.target.value })}
-                placeholder="e.g. _1VaQCNUdnU"
-                hint="Copy the video ID from the YouTube URL (the part after v= or in embed)."
+                onChange={(e) => {
+                  let val = e.target.value.trim();
+                  const m = val.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+                  if (m) val = m[1];
+                  setForm({ ...form, showreelVideoId: val });
+                }}
+                placeholder="e.g. q7hCvbfvRPU or https://www.youtube.com/watch?v=q7hCvbfvRPU"
+                hint="You can paste either the full YouTube URL or just the 11-character video ID."
               />
 
               <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-100 text-xs text-blue-800 space-y-1">

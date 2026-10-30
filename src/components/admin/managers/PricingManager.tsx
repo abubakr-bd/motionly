@@ -7,7 +7,8 @@ import {
 } from "../ui/AdminUI";
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
-import { Edit2, Trash2, Plus, Loader2, Check, Sparkles } from "lucide-react";
+import { DEFAULT_PRICING_PLANS } from "../../../lib/useSiteData";
+import { Edit2, Trash2, Plus, Loader2, Check, Sparkles, RefreshCw, RotateCcw } from "lucide-react";
 
 export const PricingManager = ({ notify }: any) => {
   const { user } = useAuth();
@@ -112,29 +113,62 @@ export const PricingManager = ({ notify }: any) => {
     }
   };
 
+  const handleSeedDefaults = async () => {
+    if (!confirm("Reset all pricing packages to Motionly's default retainer tiers (Starter $3,200, Growth $5,800, Authority $9,500, Enterprise)?")) return;
+    setSaving(true);
+    try {
+      const db = await getDb();
+      for (const plan of DEFAULT_PRICING_PLANS) {
+        await setDoc(doc(db, "pricing", plan.id), {
+          name: plan.name,
+          price: plan.price,
+          description: plan.description,
+          features: plan.features,
+          cta: plan.cta,
+          popular: plan.popular || false,
+          order: plan.order,
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now()
+        }, { merge: true });
+      }
+      logActivity(user, "updated", "pricing", "Loaded default pricing tiers");
+      notify("Default pricing plans successfully loaded!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to seed pricing plans", "err");
+    }
+    setSaving(false);
+  };
+
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
       <AdminPageHeader
         title="Pricing Engine"
         description="Configure client retainer tiers, included deliverables, pricing, and recommended highlights."
         action={
-          <AdminButton
-            onClick={() => {
-              setForm({
-                name: "",
-                price: "",
-                description: "",
-                features: "",
-                cta: "Discuss this plan",
-                popular: false,
-                order: items.length
-              });
-              setEditingId(null);
-              setIsAdding(true);
-            }}
-          >
-            <Plus className="w-4 h-4" /> Add Plan
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleSeedDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" />
+              <span>Reset to Defaults</span>
+            </AdminButton>
+            <AdminButton
+              onClick={() => {
+                setForm({
+                  name: "",
+                  price: "",
+                  description: "",
+                  features: "",
+                  cta: "Discuss this plan",
+                  popular: false,
+                  order: items.length
+                });
+                setEditingId(null);
+                setIsAdding(true);
+              }}
+            >
+              <Plus className="w-4 h-4" /> Add Plan
+            </AdminButton>
+          </div>
         }
       />
 

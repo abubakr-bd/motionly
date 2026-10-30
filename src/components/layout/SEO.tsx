@@ -25,30 +25,52 @@ const SEO: React.FC<SEOProps> = ({
 }) => {
   const { settings } = useSiteSettings();
   const siteName = settings.global.siteName || "Motionly Media";
-  const siteDesc = settings.global.siteDescription || "High-Retention Video Editing & Creative Direction Agency";
+  const siteDesc = settings.global.siteDescription || "Premier high-retention video editing, video marketing, and commercial video production agency serving global market leaders.";
   
   const finalTitle = title || siteName;
   const finalDescription = description || siteDesc;
   const fullTitle = finalTitle.includes(siteName) ? finalTitle : `${finalTitle} | ${siteName}`;
-  const metaKeywords = keywords || "video marketing agency, high-retention video editing, VSL strategy, YouTube video editor, motion graphics, commercial video production, creative agency, Motionly Media";
+  const metaKeywords = keywords || "video editing agency, video marketing agency, video production company, high-retention video editing, video editing agency in Bangladesh, video production BD, SaaS video production, YouTube video editor, VSL production, commercial video agency, Motionly Media";
   
   // Clean canonical URL without search query params or hashes
   const rawUrl = url || (typeof window !== "undefined" ? (window.location.origin + window.location.pathname) : "https://motionly.media/");
   const canonicalUrl = rawUrl.split("?")[0].split("#")[0];
 
-  // Base Schema for Organization
+  // Base Schema for Organization & ProfessionalService
   const baseSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService", "VideoProductionService"],
     "name": siteName,
+    "alternateName": ["Motionly", "Motionly Media BD", "Motionly Video Agency"],
     "url": "https://motionly.media/",
     "logo": settings.global.logoUrl || "https://motionly.media/nav_logo.webp",
+    "image": image,
+    "description": finalDescription,
     "sameAs": [
       settings.contact.linkedin || "https://www.linkedin.com/company/motionly-media",
       settings.contact.instagram || "https://www.instagram.com/motionlymedia",
-      settings.contact.facebook,
+      settings.contact.facebook || "https://www.facebook.com/motionlymedia",
       "https://twitter.com/motionlymedia"
-    ].filter(Boolean)
+    ].filter(Boolean),
+    "knowsAbout": [
+      "Video Editing",
+      "High-Retention Video Editing",
+      "Video Marketing",
+      "Video Production",
+      "SaaS Product Videos",
+      "VSL Production",
+      "YouTube Video Growth",
+      "3D Motion Graphics",
+      "Commercial Video Production"
+    ],
+    "areaServed": [
+      "Bangladesh",
+      "United States",
+      "United Kingdom",
+      "Canada",
+      "Australia",
+      "Worldwide"
+    ]
   };
 
   return (

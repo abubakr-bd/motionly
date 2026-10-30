@@ -5,7 +5,7 @@ import { AdminButton, AdminInput, AdminTextarea, AdminPageHeader, AdminCard } fr
 import { useAuth } from "../../../lib/auth";
 import { logActivity } from "../../../lib/activity";
 import { DEFAULT_PAIN_POINTS, type PainPointsSettings } from "../../../lib/useSiteData";
-import { Save, Loader2, Plus, Trash2, ArrowUp, ArrowDown } from "lucide-react";
+import { Save, Loader2, Plus, Trash2, ArrowUp, ArrowDown, RotateCcw } from "lucide-react";
 
 export const PainPointsManager = ({ notify }: { notify: (msg: string, type?: "ok" | "err") => void }) => {
   const { user } = useAuth();
@@ -49,6 +49,25 @@ export const PainPointsManager = ({ notify }: { notify: (msg: string, type?: "ok
     setSaving(false);
   };
 
+  const handleResetDefaults = async () => {
+    if (!confirm("Reset Pain Points section to Motionly's default points? This will overwrite custom points.")) return;
+    setSaving(true);
+    setForm(DEFAULT_PAIN_POINTS);
+    try {
+      const db = await getDb();
+      await setDoc(doc(db, "settings", "site"), {
+        painPoints: DEFAULT_PAIN_POINTS,
+        updatedAt: Timestamp.now(),
+      }, { merge: true });
+      logActivity(user, "updated", "settings", "Reset Pain Points to Defaults");
+      notify("Pain Points reset to defaults successfully!");
+    } catch (err) {
+      console.error(err);
+      notify("Failed to reset pain points", "err");
+    }
+    setSaving(false);
+  };
+
   const addPoint = () => {
     setForm({ ...form, points: [...form.points, ""] });
   };
@@ -88,9 +107,15 @@ export const PainPointsManager = ({ notify }: { notify: (msg: string, type?: "ok
         subtitle="Manage the numbered pain points that resonate with creators looking for a reliable editing partner."
         badge="Live Sync"
         action={
-          <AdminButton onClick={handleSave} loading={saving} icon={Save}>
-            Save Changes
-          </AdminButton>
+          <div className="flex items-center gap-2.5">
+            <AdminButton variant="secondary" onClick={handleResetDefaults} loading={saving}>
+              <RotateCcw className="w-3.5 h-3.5 text-blue-600" />
+              <span>Reset to Defaults</span>
+            </AdminButton>
+            <AdminButton onClick={handleSave} loading={saving} icon={Save}>
+              Save Changes
+            </AdminButton>
+          </div>
         }
       />
 

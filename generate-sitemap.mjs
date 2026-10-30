@@ -22,15 +22,16 @@ const staticRoutes = [
 ];
 
 const STATIC_BLOGS = [
-  { id: 'seo-1', date: '2025-05-10' },
-  { id: 'seo-2', date: '2025-05-08' },
-  { id: 'seo-3', date: '2025-05-05' },
-  { id: 'seo-4', date: '2025-05-02' },
-  { id: 'seo-5', date: '2025-04-28' },
-  { id: 'short-form-roi', date: '2025-05-12' },
-  { id: 'video-editing-trends-2025', date: '2025-05-15' },
-  { id: 'youtube-growth-secrets', date: '2025-05-18' },
-  { id: 'short-form-fails', date: '2025-05-20' }
+  { id: 'saas-launch-video-guide', date: '2025-05-24' },
+  { id: 'yc-demo-pitch-videos', date: '2025-05-22' },
+  { id: 'vsl-vs-product-demo', date: '2025-05-19' },
+  { id: 'science-of-the-first-3-seconds', date: '2025-05-16' },
+  { id: '3d-motion-graphics-software-demos', date: '2025-05-13' },
+  { id: 'repurpose-long-form-to-viral-shorts', date: '2025-05-10' },
+  { id: 'sound-design-video-retention', date: '2025-05-07' },
+  { id: 'kinetic-typography-best-practices', date: '2025-05-04' },
+  { id: 'founder-led-video-growth', date: '2025-04-29' },
+  { id: 'b2b-video-marketing-roi-metrics', date: '2025-04-25' }
 ];
 
 const STATIC_PORTFOLIO = [

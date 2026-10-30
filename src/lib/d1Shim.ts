@@ -22,12 +22,42 @@ async function apiFetch(path: string, options: RequestInit = {}) {
 
 export function getFirestore() { return "d1"; }
 
-export function doc(db: any, col: string, id?: string) {
-  if (arguments.length === 2 && col.includes('/')) {
-    const parts = col.split('/');
-    return { col: parts[0], id: parts[1] };
+export function doc(...args: any[]) {
+  if (args.length === 1) {
+    const arg = args[0];
+    if (typeof arg === "string") {
+      if (arg.includes('/')) {
+        const parts = arg.split('/');
+        return { col: parts[0], id: parts[1] };
+      }
+      return { col: arg, id: crypto.randomUUID() };
+    }
+    if (arg && typeof arg === "object") {
+      const col = arg.col || arg;
+      return { col: typeof col === "string" ? col : String(col), id: crypto.randomUUID() };
+    }
+    return { col: String(arg), id: crypto.randomUUID() };
   }
-  return { col, id };
+
+  if (args.length === 2) {
+    const [first, second] = args;
+    if (typeof second === "string" && second.includes('/')) {
+      const parts = second.split('/');
+      return { col: parts[0], id: parts[1] };
+    }
+    if (typeof first === "string" && first.includes('/')) {
+      const parts = first.split('/');
+      return { col: parts[0], id: parts[1] };
+    }
+    const col = typeof first === "string" && first !== "d1" ? first : (first?.col || second);
+    const id = first === col ? second : (second || crypto.randomUUID());
+    return { col: String(col), id: String(id) };
+  }
+
+  // args.length >= 3: doc(db, col, id)
+  const col = args[1];
+  const id = args[2] || crypto.randomUUID();
+  return { col: String(col), id: String(id) };
 }
 
 export function collection(db: any, col: string) {
@@ -108,17 +138,21 @@ export async function deleteDoc(ref: any) {
 }
 
 export function onSnapshot(refOrQuery: any, onNext: any, onError?: any) {
-  // We remove the 5-second polling interval to prevent hitting Cloudflare's 100k daily function limit.
-  // The Admin panel will now just fetch data on mount. (Users can refresh the page to see new data).
   const fetchAndCall = () => {
-    if (typeof refOrQuery === "string" || refOrQuery.col) {
-      getDocs(refOrQuery).then(onNext).catch(onError);
-    } else {
+    const isDoc = Boolean(refOrQuery && typeof refOrQuery === "object" && typeof refOrQuery.id === "string" && refOrQuery.id.length > 0);
+    if (isDoc) {
       getDoc(refOrQuery).then(onNext).catch(onError);
+    } else {
+      getDocs(refOrQuery).then(onNext).catch(onError);
     }
   };
   
-  fetchAndCall();
+  const isAdmin = typeof window !== "undefined" && (window.location.pathname.startsWith("/admin") || window.location.pathname.startsWith("/team"));
+  if (isAdmin) {
+    fetchAndCall();
+  } else {
+    setTimeout(fetchAndCall, 0);
+  }
   
   // Return an empty unsubscribe function
   return () => {};

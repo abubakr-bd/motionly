@@ -1,5 +1,3 @@
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import type { Invoice, FinanceCompanyInfo, FinanceBankInfo, InvoiceBranding } from "../../types/finance";
 
 export class PDFService {
@@ -11,6 +9,11 @@ export class PDFService {
     filename: string
   ): Promise<boolean> {
     try {
+      const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf")
+      ]);
+
       const canvas = await html2canvas(element, {
         scale: 2, // High resolution crisp text
         useCORS: true,
@@ -62,6 +65,7 @@ export class PDFService {
     filename: string
   ): Promise<boolean> {
     try {
+      const { default: html2canvas } = await import("html2canvas");
       const canvas = await html2canvas(element, {
         scale: 2, // High resolution crisp image
         useCORS: true,
@@ -86,12 +90,13 @@ export class PDFService {
   /**
    * Fallback programmatically constructed PDF generator using jsPDF vector API
    */
-  public static generateProgrammaticPDF(
+  public static async generateProgrammaticPDF(
     invoice: Invoice,
     company: FinanceCompanyInfo,
     _bank: FinanceBankInfo,
     _branding?: InvoiceBranding
   ) {
+    const { default: jsPDF } = await import("jspdf");
     const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
     const pw = doc.internal.pageSize.getWidth();
     let y = 15;

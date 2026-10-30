@@ -8,6 +8,7 @@
  */
 import { useEffect, useState } from "react";
 import { getDb } from "./firebaseLazy";
+import { STATIC_BLOGS } from "./staticBlogs";
 
 // --- Types ------------------------------------------------------------------
 
@@ -33,6 +34,8 @@ export interface SEOSettings {
 
 export interface ContactSettings {
   calendlyUrl: string;
+  calLink?: string;
+  calNamespace?: string;
   email: string;
   phone: string;
   facebook: string;
@@ -43,9 +46,11 @@ export interface ContactSettings {
 export interface ProcessStep {
   id: string;
   label: string;
+  category?: string;
   title: string;
   description: string;
   icon: string;
+  optional?: boolean;
   tags: string[];
   previews: string[];
   chessPiece?: string;
@@ -105,36 +110,38 @@ export interface SiteSettings {
 // --- Defaults (shown when Firestore doc doesn't exist yet) ------------------
 
 export const DEFAULT_HERO: HeroSettings = {
-  badge: "Video editing and creative direction",
-  headline1: "Make every frame",
-  headline2: "mean more.",
-  subheadline: "Story-led editing, motion design, and creative direction for creators and ambitious brands.",
-  cta1: "Talk through a project",
+  badge: "High-Retention Video Agency • Global Reach",
+  headline1: "Product videos",
+  headline2: "that just work",
+  subheadline: "Story-led video editing, B2B SaaS video marketing, and high-retention commercial video production for market leaders worldwide.",
+  cta1: "GET YOUR PRODUCT VIDEO",
   cta1Link: "/contact",
   cta2: "View Showcase",
-  cta2Link: "#selected-work",
-  socialProofText: "",
-  socialProofCount: "",
-  showreelVideoId: "_1VaQCNUdnU",
+  cta2Link: "#work",
+  socialProofText: "Founder Reviews",
+  socialProofCount: "50+",
+  showreelVideoId: "q7hCvbfvRPU",
 };
 
 export const DEFAULT_TEAM: TeamMember[] = [
-  { id: "1", name: "Abu Bakar Siddique",    role: "Founder and CEO",                    img: "/employes/abu bakar.png",             order: 1 },
-  { id: "2", name: "Nazmul Hossen Shuvo",   role: "COO and Head of Growth",             img: "/employes/Nazmul Hossen Shuvo.jpg",    order: 2 },
-  { id: "3", name: "Raiyan",                role: "Social Media Manager and Presenter", img: "/employes/Raiyan.jpg",                order: 3 },
-  { id: "4", name: "Mohammad Wasif Rahman", role: "Video Editor",                       img: "/employes/Wasif.png",                 order: 4 },
-  { id: "5", name: "Abir Ratul",            role: "Video Editor",                       img: "/employes/abir.png",                  order: 5 },
-  { id: "6", name: "Barno",                 role: "Strategy Specialist",                img: "/employes/barno.png",                order: 6 },
+  { id: "1", name: "Abu Bakar Siddique",    role: "Founder and CEO",                    img: "/employes/abu_bakar.webp", order: 1 },
+  { id: "2", name: "Nazmul Hossen Shuvo",   role: "COO and Head of Growth",             img: "/employes/nazmul.webp",    order: 2 },
+  { id: "3", name: "Raiyan",                role: "Social Media Manager and Presenter", img: "/employes/raiyan.webp",    order: 3 },
+  { id: "4", name: "Mohammad Wasif Rahman", role: "Video Editor",                       img: "/employes/wasif.webp",     order: 4 },
+  { id: "5", name: "Abir Ratul",            role: "Video Editor",                       img: "/employes/abir.webp",      order: 5 },
+  { id: "6", name: "Barno",                 role: "Strategy Specialist",                img: "/employes/barno.webp",     order: 6 },
 ];
 
 export const DEFAULT_SEO: SEOSettings = {
-  title: "Motionly Media | High-Retention Video Marketing & Editing Agency",
-  description: "Scale your brand with high-retention video editing, VSL production, and content marketing systems. Explore Motionly Media's work and creative services.",
+  title: "Motionly Media | Premier Video Editing, Video Marketing & Production Agency",
+  description: "Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency. Trusted by market leaders across the US, UK, Canada, Australia, and worldwide.",
   image: "https://motionly.media/og-image-v2.png"
 };
 
 export const DEFAULT_CONTACT: ContactSettings = {
-  calendlyUrl: "https://calendly.com/motionlymedia-help/30min",
+  calendlyUrl: "https://cal.com/motionly-media-rdgfxc/30min",
+  calLink: "motionly-media-rdgfxc/30min",
+  calNamespace: "30min",
   email: "hello@motionly.media",
   phone: "",
   facebook: "https://www.facebook.com/motionlymedia",
@@ -143,69 +150,36 @@ export const DEFAULT_CONTACT: ContactSettings = {
 };
 
 export const DEFAULT_PROCESS: ProcessSettings = {
-  title: "How It Works",
-  subtitle: "Simple. Transparent. Effective.",
-  description: "We handle the entire creative pipeline so you can focus on what you do best: creating content.",
+  title: "The Motionly Framework.",
+  subtitle: "A simple 3 step framework we follow in every video.",
+  description: "We handle the entire creative pipeline so you can focus on scale and growth.",
   steps: [
     {
       id: "step-1",
-      label: "STRATEGY",
-      title: "Idea & Strategy",
-      description: "We understand the idea, audience, goals and creative direction before anything is produced.",
+      label: "01",
+      title: "Strategy",
+      description: "Before we open the edit, we figure out what the video needs to do, who it needs to convince, and what action you want your buyer to take by the end.",
       icon: "Search",
-      tags: [],
-      previews: [],
-      chessPiece: "queen"
+      tags: ["Audience Context", "Hook Architecture", "Conversion Goal"],
+      previews: []
     },
     {
       id: "step-2",
-      label: "CONTENT",
-      title: "Content & Script",
-      description: "We turn the idea into a compelling story, script, structure and visual direction.",
-      icon: "PenTool",
-      tags: [],
-      previews: [],
-      chessPiece: "knight"
+      label: "02",
+      title: "Build",
+      description: "Precision video editing, custom 3D/2D motion design, kinetic type, and cinematic sound engineering executed in rapid sprint cycles.",
+      icon: "Wand2",
+      tags: ["Kinetic Motion", "3D Animation", "Spatial Audio"],
+      previews: []
     },
     {
       id: "step-3",
-      label: "OPTIONAL",
-      title: "Studio Production",
-      description: "Need visuals that don't exist yet? Shoot with Motionly's high-quality studio.",
-      icon: "Clapperboard",
-      tags: [],
-      previews: [],
-      chessPiece: "bishop"
-    },
-    {
-      id: "step-4",
-      label: "EXECUTION",
-      title: "Video Editing",
-      description: "We transform raw footage into engaging videos with editing, motion, sound and visual polish.",
-      icon: "Wand2",
-      tags: [],
-      previews: [],
-      chessPiece: "rook"
-    },
-    {
-      id: "step-5",
-      label: "PACKAGING",
-      title: "Thumbnail & Packaging",
-      description: "We design the visual packaging that earns attention and makes people want to click.",
-      icon: "MessageSquare",
-      tags: [],
-      previews: [],
-      chessPiece: "king"
-    },
-    {
-      id: "step-6",
-      label: "GROWTH",
-      title: "Distribution & SEO",
-      description: "We optimize and prepare your content for distribution, discovery and long-term reach.",
+      label: "03",
+      title: "Launch",
+      description: "You get the final cut in two weeks, ready to go live across your website, paid ads, and outbound the moment it lands in your inbox.",
       icon: "Rocket",
-      tags: [],
-      previews: [],
-      chessPiece: "pawn"
+      tags: ["Multi-Format Export", "Ad Testing", "Organic Virality"],
+      previews: []
     }
   ]
 };
@@ -244,7 +218,7 @@ export const DEFAULT_PAIN_POINTS: PainPointsSettings = {
 
 export const DEFAULT_GLOBAL: GlobalSettings = {
   siteName: "Motionly Media",
-  siteDescription: "Story-led video editing, motion design, and creative direction for creators and ambitious brands.",
+  siteDescription: "Premier high-retention video editing, video marketing, and commercial video production agency serving global market leaders.",
   logoUrl: "/nav_logo.webp",
   faviconUrl: "/favicon.ico",
   maintenanceMode: false,
@@ -280,8 +254,24 @@ export const DEFAULT_LAYOUT: LayoutSettings = {
 
 // --- Hero settings hook -----------------------------------------------------
 
+function sanitizeHero(data: any): HeroSettings {
+  const merged = { ...DEFAULT_HERO, ...data };
+  if (merged.badge && (merged.badge.includes("Bangladesh") || merged.badge.includes("#1 in BD") || merged.badge.includes("#1 in Bangladesh"))) {
+    merged.badge = "High-Retention Video Agency • Global Reach";
+  }
+  return merged;
+}
+
 export function useHeroSettings() {
-  const [hero, setHero] = useState<HeroSettings>(DEFAULT_HERO);
+  const [hero, setHero] = useState<HeroSettings>(() => {
+    try {
+      const cached = localStorage.getItem("motionly_hero_settings");
+      if (cached) {
+        return sanitizeHero(JSON.parse(cached));
+      }
+    } catch {}
+    return DEFAULT_HERO;
+  });
 
   useEffect(() => {
     let unsub: (() => void) | undefined;
@@ -289,7 +279,11 @@ export function useHeroSettings() {
       const { doc, onSnapshot } = await import("firebase/firestore");
       unsub = onSnapshot(doc(db, "settings", "site"), (snap) => {
         if (snap.exists() && snap.data().hero) {
-          setHero({ ...DEFAULT_HERO, ...snap.data().hero });
+          const updatedHero = sanitizeHero(snap.data().hero);
+          setHero(updatedHero);
+          try {
+            localStorage.setItem("motionly_hero_settings", JSON.stringify(updatedHero));
+          } catch {}
         }
       });
     });
@@ -381,80 +375,63 @@ export interface PortfolioItem {
   category: string;
   labels: string | string[];
   order: number;
+  description?: string;
 }
 
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
-    id: "4v95coAmufm3daVAgqKm",
-    title: "Apple SaaS Explainer",
+    id: "port-1",
+    title: "Bolto",
     videoId: "KDK1jHJXPrk",
-    category: "VSL",
-    labels: ["apple saas", "SaaS Video", "Product Explainer"],
+    category: "In-Person Demo",
+    labels: ["In-Person Demo", "AI Platform", "Series A"],
+    description: "YC-backed AI-native platform that unifies recruiting, payroll, and HR into one system.",
     order: 1
   },
   {
-    id: "y2coqeZTqk27tzrCe1EI",
-    title: "The Afjal Story Reel",
-    videoId: "xygb6y5L9x8",
-    category: "Short-form",
-    labels: ["Short-form", "Personal Branding", "Reels"],
+    id: "port-2",
+    title: "ClickUp",
+    videoId: "pIEkY7YDIF0",
+    category: "Product Release",
+    labels: ["Product Release", "Super Agents", "Productivity"],
+    description: "The world's #1 work platform that replaces every productivity tool teams use.",
     order: 2
   },
   {
-    id: "mMbBQT6srWSTDPwS7ILB",
-    title: "EquiSaaS Brand Short",
-    videoId: "pIEkY7YDIF0",
-    category: "Short-form",
-    labels: ["shorts", "Tech Branding", "Social Clip"],
+    id: "port-3",
+    title: "Atria",
+    videoId: "xygb6y5L9x8",
+    category: "Launch Video",
+    labels: ["Launch Video", "AI Platform", "TikTok Ads"],
+    description: "AI platform that builds high-performing Meta and TikTok ads.",
     order: 3
   },
   {
-    id: "uYMBcFEXcK7EeAqFdQ6B",
-    title: "Fellas Finance YouTube Series",
+    id: "port-4",
+    title: "Relixir",
     videoId: "0NHfOpolrjs",
-    category: "YouTube",
-    labels: ["Youtube", "Finance Content", "High Retention"],
+    category: "In-Person Demo",
+    labels: ["In-Person Demo", "Dev Tools", "Founder Story"],
+    description: "Introducing next-generation developer tooling with a high-energy founder walkthrough.",
     order: 4
   },
   {
-    id: "1xUEC9RmJgu0GsmCwaWL",
-    title: "Webdesert Short-Form",
-    videoId: "-_GCBlnT7R0",
-    category: "Short-form",
-    labels: ["Shorts", "Social Content", "Mobile Video"],
+    id: "port-5",
+    title: "Apple SaaS Explainer",
+    videoId: "xA_msiryNvQ",
+    category: "Product Release",
+    labels: ["Product Release", "Minimalist SaaS", "Product Explainer"],
+    description: "Minimalist Apple-inspired SaaS product explainer with fluid UI transitions.",
     order: 5
   },
   {
-    id: "S2tVmi5VDvhZCOctFiun",
-    title: "Original Video Commercial",
-    videoId: "xA_msiryNvQ",
-    category: "Commercial",
-    labels: ["VSL", "Commercial", "Brand Video"],
+    id: "port-6",
+    title: "Original Commercial",
+    videoId: "-_GCBlnT7R0",
+    category: "Others",
+    labels: ["Commercial", "Brand Video", "Paid Ads"],
+    description: "Kinetic brand commercial engineered for paid acquisition and organic virality.",
     order: 6
-  },
-  {
-    id: "QQg8PGAjeiWK7iyQcl4e",
-    title: "Mandela Effect Documentary",
-    videoId: "iOthMnht9tM",
-    category: "VSL",
-    labels: ["vsl", "Documentary Editing", "Storytelling"],
-    order: 7
-  },
-  {
-    id: "yqD2TSQGtmoQIOis7sNh",
-    title: "Fitness High-Energy Short",
-    videoId: "-IZHpWHb3QI",
-    category: "Short-form",
-    labels: ["Short-form", "Fitness", "Kinetic Cuts"],
-    order: 8
-  },
-  {
-    id: "dtkEYUcnjoeKeA6rJdD3",
-    title: "Creative YouTube Feature",
-    videoId: "Bfce9mHYcDg",
-    category: "YouTube",
-    labels: ["YouTube", "Long-form", "Pacing"],
-    order: 9
   }
 ];
 
@@ -469,14 +446,62 @@ export interface BlogItem {
   order: number;
 }
 
+export const DEFAULT_BLOGS: BlogItem[] = STATIC_BLOGS.map((item, index) => ({
+  id: item.id,
+  title: item.title,
+  content: item.content,
+  imageUrl: item.imageUrl,
+  summary: item.summary,
+  category: item.category,
+  date: item.date,
+  order: index + 1
+}));
+
 export interface TestimonialItem {
   id: string;
   name: string;
   role: string;
   content: string;
+  company?: string;
+  avatar?: string;
+  rating?: number;
+  featured?: boolean;
   videoId?: string;
   order: number;
 }
+
+export const DEFAULT_TESTIMONIALS: TestimonialItem[] = [
+  {
+    id: "test-1",
+    name: "Sean Dorje",
+    role: "Founder",
+    company: "Naive",
+    content: "Felt like we hired in-house, not an agency. Big difference.",
+    rating: 5,
+    order: 1,
+    featured: true,
+  },
+  {
+    id: "test-2",
+    name: "Nikhil Reddy",
+    role: "Founder",
+    company: "Datoric",
+    content: "Top-tier work, delivered faster than anyone else we've tried.",
+    rating: 5,
+    order: 2,
+    featured: true,
+  },
+  {
+    id: "test-3",
+    name: "Chris Cunningham",
+    role: "Head of Content",
+    company: "ClickUp",
+    content: "Honestly the first video team that didn't make me chase them for updates.",
+    rating: 5,
+    order: 3,
+    featured: true,
+  },
+];
 
 export interface FAQItem {
   id: string;
@@ -487,52 +512,64 @@ export interface FAQItem {
 
 export const DEFAULT_FAQS: FAQItem[] = [
   {
+    id: "faq-0",
+    question: "How does Motionly Media deliver global-standard video production?",
+    answer: "Motionly Media pairs elite creative directors and technical editors with Silicon Valley-grade production standards. Operating with an international reach, we provide top-tier work for clients across the United States, United Kingdom, Canada, Australia, and worldwide with 24/7 turnaround and dedicated creative teams.",
+    order: 0
+  },
+  {
+    id: "faq-global",
+    question: "Which countries and client timezones does Motionly Media support?",
+    answer: "We support clients globally with primary hubs in the United States, United Kingdom, Canada, Australia, Germany, Europe, and Bangladesh. Our 24/7 asynchronous review pipeline via Frame.io ensures immediate turnaround and zero friction regardless of your local timezone.",
+    order: 1
+  },
+  {
     id: "faq-1",
     question: "What is your turnaround time for video edits?",
     answer: "For short-form content (Reels, TikToks, Shorts), turnaround is typically 24–48 hours. For long-form YouTube episodes, brand documentaries, or podcast series, standard turnaround is 3–5 business days.",
-    order: 1
+    order: 2
   },
   {
     id: "faq-2",
     question: "How does your revision and feedback process work?",
     answer: "We provide structured, frame-accurate revision rounds via Frame.io. You can pause at any second, leave timestamped notes, and our editors refine the cut until it meets your exact standard.",
-    order: 2
+    order: 3
   },
   {
     id: "faq-3",
     question: "How do we transfer raw footage and project assets?",
     answer: "You can upload raw files via Google Drive, Dropbox, Frame.io, or Massive. For ongoing clients, we set up a dedicated cloud folder for seamless asset ingestion.",
-    order: 3
+    order: 4
   },
   {
     id: "faq-4",
     question: "Do your edits include motion graphics, sound design, and color grading?",
     answer: "Yes! Every single edit includes custom kinetic typography, 2D/3D motion graphics, cinematic sound design (SFX & music licensing), audio mastering, and professional color grading matched to your brand.",
-    order: 4
+    order: 5
   },
   {
     id: "faq-5",
     question: "What video styles and formats do you specialize in?",
     answer: "We specialize in high-retention YouTube long-form, talking-head authority content, commercial advertisements, course videos, podcast highlights, and viral short-form hooks.",
-    order: 5
+    order: 6
   },
   {
     id: "faq-6",
     question: "Can you match our existing brand identity and editing style?",
     answer: "Absolutely. During onboarding, we analyze your previous videos, font packs, color palette, pacing, and inspiration references to create a bespoke style profile for your project.",
-    order: 6
+    order: 7
   },
   {
     id: "faq-7",
     question: "How do monthly retainers and billing work?",
     answer: "We offer transparent flat-rate monthly retainers with guaranteed turnaround and fixed scope, as well as milestone-based per-project quotes. No surprise hourly charges.",
-    order: 7
+    order: 8
   },
   {
     id: "faq-8",
     question: "Who owns the final video assets and project files?",
     answer: "You own 100% of the commercial rights to all delivered videos and final renders. Project source files (Premiere Pro, After Effects) can also be packaged upon request.",
-    order: 8
+    order: 9
   }
 ];
 
@@ -550,6 +587,83 @@ export interface PricingPlan {
   buttonText?: string;
 }
 
+export const DEFAULT_PRICING_PLANS: PricingPlan[] = [
+  {
+    id: "starter",
+    name: "Starter Sprint",
+    price: "2,500",
+    period: "month",
+    description: "Establish your high-retention baseline and launch core product video assets.",
+    features: [
+      "4x High-Retention Short-form Videos / Reels",
+      "Dynamic Hook & Script Architecture",
+      "Custom 2D Motion Graphics & Typography",
+      "Frame-accurate revisions via Frame.io",
+      "Standard 48-hour sprint turnaround"
+    ],
+    recommended: false,
+    popular: false,
+    cta: "Start Starter Plan",
+    order: 1
+  },
+  {
+    id: "growth",
+    name: "Growth Partner",
+    price: "5,000",
+    period: "month",
+    description: "Complete video production system for high-velocity software launches and creators.",
+    features: [
+      "2x Premium Long-form / VSL Product Launches",
+      "12x Repurposed Multi-Platform Shorts",
+      "Custom 3D Product & UI Motion Graphics",
+      "Cinematic Sound Design & Spatial Audio",
+      "Dedicated Slack Channel & Senior Art Director",
+      "Priority 24-48h turnaround"
+    ],
+    recommended: true,
+    popular: true,
+    cta: "Claim Growth Slot",
+    order: 2
+  },
+  {
+    id: "authority",
+    name: "Authority Accelerator",
+    price: "9,500",
+    period: "month",
+    description: "End-to-end creative direction, omnichannel dominance, and continuous authority scaling.",
+    features: [
+      "4x High-Impact Product Videos & Mini-Docs",
+      "25x Viral Shorts, Paid Ad Variations & Hooks",
+      "Full 3D CGI Animation & Photoreal Product Renders",
+      "Bi-weekly Creative Strategy Sprints",
+      "A/B Hook Testing & Paid Ad Variations",
+      "Dedicated Creative Director & Video Editor"
+    ],
+    recommended: false,
+    popular: false,
+    cta: "Partner With Us",
+    order: 3
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise Custom",
+    price: "Custom",
+    period: "custom scope",
+    description: "Bespoke production teams, studio film shoots, and white-glove agency integration.",
+    features: [
+      "On-site film crew & studio production",
+      "Full IP ownership & source project files",
+      "Custom 3D CGI & VFX pipelines",
+      "Enterprise SLA & dedicated round-the-clock team",
+      "Dedicated Slack Connect & custom billing terms"
+    ],
+    recommended: false,
+    popular: false,
+    cta: "Request Enterprise Quote",
+    order: 4
+  }
+];
+
 export interface PartnerItem {
   id: string;
   name: string;
@@ -564,8 +678,8 @@ export interface PartnerItem {
 export const DEFAULT_PARTNERS: PartnerItem[] = [
   {
     id: "equisaas-bd",
-    name: "Equissas BD",
-    logoUrl: "https://i.ibb.co.com/mVYQq7n2/Equi-Saa-S-BD-Logo.png",
+    name: "EquiSaaS BD",
+    logoUrl: "/partners/equisaas-bd.png",
     websiteUrl: "https://equisaas-bd.com/",
     description: "EquiSaaS BD is an open technology cooperative building SaaS and AI products.",
     category: "LEARN",
@@ -575,7 +689,7 @@ export const DEFAULT_PARTNERS: PartnerItem[] = [
   {
     id: "samner-bd",
     name: "Samner BD",
-    logoUrl: "",
+    logoUrl: "/partners/samner-bd.png",
     websiteUrl: "https://samnerbd.lovable.app/",
     description: "Modern SaaS platform empowering scalable digital businesses.",
     category: "SAAS",
@@ -585,7 +699,7 @@ export const DEFAULT_PARTNERS: PartnerItem[] = [
   {
     id: "graduation-gate",
     name: "Graduation Gate",
-    logoUrl: "",
+    logoUrl: "/partners/graduation-gate.png",
     websiteUrl: "https://graduation-gate.equisaas-bd.com/",
     description: "EdTech gateway supporting global students and institutions.",
     category: "TECH",
@@ -595,8 +709,8 @@ export const DEFAULT_PARTNERS: PartnerItem[] = [
   {
     id: "varnox",
     name: "Varnox",
-    logoUrl: "",
-    websiteUrl: "",
+    logoUrl: "/partners/varnox.png",
+    websiteUrl: "https://varnox.netlify.app/",
     description: "Signature luxury fragrance brand crafting bespoke perfumes.",
     category: "PERFUME SHOP",
     enabled: true,
@@ -754,6 +868,12 @@ export function useCollection<T = unknown>(
 
         if (colName === "portfolio" && docs.length === 0) {
           setItems(DEFAULT_PORTFOLIO as unknown as T[]);
+        } else if (colName === "testimonials" && docs.length === 0) {
+          setItems(DEFAULT_TESTIMONIALS as unknown as T[]);
+        } else if (colName === "pricing" && docs.length === 0) {
+          setItems(DEFAULT_PRICING_PLANS as unknown as T[]);
+        } else if (colName === "blogs" && docs.length === 0) {
+          setItems(DEFAULT_BLOGS as unknown as T[]);
         } else {
           setItems(docs as T[]);
         }
@@ -762,6 +882,12 @@ export function useCollection<T = unknown>(
         console.error(`Error fetching collection ${colName}:`, err);
         if (colName === "portfolio") {
           setItems(DEFAULT_PORTFOLIO as unknown as T[]);
+        } else if (colName === "testimonials") {
+          setItems(DEFAULT_TESTIMONIALS as unknown as T[]);
+        } else if (colName === "pricing") {
+          setItems(DEFAULT_PRICING_PLANS as unknown as T[]);
+        } else if (colName === "blogs") {
+          setItems(DEFAULT_BLOGS as unknown as T[]);
         }
         setLoading(false);
       });

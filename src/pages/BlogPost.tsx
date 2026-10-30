@@ -104,12 +104,61 @@ const BlogPost = () => {
   }
 
   const plainText = post.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-  const contentHtml = /<\/?[a-z][\s\S]*>/i.test(post.content)
-    ? DOMPurify.sanitize(post.content)
-    : DOMPurify.sanitize(post.content
-      .split("\n\n")
-      .map((paragraph) => `<p>${paragraph.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br />")}</p>`)
-      .join(""));
+  
+  const formatMarkdown = (text: string) => {
+    if (!text) return "";
+    if (/<\/?[a-z][\s\S]*>/i.test(text)) {
+      return DOMPurify.sanitize(text);
+    }
+    const lines = text.split("\n");
+    const htmlLines: string[] = [];
+    let inList = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      const rawLine = lines[i];
+      const trimmed = rawLine.trim();
+
+      if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+        if (!inList) {
+          htmlLines.push("<ul>");
+          inList = true;
+        }
+        const itemContent = trimmed.substring(2);
+        const formatted = itemContent
+          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+          .replace(/\*(.*?)\*/g, "<em>$1</em>");
+        htmlLines.push(`<li>${formatted}</li>`);
+        continue;
+      } else if (inList) {
+        htmlLines.push("</ul>");
+        inList = false;
+      }
+
+      if (!trimmed) continue;
+
+      if (trimmed.startsWith("#### ")) {
+        htmlLines.push(`<h4>${trimmed.substring(5)}</h4>`);
+      } else if (trimmed.startsWith("### ")) {
+        htmlLines.push(`<h3>${trimmed.substring(4)}</h3>`);
+      } else if (trimmed.startsWith("## ")) {
+        htmlLines.push(`<h2>${trimmed.substring(3)}</h2>`);
+      } else if (trimmed === "---") {
+        htmlLines.push("<hr />");
+      } else {
+        const formatted = trimmed
+          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+          .replace(/\*(.*?)\*/g, "<em>$1</em>");
+        htmlLines.push(`<p>${formatted}</p>`);
+      }
+    }
+    if (inList) {
+      htmlLines.push("</ul>");
+    }
+
+    return DOMPurify.sanitize(htmlLines.join("\n"));
+  };
+
+  const contentHtml = formatMarkdown(post.content);
   const postSchema = {
     "@context": "https://schema.org",
     "@graph": [
