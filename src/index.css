@@ -393,6 +393,187 @@ iframe {
   margin-bottom: 1em;
 }
 
+/* =========================================================================
+   MS WORD LITE EDITOR STYLES
+   ========================================================================= */
+.ms-word-editor .ql-toolbar.ql-snow {
+  border: 1px solid #e2e8f0;
+  border-bottom: 2px solid #cbd5e1;
+  background: #f8fafc;
+  padding: 6px 12px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.dark .ms-word-editor .ql-toolbar.ql-snow {
+  background: #0f172a;
+  border-color: #334155;
+  border-bottom-color: #475569;
+}
+
+/* Guard against unconstrained SVG icons */
+.ms-word-editor .ql-toolbar svg,
+.ms-word-editor .ql-picker-label svg {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+}
+
+.ms-word-editor .ql-toolbar button {
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.ms-word-editor .ql-toolbar button:hover {
+  background: #e2e8f0;
+}
+
+.dark .ms-word-editor .ql-toolbar button:hover {
+  background: #1e293b;
+}
+
+.ms-word-editor .ql-toolbar button.ql-active {
+  background: #dbeafe !important;
+  color: #1d4ed8 !important;
+}
+
+.dark .ms-word-editor .ql-toolbar button.ql-active {
+  background: #1e3a8a !important;
+  color: #93c5fd !important;
+}
+
+.ms-word-editor .ql-container.ql-snow {
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+  font-size: 1.0625rem;
+}
+
+.dark .ms-word-editor .ql-container.ql-snow {
+  background: #111625;
+  border-color: #334155;
+}
+
+.ms-word-editor .ql-editor {
+  min-height: 520px;
+  padding: 36px 44px;
+  line-height: 1.85;
+  color: #1e293b;
+}
+
+.dark .ms-word-editor .ql-editor {
+  color: #f1f5f9;
+}
+
+.ms-word-editor .ql-editor.ql-blank::before {
+  left: 44px;
+  top: 36px;
+  color: #94a3b8;
+  font-style: normal;
+  font-family: inherit;
+}
+
+.ms-word-editor .ql-editor h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.25;
+  color: #0f172a;
+}
+
+.dark .ms-word-editor .ql-editor h1 {
+  color: #ffffff;
+}
+
+.ms-word-editor .ql-editor h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-top: 1.3em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+  color: #0f172a;
+}
+
+.dark .ms-word-editor .ql-editor h2 {
+  color: #f8fafc;
+}
+
+.ms-word-editor .ql-editor h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+  color: #1e293b;
+}
+
+.dark .ms-word-editor .ql-editor h3 {
+  color: #e2e8f0;
+}
+
+.ms-word-editor .ql-editor p {
+  margin-bottom: 1.25em;
+}
+
+.ms-word-editor .ql-editor blockquote {
+  border-left: 4px solid #3b82f6;
+  margin: 1.5em 0;
+  color: #475569;
+  font-style: italic;
+  background: rgba(59, 130, 246, 0.05);
+  padding: 12px 18px;
+  border-radius: 0 8px 8px 0;
+}
+
+.dark .ms-word-editor .ql-editor blockquote {
+  color: #94a3b8;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.ms-word-editor .ql-editor pre.ql-syntax {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.ms-word-editor .ql-editor ul,
+.ms-word-editor .ql-editor ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25em;
+}
+
+.ms-word-editor .ql-editor li {
+  margin-bottom: 0.4em;
+}
+
+.ms-word-editor .ql-editor img {
+  border-radius: 12px;
+  max-width: 100%;
+  margin: 1.5em auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
