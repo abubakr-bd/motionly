@@ -840,6 +840,34 @@ async function prerender() {
     } catch {}
   }
 
+  // Generate dedicated entrypoint HTML files for client-side SPA routes (admin, team)
+  const SPA_ROUTES = [
+    { dir: 'admin', title: 'Admin Workspace | Motionly Studio' },
+    { dir: 'team', title: 'Team Workspace | Motionly Media' }
+  ];
+
+  for (const route of SPA_ROUTES) {
+    const routeDir = path.join(DIST_DIR, route.dir);
+    if (!fs.existsSync(routeDir)) {
+      fs.mkdirSync(routeDir, { recursive: true });
+    }
+    let spaHtml = baseHtml
+      .replace(/<title>.*?<\/title>/, `<title>${route.title}</title>`)
+      .replace(/<meta name="robots"[^>]*>/, '<meta name="robots" content="noindex, nofollow" />');
+
+    if (!spaHtml.includes('name="robots"')) {
+      spaHtml = spaHtml.replace('</head>', '  <meta name="robots" content="noindex, nofollow">\n</head>');
+    }
+
+    const routeFile = path.join(routeDir, 'index.html');
+    fs.writeFileSync(routeFile, spaHtml, 'utf-8');
+    fs.writeFileSync(`${routeFile}.gz`, zlib.gzipSync(Buffer.from(spaHtml, 'utf-8')));
+    try {
+      fs.writeFileSync(`${routeFile}.br`, zlib.brotliCompressSync(Buffer.from(spaHtml, 'utf-8')));
+    } catch {}
+  }
+  console.log(`Generated dedicated SPA shells for /admin and /team routes.`);
+
   console.log(`Pre-rendered ${PAGES.length} routes with custom metadata, schemas, and semantic HTML.`);
 }
 

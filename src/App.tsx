@@ -84,6 +84,7 @@ function AppRoutes() {
             {/* Legacy /legal redirects to the privacy page. */}
             <Route path="/legal"           element={<Navigate to="/privacy" replace />} />
             <Route path="/invoice/:id/:publicToken" element={<PublicInvoice />} />
+            <Route path="/admin"     element={<Admin />} />
             <Route path="/admin/*"   element={<Admin />} />
             <Route path="/team/*"    element={<TeamWorkspace />} />
             <Route path="/team"      element={<TeamWorkspace />} />
