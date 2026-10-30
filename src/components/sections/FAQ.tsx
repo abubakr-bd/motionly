@@ -51,7 +51,7 @@ const FAQ = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-md mx-auto font-normal"
+            className="text-sm sm:text-base text-slate-700 dark:text-slate-200 max-w-md mx-auto font-medium"
           >
             Everything you need to know before getting started.
           </motion.p>
@@ -83,7 +83,7 @@ const FAQ = () => {
                   <AccordionTrigger className="text-base sm:text-lg font-bold text-slate-900 group-hover/item:text-blue-600 dark:text-white dark:group-hover/item:text-blue-300 hover:no-underline text-left py-5 gap-4 transition-colors">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed pb-5 font-normal">
+                  <AccordionContent className="text-slate-700 dark:text-slate-200 text-sm sm:text-base leading-relaxed pb-5 font-normal">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

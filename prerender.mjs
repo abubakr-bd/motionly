@@ -204,11 +204,7 @@ const PAGES = [
             <a href="/contact" class="crit-cta-btn">GET YOUR PRODUCT VIDEO</a>
           </div>
           <div class="crit-video-card">
-            <picture>
-              <source media="(max-width: 640px)" srcset="/hero-thumb-mobile.webp" type="image/webp" />
-              <source srcset="/hero-thumb.webp" type="image/webp" />
-              <img src="/hero-thumb.webp" alt="Motionly Media showreel video thumbnail" width="1280" height="720" fetchpriority="high" decoding="async" />
-            </picture>
+            <img src="https://img.youtube.com/vi/q7hCvbfvRPU/maxresdefault.jpg" alt="Motionly Media showreel video thumbnail" width="1280" height="720" style="width:100%;height:100%;object-fit:cover" fetchpriority="high" decoding="async" />
             <div class="crit-play-btn">
               <div class="crit-play-circle">
                 <div class="crit-play-icon"></div>
@@ -708,27 +704,30 @@ async function prerender() {
 
   // Inlined Critical CSS for instant FCP and zero layout shift
   const criticalCss = `
-  :root { --paper: #ffffff; --ink: #0f172a; --brand: #2563eb; --body: #475569; }
-  @media (prefers-color-scheme: dark) { :root { --paper: #05070f; --ink: #f8fafc; --brand: #38bdf8; --body: #94a3b8; } }
+  :root { --paper: #ffffff; --ink: #0f172a; --brand: #2563eb; --body: #334155; --muted: #475569; }
+  html.dark, body.dark { --paper: #05070f; --ink: #ffffff; --brand: #38bdf8; --body: #cbd5e1; --muted: #94a3b8; }
   html { scroll-behavior: smooth; font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
   body { margin: 0; padding: 0; background-color: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   * { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
   .site-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
   @media (min-width: 640px) { .site-container { padding: 0 1.5rem; } }
-  .crit-nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); width: calc(100% - 2rem); max-width: 1120px; height: 64px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 9999px; display: flex; align-items: center; justify-content: space-between; padding: 0 1.25rem; z-index: 50; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04); }
+  .crit-nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); width: calc(100% - 2rem); max-width: 1120px; height: 64px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(226, 232, 240, 0.9); border-radius: 9999px; display: flex; align-items: center; justify-content: space-between; padding: 0 1.25rem; z-index: 50; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04); }
+  html.dark .crit-nav { background: rgba(10, 14, 26, 0.85); border-color: rgba(255, 255, 255, 0.1); }
   .crit-nav img { height: 28px; width: auto; display: block; }
   .crit-nav .talk-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 1.25rem; background: #2563eb; color: #ffffff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; border-radius: 9999px; text-transform: uppercase; }
   .crit-hero { position: relative; padding-top: 6.5rem; padding-bottom: 3.5rem; text-align: center; }
   @media (min-width: 640px) { .crit-hero { padding-top: 8.5rem; padding-bottom: 5rem; } }
-  .crit-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.025em; color: #1e3a8a; background: rgba(239, 246, 255, 0.8); border: 1px solid rgba(191, 219, 254, 0.8); border-radius: 9999px; margin-bottom: 1.5rem; }
+  .crit-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.025em; color: #1e3a8a; background: rgba(239, 246, 255, 0.9); border: 1px solid rgba(191, 219, 254, 0.9); border-radius: 9999px; margin-bottom: 1.5rem; }
+  html.dark .crit-badge { color: #93c5fd; background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
   .crit-badge-dot { width: 6px; height: 6px; border-radius: 9999px; background: #2563eb; }
+  html.dark .crit-badge-dot { background: #38bdf8; }
   .crit-h1 { font-size: 2.25rem; line-height: 1.08; font-weight: 900; letter-spacing: -0.03em; margin: 0 auto 1.25rem auto; max-width: 56rem; color: #020617; }
-  @media (min-width: 640px) { .crit-h1 { font-size: 3.75rem; margin-bottom: 1.5rem; } }
-  @media (min-width: 768px) { .crit-h1 { font-size: 4.5rem; } }
-  @media (min-width: 1024px) { .crit-h1 { font-size: 5rem; } }
-  .crit-gradient-text { background: linear-gradient(to right, #1d4ed8, #2563eb, #4f46e5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .crit-lede { font-size: 1rem; line-height: 1.6; color: #475569; max-width: 42rem; margin: 0 auto 2rem auto; font-weight: 400; }
+  html.dark .crit-h1 { color: #ffffff; }
+  .crit-gradient-text { display: inline-block; background: linear-gradient(to right, #1d4ed8, #2563eb, #4f46e5); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #2563eb; }
+  html.dark .crit-gradient-text { background: linear-gradient(to right, #ffffff, #bfdbfe, #38bdf8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #38bdf8; }
+  .crit-lede { font-size: 1rem; line-height: 1.6; color: #334155; max-width: 42rem; margin: 0 auto 2rem auto; font-weight: 500; }
+  html.dark .crit-lede { color: #cbd5e1; }
   @media (min-width: 640px) { .crit-lede { font-size: 1.15rem; margin-bottom: 2.5rem; } }
   .crit-cta-btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.875rem 2.25rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; background: #2563eb; color: #ffffff; box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35); }
   .crit-video-card { position: relative; width: 100%; max-width: 64rem; margin: 2.5rem auto 0 auto; aspect-ratio: 16 / 9; border-radius: 1rem; overflow: hidden; background: #0f172a; border: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12); }

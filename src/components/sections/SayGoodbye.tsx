@@ -29,7 +29,7 @@ const SayGoodbye = () => {
               viewport={{ once: true }}
               className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-4 block"
             >
-              {subtitle || "A Clearer Rhythm"}
+              {subtitle || "YOUR CREATIVE PARTNER"}
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
@@ -44,7 +44,7 @@ const SayGoodbye = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.15 }}
-              className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm font-normal"
+              className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed max-w-sm font-medium"
             >
               {description}
             </motion.p>
@@ -60,10 +60,10 @@ const SayGoodbye = () => {
                 viewport={{ once: true }}
                 className="flex items-start gap-6 py-6 px-4 -mx-4 rounded-2xl border-b border-slate-200/80 dark:border-white/10 last:border-0 hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition-all duration-300 group cursor-default"
               >
-                <span className="text-sm font-mono font-bold text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-cyan-400 tabular-nums mt-1 select-none transition-colors duration-300">
+                <span className="text-sm font-mono font-bold text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-cyan-400 tabular-nums mt-1 select-none transition-colors duration-300">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="text-lg sm:text-2xl font-semibold text-slate-800 dark:text-slate-200 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-300 group-hover:translate-x-1.5 transition-all duration-300">
+                <span className="text-lg sm:text-2xl font-semibold text-slate-900 dark:text-white leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-300 group-hover:translate-x-1.5 transition-all duration-300">
                   {point}
                 </span>
               </motion.div>

@@ -47,9 +47,10 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" />
     </noscript>
 
-    <!-- Preload Critical LCP Assets (Hero Video Thumbnail & Logo) -->
-    <link rel="preload" as="image" href="/hero-thumb-mobile.webp" media="(max-width: 640px)" type="image/webp" fetchpriority="high" />
-    <link rel="preload" as="image" href="/hero-thumb.webp" media="(min-width: 641px)" type="image/webp" fetchpriority="high" />
+    <!-- Preconnect to YouTube CDN & Preload Critical LCP Assets -->
+    <link rel="preconnect" href="https://img.youtube.com" crossorigin />
+    <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+    <link rel="preload" as="image" href="https://img.youtube.com/vi/q7hCvbfvRPU/maxresdefault.jpg" fetchpriority="high" />
     <link rel="preload" as="image" href="/nav_logo.webp" fetchpriority="high" />
 
     <!-- Structured Data (Organization, ProfessionalService, WebSite & FAQPage for GEO/AEO/SEO) -->

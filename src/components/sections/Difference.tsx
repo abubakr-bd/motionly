@@ -20,36 +20,36 @@ export const Difference = () => {
   const pillars = [
     {
       step: "01",
-      title: "Story-Led Direction & Angles",
-      subtitle: "Retention-first scripting",
-      description: "Every cut begins with audience psychology. We map retention curves, cold hooks, and persuasive narrative arcs before touching the timeline.",
+      title: "Understand Before We Create",
+      subtitle: "STRATEGIC DIRECTION",
+      description: "We start by understanding your brand, audience, goals, and message. Every creative decision begins with a clear direction.",
       icon: Sparkles,
       gradient: "from-blue-600/15 via-blue-500/10 to-transparent",
       borderColor: "group-hover:border-blue-500/50",
       accent: "text-blue-600 dark:text-blue-400",
-      badges: ["Script Architecture", "Hook Retention", "Audience Resonance"],
+      badges: ["Audience Insights", "Brand Goals", "Clear Direction"],
     },
     {
       step: "02",
-      title: "Kinetic Motion & 3D Polish",
-      subtitle: "High-fidelity motion design",
-      description: "Custom 2D/3D visual effects, sleek UI mockups, and kinetic typography that transform complex software into pure visual delight.",
+      title: "Turn Ideas Into Visuals",
+      subtitle: "CREATIVE EXECUTION",
+      description: "From storytelling and high-retention editing to advanced 2D/3D motion graphics, we transform ideas into compelling visual experiences.",
       icon: Wand2,
       gradient: "from-indigo-600/15 via-blue-600/10 to-transparent",
       borderColor: "group-hover:border-indigo-500/50",
       accent: "text-indigo-600 dark:text-indigo-400",
-      badges: ["3D Product Renders", "Kinetic Typography", "Micro-Interactions"],
+      badges: ["Storytelling", "2D/3D Motion", "Compelling Visuals"],
     },
     {
       step: "03",
-      title: "Spatial Audio & Color Mastery",
-      subtitle: "Cinematic finishing",
-      description: "Multi-track Foley, punchy impact SFX, licensed cinematic score, and broadcast color grading calibrated for OLED and mobile screens.",
+      title: "Create. Refine. Deliver.",
+      subtitle: "DELIVERY & GROWTH",
+      description: "We refine every detail, maintain creative consistency, and deliver content ready for your website, social platforms, campaigns, and launches.",
       icon: Volume2,
       gradient: "from-sky-600/15 via-blue-500/10 to-transparent",
       borderColor: "group-hover:border-sky-500/50",
       accent: "text-sky-600 dark:text-sky-400",
-      badges: ["Custom SFX Foley", "Audio Mastering", "OLED Color Grade"],
+      badges: ["Detail Polish", "Multi-Platform Ready", "Launch Delivery"],
     },
   ];
 
@@ -81,7 +81,7 @@ export const Difference = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-normal"
+            className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed font-medium"
           >
             {description || "A battle-tested production standard built for speed, retention, and undeniable brand authority."}
           </motion.p>
@@ -117,10 +117,10 @@ export const Difference = () => {
                   <span className={`block text-xs font-bold uppercase tracking-wider ${pillar.accent} mb-2`}>
                     {pillar.subtitle}
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-100 transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-100 transition-colors">
                     {pillar.title}
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal mb-6">
+                  <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-normal mb-6">
                     {pillar.description}
                   </p>
                 </div>
@@ -130,7 +130,7 @@ export const Difference = () => {
                   {pillar.badges.map((badge) => (
                     <span
                       key={badge}
-                      className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-white/[0.04] px-2.5 py-1 rounded-lg border border-slate-200/80 dark:border-white/5 shadow-2xs"
+                      className="text-[11px] font-bold text-slate-800 dark:text-slate-100 bg-white dark:bg-white/[0.04] px-2.5 py-1 rounded-lg border border-slate-200/80 dark:border-white/5 shadow-2xs"
                     >
                       {badge}
                     </span>
@@ -166,15 +166,15 @@ export const Difference = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-xl dark:bg-[#090D1A]/95 dark:border-white/10">
                 {/* Traditional Agency Card */}
                 <div className="p-6 rounded-2xl bg-white border border-slate-200 dark:bg-white/[0.02] dark:border-white/5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2 block">
                     The Usual Approach
                   </span>
-                  <h4 className="text-lg font-bold text-slate-800 dark:text-slate-300 mb-6 pb-4 border-b border-slate-100 dark:border-white/10">
+                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-6 pb-4 border-b border-slate-200 dark:border-white/10">
                     {statusQuoTitle || "Fragmented, Slow & Unpredictable"}
                   </h4>
                   <ul className="space-y-4">
                     {(statusQuoPoints || []).map((pt: string, i: number) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                      <li key={i} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-200 font-medium">
                         <XCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
                         <span>{pt}</span>
                       </li>
@@ -193,7 +193,7 @@ export const Difference = () => {
                   </h4>
                   <ul className="space-y-4">
                     {(motionlyPoints || []).map((pt: string, i: number) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-200">
+                      <li key={i} className="flex items-start gap-3 text-sm text-slate-800 dark:text-slate-100 font-medium">
                         <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                         <span>{pt}</span>
                       </li>

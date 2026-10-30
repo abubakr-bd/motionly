@@ -122,7 +122,7 @@ const Navbar = () => {
                       : "text-blue-700 bg-blue-50 font-semibold shadow-inner"
                     : isDark
                       ? "text-slate-300 hover:text-white hover:bg-white/5"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
+                      : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
                 }`}
               >
                 {link.name}
@@ -136,7 +136,7 @@ const Navbar = () => {
               className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-medium flex items-center gap-1.5 group/pb transition-all ${
                 isDark
                   ? "text-slate-300 hover:text-white hover:bg-white/5"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
+                  : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
               }`}
             >
               <span>Personal Branding</span>
@@ -149,7 +149,7 @@ const Navbar = () => {
             className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-medium transition-all ${
               isDark
                 ? "text-slate-300 hover:text-white hover:bg-white/5"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
+                : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
             }`}
           >
             Careers

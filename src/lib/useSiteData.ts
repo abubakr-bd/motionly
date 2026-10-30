@@ -185,9 +185,9 @@ export const DEFAULT_PROCESS: ProcessSettings = {
 };
 
 export const DEFAULT_DIFFERENCE: DifferenceSettings = {
-  title: "The Motionly approach",
-  subtitle: "How we work",
-  description: "Editing, creative direction, and a dependable production process in one place.",
+  title: "The Motionly approach.",
+  subtitle: "HOW WE WORK",
+  description: "Strategy, creativity, and execution come together to create videos that make a difference.",
   statusQuoTitle: "A fragmented workflow",
   statusQuoPoints: [
     "Creative direction changes between contributors",
@@ -198,27 +198,27 @@ export const DEFAULT_DIFFERENCE: DifferenceSettings = {
   motionlyTitle: "Motionly Media",
   motionlyPoints: [
     "A clear owner from brief to delivery",
-    "Story-led editing and audience context",
+    "Strategic storytelling and audience context",
     "A consistent review and delivery process",
-    "Custom motion, sound, and finishing"
+    "Custom motion, sound, and visual finishing"
   ]
 };
 
 export const DEFAULT_PAIN_POINTS: PainPointsSettings = {
-  title: "Make room for the work only you can do",
-  subtitle: "A clearer production rhythm",
-  description: "A dependable creative partner gives your team more time to plan, film, and build the next idea.",
+  title: "From the first idea to the final frame.",
+  subtitle: "YOUR CREATIVE PARTNER",
+  description: "Whether you're building a personal brand, launching a product, or growing a business, we bring the creative direction and execution to make your vision happen.",
   points: [
-    "Editing takes time away from filming and planning",
-    "Every new editor needs to learn your visual language",
-    "Review cycles become difficult to keep consistent",
-    "Publishing slows when the process lives in one person's head"
+    "Creating consistent content takes more than just editing.",
+    "Your ideas need the right storytelling and visual direction.",
+    "Finding reliable creative talent shouldn't slow down your growth.",
+    "Managing multiple creative requirements shouldn't become another full-time job."
   ]
 };
 
 export const DEFAULT_GLOBAL: GlobalSettings = {
   siteName: "Motionly Media",
-  siteDescription: "Premier high-retention video editing, video marketing, and commercial video production agency serving global market leaders.",
+  siteDescription: "Motionly is a creative and video marketing agency helping SaaS companies, founders, creators, and ambitious brands turn ideas into impactful visual experiences.",
   logoUrl: "/nav_logo.webp",
   faviconUrl: "/favicon.ico",
   maintenanceMode: false,
@@ -258,6 +258,9 @@ function sanitizeHero(data: any): HeroSettings {
   const merged = { ...DEFAULT_HERO, ...data };
   if (merged.badge && (merged.badge.includes("Bangladesh") || merged.badge.includes("#1 in BD") || merged.badge.includes("#1 in Bangladesh"))) {
     merged.badge = "High-Retention Video Agency • Global Reach";
+  }
+  if (!merged.showreelVideoId || merged.showreelVideoId === "_1VaQCNUdnU") {
+    merged.showreelVideoId = "q7hCvbfvRPU";
   }
   return merged;
 }
@@ -383,8 +386,8 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     id: "port-1",
     title: "Bolto",
     videoId: "KDK1jHJXPrk",
-    category: "In-Person Demo",
-    labels: ["In-Person Demo", "AI Platform", "Series A"],
+    category: "SaaS & Technology",
+    labels: ["SaaS & Technology", "AI Platform", "Series A"],
     description: "YC-backed AI-native platform that unifies recruiting, payroll, and HR into one system.",
     order: 1
   },
@@ -392,8 +395,8 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     id: "port-2",
     title: "ClickUp",
     videoId: "pIEkY7YDIF0",
-    category: "Product Release",
-    labels: ["Product Release", "Super Agents", "Productivity"],
+    category: "SaaS & Technology",
+    labels: ["SaaS & Technology", "Productivity", "Product Launch"],
     description: "The world's #1 work platform that replaces every productivity tool teams use.",
     order: 2
   },
@@ -401,8 +404,8 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     id: "port-3",
     title: "Atria",
     videoId: "xygb6y5L9x8",
-    category: "Launch Video",
-    labels: ["Launch Video", "AI Platform", "TikTok Ads"],
+    category: "Commercial & Brand Videos",
+    labels: ["Commercial & Brand Videos", "Paid Ads", "Growth Campaign"],
     description: "AI platform that builds high-performing Meta and TikTok ads.",
     order: 3
   },
@@ -410,8 +413,8 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     id: "port-4",
     title: "Relixir",
     videoId: "0NHfOpolrjs",
-    category: "In-Person Demo",
-    labels: ["In-Person Demo", "Dev Tools", "Founder Story"],
+    category: "Personal Branding",
+    labels: ["Personal Branding", "Founder Story", "Dev Tools"],
     description: "Introducing next-generation developer tooling with a high-energy founder walkthrough.",
     order: 4
   },
@@ -419,8 +422,8 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     id: "port-5",
     title: "Apple SaaS Explainer",
     videoId: "xA_msiryNvQ",
-    category: "Product Release",
-    labels: ["Product Release", "Minimalist SaaS", "Product Explainer"],
+    category: "Creative & Motion Graphics",
+    labels: ["Creative & Motion Graphics", "Minimalist SaaS", "UI Animation"],
     description: "Minimalist Apple-inspired SaaS product explainer with fluid UI transitions.",
     order: 5
   },
@@ -428,8 +431,8 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     id: "port-6",
     title: "Original Commercial",
     videoId: "-_GCBlnT7R0",
-    category: "Others",
-    labels: ["Commercial", "Brand Video", "Paid Ads"],
+    category: "Commercial & Brand Videos",
+    labels: ["Commercial & Brand Videos", "Paid Acquisition", "Brand Campaign"],
     description: "Kinetic brand commercial engineered for paid acquisition and organic virality.",
     order: 6
   }
@@ -512,64 +515,64 @@ export interface FAQItem {
 
 export const DEFAULT_FAQS: FAQItem[] = [
   {
-    id: "faq-0",
-    question: "How does Motionly Media deliver global-standard video production?",
-    answer: "Motionly Media pairs elite creative directors and technical editors with Silicon Valley-grade production standards. Operating with an international reach, we provide top-tier work for clients across the United States, United Kingdom, Canada, Australia, and worldwide with 24/7 turnaround and dedicated creative teams.",
-    order: 0
-  },
-  {
-    id: "faq-global",
-    question: "Which countries and client timezones does Motionly Media support?",
-    answer: "We support clients globally with primary hubs in the United States, United Kingdom, Canada, Australia, Germany, Europe, and Bangladesh. Our 24/7 asynchronous review pipeline via Frame.io ensures immediate turnaround and zero friction regardless of your local timezone.",
+    id: "faq-1",
+    question: "What types of businesses and creators do you work with?",
+    answer: "We partner with SaaS companies, technology startups, founders, content creators, personal brands, and growing businesses worldwide who want to create high-impact, story-driven video content.",
     order: 1
   },
   {
-    id: "faq-1",
-    question: "What is your turnaround time for video edits?",
-    answer: "For short-form content (Reels, TikToks, Shorts), turnaround is typically 24–48 hours. For long-form YouTube episodes, brand documentaries, or podcast series, standard turnaround is 3–5 business days.",
+    id: "faq-2",
+    question: "What creative and video services do you offer?",
+    answer: "Our core services include SaaS product videos, software explainers, 2D and 3D motion graphics, launch videos, personal branding content, commercial campaigns, and full-cycle creative video marketing.",
     order: 2
   },
   {
-    id: "faq-2",
-    question: "How does your revision and feedback process work?",
-    answer: "We provide structured, frame-accurate revision rounds via Frame.io. You can pause at any second, leave timestamped notes, and our editors refine the cut until it meets your exact standard.",
+    id: "faq-3",
+    question: "Do you specialize in SaaS and technology videos?",
+    answer: "Yes, technology and SaaS video production is our strongest core specialization. We translate complex software workflows and abstract technical concepts into intuitive, beautifully animated visual narratives.",
     order: 3
   },
   {
-    id: "faq-3",
-    question: "How do we transfer raw footage and project assets?",
-    answer: "You can upload raw files via Google Drive, Dropbox, Frame.io, or Massive. For ongoing clients, we set up a dedicated cloud folder for seamless asset ingestion.",
+    id: "faq-4",
+    question: "Can you help founders and creators build personal brands?",
+    answer: "Absolutely. We help founders and creators develop authoritative personal brands through high-retention video systems, talking-head editing, strategic hook architecture, and multi-platform content repurposing.",
     order: 4
   },
   {
-    id: "faq-4",
-    question: "Do your edits include motion graphics, sound design, and color grading?",
-    answer: "Yes! Every single edit includes custom kinetic typography, 2D/3D motion graphics, cinematic sound design (SFX & music licensing), audio mastering, and professional color grading matched to your brand.",
+    id: "faq-5",
+    question: "Do you offer filming and on-location production?",
+    answer: "Yes. While most of our client engagements focus on digital post-production and motion design, we can provide professional filming, cinematography, studio shoots, and on-location production support whenever your project requires it.",
     order: 5
   },
   {
-    id: "faq-5",
-    question: "What video styles and formats do you specialize in?",
-    answer: "We specialize in high-retention YouTube long-form, talking-head authority content, commercial advertisements, course videos, podcast highlights, and viral short-form hooks.",
+    id: "faq-6",
+    question: "Can we work with you on a monthly basis?",
+    answer: "Yes. We offer both dedicated monthly creative partnerships for ongoing publishing needs and milestone-based engagements for standalone product launches and commercial projects.",
     order: 6
   },
   {
-    id: "faq-6",
-    question: "Can you match our existing brand identity and editing style?",
-    answer: "Absolutely. During onboarding, we analyze your previous videos, font packs, color palette, pacing, and inspiration references to create a bespoke style profile for your project.",
+    id: "faq-7",
+    question: "How does your creative process work?",
+    answer: "Our framework follows three simple stages: Discover (understanding your goals and audience), Create (story development, visual production, and motion design), and Deliver (refining details and packaging for launch).",
     order: 7
   },
   {
-    id: "faq-7",
-    question: "How do monthly retainers and billing work?",
-    answer: "We offer transparent flat-rate monthly retainers with guaranteed turnaround and fixed scope, as well as milestone-based per-project quotes. No surprise hourly charges.",
+    id: "faq-8",
+    question: "Can you work with our existing brand identity?",
+    answer: "Yes. During onboarding, we study your typography, brand guidelines, color palettes, and voice to ensure every video looks and feels authentically aligned with your brand.",
     order: 8
   },
   {
-    id: "faq-8",
-    question: "Who owns the final video assets and project files?",
-    answer: "You own 100% of the commercial rights to all delivered videos and final renders. Project source files (Premiere Pro, After Effects) can also be packaged upon request.",
+    id: "faq-9",
+    question: "Who owns the final video assets?",
+    answer: "You own 100% of the commercial rights to all delivered videos and final renders upon completion. Source files and project assets can also be packaged upon request.",
     order: 9
+  },
+  {
+    id: "faq-10",
+    question: "How do revisions and feedback work?",
+    answer: "We conduct frame-accurate revision rounds via Frame.io. You can pause at any timestamp, leave direct visual feedback, and our team implements changes swiftly until the cut is finalized.",
+    order: 10
   }
 ];
 
@@ -593,7 +596,7 @@ export const DEFAULT_PRICING_PLANS: PricingPlan[] = [
     name: "Starter Sprint",
     price: "2,500",
     period: "month",
-    description: "Establish your high-retention baseline and launch core product video assets.",
+    description: "Establish your visual presence and produce high-impact core video assets.",
     features: [
       "4x High-Retention Short-form Videos / Reels",
       "Dynamic Hook & Script Architecture",
@@ -611,7 +614,7 @@ export const DEFAULT_PRICING_PLANS: PricingPlan[] = [
     name: "Growth Partner",
     price: "5,000",
     period: "month",
-    description: "Complete video production system for high-velocity software launches and creators.",
+    description: "A dedicated creative partnership for high-velocity software launches, creators, and brands.",
     features: [
       "2x Premium Long-form / VSL Product Launches",
       "12x Repurposed Multi-Platform Shorts",
@@ -630,7 +633,7 @@ export const DEFAULT_PRICING_PLANS: PricingPlan[] = [
     name: "Authority Accelerator",
     price: "9,500",
     period: "month",
-    description: "End-to-end creative direction, omnichannel dominance, and continuous authority scaling.",
+    description: "End-to-end creative direction, comprehensive visual campaigns, and continuous brand scaling.",
     features: [
       "4x High-Impact Product Videos & Mini-Docs",
       "25x Viral Shorts, Paid Ad Variations & Hooks",
@@ -649,7 +652,7 @@ export const DEFAULT_PRICING_PLANS: PricingPlan[] = [
     name: "Enterprise Custom",
     price: "Custom",
     period: "custom scope",
-    description: "Bespoke production teams, studio film shoots, and white-glove agency integration.",
+    description: "Bespoke creative teams, multi-format production, studio shoots, and white-glove agency integration.",
     features: [
       "On-site film crew & studio production",
       "Full IP ownership & source project files",

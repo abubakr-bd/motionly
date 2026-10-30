@@ -83,7 +83,7 @@ export const OurProcess = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-normal"
+            className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium"
           >
             {settings.process.subtitle || "A simple 3 step framework we follow in every video."}
           </motion.p>
@@ -187,8 +187,8 @@ export const OurProcess = () => {
                       {/* Step Description */}
                       <p className={`text-xs sm:text-sm leading-relaxed transition-colors ${
                         isSelected
-                          ? "text-slate-700 dark:text-slate-300 font-normal"
-                          : "text-slate-500 dark:text-slate-400 font-normal line-clamp-2"
+                          ? "text-slate-800 dark:text-slate-200 font-medium"
+                          : "text-slate-600 dark:text-slate-300 font-normal line-clamp-2"
                       }`}>
                         {step.description}
                       </p>

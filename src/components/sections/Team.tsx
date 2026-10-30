@@ -53,7 +53,7 @@ const Team = () => {
               Meet the minds behind the cuts.
             </h2>
           </div>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-sm font-normal">
+          <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 max-w-sm font-medium">
             Story strategists, 3D animators, and sound designers engineering attention for world-class brands.
           </p>
         </div>
@@ -111,7 +111,7 @@ const Team = () => {
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 transition-colors mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
                     {member.role}
                   </p>
                 </div>

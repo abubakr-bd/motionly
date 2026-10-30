@@ -47,9 +47,9 @@ const Hero = () => {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
             <span>{
-              (hero.badge && !hero.badge.includes("Bangladesh") && !hero.badge.includes("#1 in BD"))
+              (hero.badge && !hero.badge.includes("Bangladesh") && !hero.badge.includes("#1 in BD") && !hero.badge.includes("Product videos"))
                 ? hero.badge
-                : "High-Retention Video Agency • Global Reach"
+                : "Creative Video Agency • Global Reach"
             }</span>
             {hero.badge && hero.badge.toUpperCase().includes("YC") && (
               <span className="w-4 h-4 rounded bg-[#FF6600] text-white font-black text-[10px] flex items-center justify-center">
@@ -65,8 +65,10 @@ const Hero = () => {
           {...reveal(0.15)}
           className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-black tracking-tight leading-[1.08] mb-6 sm:mb-8 text-slate-950 dark:text-white max-w-4xl mx-auto"
         >
-          {hero.headline1 || "Product videos"}{" "}
-          <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 dark:from-white dark:via-blue-200 dark:to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(37,99,235,0.25)]">
+          <span className="text-slate-950 dark:text-white">
+            {hero.headline1 || "Product videos"}
+          </span>{" "}
+          <span className="inline-block bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 dark:from-sky-300 dark:via-blue-200 dark:to-cyan-400 bg-clip-text text-transparent">
             {hero.headline2 || "that just work"}
           </span>
         </motion.h1>
@@ -74,12 +76,12 @@ const Hero = () => {
         {/* Subtitle (Clean & Responsive for Phone) */}
         <motion.p
           {...reveal(0.25)}
-          className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-normal"
+          className="text-base sm:text-lg md:text-xl text-slate-700 dark:text-slate-200 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed font-medium"
         >
-          {hero.subheadline || "Story-led video editing, 3D motion design, and high-retention launch videos for ambitious software teams."}
+          {hero.subheadline || "Story-led video editing, B2B SaaS video marketing, and high-retention commercial video production for market leaders worldwide."}
         </motion.p>
 
-        {/* Call-to-action Button with Shimmer Sweep */}
+        {/* Call-to-action Button */}
         <motion.div {...reveal(0.35)} className="flex items-center justify-center gap-4 mb-10 sm:mb-14">
           <Link
             to={hero.cta1Link || "/contact"}
@@ -93,11 +95,11 @@ const Hero = () => {
 
         {/* Monochrome Client Logos Bar */}
         <motion.div {...reveal(0.4)} className="mb-10 sm:mb-14">
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12 opacity-60 hover:opacity-95 dark:opacity-50 dark:hover:opacity-90 transition-opacity">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
             {clientLogos.map((client) => (
               <span
                 key={client.id}
-                className="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-700 dark:text-slate-300 font-mono transition-colors hover:text-blue-600 dark:hover:text-blue-300"
+                className="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-800 dark:text-slate-200 font-mono transition-colors hover:text-blue-600 dark:hover:text-blue-300"
               >
                 {client.name}
               </span>
@@ -126,37 +128,24 @@ const Hero = () => {
               aria-label="Play showreel video"
             >
               {!thumbnailUnavailable && (
-                (showreelId === "q7hCvbfvRPU" || showreelId === "_1VaQCNUdnU") ? (
-                  <picture>
-                    <source media="(max-width: 640px)" srcSet="/hero-thumb-mobile.webp" type="image/webp" />
-                    <source srcSet="/hero-thumb.webp" type="image/webp" />
-                    <img
-                      src="/hero-thumb.webp"
-                      className="w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                      alt="Motionly Media showreel video thumbnail"
-                      width="1280"
-                      height="720"
-                      decoding="async"
-                      loading="eager"
-                      fetchPriority="high"
-                    />
-                  </picture>
-                ) : (
-                  <img
-                    src={`https://img.youtube.com/vi/${showreelId}/maxresdefault.jpg`}
-                    className="w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                    alt="Motionly Media showreel video thumbnail"
-                    width="1280"
-                    height="720"
-                    decoding="async"
-                    loading="eager"
-                    fetchPriority="high"
-                    onError={(e) => {
+                <img
+                  src={`https://img.youtube.com/vi/${showreelId}/maxresdefault.jpg`}
+                  className="w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                  alt="Motionly Media showreel video thumbnail"
+                  width="1280"
+                  height="720"
+                  decoding="async"
+                  loading="eager"
+                  fetchPriority="high"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (!target.src.includes("hqdefault.jpg")) {
+                      target.src = `https://img.youtube.com/vi/${showreelId}/hqdefault.jpg`;
+                    } else {
                       setThumbnailUnavailable(true);
-                      (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${showreelId}/hqdefault.jpg`;
-                    }}
-                  />
-                )
+                    }
+                  }}
+                />
               )}
 
               {/* Glassmorphic Play Button with Radial Pulse & Sonar Ring */}

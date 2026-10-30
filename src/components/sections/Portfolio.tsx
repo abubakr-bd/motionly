@@ -7,14 +7,13 @@ import { Play, X, Monitor, Rocket, Users2, Sparkles, Film, ArrowUpRight } from "
 type PortfolioProps = { limit?: number };
 
 const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  "Product Release": Monitor,
-  "Launch Video": Rocket,
-  "In-Person Demo": Users2,
-  "Others": Sparkles,
-  "Short-form": Film,
-  "VSL": Film,
-  "YouTube": Film,
+  "All Projects": Sparkles,
   "all": Sparkles,
+  "SaaS & Technology": Monitor,
+  "Personal Branding": Users2,
+  "Commercial & Brand Videos": Film,
+  "Creative & Motion Graphics": Rocket,
+  "Others": Film,
 };
 
 const VideoCard = React.memo(({
@@ -96,12 +95,17 @@ export const Portfolio = ({ limit }: PortfolioProps) => {
   const allItems = items && items.length > 0 ? items : DEFAULT_PORTFOLIO;
 
   const categories = useMemo(() => {
-    const defaultCats = ["Product Release", "Launch Video", "In-Person Demo", "Others"];
+    const standardCats = [
+      "SaaS & Technology",
+      "Personal Branding",
+      "Commercial & Brand Videos",
+      "Creative & Motion Graphics",
+    ];
     const found = new Set<string>();
+    standardCats.forEach((c) => found.add(c));
     allItems.forEach((i) => {
       if (i.category?.trim()) found.add(i.category.trim());
     });
-    defaultCats.forEach((c) => found.add(c));
     return ["all", ...Array.from(found)];
   }, [allItems]);
 
@@ -147,10 +151,10 @@ export const Portfolio = ({ limit }: PortfolioProps) => {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 dark:text-white mb-3">
-            The Videos We Ship.
+            What We Create.
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-normal">
-            What are you launching?
+          <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">
+            Different ideas. Different audiences. One creative standard.
           </p>
         </div>
 
@@ -159,7 +163,7 @@ export const Portfolio = ({ limit }: PortfolioProps) => {
           {categories.map((cat) => {
             const isActive = filter.toLowerCase() === cat.toLowerCase();
             const IconComponent = categoryIcons[cat] || categoryIcons["Others"];
-            const label = cat === "all" ? "All Videos" : cat;
+            const label = cat === "all" ? "All Projects" : cat;
 
             return (
               <button
@@ -169,10 +173,10 @@ export const Portfolio = ({ limit }: PortfolioProps) => {
                 className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-lg shadow-blue-500/25 scale-[1.02] border border-blue-400/40 dark:shadow-[0_0_25px_rgba(37,99,235,0.35)]"
-                    : "bg-slate-100 hover:bg-slate-200/80 text-slate-700 border border-slate-200 dark:bg-[#090D1A]/90 dark:text-slate-300 dark:hover:text-white dark:hover:bg-[#0E1528] dark:border-white/10 dark:hover:border-blue-500/30"
+                    : "bg-slate-100 hover:bg-slate-200/80 text-slate-800 font-semibold border border-slate-300/80 dark:bg-[#090D1A]/90 dark:text-slate-200 dark:hover:text-white dark:hover:bg-[#0E1528] dark:border-white/10 dark:hover:border-blue-500/30"
                 }`}
               >
-                <IconComponent className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-slate-500 dark:text-slate-400"}`} />
+                <IconComponent className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-slate-600 dark:text-slate-400"}`} />
                 <span>{label}</span>
               </button>
             );

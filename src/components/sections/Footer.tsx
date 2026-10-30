@@ -34,7 +34,7 @@ export const Footer = () => {
   ].filter((item) => item.href);
 
   return (
-    <footer className="bg-slate-50 dark:bg-[#03050B] border-t border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 pt-16 sm:pt-20 pb-12 relative overflow-hidden transition-colors duration-300">
+    <footer className="bg-slate-50 dark:bg-[#03050B] border-t border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 pt-16 sm:pt-20 pb-12 relative overflow-hidden transition-colors duration-300">
       {/* Subtle blue bottom lighting */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-500/5 dark:bg-blue-600/5 rounded-full blur-[140px] -z-10" />
 
@@ -53,7 +53,7 @@ export const Footer = () => {
                 decoding="async"
               />
             </Link>
-            <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed font-normal">
+            <p className="text-sm text-slate-700 dark:text-slate-200 max-w-md leading-relaxed font-medium">
               Story-led video editing, 3D motion design, and high-retention launch videos for high-growth software brands and creators.
             </p>
             <div>
@@ -77,7 +77,7 @@ export const Footer = () => {
                 <li key={item.to}>
                   <Link
                     to={item.to}
-                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors"
+                    className="text-sm text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -99,7 +99,7 @@ export const Footer = () => {
                       href={item.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors"
+                      className="text-sm text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
                     >
                       {item.label}
                     </a>
@@ -120,16 +120,16 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Credits & Legal */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-400">
           <div>
             <p>&copy; {new Date().getFullYear()} Motionly Media. All rights reserved.</p>
-            <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-[11px] text-slate-600 dark:text-slate-400 font-medium">
               Designed &amp; Developed by{" "}
               <a
                 href="https://wa.me/8801948303128"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white font-semibold"
+                className="underline text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white font-semibold"
                 title="Chat with Abu Bakar Siddique on WhatsApp"
               >
                 Abu Bakar Siddique
@@ -139,7 +139,7 @@ export const Footer = () => {
                 href="https://kholipha-ahmmad-al-amin.equisaas-bd.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white"
+                className="underline text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white font-medium"
               >
                 Kholipha Ahmmad Al-Amin
               </a>{" "}
@@ -148,7 +148,7 @@ export const Footer = () => {
                 href="https://agency.equisaas-bd.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white"
+                className="underline text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white font-medium"
               >
                 EquiSaaS Agency
               </a>
@@ -157,7 +157,7 @@ export const Footer = () => {
                 href="https://equisaas-bd.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white"
+                className="underline text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white font-medium"
               >
                 EquiSaaS BD
               </a>{" "}
@@ -195,7 +195,7 @@ export const Footer = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 font-medium">
             <Link to="/privacy" className="hover:text-blue-600 dark:hover:text-white transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-blue-600 dark:hover:text-white transition-colors">Terms</Link>
             <Link to="/refund" className="hover:text-blue-600 dark:hover:text-white transition-colors">Refund policy</Link>

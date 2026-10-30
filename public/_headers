@@ -1,18 +1,18 @@
 /*.png
   Content-Type: image/png
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 /*.webp
   Content-Type: image/webp
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 /*.jpg
   Content-Type: image/jpeg
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 /*.svg
   Content-Type: image/svg+xml
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 /*.xml
   Content-Type: application/xml

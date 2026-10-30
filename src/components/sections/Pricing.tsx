@@ -22,7 +22,7 @@ export const Pricing = () => {
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 dark:text-white mb-4">
             Predictable terms. Relentless execution.
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
             Choose a plan that fits your publishing rhythm. Every engagement starts with a clear scope and transparent turnaround.
           </p>
         </div>
@@ -67,18 +67,18 @@ export const Pricing = () => {
                         </strong>
                         {hasNumericPrice && <span className="text-xs font-medium text-slate-500 dark:text-slate-400">/ mo</span>}
                       </div>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                      <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                         {plan.description}
                       </p>
                     </div>
 
                     <div className="mb-8 pt-5 border-t border-slate-200 dark:border-white/10">
-                      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-3">
                         What&apos;s included
                       </p>
                       <ul className="space-y-2.5">
                         {plan.features?.map((feature, idx) => (
-                          <li key={`${plan.id}-${idx}`} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+                          <li key={`${plan.id}-${idx}`} className="flex items-start gap-2.5 text-xs text-slate-800 dark:text-slate-200 font-medium">
                             <Check className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                             <span>{feature}</span>
                           </li>

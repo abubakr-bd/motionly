@@ -93,10 +93,10 @@ export const Partners = () => {
     <section id="partners" className="py-16 sm:py-24 bg-white dark:bg-[#05070F] text-slate-900 dark:text-white border-y border-slate-100 dark:border-white/10 overflow-hidden relative transition-colors duration-300">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 text-center mb-10 sm:mb-14">
         <p className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-3">
-          Trusted Partners &amp; Brands
+          TRUSTED BY AMBITIOUS TEAMS
         </p>
         <h2 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
-          Powering creators, startups, and ambitious teams worldwide
+          Working alongside creators, startups, and growing brands.
         </h2>
       </div>
 
