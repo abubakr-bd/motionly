@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSiteSettings } from "../../lib/useSiteData";
 import { useTheme } from "../../lib/ThemeContext";
 import { Menu, X, ArrowUpRight, Sparkles, Sun, Moon } from "lucide-react";
+import AcademyComingSoonModal from "./AcademyComingSoonModal";
 
 const navLinks = [
   { name: "Work", path: "/#work" },
@@ -22,9 +23,24 @@ const Navbar = () => {
   const { settings } = useSiteSettings();
   const { theme, toggleTheme } = useTheme();
 
+  const [isAcademyModalOpen, setIsAcademyModalOpen] = useState(false);
+
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname, location.hash]);
+
+  // Open modal if triggered via global custom event or URL query (?academy=coming-soon)
+  useEffect(() => {
+    const handleOpenModal = () => setIsAcademyModalOpen(true);
+    window.addEventListener("open-academy-modal", handleOpenModal);
+    return () => window.removeEventListener("open-academy-modal", handleOpenModal);
+  }, []);
+
+  useEffect(() => {
+    if (location.search.includes("academy=coming-soon") || location.search.includes("academy=true")) {
+      setIsAcademyModalOpen(true);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -155,17 +171,19 @@ const Navbar = () => {
             Careers
           </Link>
 
-          <a
-            href="https://academy.motionly.media"
-            className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-bold flex items-center gap-1.5 transition-all ${
+          <button
+            type="button"
+            onClick={() => setIsAcademyModalOpen(true)}
+            className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
               isDark
                 ? "text-[#F47B35] bg-[#F47B35]/15 hover:bg-[#F47B35]/25 border border-[#F47B35]/30"
                 : "text-[#F47B35] bg-[#FFF2EA] hover:bg-[#ffe5d3] border border-[#F47B35]/40"
             }`}
+            aria-label="Motionly Academy (Coming Soon)"
           >
             <span className="text-[10px]">✳</span>
             <span>Academy</span>
-          </a>
+          </button>
         </nav>
 
         {/* Right CTA & Black View Toggle */}
@@ -301,17 +319,20 @@ const Navbar = () => {
               <span className="text-[11px] font-mono text-slate-400">0{navLinks.length + 2}</span>
             </Link>
 
-            <a
-              href="https://academy.motionly.media"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold bg-[#F47B35]/10 text-[#F47B35] border border-[#F47B35]/20"
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(false);
+                setIsAcademyModalOpen(true);
+              }}
+              className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold bg-[#F47B35]/10 text-[#F47B35] border border-[#F47B35]/20 text-left cursor-pointer"
             >
               <div className="flex items-center gap-2">
                 <span>✳</span>
                 <span>Motionly Academy</span>
               </div>
-              <span className="text-[10px] font-bold uppercase bg-[#F47B35] text-white px-2 py-0.5 rounded-md">New</span>
-            </a>
+              <span className="text-[10px] font-bold uppercase bg-[#F47B35] text-white px-2 py-0.5 rounded-md">Coming Soon</span>
+            </button>
           </nav>
 
           <div className="mt-2 pt-2 border-t border-slate-200 dark:border-white/5">
@@ -330,6 +351,12 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+      {/* Academy Coming Soon Modal */}
+      <AcademyComingSoonModal
+        isOpen={isAcademyModalOpen}
+        onClose={() => setIsAcademyModalOpen(false)}
+      />
     </header>
   );
 };

@@ -312,16 +312,21 @@ export const Footer = () => {
     about: true,
   };
 
-  const navigation: Array<{ label: string; to?: string; href?: string }> = [
+  const navigation: Array<{ label: string; to?: string; href?: string; onAction?: () => void }> = [
     pageToggles.portfolio !== false ? { label: "Work", to: "/portfolio" } : null,
     pageToggles.services !== false ? { label: "Services", to: "/services" } : null,
     { label: "Process", to: "/#process" },
     pageToggles.about !== false ? { label: "About", to: "/about" } : null,
     { label: "Careers", to: "/careers" },
-    { label: "Motionly Academy ↗", href: "https://academy.motionly.media" },
+    {
+      label: "Motionly Academy",
+      onAction: () => {
+        window.dispatchEvent(new CustomEvent("open-academy-modal"));
+      },
+    },
     { label: "Journal", to: "/blog" },
     pageToggles.personalBranding !== false ? { label: "Personal branding", to: "/personal-branding" } : null,
-  ].filter(Boolean) as Array<{ label: string; to?: string; href?: string }>;
+  ].filter(Boolean) as Array<{ label: string; to?: string; href?: string; onAction?: () => void }>;
 
   const social = [
     { label: "Instagram", href: settings.contact.instagram },
@@ -470,7 +475,18 @@ export const Footer = () => {
             <ul className="space-y-2.5 text-xs sm:text-sm">
               {navigation.map((item) => (
                 <li key={item.label}>
-                  {item.href ? (
+                  {item.onAction ? (
+                    <button
+                      type="button"
+                      onClick={item.onAction}
+                      className="text-[#F47B35] font-semibold hover:underline transition-colors flex items-center gap-1.5 cursor-pointer text-left"
+                    >
+                      <span>{item.label}</span>
+                      <span className="text-[10px] bg-[#F47B35]/15 text-[#F47B35] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+                        Soon
+                      </span>
+                    </button>
+                  ) : item.href ? (
                     <a
                       href={item.href}
                       target="_blank"

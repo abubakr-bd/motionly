@@ -24,10 +24,7 @@ const PublicInvoice    = lazy(() => import("./pages/PublicInvoice"));
 const ProjectCaseStudy = lazy(() => import("./pages/ProjectCaseStudy"));
 
 const AcademyRedirect = () => {
-  React.useEffect(() => {
-    window.location.href = "https://academy.motionly.media";
-  }, []);
-  return null;
+  return <Navigate to="/?academy=coming-soon" replace />;
 };
 
 const TeamRedirect = () => {
