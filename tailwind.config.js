@@ -18,6 +18,18 @@ module.exports = {
     },
     extend: {
       colors: {
+        academy: {
+          orange: '#F47B35',
+          'orange-hover': '#e06622',
+          'orange-light': '#FFF2EA',
+          charcoal: '#202020',
+          'charcoal-muted': '#3A3A3A',
+          canvas: '#FAF8F5',
+          cream: '#F2EDE6',
+          'cream-dark': '#E8E1D5',
+          muted: '#858585',
+          border: '#E7E2DA',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

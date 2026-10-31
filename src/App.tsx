@@ -24,6 +24,13 @@ const PublicInvoice    = lazy(() => import("./pages/PublicInvoice"));
 const TeamWorkspace    = lazy(() => import("./pages/TeamWorkspace"));
 const ProjectCaseStudy = lazy(() => import("./pages/ProjectCaseStudy"));
 
+const AcademyRedirect = () => {
+  React.useEffect(() => {
+    window.location.href = "https://academy.motionly.media";
+  }, []);
+  return null;
+};
+
 const PageLoader = () => (
   <div className="min-h-[70vh] flex flex-col items-center justify-center p-8 bg-transparent" role="status">
     <div className="relative flex flex-col items-center justify-center">
@@ -81,6 +88,11 @@ function AppRoutes() {
             <Route path="/privacy"   element={<PrivacyPolicy />} />
             <Route path="/terms"     element={<TermsOfService />} />
             <Route path="/refund"    element={<RefundPolicy />} />
+            
+            {/* Motionly Academy Redirects to separate hosted platform */}
+            <Route path="/academy"   element={<AcademyRedirect />} />
+            <Route path="/academy/*" element={<AcademyRedirect />} />
+
             {/* Legacy /legal redirects to the privacy page. */}
             <Route path="/legal"           element={<Navigate to="/privacy" replace />} />
             <Route path="/invoice/:id/:publicToken" element={<PublicInvoice />} />

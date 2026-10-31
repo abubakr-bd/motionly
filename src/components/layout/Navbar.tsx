@@ -154,6 +154,18 @@ const Navbar = () => {
           >
             Careers
           </Link>
+
+          <a
+            href="https://academy.motionly.media"
+            className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-bold flex items-center gap-1.5 transition-all ${
+              isDark
+                ? "text-[#F47B35] bg-[#F47B35]/15 hover:bg-[#F47B35]/25 border border-[#F47B35]/30"
+                : "text-[#F47B35] bg-[#FFF2EA] hover:bg-[#ffe5d3] border border-[#F47B35]/40"
+            }`}
+          >
+            <span className="text-[10px]">✳</span>
+            <span>Academy</span>
+          </a>
         </nav>
 
         {/* Right CTA & Black View Toggle */}
@@ -288,6 +300,18 @@ const Navbar = () => {
               <span>Careers</span>
               <span className="text-[11px] font-mono text-slate-400">0{navLinks.length + 2}</span>
             </Link>
+
+            <a
+              href="https://academy.motionly.media"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold bg-[#F47B35]/10 text-[#F47B35] border border-[#F47B35]/20"
+            >
+              <div className="flex items-center gap-2">
+                <span>✳</span>
+                <span>Motionly Academy</span>
+              </div>
+              <span className="text-[10px] font-bold uppercase bg-[#F47B35] text-white px-2 py-0.5 rounded-md">New</span>
+            </a>
           </nav>
 
           <div className="mt-2 pt-2 border-t border-slate-200 dark:border-white/5">

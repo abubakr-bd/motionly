@@ -312,15 +312,16 @@ export const Footer = () => {
     about: true,
   };
 
-  const navigation = [
+  const navigation: Array<{ label: string; to?: string; href?: string }> = [
     pageToggles.portfolio !== false ? { label: "Work", to: "/portfolio" } : null,
     pageToggles.services !== false ? { label: "Services", to: "/services" } : null,
     { label: "Process", to: "/#process" },
     pageToggles.about !== false ? { label: "About", to: "/about" } : null,
     { label: "Careers", to: "/careers" },
+    { label: "Motionly Academy ↗", href: "https://academy.motionly.media" },
     { label: "Journal", to: "/blog" },
     pageToggles.personalBranding !== false ? { label: "Personal branding", to: "/personal-branding" } : null,
-  ].filter(Boolean) as { label: string; to: string }[];
+  ].filter(Boolean) as Array<{ label: string; to?: string; href?: string }>;
 
   const social = [
     { label: "Instagram", href: settings.contact.instagram },
@@ -468,10 +469,21 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               {navigation.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors">
-                    {item.label}
-                  </Link>
+                <li key={item.label}>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#F47B35] font-semibold hover:underline transition-colors flex items-center gap-1"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link to={item.to || "/"} className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors">
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
