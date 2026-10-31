@@ -81,6 +81,21 @@ const VideoCard = React.memo(({
           </div>
         </div>
       </button>
+
+      {/* Case Study Link & Title for internal crawlability */}
+      <div className="mt-2.5 flex items-center justify-between px-1">
+        <span className="font-medium text-slate-800 dark:text-slate-200 text-xs sm:text-sm line-clamp-1">
+          {item.title || "Showcase Project"}
+        </span>
+        <Link
+          to={`/portfolio/${item.id}`}
+          className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline shrink-0 ml-2"
+          aria-label={`View case study for ${item.title || "project"}`}
+        >
+          <span>Case study</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
+        </Link>
+      </div>
     </motion.div>
   );
 });

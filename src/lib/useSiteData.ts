@@ -869,14 +869,31 @@ export function useCollection<T = unknown>(
           return 0;
         });
 
-        if (colName === "portfolio" && docs.length === 0) {
-          setItems(DEFAULT_PORTFOLIO as unknown as T[]);
+        if (colName === "portfolio") {
+          const validDocs = (docs as unknown as PortfolioItem[]).filter(
+            (p) => p && p.title && p.videoId
+          );
+          const existingIds = new Set(validDocs.map((p) => p.id));
+          const merged = [
+            ...validDocs,
+            ...DEFAULT_PORTFOLIO.filter((p) => !existingIds.has(p.id)),
+          ];
+          setItems((merged.length > 0 ? merged : DEFAULT_PORTFOLIO) as unknown as T[]);
         } else if (colName === "testimonials" && docs.length === 0) {
           setItems(DEFAULT_TESTIMONIALS as unknown as T[]);
         } else if (colName === "pricing" && docs.length === 0) {
           setItems(DEFAULT_PRICING_PLANS as unknown as T[]);
-        } else if (colName === "blogs" && docs.length === 0) {
-          setItems(DEFAULT_BLOGS as unknown as T[]);
+        } else if (colName === "blogs") {
+          // Filter out junk/empty/test posts (e.g., "fx" or 0 content)
+          const validDocs = (docs as unknown as BlogItem[]).filter(
+            (b) => b && b.title && b.title.trim().toLowerCase() !== "fx" && b.title.trim().length > 3 && (!b.content || b.content.length > 50)
+          );
+          const existingIds = new Set(validDocs.map((b) => b.id));
+          const merged = [
+            ...validDocs,
+            ...DEFAULT_BLOGS.filter((b) => !existingIds.has(b.id)),
+          ];
+          setItems((merged.length > 0 ? merged : DEFAULT_BLOGS) as unknown as T[]);
         } else {
           setItems(docs as T[]);
         }

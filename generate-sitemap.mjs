@@ -55,11 +55,19 @@ async function generateSitemap() {
     if (response.ok) {
       const data = await response.json();
       if (data.documents) {
-        dynamicBlogs = data.documents.map(doc => {
-          const id = doc.name.split('/').pop();
-          const updatedAt = doc.updateTime ? doc.updateTime.split('T')[0] : new Date().toISOString().split('T')[0];
-          return { id, date: updatedAt };
-        });
+        dynamicBlogs = data.documents
+          .filter(doc => {
+            const id = doc.name.split('/').pop();
+            const title = doc.fields?.title?.stringValue || '';
+            const content = doc.fields?.content?.stringValue || '';
+            // Strictly exclude empty junk test posts (e.g. "fx" or empty content)
+            return id !== 'Ct26jhtmvhEdLLCTk1fg' && title.trim().toLowerCase() !== 'fx' && title.trim().length > 3 && content.length > 50;
+          })
+          .map(doc => {
+            const id = doc.name.split('/').pop();
+            const updatedAt = doc.updateTime ? doc.updateTime.split('T')[0] : new Date().toISOString().split('T')[0];
+            return { id, date: updatedAt };
+          });
       }
     }
   } catch (error) {

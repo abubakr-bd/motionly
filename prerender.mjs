@@ -9,89 +9,31 @@ const __dirname = path.dirname(__filename);
 const DIST_DIR = path.join(__dirname, 'dist');
 const BASE_URL = 'https://motionly.media';
 
-// Static Blogs
-const BLOG_DATA = [
-  {
-    id: "saas-launch-video-guide",
-    title: "The Anatomy of a High-Retention SaaS Product Launch Video",
-    category: "SaaS",
-    date: "2025-05-24",
-    description: "Discover the exact 60-second launch video blueprint used by top Product Hunt #1 products and high-growth SaaS startups to turn viewers into paying users.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "yc-demo-pitch-videos",
-    title: "How YC Startups Use 60-Second Videos to Close Multi-Million Dollar Seed Rounds",
-    category: "Strategy",
-    date: "2025-05-22",
-    description: "How top venture-backed startups structure 60-second pitch videos to convince Tier-1 investors, ignite FOMO, and secure oversubscribed investment rounds.",
-    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "vsl-vs-product-demo",
-    title: "VSL vs. Product Demo: Which Video Format Converts Highest for B2B Software?",
-    category: "Strategy",
-    date: "2025-05-19",
-    description: "Compare VSLs and B2B product demos: conversion rates, audience intent, funnel placement, sales velocity, and production frameworks.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "science-of-the-first-3-seconds",
-    title: "The Science of the First 3 Seconds: Cold Hooks That Stop the Scroll",
-    category: "Editing",
-    date: "2025-05-16",
-    description: "Master the psychology of scroll-stopping video hooks: pattern interrupts, auditory cues, cognitive dissonance, and frame pacing.",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "3d-motion-graphics-software-demos",
-    title: "3D Motion Graphics vs Screen Capture: How to Showcase Complex Software Visually",
-    category: "Production",
-    date: "2025-05-13",
-    description: "Why leading technology brands use 3D motion design over screen recordings to showcase developer tools, cloud infrastructure, and fintech software.",
-    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "repurpose-long-form-to-viral-shorts",
-    title: "How to Repurpose 1 Long-Form YouTube Video into 15 High-Performing Shorts",
-    category: "Growth",
-    date: "2025-05-10",
-    description: "Step-by-step strategy to extract 15 high-retention micro-videos from one long-form episode, optimizing for TikTok, Instagram Reels, and YouTube Shorts.",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "sound-design-video-retention",
-    title: "Audio Branding in Video Marketing: Why Sound Design Accounts for 50% of Retention",
-    category: "Production",
-    date: "2025-05-07",
-    description: "Why audio is 50% of the video experience: explore psychoacoustics, spatial audio, sub-bass impacts, UI foley, and brand soundmarks.",
-    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "kinetic-typography-best-practices",
-    title: "Kinetic Typography Best Practices: Designing Captions People Actually Read",
-    category: "Editing",
-    date: "2025-05-04",
-    description: "Master kinetic typography: typography hierarchy, word-level keyframing, color theory for text overlays, and mobile accessibility standards.",
-    image: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "founder-led-video-growth",
-    title: "The Founder-Led Video Strategy: Building a Personal Brand That Drives Pipeline",
-    category: "Growth",
-    date: "2025-04-29",
-    description: "How tech founders and CEOs use personal brand video marketing on LinkedIn, YouTube, and X to attract enterprise buyers and top-tier talent.",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "b2b-video-marketing-roi-metrics",
-    title: "Video Marketing ROI: The Exact Metrics Every High-Growth SaaS Should Track",
-    category: "Strategy",
-    date: "2025-04-25",
-    description: "Move beyond vanity metrics: calculate the true ROI of B2B video marketing with view retention curves, pipeline velocity, CAC reduction, and demo conversion.",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80"
-  }
-];
+// Dynamic & Static Unified Blogs (19 high-retention guides & articles)
+const allBlogsJsonPath = path.join(__dirname, 'src', 'lib', 'all_prerender_blogs.json');
+const BLOG_DATA = JSON.parse(fs.readFileSync(allBlogsJsonPath, 'utf8'));
+
+function formatBlogBody(content) {
+  if (!content) return '';
+  if (content.includes('<p>') || content.includes('<h3>')) return content;
+  return content
+    .split(/\n\n+/)
+    .map(block => {
+      block = block.trim();
+      if (block.startsWith('### ')) {
+        return `<h3>${block.replace('### ', '')}</h3>`;
+      }
+      if (block.startsWith('## ')) {
+        return `<h2>${block.replace('## ', '')}</h2>`;
+      }
+      if (block.startsWith('- ')) {
+        const items = block.split('\n').map(li => `<li>${li.replace(/^-\s*/, '')}</li>`).join('');
+        return `<ul>${items}</ul>`;
+      }
+      return `<p>${block.replace(/\n/g, '<br/>')}</p>`;
+    })
+    .join('\n');
+}
 
 // Static Portfolio Case Studies
 const PORTFOLIO_DATA = [
@@ -623,14 +565,17 @@ BLOG_DATA.forEach(b => {
       ]
     },
     bodyContent: `
-      <article>
+      <article class="site-blog-article">
         <p><a href="/blog">&larr; Back to all articles</a></p>
         <p class="site-kicker">${b.category} &bull; ${b.date}</p>
         <h1>${b.title}</h1>
         <p class="site-page-hero__lede">${b.description}</p>
-        <div>
-          <p>Read the complete strategic breakdown on Motionly Media. High-retention video editing and content frameworks built for creators and brands.</p>
-          <p><a href="/contact">Discuss your video strategy &rarr;</a> | <a href="/portfolio">View our work &rarr;</a></p>
+        <div class="site-blog-article__body" style="font-size:1.0625rem;line-height:1.75;margin:2rem 0;color:#334155;">
+          ${formatBlogBody(b.content)}
+        </div>
+        <div class="site-blog-article__footer" style="margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid #cbd5e1;">
+          <p><strong>About Motionly Media:</strong> Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency serving leading brands and creators across the US, UK, Canada, Australia, and worldwide.</p>
+          <p><a href="/contact">Discuss your video strategy &rarr;</a> | <a href="/portfolio">Explore our work &rarr;</a></p>
         </div>
       </article>
     `

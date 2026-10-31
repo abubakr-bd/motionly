@@ -1,0 +1,4 @@
+# Cloudflare Pages Redirects
+# 301 Permanent Redirects for retired test/junk URLs
+/blog/Ct26jhtmvhEdLLCTk1fg /blog 301
+/blog/Ct26jhtmvhEdLLCTk1fg/ /blog 301
