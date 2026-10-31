@@ -97,23 +97,11 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
             {/* Modal Header */}
             <div className="px-5 sm:px-7 pt-5 pb-4 flex items-center justify-between border-b border-[#E7E2DA] shrink-0 bg-white/70 backdrop-blur-sm">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#202020] text-white flex items-center justify-center font-bold text-xs shadow-sm">
-                  <span className="text-[#F47B35]">M</span>
-                  <span className="w-1 h-1 rounded-full bg-[#F47B35] ml-0.5" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-extrabold text-[#202020] text-sm tracking-tight">
-                      MOTIONLY
-                    </span>
-                    <span className="bg-[#F47B35] text-white text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded">
-                      ACADEMY
-                    </span>
-                  </div>
-                  <span className="text-[10px] text-[#858585] block -mt-0.5">
-                    Practical Skill-Development Division
-                  </span>
-                </div>
+                <img
+                  src="/academy-logo.png"
+                  alt="Motionly Academy"
+                  className="h-8 sm:h-9 w-auto object-contain"
+                />
               </div>
 
               {/* Status Pill & Close */}
