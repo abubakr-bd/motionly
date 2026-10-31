@@ -1,4 +1,10 @@
 # Cloudflare Pages Redirects
+# Team & Finance Workspace redirects to standalone domain team.motionly.media
+/team/* https://team.motionly.media/:splat 302
+/team https://team.motionly.media/ 302
+/finance/* https://team.motionly.media/finance/:splat 302
+/finance https://team.motionly.media/finance 302
+
 # 301 Permanent Redirects for retired test/junk URLs
 /blog/Ct26jhtmvhEdLLCTk1fg /blog 301
 /blog/Ct26jhtmvhEdLLCTk1fg/ /blog 301

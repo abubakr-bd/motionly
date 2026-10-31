@@ -21,7 +21,6 @@ const NotFound     = lazy(() => import("./pages/NotFound"));
 const PersonalBranding = lazy(() => import("./pages/PersonalBranding"));
 const Careers          = lazy(() => import("./pages/Careers"));
 const PublicInvoice    = lazy(() => import("./pages/PublicInvoice"));
-const TeamWorkspace    = lazy(() => import("./pages/TeamWorkspace"));
 const ProjectCaseStudy = lazy(() => import("./pages/ProjectCaseStudy"));
 
 const AcademyRedirect = () => {
@@ -29,6 +28,21 @@ const AcademyRedirect = () => {
     window.location.href = "https://academy.motionly.media";
   }, []);
   return null;
+};
+
+const TeamRedirect = () => {
+  const location = useLocation();
+  React.useEffect(() => {
+    const cleanPath = location.pathname.replace(/^\/team/, "") || "/";
+    window.location.replace(`https://team.motionly.media${cleanPath}${location.search}${location.hash}`);
+  }, [location]);
+  return (
+    <div className="min-h-screen bg-[#070a12] flex flex-col items-center justify-center p-6 text-center text-white" role="status">
+      <div className="w-10 h-10 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin mb-4" />
+      <p className="font-bold text-lg">Redirecting to Motionly Team Workspace...</p>
+      <p className="text-xs font-mono text-cyan-400 mt-2">team.motionly.media</p>
+    </div>
+  );
 };
 
 const PageLoader = () => (
@@ -98,8 +112,9 @@ function AppRoutes() {
             <Route path="/invoice/:id/:publicToken" element={<PublicInvoice />} />
             <Route path="/admin"     element={<Admin />} />
             <Route path="/admin/*"   element={<Admin />} />
-            <Route path="/team/*"    element={<TeamWorkspace />} />
-            <Route path="/team"      element={<TeamWorkspace />} />
+            {/* Motionly Team & Finance Workspace - Hosted separately at team.motionly.media */}
+            <Route path="/team/*"    element={<TeamRedirect />} />
+            <Route path="/team"      element={<TeamRedirect />} />
             <Route path="*"          element={<NotFound />} />
           </Routes>
         </Suspense>

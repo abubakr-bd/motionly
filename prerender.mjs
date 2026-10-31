@@ -785,11 +785,15 @@ async function prerender() {
     } catch {}
   }
 
-  // Generate dedicated entrypoint HTML files for client-side SPA routes (admin, team)
+  // Generate dedicated entrypoint HTML file for client-side admin SPA route
   const SPA_ROUTES = [
-    { dir: 'admin', title: 'Admin Workspace | Motionly Studio' },
-    { dir: 'team', title: 'Team Workspace | Motionly Media' }
+    { dir: 'admin', title: 'Admin Workspace | Motionly Studio' }
   ];
+
+  const teamDir = path.join(DIST_DIR, 'team');
+  if (fs.existsSync(teamDir)) {
+    fs.rmSync(teamDir, { recursive: true, force: true });
+  }
 
   for (const route of SPA_ROUTES) {
     const routeDir = path.join(DIST_DIR, route.dir);
@@ -811,7 +815,7 @@ async function prerender() {
       fs.writeFileSync(`${routeFile}.br`, zlib.brotliCompressSync(Buffer.from(spaHtml, 'utf-8')));
     } catch {}
   }
-  console.log(`Generated dedicated SPA shells for /admin and /team routes.`);
+  console.log(`Generated dedicated SPA shell for /admin route.`);
 
   console.log(`Pre-rendered ${PAGES.length} routes with custom metadata, schemas, and semantic HTML.`);
 }
