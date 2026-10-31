@@ -93,8 +93,9 @@ const Navbar = () => {
   const isDark = theme === "dark";
 
   return (
-    <header
-      ref={headerRef}
+    <>
+      <header
+        ref={headerRef}
       className={`fixed top-3 sm:top-5 left-0 right-0 z-50 max-w-6xl w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] mx-auto transition-all duration-300 ${
         isDark
           ? isScrolled
@@ -352,12 +353,14 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Academy Coming Soon Modal */}
+      </header>
+
+      {/* Academy Coming Soon Modal (Rendered outside header and portaled to body) */}
       <AcademyComingSoonModal
         isOpen={isAcademyModalOpen}
         onClose={() => setIsAcademyModalOpen(false)}
       />
-    </header>
+    </>
   );
 };
 

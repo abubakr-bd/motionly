@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Film, Sparkles, Send, Bell, ArrowRight } from "lucide-react";
 
@@ -11,11 +12,16 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(() => {
     return typeof window !== "undefined" && Boolean(localStorage.getItem("motionly_academy_waitlist"));
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close on Escape key
   useEffect(() => {
@@ -55,28 +61,32 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
     }, 600);
   };
 
-  return (
+  if (!mounted || typeof document === "undefined") {
+    return null;
+  }
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+          {/* Backdrop covering whole screen */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[9999]"
             aria-hidden="true"
           />
 
-          {/* Modal Container */}
+          {/* Modal Container Centered on Main Screen */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 16 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-2xl bg-[#FAF8F5] text-[#202020] rounded-[28px] sm:rounded-[36px] border border-[#E7E2DA] shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col font-sans"
+            className="relative w-full max-w-2xl bg-[#FAF8F5] text-[#202020] rounded-[28px] sm:rounded-[36px] border border-[#E7E2DA] shadow-2xl overflow-hidden z-[10000] max-h-[90vh] my-auto flex flex-col font-sans"
             role="dialog"
             aria-modal="true"
             aria-labelledby="academy-modal-title"
@@ -114,8 +124,9 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
                 </span>
 
                 <button
+                  type="button"
                   onClick={onClose}
-                  className="w-8 h-8 rounded-full bg-[#F2EDE6] hover:bg-[#E8E1D5] text-[#202020] flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-[#F47B35]"
+                  className="w-8 h-8 rounded-full bg-[#F2EDE6] hover:bg-[#E8E1D5] text-[#202020] flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-[#F47B35] cursor-pointer"
                   aria-label="Close modal"
                 >
                   <X className="w-4 h-4" />
@@ -248,7 +259,7 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="inline-flex items-center justify-center gap-1.5 bg-[#F47B35] hover:bg-[#e06622] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm shrink-0 disabled:opacity-50"
+                      className="inline-flex items-center justify-center gap-1.5 bg-[#F47B35] hover:bg-[#e06622] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm shrink-0 disabled:opacity-50 cursor-pointer"
                     >
                       {isLoading ? (
                         <span>Saving...</span>
@@ -279,7 +290,7 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="w-full sm:w-auto ml-auto px-5 py-2 rounded-full bg-[#202020] hover:bg-[#333333] text-white text-xs font-bold transition-colors"
+                className="w-full sm:w-auto ml-auto px-5 py-2 rounded-full bg-[#202020] hover:bg-[#333333] text-white text-xs font-bold transition-colors cursor-pointer"
               >
                 Close Preview
               </button>
@@ -288,7 +299,8 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
