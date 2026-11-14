@@ -114,10 +114,10 @@ const PORTFOLIO_DATA = [
 const PAGES = [
   {
     path: "/",
-    title: "Motionly Media | Premier Video Editing, Video Marketing & Production Agency",
-    description: "Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency. Serving market leaders across the US, UK, Canada, Australia, and worldwide.",
-    keywords: "video editing agency, video marketing agency, video production company, high-retention video editing, video editing agency in Bangladesh, video production BD, SaaS video production, YouTube video editor, VSL production, commercial video agency, Motionly Media",
-    h1: "Global High-Retention Video Editing, Video Marketing & Video Production Agency",
+    title: "MOTIONLY — Independent Creative Video & Content Studio",
+    description: "From SaaS products to personal brands, we turn complex ideas and ambitious visions into compelling visual experiences through strategic video production, motion design, and creative storytelling.",
+    keywords: "creative video studio, motion design studio, SaaS product videos, explainer video production, high-retention video editing, personal branding content, commercial video production, 3D motion graphics, creative agency, Motionly Media",
+    h1: "We Make Ideas Move. | Independent Creative Video & Content Studio",
     bodyContent: `
       <header class="crit-nav" aria-label="Main Navigation">
         <a href="/" aria-label="Motionly Media Home">
@@ -133,14 +133,14 @@ const PAGES = [
         <div class="site-container">
           <div class="crit-badge">
             <span class="crit-badge-dot"></span>
-            <span>High-Retention Video Agency &bull; Global Reach</span>
+            <span>INDEPENDENT CREATIVE VIDEO & CONTENT STUDIO</span>
             <span style="color:#3b82f6">&rsaquo;</span>
           </div>
           <h1 class="crit-h1">
-            Creative videos. <span class="crit-gradient-text">Built to move brands.</span>
+            We Make Ideas <span class="crit-gradient-text" style="font-family:serif;font-style:italic">Move.</span>
           </h1>
           <p class="crit-lede">
-            We combine strategic storytelling, high-end video editing, motion graphics, and creative production to help SaaS companies, founders, creators, and ambitious brands stand out.
+            From SaaS products to personal brands, we turn complex ideas and ambitious visions into compelling visual experiences through strategic video production, motion design, and creative storytelling.
           </p>
           <div>
             <a href="/contact" class="crit-cta-btn">LET'S WORK TOGETHER</a>

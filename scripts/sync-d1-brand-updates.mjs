@@ -1,0 +1,364 @@
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const siteSettings = {
+  hero: {
+    badge: "High-Retention Video Agency • Global Reach",
+    headline1: "Creative videos.",
+    headline2: "Built to move brands.",
+    subheadline: "We combine strategic storytelling, high-end video editing, motion graphics, and creative production to help SaaS companies, founders, creators, and ambitious brands stand out.",
+    cta1: "LET'S WORK TOGETHER",
+    cta1Link: "/contact",
+    cta2: "EXPLORE OUR WORK",
+    cta2Link: "#work",
+    socialProofText: "Founder Reviews",
+    socialProofCount: "50+",
+    showreelVideoId: "q7hCvbfvRPU"
+  },
+  process: {
+    title: "From idea to impact.",
+    subtitle: "OUR CREATIVE FRAMEWORK",
+    description: "A clear creative process designed to take your vision from concept to final delivery.",
+    steps: [
+      {
+        id: "step-1",
+        label: "01",
+        title: "Discover",
+        description: "Understand the audience, define the objective, and establish the creative direction.",
+        icon: "Search",
+        tags: ["Audience Context", "Core Objective", "Creative Direction"],
+        previews: []
+      },
+      {
+        id: "step-2",
+        label: "02",
+        title: "Create",
+        description: "Develop the story, produce the visuals, and bring everything together through thoughtful creative execution.",
+        icon: "Wand2",
+        tags: ["Visual Storytelling", "2D/3D Motion", "Creative Craft"],
+        previews: []
+      },
+      {
+        id: "step-3",
+        label: "03",
+        title: "Deliver",
+        description: "Refine, finalize, and deliver content ready to make an impact across your chosen platforms.",
+        icon: "Rocket",
+        tags: ["Precision Polish", "Multi-Platform Export", "Launch Ready"],
+        previews: []
+      }
+    ]
+  },
+  difference: {
+    title: "The Motionly approach.",
+    subtitle: "HOW WE WORK",
+    description: "Strategy, creativity, and execution come together to create videos that make a difference.",
+    statusQuoTitle: "A fragmented workflow",
+    statusQuoPoints: [
+      "Creative direction changes between contributors",
+      "Feedback and files are spread across tools",
+      "The edit starts before the story is clear",
+      "Publishing depends on one-off effort"
+    ],
+    motionlyTitle: "Motionly Media",
+    motionlyPoints: [
+      "A clear owner from brief to delivery",
+      "Strategic storytelling and audience context",
+      "A consistent review and delivery process",
+      "Custom motion, sound, and visual finishing"
+    ]
+  },
+  painPoints: {
+    title: "From the first idea to the final frame.",
+    subtitle: "YOUR CREATIVE PARTNER",
+    description: "Whether you're building a personal brand, launching a product, or growing a business, we bring the creative direction and execution to make your vision happen.",
+    points: [
+      "Creating consistent content takes more than just editing.",
+      "Your ideas need the right storytelling and visual direction.",
+      "Finding reliable creative talent shouldn't slow down your growth.",
+      "Managing multiple creative requirements shouldn't become another full-time job."
+    ]
+  },
+  seo: {
+    title: "Motionly Media | Creative & Video Marketing Agency",
+    description: "Motionly is a creative and video marketing agency helping SaaS companies, founders, creators, and ambitious brands turn ideas into impactful visual experiences.",
+    image: "https://motionly.media/og-image-v2.png"
+  },
+  contact: {
+    calendlyUrl: "https://cal.com/motionly-media-rdgfxc/30min",
+    email: "support@motionly.media",
+    phone: "",
+    facebook: "https://www.facebook.com/motionlymedia",
+    instagram: "https://www.instagram.com/motionlymedia/",
+    linkedin: "https://www.linkedin.com/company/motionlymedia/"
+  },
+  global: {
+    siteName: "Motionly Media",
+    siteDescription: "Motionly is a creative and video marketing agency helping SaaS companies, founders, creators, and ambitious brands turn ideas into impactful visual experiences.",
+    logoUrl: "/nav_logo.webp",
+    faviconUrl: "/favicon.ico",
+    maintenanceMode: false,
+    maintenanceMessage: "We are currently updating our systems to serve you better. The site remains fully functional.",
+    pageToggles: {
+      personalBranding: true,
+      services: true,
+      portfolio: true,
+      about: true
+    }
+  },
+  layout: {
+    homepageSections: [
+      "hero",
+      "partners",
+      "portfolio",
+      "painPoints",
+      "difference",
+      "testimonials",
+      "process",
+      "team",
+      "pricing",
+      "blog",
+      "faqs",
+      "contact"
+    ]
+  },
+  partners: { layers: 1 },
+  updatedAt: { seconds: Math.floor(Date.now() / 1000) }
+};
+
+const portfolioItems = [
+  {
+    id: "port-1",
+    title: "Bolto",
+    videoId: "KDK1jHJXPrk",
+    category: "SaaS & Technology",
+    labels: ["SaaS & Technology", "AI Platform", "Product Explainer"],
+    description: "YC-backed AI-native platform that unifies recruiting, payroll, and HR into one system.",
+    order: 1
+  },
+  {
+    id: "port-2",
+    title: "ClickUp",
+    videoId: "pIEkY7YDIF0",
+    category: "SaaS & Technology",
+    labels: ["SaaS & Technology", "Productivity", "Feature Release"],
+    description: "The world's #1 work platform that replaces every productivity tool teams use.",
+    order: 2
+  },
+  {
+    id: "port-3",
+    title: "Atria",
+    videoId: "xygb6y5L9x8",
+    category: "Commercial & Brand Videos",
+    labels: ["Commercial & Brand Videos", "Paid Ads", "Growth Campaign"],
+    description: "AI platform that builds high-performing Meta and TikTok ads.",
+    order: 3
+  },
+  {
+    id: "port-4",
+    title: "Relixir",
+    videoId: "0NHfOpolrjs",
+    category: "Personal Branding",
+    labels: ["Personal Branding", "Founder Story", "Dev Tools"],
+    description: "Introducing next-generation developer tooling with a high-energy founder walkthrough.",
+    order: 4
+  },
+  {
+    id: "port-5",
+    title: "Apple SaaS Explainer",
+    videoId: "xA_msiryNvQ",
+    category: "Creative & Motion Graphics",
+    labels: ["Creative & Motion Graphics", "Minimalist SaaS", "UI Animation"],
+    description: "Minimalist Apple-inspired SaaS product explainer with fluid UI transitions.",
+    order: 5
+  },
+  {
+    id: "port-6",
+    title: "Original Commercial",
+    videoId: "-_GCBlnT7R0",
+    category: "Commercial & Brand Videos",
+    labels: ["Commercial & Brand Videos", "Paid Acquisition", "Brand Campaign"],
+    description: "Kinetic brand commercial engineered for paid acquisition and organic virality.",
+    order: 6
+  }
+];
+
+const faqs = [
+  {
+    id: "faq-1",
+    question: "What types of businesses and creators do you work with?",
+    answer: "We partner with SaaS companies, technology startups, founders, content creators, personal brands, and growing businesses worldwide who want to create high-impact, story-driven video content.",
+    order: 1
+  },
+  {
+    id: "faq-2",
+    question: "What creative and video services do you offer?",
+    answer: "Our core services include SaaS product videos, software explainers, 2D and 3D motion graphics, launch videos, personal branding content, commercial campaigns, and full-cycle creative video marketing.",
+    order: 2
+  },
+  {
+    id: "faq-3",
+    question: "Do you specialize in SaaS and technology videos?",
+    answer: "Yes, technology and SaaS video production is our strongest core specialization. We translate complex software workflows and abstract technical concepts into intuitive, beautifully animated visual narratives.",
+    order: 3
+  },
+  {
+    id: "faq-4",
+    question: "Can you help founders and creators build personal brands?",
+    answer: "Absolutely. We help founders and creators develop authoritative personal brands through high-retention video systems, talking-head editing, strategic hook architecture, and multi-platform content repurposing.",
+    order: 4
+  },
+  {
+    id: "faq-5",
+    question: "Do you offer filming and on-location production?",
+    answer: "Yes. While most of our client engagements focus on digital post-production and motion design, we can provide professional filming, cinematography, studio shoots, and on-location production support whenever your project requires it.",
+    order: 5
+  },
+  {
+    id: "faq-6",
+    question: "Can we work with you on a monthly basis?",
+    answer: "Yes. We offer both dedicated monthly creative partnerships for ongoing publishing needs and milestone-based engagements for standalone product launches and commercial projects.",
+    order: 6
+  },
+  {
+    id: "faq-7",
+    question: "How does your creative process work?",
+    answer: "Our framework follows three simple stages: Discover (understanding your goals and audience), Create (story development, visual production, and motion design), and Deliver (refining details and packaging for launch).",
+    order: 7
+  },
+  {
+    id: "faq-8",
+    question: "Can you work with our existing brand identity?",
+    answer: "Yes. During onboarding, we study your typography, brand guidelines, color palettes, and voice to ensure every video looks and feels authentically aligned with your brand.",
+    order: 8
+  },
+  {
+    id: "faq-9",
+    question: "Who owns the final video assets?",
+    answer: "You own 100% of the commercial rights to all delivered videos and final renders upon completion. Source files and project assets can also be packaged upon request.",
+    order: 9
+  },
+  {
+    id: "faq-10",
+    question: "How do revisions and feedback work?",
+    answer: "We conduct frame-accurate revision rounds via Frame.io. You can pause at any timestamp, leave direct visual feedback, and our team implements changes swiftly until the cut is finalized.",
+    order: 10
+  }
+];
+
+const pricingPlans = [
+  {
+    id: "starter",
+    name: "Starter Sprint",
+    price: "2,500",
+    period: "month",
+    description: "Establish your visual presence and produce high-impact core video assets.",
+    features: [
+      "Up to 4 high-retention short-form videos / mo",
+      "1 core product or brand showcase video",
+      "Story direction & script assistance",
+      "2D kinetic typography & custom sound design",
+      "48-hour sprint turnaround",
+      "Dedicated Frame.io review workspace"
+    ],
+    recommended: false,
+    popular: false,
+    cta: "Get Started",
+    order: 1
+  },
+  {
+    id: "growth",
+    name: "Growth Partner",
+    price: "4,500",
+    period: "month",
+    description: "Comprehensive creative video partnership for high-growth SaaS, brands, and creators.",
+    features: [
+      "Up to 12 high-retention short-form videos / mo",
+      "2 hero product or commercial videos",
+      "Full creative direction & hook scripting",
+      "Advanced 2D/3D motion graphics & UI animations",
+      "Priority turnaround & dedicated Slack channel",
+      "Unlimited revisions within active sprints"
+    ],
+    recommended: true,
+    popular: true,
+    cta: "Start Partnership",
+    order: 2
+  },
+  {
+    id: "scale",
+    name: "Scale Engine",
+    price: "7,500",
+    period: "month",
+    description: "High-volume multi-channel video production and ongoing creative campaigns.",
+    features: [
+      "Up to 24 multi-platform video assets / mo",
+      "Full product launch & campaign video suite",
+      "Dedicated Creative Director & Senior Editor",
+      "High-end 3D CGI visuals & cinematic grading",
+      "24-hour priority response & sprint management",
+      "Multi-format repurposing across all channels"
+    ],
+    recommended: false,
+    popular: false,
+    cta: "Scale With Us",
+    order: 3
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise Custom",
+    price: "Custom",
+    period: "custom scope",
+    description: "Bespoke production teams, studio film shoots, and white-glove agency integration.",
+    features: [
+      "On-site film crew & studio production support",
+      "Full IP ownership & source project files",
+      "Custom 3D CGI & VFX pipelines",
+      "Enterprise SLA & dedicated round-the-clock team",
+      "Dedicated Slack Connect & custom billing terms"
+    ],
+    recommended: false,
+    popular: false,
+    cta: "Request Enterprise Quote",
+    order: 4
+  }
+];
+
+function escapeSql(str) {
+  return str.replace(/'/g, "''");
+}
+
+const sqlStatements = [];
+
+// 1. Settings site
+const siteJson = JSON.stringify(siteSettings);
+sqlStatements.push(`INSERT OR REPLACE INTO _collections (collection_name, doc_id, data) VALUES ('settings', 'site', '${escapeSql(siteJson)}');`);
+
+// 2. Portfolio
+for (const item of portfolioItems) {
+  const itemJson = JSON.stringify(item);
+  sqlStatements.push(`INSERT OR REPLACE INTO _collections (collection_name, doc_id, data) VALUES ('portfolio', '${item.id}', '${escapeSql(itemJson)}');`);
+}
+
+// 3. Clear old faqs and insert new faqs
+sqlStatements.push(`DELETE FROM _collections WHERE collection_name = 'faqs';`);
+for (const faq of faqs) {
+  const faqJson = JSON.stringify(faq);
+  sqlStatements.push(`INSERT INTO _collections (collection_name, doc_id, data) VALUES ('faqs', '${faq.id}', '${escapeSql(faqJson)}');`);
+}
+
+// 4. Pricing plans
+for (const plan of pricingPlans) {
+  const planJson = JSON.stringify(plan);
+  sqlStatements.push(`INSERT OR REPLACE INTO _collections (collection_name, doc_id, data) VALUES ('pricing', '${plan.id}', '${escapeSql(planJson)}');`);
+}
+
+const sqlOutput = sqlStatements.join('\n');
+const sqlPath = path.join(__dirname, 'update_d1.sql');
+fs.writeFileSync(sqlPath, sqlOutput, 'utf8');
+console.log(`Generated ${sqlStatements.length} SQL statements in ${sqlPath}`);

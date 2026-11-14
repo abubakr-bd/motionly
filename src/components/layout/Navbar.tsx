@@ -7,10 +7,10 @@ import AcademyComingSoonModal from "./AcademyComingSoonModal";
 
 const navLinks = [
   { name: "Work", path: "/#work" },
-  { name: "Case Studies", path: "/portfolio" },
-  { name: "Reviews", path: "/#testimonials" },
-  { name: "Pricing", path: "/#pricing" },
-  { name: "Blog", path: "/blog" },
+  { name: "Services", path: "/#services" },
+  { name: "About", path: "/#about" },
+  { name: "Journal", path: "/blog" },
+  { name: "Careers", path: "/careers" },
 ];
 
 const Navbar = () => {
@@ -124,14 +124,14 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main navigation">
           {navLinks.map((link) => {
             const active = isActive(link.path);
             return (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap transition-all ${
+                className={`relative px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap transition-all ${
                   active
                     ? isDark
                       ? "text-white bg-white/10 shadow-inner"
@@ -145,45 +145,6 @@ const Navbar = () => {
               </Link>
             );
           })}
-
-          {pageToggles.personalBranding !== false && (
-            <Link
-              to="/personal-branding"
-              className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap flex items-center gap-1.5 group/pb transition-all ${
-                isDark
-                  ? "text-slate-300 hover:text-white hover:bg-white/5"
-                  : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
-              }`}
-            >
-              <span>Personal Branding</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover/pb:animate-ping shrink-0" />
-            </Link>
-          )}
-
-          <Link
-            to="/careers"
-            className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap transition-all ${
-              isDark
-                ? "text-slate-300 hover:text-white hover:bg-white/5"
-                : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
-            }`}
-          >
-            Careers
-          </Link>
-
-          <button
-            type="button"
-            onClick={() => setIsAcademyModalOpen(true)}
-            className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-bold whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer shrink-0 ${
-              isDark
-                ? "text-[#F47B35] bg-[#F47B35]/15 hover:bg-[#F47B35]/25 border border-[#F47B35]/30"
-                : "text-[#F47B35] bg-[#FFF2EA] hover:bg-[#ffe5d3] border border-[#F47B35]/40"
-            }`}
-            aria-label="Motionly Academy (Coming Soon)"
-          >
-            <span className="text-[10px]">✳</span>
-            <span>Academy</span>
-          </button>
         </nav>
 
         {/* Right CTA & Black View Toggle */}
@@ -306,18 +267,6 @@ const Navbar = () => {
               </Link>
             )}
 
-            <Link
-              to="/careers"
-              onClick={() => setIsOpen(false)}
-              className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                isDark
-                  ? "text-slate-200 hover:text-white hover:bg-white/5"
-                  : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-              }`}
-            >
-              <span>Careers</span>
-              <span className="text-[11px] font-mono text-slate-400">0{navLinks.length + 2}</span>
-            </Link>
 
             <button
               type="button"
