@@ -124,12 +124,17 @@ export const DEFAULT_HERO: HeroSettings = {
 };
 
 export const DEFAULT_TEAM: TeamMember[] = [
-  { id: "1", name: "Abu Bakar Siddique",    role: "Founder and CEO",                    img: "/employes/abu_bakar.webp", order: 1 },
-  { id: "2", name: "Nazmul Hossen Shuvo",   role: "COO and Head of Growth",             img: "/employes/nazmul.webp",    order: 2 },
-  { id: "3", name: "Raiyan",                role: "Social Media Manager and Presenter", img: "/employes/raiyan.webp",    order: 3 },
-  { id: "4", name: "Mohammad Wasif Rahman", role: "Video Editor",                       img: "/employes/wasif.webp",     order: 4 },
-  { id: "5", name: "Abir Ratul",            role: "Video Editor",                       img: "/employes/abir.webp",      order: 5 },
-  { id: "6", name: "Barno",                 role: "Strategy Specialist",                img: "/employes/barno.webp",     order: 6 },
+  { id: "1", name: "Abu Bakar Siddique",    role: "Founder & CEO",                      img: "/employes/abu_bakar.webp", order: 1 },
+  { id: "2", name: "Nazmul Hossen Shuvo",   role: "COO & Head of Growth",               img: "/employes/nazmul.webp",    order: 2 },
+  { id: "3", name: "Raiyan",                role: "Social Media Manager & Presenter",   img: "/employes/raiyan.webp",    order: 3 },
+  { id: "MHynmebMMimtKqq8jdUY", name: "Nafew Islam", role: "CCO & Head of Production", img: "/employes/nafew.webp",     order: 4 },
+  { id: "g4FBo4G0Om1u3n3OdHuZ", name: "Afolabi Isaiah", role: "Video Editor",         img: "/employes/afolabi.webp",   order: 5 },
+  { id: "5", name: "Abir Ratul",            role: "Video Editor",                       img: "/employes/abir.webp",      order: 6 },
+  { id: "4", name: "Mohammad Wasif Rahman", role: "Video Editor",                       img: "/employes/wasif.webp",     order: 7 },
+  { id: "xdzyVdvEYexLZMzyezpD", name: "Mamun Khan", role: "Cinematographer",           img: "/employes/mamun.webp",     order: 8 },
+  { id: "6", name: "Barno",                 role: "Strategy Specialist",                img: "/employes/barno.webp",     order: 9 },
+  { id: "VgcgURjZKxKMDtBNjpVL", name: "Sojol", role: "Video Editor",                  img: "/employes/sojol.webp",     order: 10 },
+  { id: "ozLvHtEGoAHoDOFoRBhH", name: "Fardin Sazid", role: "Graphic Designer",        img: "/employes/fardin.webp",    order: 11 },
 ];
 
 export const DEFAULT_SEO: SEOSettings = {
