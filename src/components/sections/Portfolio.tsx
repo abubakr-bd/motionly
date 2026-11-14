@@ -47,11 +47,11 @@ const VideoCard = React.memo(({
         type="button"
         onClick={() => onSelect(item)}
         className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 aspect-video ring-1 ring-slate-200 dark:ring-white/10 hover:ring-blue-500/50 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_16px_40px_rgba(37,99,235,0.22)] dark:hover:shadow-[0_0_50px_rgba(37,99,235,0.35)] transition-all duration-500 cursor-pointer block text-left"
-        aria-label={`Open and play video: ${item.title || "Showcase work"}`}
+        aria-label="Play showcase video"
       >
         <img
           src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-          alt={item.title ? `${item.title} - Motionly Media showcase` : "Video thumbnail"}
+          alt="Motionly Media showcase video thumbnail"
           width="640"
           height="360"
           loading="lazy"
@@ -81,21 +81,6 @@ const VideoCard = React.memo(({
           </div>
         </div>
       </button>
-
-      {/* Case Study Link & Title for internal crawlability */}
-      <div className="mt-2.5 flex items-center justify-between px-1">
-        <span className="font-medium text-slate-800 dark:text-slate-200 text-xs sm:text-sm line-clamp-1">
-          {item.title || "Showcase Project"}
-        </span>
-        <Link
-          to={`/portfolio/${item.id}`}
-          className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline shrink-0 ml-2"
-          aria-label={`View case study for ${item.title || "project"}`}
-        >
-          <span>Case study</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </Link>
-      </div>
     </motion.div>
   );
 });

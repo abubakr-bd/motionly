@@ -82,7 +82,7 @@ const Landing = () => {
         description={settings.seo.description || "Story-led video editing, motion design, and creative direction for creators and ambitious brands."}
         image={settings.seo.image}
       />
-      <div className="bg-white text-slate-900 dark:bg-[#05070F] dark:text-slate-100 min-h-screen relative overflow-x-hidden transition-colors duration-300">
+      <div className="bg-white text-slate-900 dark:bg-[#05070F] dark:text-slate-100 min-h-screen relative transition-colors duration-300">
         {/* Subtle Ambient Radial Lighting - Adaptive for Light and Dark */}
         <div className="pointer-events-none fixed -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-blue-500/15 via-blue-400/5 to-transparent dark:from-blue-600/15 dark:via-blue-500/5 blur-[140px] -z-10" />
         <div className="pointer-events-none fixed top-[40%] right-[-10%] w-[600px] h-[600px] bg-blue-500/5 dark:bg-blue-600/10 blur-[150px] -z-10" />

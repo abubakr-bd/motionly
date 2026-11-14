@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useHeroSettings, usePartners } from "../../lib/useSiteData";
+import { useHeroSettings } from "../../lib/useSiteData";
 import { ArrowUpRight, Play } from "lucide-react";
 
 const Hero = () => {
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [thumbnailUnavailable, setThumbnailUnavailable] = useState(false);
   const hero = useHeroSettings();
-  const { partners } = usePartners();
   const rawShowreelId = (hero.showreelVideoId || "q7hCvbfvRPU").trim();
   const urlMatch = rawShowreelId.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
   const showreelId = urlMatch ? urlMatch[1] : (rawShowreelId || "q7hCvbfvRPU");
@@ -20,16 +19,6 @@ const Hero = () => {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6, delay: Math.min(delay, 0.2), ease: [0.16, 1, 0.3, 1] as const }
   };
-
-  const clientLogos = partners && partners.length > 0
-    ? partners.slice(0, 6)
-    : [
-        { id: "1", name: "Patent Watch" },
-        { id: "2", name: "Lexi" },
-        { id: "3", name: "Castari" },
-        { id: "4", name: "Atria" },
-        { id: "5", name: "EquiSaaS" },
-      ];
 
   return (
     <section id="home" className="relative pt-24 sm:pt-32 pb-14 sm:pb-20 overflow-hidden bg-white dark:bg-[#05070F] text-slate-900 dark:text-white transition-colors duration-300">
@@ -91,20 +80,6 @@ const Hero = () => {
             <span className="relative z-10">{hero.cta1 || "GET YOUR PRODUCT VIDEO"}</span>
             <ArrowUpRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
-        </motion.div>
-
-        {/* Monochrome Client Logos Bar */}
-        <motion.div {...reveal(0.4)} className="mb-10 sm:mb-14">
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
-            {clientLogos.map((client) => (
-              <span
-                key={client.id}
-                className="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-800 dark:text-slate-200 font-mono transition-colors hover:text-blue-600 dark:hover:text-blue-300"
-              >
-                {client.name}
-              </span>
-            ))}
-          </div>
         </motion.div>
 
         {/* Hero Video Showcase Card with Luminous Glow */}

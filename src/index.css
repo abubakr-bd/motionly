@@ -93,6 +93,8 @@ body.dark {
 
 html {
   min-width: 320px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
   text-rendering: optimizeLegibility;
@@ -102,13 +104,21 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  overflow-x: clip;
+  overflow-x: hidden;
+  overflow-y: visible;
   background: var(--paper);
   color: var(--ink);
   font-family: "Outfit", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-feature-settings: "kern" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root,
+.site-shell,
+.public-main,
+.route-transition {
+  overflow: visible;
 }
 
 button,

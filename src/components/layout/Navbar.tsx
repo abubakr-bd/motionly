@@ -10,7 +10,6 @@ const navLinks = [
   { name: "Case Studies", path: "/portfolio" },
   { name: "Reviews", path: "/#testimonials" },
   { name: "Pricing", path: "/#pricing" },
-  { name: "Framework", path: "/#process" },
   { name: "Blog", path: "/blog" },
 ];
 
@@ -104,7 +103,7 @@ const Navbar = () => {
           : isScrolled
             ? "bg-white/95 backdrop-blur-2xl border-slate-200/90 shadow-[0_12px_36px_rgba(37,99,235,0.08)] text-slate-900"
             : "bg-white/85 backdrop-blur-xl border-slate-200/70 shadow-[0_8px_25px_rgba(37,99,235,0.05)] text-slate-900"
-      } border rounded-full px-4 sm:px-6 py-2.5 sm:py-3`}
+      } border rounded-full px-4 sm:px-6 py-2 sm:py-2.5`}
     >
       <div className="flex items-center justify-between">
         {/* Brand Logo */}
@@ -125,14 +124,14 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5" aria-label="Main navigation">
           {navLinks.map((link) => {
             const active = isActive(link.path);
             return (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-medium transition-all ${
+                className={`relative px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap transition-all ${
                   active
                     ? isDark
                       ? "text-white bg-white/10 shadow-inner"
@@ -150,20 +149,20 @@ const Navbar = () => {
           {pageToggles.personalBranding !== false && (
             <Link
               to="/personal-branding"
-              className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-medium flex items-center gap-1.5 group/pb transition-all ${
+              className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap flex items-center gap-1.5 group/pb transition-all ${
                 isDark
                   ? "text-slate-300 hover:text-white hover:bg-white/5"
                   : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
               }`}
             >
               <span>Personal Branding</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover/pb:animate-ping" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover/pb:animate-ping shrink-0" />
             </Link>
           )}
 
           <Link
             to="/careers"
-            className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-medium transition-all ${
+            className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap transition-all ${
               isDark
                 ? "text-slate-300 hover:text-white hover:bg-white/5"
                 : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
@@ -175,7 +174,7 @@ const Navbar = () => {
           <button
             type="button"
             onClick={() => setIsAcademyModalOpen(true)}
-            className={`px-3 py-1.5 rounded-full text-xs xl:text-sm font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+            className={`px-2.5 xl:px-3 py-1.5 rounded-full text-xs xl:text-sm font-bold whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer shrink-0 ${
               isDark
                 ? "text-[#F47B35] bg-[#F47B35]/15 hover:bg-[#F47B35]/25 border border-[#F47B35]/30"
                 : "text-[#F47B35] bg-[#FFF2EA] hover:bg-[#ffe5d3] border border-[#F47B35]/40"

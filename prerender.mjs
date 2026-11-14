@@ -651,8 +651,8 @@ async function prerender() {
   const criticalCss = `
   :root { --paper: #ffffff; --ink: #0f172a; --brand: #2563eb; --body: #334155; --muted: #475569; }
   html.dark, body.dark { --paper: #05070f; --ink: #ffffff; --brand: #38bdf8; --body: #cbd5e1; --muted: #94a3b8; }
-  html { scroll-behavior: smooth; font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-  body { margin: 0; padding: 0; background-color: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  html { scroll-behavior: smooth; font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; overflow-x: hidden; overflow-y: scroll; }
+  body { margin: 0; padding: 0; background-color: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-y: visible; }
   * { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
   .site-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
