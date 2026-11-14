@@ -475,16 +475,24 @@ const PAGES = [
   },
   {
     path: "/personal-branding",
-    title: "Personal Branding Video Systems | Motionly Media",
-    description: "Build authority and scale your personal brand with custom high-retention video production, positioning, and content engines by Motionly Media.",
+    title: "Personal Branding by Motionly | Content & Creative Partner for Founders & Leaders",
+    description: "Turn your expertise into an authoritative, recognizable personal brand. Motionly manages video editing, content strategy, storytelling, and multi-platform distribution.",
     keywords: "personal branding video, founder personal branding, executive video marketing, creator branding agency",
-    h1: "Personal Branding Video Systems for Founders & Creators",
+    h1: "Your Expertise. Our Creativity. A Brand That Stands Out.",
     bodyContent: `
       <section class="site-page-hero">
-        <p class="site-kicker">Personal Branding Systems</p>
-        <h1>Personal Branding Video Systems for Founders &amp; Creators</h1>
-        <p class="site-page-hero__lede">Positioning, production, and distribution built around your point of view. Turn your expertise into an organic client acquisition engine.</p>
-        <p><a href="/contact" class="site-button">Start your brand engine</a></p>
+        <p class="site-kicker">PERSONAL BRANDING BY MOTIONLY</p>
+        <h1>Your Expertise. Our Creativity. <em>A Brand That Stands Out.</em></h1>
+        <p class="site-page-hero__lede">You have the knowledge, experience, and ideas. We help the world see them. Motionly turns your expertise into engaging content through strategic planning, professional video editing, creative storytelling, and consistent content distribution.</p>
+        <p><a href="/contact" class="site-button">Let's Build Your Brand</a></p>
+      </section>
+      <section class="site-page-section">
+        <h2>You Have Something Worth Sharing. But Are You Sharing It?</h2>
+        <p>Building a personal brand takes more than occasionally posting on social media. You need consistent content, a clear message, engaging storytelling, and time to execute everything.</p>
+      </section>
+      <section class="site-page-section">
+        <h2>A Simpler Way to Build Your Personal Brand.</h2>
+        <p>Discover, Strategize, Create, Produce, and Publish platform-ready content designed around your schedule and expertise.</p>
       </section>
     `
   },
