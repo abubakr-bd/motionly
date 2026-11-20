@@ -75,7 +75,7 @@ export const PBProblem: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center p-8 rounded-3xl bg-gradient-to-r from-blue-600/10 via-indigo-600/10 to-cyan-600/10 border border-blue-500/20 dark:border-blue-400/20"
+          className="text-center p-8 rounded-3xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/[0.08] dark:border-white/[0.08]"
         >
           <p className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white tracking-tight mb-2">
             {PROBLEM_CONTENT.closingStatement}

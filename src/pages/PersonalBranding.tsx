@@ -58,7 +58,7 @@ const PersonalBranding: React.FC = () => {
         }}
       />
 
-      <div className="min-h-screen bg-[#05070F] text-white">
+      <div className="min-h-screen bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] transition-colors duration-200">
         {/* 01. HERO SECTION */}
         <PBHero />
 

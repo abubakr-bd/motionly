@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { getDb } from "../lib/firebaseLazy";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/layout/SEO";
 import { STATIC_BLOGS } from "../lib/staticBlogs";
 import DOMPurify from "dompurify";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Clock,
+  Calendar,
+  Share2,
+  Check,
+  Copy,
+  Sparkles,
+  BookOpen,
+  ArrowRight
+} from "lucide-react";
 
 interface BlogPostData {
   id: string;
@@ -14,14 +27,23 @@ interface BlogPostData {
   imageUrl?: string;
   category?: string;
   date: string;
+  readTime?: string;
 }
 
-const BlogPost = () => {
+const BlogPost: React.FC = () => {
   const { id } = useParams();
   const [post, setPost] = useState<BlogPostData | null>(null);
   const [popularPosts, setPopularPosts] = useState<BlogPostData[]>([]);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+
+  // Reading progress indicator
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     let active = true;
@@ -79,32 +101,10 @@ const BlogPost = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <Layout>
-        <div className="site-loading-state" role="status"><span className="site-spinner" /><span>Loading article</span></div>
-      </Layout>
-    );
-  }
+  const plainText = post ? post.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim() : "";
+  const wordCount = plainText ? plainText.split(/\s+/).length : 0;
+  const computedReadTime = Math.max(2, Math.ceil(wordCount / 200)) + " min read";
 
-  if (!post) {
-    return (
-      <Layout>
-        <SEO title="Article Not Found | Motionly Media" />
-        <section className="site-not-found">
-          <div className="site-container">
-            <p className="site-kicker">Journal</p>
-            <h1>We could not find that article.</h1>
-            <p>It may have been moved or removed.</p>
-            <Link to="/blog" className="site-button">Browse the journal</Link>
-          </div>
-        </section>
-      </Layout>
-    );
-  }
-
-  const plainText = post.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-  
   const formatMarkdown = (text: string) => {
     if (!text) return "";
     if (/<\/?[a-z][\s\S]*>/i.test(text)) {
@@ -120,14 +120,14 @@ const BlogPost = () => {
 
       if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
         if (!inList) {
-          htmlLines.push("<ul>");
+          htmlLines.push('<ul class="my-5 pl-6 list-disc space-y-2 text-slate-700 dark:text-slate-300">');
           inList = true;
         }
         const itemContent = trimmed.substring(2);
         const formatted = itemContent
-          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-          .replace(/\*(.*?)\*/g, "<em>$1</em>");
-        htmlLines.push(`<li>${formatted}</li>`);
+          .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-slate-900 dark:text-white">$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+        htmlLines.push(`<li class="leading-relaxed">${formatted}</li>`);
         continue;
       } else if (inList) {
         htmlLines.push("</ul>");
@@ -137,18 +137,23 @@ const BlogPost = () => {
       if (!trimmed) continue;
 
       if (trimmed.startsWith("#### ")) {
-        htmlLines.push(`<h4>${trimmed.substring(5)}</h4>`);
+        htmlLines.push(`<h4 class="text-lg font-bold text-slate-900 dark:text-white mt-8 mb-3 tracking-tight">${trimmed.substring(5)}</h4>`);
       } else if (trimmed.startsWith("### ")) {
-        htmlLines.push(`<h3>${trimmed.substring(4)}</h3>`);
+        htmlLines.push(`<h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-10 mb-4 tracking-tight">${trimmed.substring(4)}</h3>`);
       } else if (trimmed.startsWith("## ")) {
-        htmlLines.push(`<h2>${trimmed.substring(3)}</h2>`);
+        htmlLines.push(`<h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-12 mb-5 tracking-tight border-b border-black/[0.06] dark:border-white/[0.08] pb-3">${trimmed.substring(3)}</h2>`);
       } else if (trimmed === "---") {
-        htmlLines.push("<hr />");
+        htmlLines.push('<hr class="my-10 border-black/[0.06] dark:border-white/[0.08]" />');
+      } else if (trimmed.startsWith("> ")) {
+        const quoteContent = trimmed.substring(2)
+          .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-slate-900 dark:text-white">$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+        htmlLines.push(`<blockquote class="my-6 pl-5 border-l-2 border-[#2563EB] dark:border-[#38BDF8] italic text-slate-800 dark:text-slate-200 text-lg leading-relaxed">${quoteContent}</blockquote>`);
       } else {
         const formatted = trimmed
-          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-          .replace(/\*(.*?)\*/g, "<em>$1</em>");
-        htmlLines.push(`<p>${formatted}</p>`);
+          .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-slate-900 dark:text-white">$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+        htmlLines.push(`<p class="my-5 text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 font-normal">${formatted}</p>`);
       }
     }
     if (inList) {
@@ -158,7 +163,59 @@ const BlogPost = () => {
     return DOMPurify.sanitize(htmlLines.join("\n"));
   };
 
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-screen bg-[#f5f7fa] dark:bg-[#07080d] flex items-center justify-center p-6">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <div className="w-8 h-8 rounded-full border-2 border-[#2563EB] dark:border-[#38BDF8] border-t-transparent animate-spin" />
+            <p className="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">
+              Loading article from studio journal...
+            </p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (!post) {
+    return (
+      <Layout>
+        <SEO title="Article Not Found | Motionly Journal" />
+        <div className="min-h-screen bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] flex items-center justify-center px-4 py-24">
+          <div className="max-w-lg mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.08] text-xs font-mono uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-6">
+              <span>Error 404 &bull; Missing Entry</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+              Article Not Found
+            </h1>
+            <p className="text-base text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+              This article may have been archived, renamed, or moved to another section of the studio journal.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111827] text-white dark:bg-white dark:text-[#07080d] font-semibold text-sm hover:opacity-90 active:scale-[0.98] transition-all"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Return to Journal</span>
+              </Link>
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-black/[0.1] dark:border-white/[0.1] font-semibold text-sm hover:bg-black/[0.03] dark:hover:bg-white/[0.03] transition-colors"
+              >
+                <span>Studio Home</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
   const contentHtml = formatMarkdown(post.content);
+
   const postSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -166,7 +223,7 @@ const BlogPost = () => {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://motionly.media/" },
-          { "@type": "ListItem", position: 2, name: "Blog", item: "https://motionly.media/blog" },
+          { "@type": "ListItem", position: 2, name: "Journal", item: "https://motionly.media/blog" },
           { "@type": "ListItem", position: 3, name: post.title, item: `https://motionly.media/blog/${id}` }
         ]
       },
@@ -174,7 +231,7 @@ const BlogPost = () => {
         "@type": "BlogPosting",
         headline: post.title,
         image: post.imageUrl,
-        author: { "@type": "Organization", name: "Motionly Media" },
+        author: { "@type": "Organization", name: "Motionly Editorial Squad" },
         publisher: {
           "@type": "Organization",
           name: "Motionly Media",
@@ -186,63 +243,251 @@ const BlogPost = () => {
     ]
   };
 
+  const shareUrl = encodeURIComponent(window.location.href);
+  const shareTitle = encodeURIComponent(post.title);
+
   return (
     <Layout>
       <SEO
-        title={post.title}
+        title={`${post.title} | Motionly Journal`}
         description={plainText.slice(0, 155)}
         url={`https://motionly.media/blog/${id}`}
         image={post.imageUrl}
         type="article"
         schema={postSchema}
       />
-      <header className="site-article-header">
-        <div className="site-container site-article-header__inner">
-          <Link to="/blog" className="site-text-link">Back to the journal</Link>
-          <p className="site-kicker">{post.category || "Motionly Journal"}</p>
-          <h1>{post.title}</h1>
-          <div className="site-article-meta"><span>{post.date}</span><span>Motionly Editorial</span></div>
-        </div>
-      </header>
 
-      <main className="site-article-main">
-        <article className="site-article">
-          {post.imageUrl && (
-            <img
-              className="site-article__image"
-              src={post.imageUrl}
-              alt={`${post.title} cover image`}
-              width="1200"
-              height="630"
-              decoding="async"
-            />
+      {/* Top Reading Progress Bar */}
+      <motion.div
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-[3px] bg-[#2563EB] dark:bg-[#38BDF8] origin-left z-50 pointer-events-none"
+      />
+
+      <article className="min-h-screen bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] transition-colors duration-200 pt-28 sm:pt-36 pb-24">
+        {/* Article Header Container */}
+        <header className="max-w-4xl mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
+          {/* Breadcrumb & Navigation */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#38BDF8] transition-colors group"
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+              <span>Back to Studio Journal</span>
+            </Link>
+
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2563EB]/10 dark:bg-[#38BDF8]/10 text-[#2563EB] dark:text-[#38BDF8] text-xs font-mono font-semibold uppercase tracking-wider">
+              {post.category || "Video Strategy"}
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.1] mb-6">
+            {post.title}
+          </h1>
+
+          {/* Subheading / Summary */}
+          {post.summary && (
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-8">
+              {post.summary}
+            </p>
           )}
-          <div className="site-article__body" dangerouslySetInnerHTML={{ __html: contentHtml }} />
-          <div className="site-article__share">
-            <button type="button" className="site-button-secondary" onClick={handleShare}>{copied ? "Link copied" : "Copy article link"}</button>
-            <Link to="/contact" className="site-text-link">Talk with our team</Link>
-          </div>
-        </article>
 
-        <aside className="site-article-aside">
-          <div className="site-article-aside__callout">
-            <p className="site-kicker">For your next project</p>
-            <h2>Need a thoughtful editing partner?</h2>
-            <Link to="/contact" className="site-text-link">Start a conversation</Link>
+          {/* Metadata Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-black/[0.08] dark:border-white/[0.08] text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#2563EB] to-[#38BDF8] text-white flex items-center justify-center font-bold text-xs uppercase shadow-xs">
+                  M
+                </div>
+                <span className="font-semibold text-slate-900 dark:text-white">Motionly Editorial</span>
+              </div>
+
+              <span className="hidden sm:inline text-slate-300 dark:text-slate-700">&bull;</span>
+
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-4 h-4 text-slate-400" />
+                <span>{post.date}</span>
+              </div>
+
+              <span className="hidden sm:inline text-slate-300 dark:text-slate-700">&bull;</span>
+
+              <div className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-slate-400" />
+                <span>{computedReadTime}</span>
+              </div>
+            </div>
+
+            {/* Quick Share Action */}
+            <button
+              type="button"
+              onClick={handleShare}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-xs font-semibold text-slate-800 dark:text-slate-200 transition-colors cursor-pointer"
+              title="Copy article link"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                  <span className="text-emerald-500 font-mono">Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Share</span>
+                </>
+              )}
+            </button>
           </div>
-          {popularPosts.length > 0 && (
-            <div className="site-article-aside__related">
-              <h2>More from the journal</h2>
+        </header>
+
+        {/* Featured Image */}
+        {post.imageUrl && (
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-slate-900 shadow-xl aspect-[16/9] max-h-[580px]">
+              <img
+                src={post.imageUrl}
+                alt={`${post.title} cover`}
+                className="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Main Article Body */}
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div
+            className="prose prose-slate dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: contentHtml }}
+          />
+
+          {/* Social Share & Interaction Footer */}
+          <div className="mt-14 pt-8 border-t border-black/[0.08] dark:border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">Share:</span>
+              <button
+                type="button"
+                onClick={handleShare}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-black/[0.08] dark:border-white/[0.08] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-xs font-semibold transition-colors"
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copied ? "Link Copied" : "Copy Link"}</span>
+              </button>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-3 py-1.5 rounded-lg border border-black/[0.08] dark:border-white/[0.08] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-xs font-semibold transition-colors"
+              >
+                X (Twitter)
+              </a>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-3 py-1.5 rounded-lg border border-black/[0.08] dark:border-white/[0.08] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-xs font-semibold transition-colors"
+              >
+                LinkedIn
+              </a>
+            </div>
+
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#38BDF8] transition-colors"
+            >
+              <span>Explore all articles</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {/* Author & Studio Info Card */}
+          <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#38BDF8] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md">
+              M
+            </div>
+            <div className="flex-1">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] block mb-1">
+                Written by Motionly Editorial
+              </span>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">
+                Motionly Media &bull; Video &amp; Creative Studio
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                We design high-retention video pipelines, SaaS explainers, 2D/3D motion graphics, and personal branding systems for ambitious companies worldwide.
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#2563EB] hover:bg-blue-600 text-white font-semibold text-xs tracking-wider uppercase text-center active:scale-[0.98] transition-all shrink-0"
+            >
+              Work With Us
+            </Link>
+          </div>
+        </div>
+
+        {/* More Articles from the Journal */}
+        {popularPosts.length > 0 && (
+          <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-20 pt-16 border-t border-black/[0.08] dark:border-white/[0.08]">
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] block mb-2">
+                  Continue Reading
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight">
+                  More From the Journal
+                </h2>
+              </div>
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#38BDF8] transition-colors"
+              >
+                <span>View all entries</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {popularPosts.map((item) => (
-                <Link key={item.id} to={`/blog/${item.id}`}>
-                  <span>{item.category || "Journal"}</span>
-                  <strong>{item.title}</strong>
+                <Link
+                  key={item.id}
+                  to={`/blog/${item.id}`}
+                  className="group flex flex-col p-5 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] hover:border-[#2563EB]/40 dark:hover:border-[#38BDF8]/40 transition-all duration-300 shadow-xs hover:shadow-md"
+                >
+                  {item.imageUrl && (
+                    <div className="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-900 border border-black/[0.04] dark:border-white/[0.04]">
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 mb-2">
+                    <span className="text-[#2563EB] dark:text-[#38BDF8] uppercase font-semibold">
+                      {item.category || "Strategy"}
+                    </span>
+                    <span>{item.date}</span>
+                  </div>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-[#38BDF8] transition-colors line-clamp-2 mb-2 leading-snug">
+                    {item.title}
+                  </h3>
+                  {item.summary && (
+                    <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4">
+                      {item.summary}
+                    </p>
+                  )}
+                  <div className="mt-auto pt-3 border-t border-black/[0.04] dark:border-white/[0.04] flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 group-hover:text-[#2563EB] dark:group-hover:text-[#38BDF8]">
+                    <span>Read Article</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
                 </Link>
               ))}
             </div>
-          )}
-        </aside>
-      </main>
+          </section>
+        )}
+      </article>
     </Layout>
   );
 };

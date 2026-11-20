@@ -2,35 +2,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { PLANS_CONTENT } from "./content";
-import { Check, ArrowUpRight, Sparkles, ShieldAlert, Layers } from "lucide-react";
+import { Check, ArrowUpRight, Layers } from "lucide-react";
 
 export const PBPartnershipPlans: React.FC = () => {
   return (
     <section 
       id="pricing" 
-      className="py-20 sm:py-28 bg-[#05070F] text-white relative overflow-hidden border-t border-white/5"
+      className="py-20 sm:py-28 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] relative overflow-hidden border-t border-black/[0.06] dark:border-white/[0.08] transition-colors duration-200"
     >
-      {/* Background Lighting */}
-      <div 
-        aria-hidden="true" 
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] -z-10" 
-      />
-
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-bold tracking-widest uppercase mb-3.5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] text-[#2563EB] dark:text-[#38BDF8] text-xs font-mono uppercase tracking-widest mb-3.5">
             <span>{PLANS_CONTENT.eyebrow}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-5 leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 dark:text-white mb-5 leading-tight">
             Find the Right Way <br className="hidden sm:inline" />
-            <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-200">
+            <span className="font-serif italic font-normal text-[#2563EB] dark:text-[#38BDF8]">
               to Work Together.
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
             {PLANS_CONTENT.description}
           </p>
         </div>
@@ -44,52 +38,52 @@ export const PBPartnershipPlans: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`relative p-7 sm:p-8 rounded-3xl backdrop-blur-xl flex flex-col justify-between transition-all duration-300 ${
+              className={`relative p-7 sm:p-8 rounded-3xl flex flex-col justify-between transition-all duration-300 shadow-sm ${
                 plan.popular
-                  ? "bg-gradient-to-b from-[#0E1838] to-[#080E21] border-2 border-blue-500/60 shadow-2xl shadow-blue-600/20 scale-[1.02] z-10"
-                  : "bg-gradient-to-b from-[#0E152E]/80 to-[#070B19]/90 border border-white/10 hover:border-blue-500/30 shadow-lg"
+                  ? "bg-white dark:bg-[#0c101d] border-2 border-[#2563EB] dark:border-[#38BDF8] shadow-lg scale-[1.02] z-10"
+                  : "bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] hover:border-[#2563EB]/40 dark:hover:border-[#38BDF8]/40"
               }`}
             >
-              {/* Subtle Most Popular Badge */}
+              {/* Most Popular Badge */}
               {plan.popular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg border border-white/20">
-                  {plan.badge || "MOST POPULAR"}
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 bg-[#2563EB] text-white text-[10px] font-mono font-bold uppercase tracking-widest rounded-full shadow-md">
+                  {plan.badge || "RECOMMENDED"}
                 </span>
               )}
 
               <div>
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold text-white mb-1.5 tracking-tight">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1.5 tracking-tight">
                     {plan.name}
                   </h3>
-                  <p className="text-xs text-blue-400 font-medium mb-4">
+                  <p className="text-xs text-[#2563EB] dark:text-[#38BDF8] font-semibold mb-4">
                     {plan.tagline}
                   </p>
 
                   <div className="mb-3">
-                    <strong className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                    <strong className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
                       {plan.priceTag}
                     </strong>
-                    <p className="text-xs text-slate-400 mt-1">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
                       {plan.priceSubtitle}
                     </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
                     {plan.description}
                   </p>
                 </div>
 
                 {/* Deliverables List */}
-                <div className="pt-5 border-t border-white/10 mb-8">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-3.5 flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-blue-400" />
-                    <span>Potential Deliverables</span>
+                <div className="pt-5 border-t border-black/[0.06] dark:border-white/[0.08] mb-8">
+                  <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3.5 flex items-center gap-1.5">
+                    <Layers className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#38BDF8]" />
+                    <span>Included Scope</span>
                   </p>
                   <ul className="space-y-2.5">
                     {plan.deliverables.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-xs text-slate-200 font-medium leading-relaxed">
-                        <Check className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
+                      <li key={i} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+                        <Check className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#38BDF8] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -100,10 +94,10 @@ export const PBPartnershipPlans: React.FC = () => {
               {/* Action Button */}
               <Link
                 to="/contact"
-                className={`w-full py-3.5 rounded-xl text-center text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 active:scale-95 ${
+                className={`w-full py-3.5 rounded-xl text-center text-xs font-bold tracking-wider uppercase transition-all duration-200 flex items-center justify-center gap-1.5 active:scale-[0.98] ${
                   plan.popular
-                    ? "bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-600/30 border border-blue-400/30"
-                    : "bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 hover:border-blue-400/40"
+                    ? "bg-[#2563EB] hover:bg-blue-600 text-white shadow-md shadow-blue-600/25"
+                    : "bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-800 dark:text-slate-200 border border-black/[0.08] dark:border-white/[0.08]"
                 }`}
               >
                 <span>{plan.cta}</span>
@@ -114,8 +108,8 @@ export const PBPartnershipPlans: React.FC = () => {
         </div>
 
         {/* Pricing Strategy Explanation Note */}
-        <div className="max-w-2xl mx-auto p-4 rounded-2xl bg-white/[0.02] border border-white/5 text-center">
-          <p className="text-xs text-slate-400 leading-relaxed">
+        <div className="max-w-2xl mx-auto p-4 rounded-2xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/[0.06] dark:border-white/[0.06] text-center">
+          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-mono">
             {PLANS_CONTENT.pricingNote}
           </p>
         </div>

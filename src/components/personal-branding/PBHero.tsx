@@ -19,17 +19,7 @@ import {
 
 export const PBHero: React.FC = () => {
   return (
-    <section className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 overflow-hidden bg-[#05070F] text-white">
-      {/* Background Cinematic Lighting */}
-      <div 
-        aria-hidden="true" 
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[650px] bg-gradient-to-b from-blue-600/15 via-indigo-600/10 to-transparent rounded-full blur-[150px] -z-10" 
-      />
-      <div 
-        aria-hidden="true" 
-        className="pointer-events-none absolute top-1/3 -right-20 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] -z-10" 
-      />
-
+    <section className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 overflow-hidden bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] transition-colors duration-200">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
         {/* Top Copy & Headline */}
         <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-18">
@@ -37,9 +27,9 @@ export const PBHero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/25 text-blue-400 text-xs sm:text-sm font-bold tracking-widest uppercase mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] text-[#2563EB] dark:text-[#38BDF8] text-xs font-mono uppercase tracking-widest mb-6"
           >
-            <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#38BDF8]" />
             <span>{HERO_CONTENT.eyebrow}</span>
           </motion.div>
 
@@ -47,11 +37,11 @@ export const PBHero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08] mb-6"
+            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.08] mb-6"
           >
             {HERO_CONTENT.headlineLine1} <br />
             {HERO_CONTENT.headlineLine2} <br />
-            <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-200 drop-shadow-sm">
+            <span className="font-serif italic font-normal text-[#2563EB] dark:text-[#38BDF8]">
               {HERO_CONTENT.headlineLine3}
             </span>
           </motion.h1>
@@ -60,7 +50,7 @@ export const PBHero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto mb-8"
+            className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto mb-8"
           >
             {HERO_CONTENT.description}
           </motion.p>
@@ -73,7 +63,7 @@ export const PBHero: React.FC = () => {
           >
             <Link
               to={HERO_CONTENT.primaryCtaLink}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm tracking-wider uppercase shadow-xl shadow-blue-600/30 hover:shadow-blue-600/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 border border-blue-400/30 group"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#2563EB] hover:bg-blue-600 text-white font-bold text-xs sm:text-sm tracking-wider uppercase shadow-lg shadow-blue-600/25 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 group"
             >
               <span>{HERO_CONTENT.primaryCtaText}</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -81,7 +71,7 @@ export const PBHero: React.FC = () => {
 
             <a
               href={HERO_CONTENT.secondaryCtaLink}
-              className="w-full sm:w-auto px-7 py-4 rounded-full bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 hover:text-white font-bold text-sm tracking-wider uppercase border border-white/10 hover:border-blue-400/30 transition-all duration-300 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-7 py-4 rounded-full bg-black/[0.04] dark:bg-white/[0.05] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-800 dark:text-slate-200 font-semibold text-xs sm:text-sm tracking-wider uppercase border border-black/[0.08] dark:border-white/[0.1] transition-all duration-200 flex items-center justify-center gap-2"
             >
               <span>{HERO_CONTENT.secondaryCtaText}</span>
             </a>
@@ -91,7 +81,7 @@ export const PBHero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xs sm:text-sm text-slate-400 font-medium"
+            className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium"
           >
             {HERO_CONTENT.subText}
           </motion.p>
