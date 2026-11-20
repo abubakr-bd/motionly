@@ -79,16 +79,15 @@ export const StudioProcess: React.FC = () => {
             PART 1: THE MOTIONLY APPROACH (User Section 6 Copy)
         ========================================================================= */}
         <div className="max-w-3xl mb-14 sm:mb-18">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
-            <Compass className="w-3.5 h-3.5" />
-            <span>HOW WE WORK</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
+            <span>How we work</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.08] mb-4">
-            The Motionly approach.
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
+            The Motionly approach
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] font-normal leading-relaxed">
             Strategy, creativity, and execution come together to create videos that make a difference.
           </p>
         </div>
@@ -142,18 +141,17 @@ export const StudioProcess: React.FC = () => {
         {/* =========================================================================
             PART 2: OUR CREATIVE FRAMEWORK (User Section 8 Copy)
         ========================================================================= */}
-        <div className="p-8 sm:p-12 lg:p-16 rounded-3xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-sm">
+        <div className="p-8 sm:p-12 lg:p-16 rounded-3xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-white/[0.08] shadow-sm">
           <div className="max-w-3xl mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
-              <Layers className="w-3.5 h-3.5" />
-              <span>OUR CREATIVE FRAMEWORK</span>
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
+              <span>Our creative framework</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.08] mb-4">
-              From idea to impact.
+            <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
+              From idea to impact
             </h2>
 
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+            <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] font-normal leading-relaxed">
               A clear creative process designed to take your vision from concept to final delivery.
             </p>
           </div>

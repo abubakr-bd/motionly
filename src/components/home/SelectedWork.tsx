@@ -31,16 +31,15 @@ export const SelectedWork: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header: User Exact Positioning Copy */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
-            <Film className="w-3.5 h-3.5" />
-            <span>PORTFOLIO SHOWCASE</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
+            <span>Portfolio</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.08] mb-4">
-            What We Create.
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
+            What We Create
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] font-normal leading-relaxed">
             Different ideas. Different audiences. One creative standard.
           </p>
         </div>

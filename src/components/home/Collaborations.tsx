@@ -17,12 +17,11 @@ export const Collaborations: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header: User Section 3 Exact Copy */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>TRUSTED BY AMBITIOUS TEAMS</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
+            <span>Trusted by ambitious teams</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
-            Working alongside creators, startups, and growing brands.
+          <h2 className="text-2xl sm:text-4xl font-medium text-[#111827] dark:text-[#eef0f5] tracking-tight mb-3">
+            Working alongside creators, startups, and growing brands
           </h2>
         </div>
 
@@ -31,7 +30,7 @@ export const Collaborations: React.FC = () => {
           {displayPartners.map((item, index) => (
             <div
               key={item.id || index}
-              className="h-24 rounded-2xl bg-slate-50 dark:bg-[#0c101d] border border-black/[0.06] dark:border-white/[0.08] p-5 flex items-center justify-center group hover:border-[#2563EB]/40 dark:hover:border-[#38BDF8]/40 shadow-xs hover:shadow-md transition-all duration-300"
+              className="h-24 rounded-2xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.06] dark:border-white/[0.08] p-5 flex items-center justify-center group hover:border-[#2563eb]/40 dark:hover:border-[#38bdf8]/40 shadow-xs hover:shadow-md transition-all duration-300"
             >
               {item.logoUrl ? (
                 <img

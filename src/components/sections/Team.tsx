@@ -240,23 +240,19 @@ const Team = () => {
       onKeyDown={handleKeyDown}
       onMouseEnter={() => setIsUserHovered(true)}
       onMouseLeave={() => setIsUserHovered(false)}
-      className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-[#05070F] text-slate-900 dark:text-white transition-colors duration-300 relative overflow-hidden flex flex-col justify-center outline-none"
+      className="py-16 sm:py-24 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200 relative overflow-hidden flex flex-col justify-center outline-none"
     >
-      {/* Subtle backdrop ambient glow */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-500/5 dark:bg-blue-600/10 blur-[130px] -z-10" />
-
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* 16:9 Compact Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-500/20 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
-              The Collective
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
+              <span>The Collective</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-950 dark:text-white tracking-tight">
-              Meet the minds behind the creativity.
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-semibold text-[#111827] dark:text-[#eef0f5] tracking-tight">
+              Meet the minds behind the creativity
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 font-normal max-w-xl">
+            <p className="mt-2 text-sm sm:text-base text-[#4b5565] dark:text-[#a3a9b8] font-normal max-w-xl">
               A multidisciplinary team of creative thinkers, strategists, editors, designers, and production professionals bringing ideas to life.
             </p>
           </div>
@@ -265,20 +261,20 @@ const Team = () => {
           <div className="flex items-center gap-3 sm:gap-4 shrink-0 self-start md:self-end">
             <a
               href="#contact"
-              className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-blue-600 dark:hover:bg-blue-500 dark:hover:text-white transition-all shadow-sm duration-300"
+              className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wider bg-[#111827] text-white dark:bg-white dark:text-[#111827] hover:bg-[#2563eb] dark:hover:bg-[#2563eb] dark:hover:text-white transition-colors duration-150 active:scale-[0.98]"
             >
-              <span>Work With Us</span>
+              <span>Work with us</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
 
             {/* Slide Counter & Automated Loop Indicator */}
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-full border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#090D1A] text-slate-700 dark:text-slate-300">
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-black/[0.08] dark:border-white/10 bg-[#ffffff] dark:bg-[#11141c] text-[#111827] dark:text-[#eef0f5]">
               <button
                 type="button"
                 onClick={() => setIsPlaying((prev) => !prev)}
                 title={isPlaying ? "Pause auto-loop" : "Play auto-loop"}
                 aria-label={isPlaying ? "Pause auto-loop" : "Play auto-loop"}
-                className="w-5 h-5 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 hover:scale-110 transition-transform"
+                className="w-5 h-5 rounded-full flex items-center justify-center text-[#2563eb] dark:text-[#38bdf8] hover:scale-110 transition-transform"
               >
                 {isPlaying && !isUserHovered ? (
                   <Pause className="w-3.5 h-3.5" />
@@ -286,11 +282,11 @@ const Team = () => {
                   <Play className="w-3.5 h-3.5 fill-current" />
                 )}
               </button>
-              <div className="font-mono text-xs sm:text-sm font-bold flex items-center">
-                <span className="text-blue-600 dark:text-blue-400">
+              <div className="font-mono text-xs sm:text-sm font-medium flex items-center">
+                <span className="text-[#2563eb] dark:text-[#38bdf8]">
                   {(activeIndex + 1).toString().padStart(2, "0")}
                 </span>
-                <span className="mx-1 text-slate-400 dark:text-slate-600">/</span>
+                <span className="mx-1 text-[#6b7487] dark:text-[#7a8296]">/</span>
                 <span>{team.length.toString().padStart(2, "0")}</span>
               </div>
             </div>
@@ -301,7 +297,7 @@ const Team = () => {
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous teammate"
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 dark:border-white/10 bg-white dark:bg-[#090D1A] text-slate-800 dark:text-slate-200 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 shadow-sm active:scale-95"
+                className="w-10 h-10 rounded-xl flex items-center justify-center border border-black/[0.08] dark:border-white/10 bg-[#ffffff] dark:bg-[#11141c] text-[#111827] dark:text-[#eef0f5] hover:border-[#2563eb] hover:text-[#2563eb] dark:hover:text-[#38bdf8] transition-colors duration-150 active:scale-[0.98]"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -309,7 +305,7 @@ const Team = () => {
                 type="button"
                 onClick={handleNext}
                 aria-label="Next teammate"
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 dark:border-white/10 bg-white dark:bg-[#090D1A] text-slate-800 dark:text-slate-200 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 shadow-sm active:scale-95"
+                className="w-10 h-10 rounded-xl flex items-center justify-center border border-black/[0.08] dark:border-white/10 bg-[#ffffff] dark:bg-[#11141c] text-[#111827] dark:text-[#eef0f5] hover:border-[#2563eb] hover:text-[#2563eb] dark:hover:text-[#38bdf8] transition-colors duration-150 active:scale-[0.98]"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -346,10 +342,10 @@ const Team = () => {
                   >
                     {/* Portrait Photo Card */}
                     <div
-                      className={`relative w-full aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-100 dark:bg-[#090D1A] ring-1 transition-all duration-500 ${
+                      className={`relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#ffffff] dark:bg-[#11141c] border transition-all duration-300 ${
                         isCardActive
-                          ? "ring-blue-500/80 shadow-[0_16px_36px_rgba(37,99,235,0.22)] dark:shadow-[0_16px_36px_rgba(37,99,235,0.3)]"
-                          : "ring-slate-200/90 dark:ring-white/10 group-hover:ring-blue-500/70 group-hover:shadow-[0_16px_36px_rgba(37,99,235,0.22)]"
+                          ? "border-[#2563eb] dark:border-[#38bdf8] shadow-md"
+                          : "border-black/[0.08] dark:border-white/10 group-hover:border-[#2563eb]/60 group-hover:shadow-md"
                       }`}
                     >
                       {imageSrc ? (
@@ -389,11 +385,10 @@ const Team = () => {
 
                       {/* Top Badges - Placed safely at top where there is no baked text */}
                       <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-none">
-                        <span className="font-mono text-[10px] font-bold text-white/90 bg-black/45 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/15 shadow-sm">
+                        <span className="font-mono text-[10px] font-medium text-white/90 bg-black/50 backdrop-blur-md px-2 py-0.5 rounded border border-white/10">
                           #{formattedIndex}
                         </span>
-                        <span className="text-[10px] font-bold tracking-wider uppercase text-blue-300 bg-blue-950/75 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-blue-500/30 shadow-sm flex items-center gap-1">
-                          <Sparkles className="w-2.5 h-2.5 text-blue-400" />
+                        <span className="text-[10px] font-mono text-[#38bdf8] bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10">
                           {category}
                         </span>
                       </div>

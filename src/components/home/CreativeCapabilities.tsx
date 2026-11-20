@@ -123,19 +123,18 @@ export const CreativeCapabilities: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header: User Exact Positioning Copy */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>YOUR CREATIVE PARTNER</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
+            <span>Your creative partner</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.08] mb-4">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
             From the first idea <br />
-            <span className="font-serif italic font-normal text-[#2563EB] dark:text-[#38BDF8]">
-              to the final frame.
+            <span className="font-serif italic font-normal text-[#2563eb] dark:text-[#38bdf8]">
+              to the final frame
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] font-normal leading-relaxed">
             Whether you&apos;re building a personal brand, launching a product, or growing a business, we bring the creative direction and execution to make your vision happen.
           </p>
         </div>
@@ -274,23 +273,23 @@ export const CreativeCapabilities: React.FC = () => {
         </div>
 
         {/* Beyond the Edit: Optional Production Support Banner (User Exact Copy) */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-slate-900 text-white relative overflow-hidden shadow-xl border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="p-8 sm:p-10 rounded-2xl sm:rounded-3xl bg-[#11141c] text-[#eef0f5] relative overflow-hidden border border-[#eef0f5]/[0.08] flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
           <div className="max-w-2xl">
-            <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-[#38BDF8] text-xs font-mono uppercase tracking-widest mb-3">
-              BEYOND THE EDIT
+            <span className="inline-block text-xs font-mono text-[#38bdf8] mb-2">
+              Beyond the edit
             </span>
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-2">
+            <h3 className="text-2xl sm:text-3xl font-medium tracking-tight mb-2">
               Need more than post-production?
             </h3>
-            <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
+            <p className="text-sm sm:text-base text-[#a3a9b8] font-normal leading-relaxed">
               We can extend creative execution with professional filming, cinematography, studio shoots, and on-location production when your project needs it.
             </p>
           </div>
           <Link
             to="/contact"
-            className="px-7 py-3.5 rounded-full bg-[#2563EB] hover:bg-blue-600 text-white text-xs sm:text-sm font-bold tracking-wider uppercase transition-all shadow-lg shadow-blue-600/30 active:scale-[0.98] shrink-0"
+            className="px-6 py-3 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-medium transition-colors shadow-sm active:scale-[0.98] shrink-0"
           >
-            DISCUSS YOUR PRODUCTION NEEDS
+            Discuss production needs
           </Link>
         </div>
       </div>

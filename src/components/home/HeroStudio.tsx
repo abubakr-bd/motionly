@@ -49,24 +49,17 @@ export const HeroStudio: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Main Editorial Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          {/* Eyebrow & Status */}
+          {/* Eyebrow & Status: Quiet, grounded studio metadata without glowing blobs */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-3 text-xs mb-6"
+            className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-[#4b5565] dark:text-[#a3a9b8] mb-6"
           >
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8]">
-              <Sparkles className="w-3 h-3 text-[#2563EB] dark:text-[#38BDF8]" />
-              <span>Creative &amp; Video Marketing Agency</span>
-            </span>
-
-            <span className="text-slate-300 dark:text-slate-700">&bull;</span>
-
-            <div className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-600 dark:text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Dhaka Studio Hub &bull; Worldwide Delivery</span>
-            </div>
+            <span className="w-2 h-2 rounded-full bg-[#2563eb] dark:bg-[#38bdf8]" />
+            <span>Independent creative &amp; video marketing studio</span>
+            <span className="text-black/20 dark:text-white/20">&bull;</span>
+            <span>Worldwide production</span>
           </motion.div>
 
           {/* Headline: User Requested Exact Copy */}
@@ -74,10 +67,10 @@ export const HeroStudio: React.FC = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.04] mb-6"
+            className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.06] mb-6"
           >
             Creative videos. <br />
-            <span className="font-serif italic font-normal text-[#2563EB] dark:text-[#38BDF8]">
+            <span className="font-serif italic font-normal text-[#2563eb] dark:text-[#38bdf8]">
               Built to move brands.
             </span>
           </motion.h1>
@@ -87,12 +80,12 @@ export const HeroStudio: React.FC = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mb-8 font-normal"
+            className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed max-w-2xl mb-8 font-normal"
           >
             We combine strategic storytelling, high-end video editing, motion graphics, and creative production to help SaaS companies, founders, creators, and ambitious brands stand out.
           </motion.p>
 
-          {/* Primary & Secondary CTAs */}
+          {/* Primary & Secondary CTAs in sentence case */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,18 +94,18 @@ export const HeroStudio: React.FC = () => {
           >
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[#2563EB] hover:bg-blue-600 text-white text-xs sm:text-sm font-bold tracking-wider uppercase shadow-lg shadow-blue-600/25 active:scale-[0.98] transition-all group"
+              className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 sm:px-7 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-medium shadow-sm active:scale-[0.98] transition-colors group"
             >
-              <span>LET&apos;S WORK TOGETHER</span>
+              <span>Let&apos;s work together</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
 
             <a
               href="#work"
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-black/[0.04] dark:bg-white/[0.05] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-slate-900 dark:text-white text-xs sm:text-sm font-bold tracking-wider uppercase border border-black/[0.08] dark:border-white/[0.08] active:scale-[0.98] transition-all"
+              className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 rounded-xl bg-[#ffffff] dark:bg-[#11141c] hover:bg-[#eceff4] dark:hover:bg-[#1a1e28] text-[#111827] dark:text-[#eef0f5] text-sm font-medium border border-black/[0.08] dark:border-white/[0.08] active:scale-[0.98] transition-colors"
             >
-              <span>EXPLORE OUR WORK</span>
-              <ArrowDown className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+              <span>Explore our work</span>
+              <ArrowDown className="w-4 h-4 text-[#6b7487] dark:text-[#7a8296]" />
             </a>
           </motion.div>
         </div>
@@ -185,56 +178,28 @@ export const HeroStudio: React.FC = () => {
             {/* Bottom HUD: Live Reel Title */}
             <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex items-end justify-between text-white z-10 pointer-events-none">
               <div>
-                <p className="font-mono text-xs uppercase tracking-widest text-[#38BDF8] mb-1">
-                  Motionly 2026 Creative Showreel
+                <p className="font-mono text-xs text-[#38bdf8] mb-1">
+                  Motionly Studio Reel
                 </p>
-                <h3 className="text-lg sm:text-2xl font-bold tracking-tight text-white">
+                <h3 className="text-base sm:text-xl font-medium tracking-tight text-white">
                   SaaS &bull; Motion Graphics &bull; Commercials &bull; Personal Branding
                 </h3>
               </div>
               <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-md font-mono text-xs text-white border border-white/15">
-                <span>Click to Play Reel</span>
+                <span>Play reel</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </span>
             </div>
           </motion.div>
 
-          {/* Floating Metric Badges beneath Showreel */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6">
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-xs flex flex-col justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">
-                Audience Impact
-              </span>
-              <strong className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white tracking-tight">
-                120M+ Views
-              </strong>
+          {/* Quiet Studio Slate Footnote: Authentic Production Details */}
+          <div className="mt-4 flex flex-wrap items-center justify-between text-xs font-mono text-[#6b7487] dark:text-[#7a8296] px-1">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#4cc38a]" />
+              <span>Full-pipeline production: concept to master delivery</span>
             </div>
-
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-xs flex flex-col justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">
-                Sprint Delivery
-              </span>
-              <strong className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white tracking-tight">
-                5&ndash;7 Days
-              </strong>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-xs flex flex-col justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">
-                Client Retention
-              </span>
-              <strong className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white tracking-tight">
-                98.6%
-              </strong>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-xs flex flex-col justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">
-                Creative Standard
-              </span>
-              <strong className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white tracking-tight text-[#2563EB] dark:text-[#38BDF8]">
-                Top 1% Motion
-              </strong>
+            <div className="hidden sm:block">
+              Average project kickoff &lt; 5 business days
             </div>
           </div>
         </motion.div>

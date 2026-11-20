@@ -39,19 +39,18 @@ export const WhyMotionly: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-14 sm:mb-18">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
-            <AlertCircle className="w-3.5 h-3.5" />
-            <span>SOLVING THE CREATIVE BOTTLENECK</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
+            <span>Solving the creative bottleneck</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.08] mb-4">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
             Why ambitious brands <br />
-            <span className="font-serif italic font-normal text-[#2563EB] dark:text-[#38BDF8]">
-              partner with Motionly.
+            <span className="font-serif italic font-normal text-[#2563eb] dark:text-[#38bdf8]">
+              partner with Motionly
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] font-normal leading-relaxed">
             Producing high-impact video marketing shouldn&apos;t turn into another exhausting operational headache.
           </p>
         </div>
@@ -68,7 +67,7 @@ export const WhyMotionly: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -6 }}
-                className="p-8 sm:p-9 rounded-3xl bg-slate-50 dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] hover:border-[#2563EB]/40 dark:hover:border-[#38BDF8]/40 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                className="p-8 sm:p-9 rounded-2xl sm:rounded-3xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-white/[0.08] hover:border-[#2563eb]/40 dark:hover:border-[#38bdf8]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
