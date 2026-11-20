@@ -1,265 +1,206 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { useCollection, type PortfolioItem, DEFAULT_PORTFOLIO } from "../../lib/useSiteData";
-import { Play, ArrowUpRight, X } from "lucide-react";
+import { Play, X, ArrowUpRight, Film, Sparkles } from "lucide-react";
 
-const getLabels = (labels?: string | string[]): string[] => {
-  if (Array.isArray(labels)) return labels;
-  if (typeof labels === "string" && labels.trim()) return labels.split(",").map((s) => s.trim());
-  return [];
-};
+const CATEGORIES = [
+  "All Projects",
+  "SaaS & Technology",
+  "Personal Branding",
+  "Commercial & Brand Videos",
+  "Creative & Motion Graphics",
+];
 
 export const SelectedWork: React.FC = () => {
   const { items: fetchedItems } = useCollection<PortfolioItem>("portfolio");
   const portfolio = fetchedItems && fetchedItems.length > 0 ? fetchedItems : DEFAULT_PORTFOLIO;
-  const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string } | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("All Projects");
+  const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string; category?: string } | null>(null);
 
-  const items: PortfolioItem[] = portfolio.slice(0, 6);
+  const filteredItems = portfolio.filter((item) => {
+    if (selectedCategory === "All Projects") return true;
+    return item.category?.toLowerCase() === selectedCategory.toLowerCase();
+  });
 
   return (
     <section 
       id="work" 
-      className="py-20 sm:py-28 bg-[#f5f7fa] dark:bg-[#07080d] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200"
+      className="py-24 sm:py-32 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.08] dark:border-white/[0.08] transition-colors duration-200 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        {/* Section Header: User Exact Positioning Copy */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="font-mono text-xs text-[#2563eb] mb-3">
-            Selected projects / 2025—2026
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
+            <Film className="w-3.5 h-3.5" />
+            <span>PORTFOLIO SHOWCASE</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.1] mb-4">
-            Made with purpose, built to be remembered
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.08] mb-4">
+            What We Create.
           </h2>
 
-          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed">
-            A selection of visual stories, product experiences, and creative projects we&apos;ve brought to life
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+            Different ideas. Different audiences. One creative standard.
           </p>
         </div>
 
-        {/* Asymmetrical Gallery */}
-        <div className="space-y-6 sm:space-y-8 mb-12">
-          {/* Row 1: Featured Hero Project (Bolto) - Wide Landscape */}
-          {items[0] && (
-            <div className="rounded-2xl overflow-hidden bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] shadow-xs">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
-                <div 
-                  className="lg:col-span-7 relative aspect-video bg-[#07080d] overflow-hidden cursor-pointer group"
-                  onClick={() => setActiveVideo({ videoId: items[0].videoId, title: items[0].title })}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActiveVideo({ videoId: items[0].videoId, title: items[0].title })}
-                  aria-label={`Play ${items[0].title} project video`}
-                >
-                  <img
-                    src={`https://img.youtube.com/vi/${items[0].videoId}/maxresdefault.jpg`}
-                    alt={items[0].title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-[#07080d]/35 group-hover:bg-[#07080d]/20 transition-colors duration-150 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shadow-md">
-                      <Play className="w-6 h-6 fill-current ml-0.5" />
-                    </div>
-                  </div>
-                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-[#07080d]/80 text-[11px] font-mono text-[#a3a9b8] border border-white/[0.08]">
-                    01 Featured
-                  </span>
-                </div>
-
-                <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between h-full">
-                  <div>
-                    <div className="text-xs font-mono text-[#2563eb] mb-2">
-                      {items[0].category || "SaaS & Technology"}
-                    </div>
-                    <h3 className="text-2xl font-medium text-[#111827] dark:text-[#eef0f5] mb-2.5">
-                      {items[0].title}
-                    </h3>
-                    <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6">
-                      {items[0].description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 mb-8">
-                      {getLabels(items[0].labels).map((label: string, idx: number) => (
-                        <span
-                          key={idx}
-                          className="px-2.5 py-1 rounded-md bg-[#eceff4] dark:bg-[#1a1e28] text-xs font-mono text-[#4b5565] dark:text-[#a3a9b8]"
-                        >
-                          {label}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setActiveVideo({ videoId: items[0].videoId, title: items[0].title })}
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-[#2563eb] hover:text-[#1d4ed8] dark:hover:text-[#60a5fa] transition-colors cursor-pointer w-fit"
-                  >
-                    <span>Watch case video</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Row 2: Two Columns (ClickUp & Apple SaaS Explainer) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-            {items.slice(1, 3).map((item: PortfolioItem, index: number) => (
-              <div
-                key={item.id}
-                className="rounded-2xl overflow-hidden bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] flex flex-col justify-between shadow-xs"
+        {/* Interactive Category Filter Pills with Emil Kowalski layoutId sliding pill */}
+        <div className="flex flex-wrap items-center gap-2 mb-12 sm:mb-16 p-1.5 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] w-fit">
+          {CATEGORIES.map((cat) => {
+            const isSelected = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                className={`relative px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors duration-150 cursor-pointer ${
+                  isSelected ? "text-white dark:text-slate-950" : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
+                }`}
               >
-                <div 
-                  className="relative aspect-video bg-[#07080d] overflow-hidden cursor-pointer group"
-                  onClick={() => setActiveVideo({ videoId: item.videoId, title: item.title })}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActiveVideo({ videoId: item.videoId, title: item.title })}
-                  aria-label={`Play ${item.title} video`}
-                >
-                  <img
-                    src={`https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg`}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
+                {isSelected && (
+                  <motion.div
+                    layoutId="activeCategoryPill"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    className="absolute inset-0 rounded-xl bg-[#111827] dark:bg-white shadow-sm"
                   />
-                  <div className="absolute inset-0 bg-[#07080d]/35 group-hover:bg-[#07080d]/20 transition-colors duration-150 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-xl bg-[#2563eb] text-white flex items-center justify-center shadow-md">
-                      <Play className="w-5 h-5 fill-current ml-0.5" />
-                    </div>
-                  </div>
-                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-[#07080d]/80 text-[11px] font-mono text-[#a3a9b8] border border-white/[0.08]">
-                    0{index + 2} {index === 0 ? "Motion design" : "Product explainer"}
-                  </span>
-                </div>
-
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-medium text-[#111827] dark:text-[#eef0f5] mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-4">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08] flex items-center justify-between">
-                    <div className="flex flex-wrap gap-1.5">
-                      {getLabels(item.labels).slice(0, 2).map((l: string, i: number) => (
-                        <span key={i} className="text-xs px-2 py-0.5 rounded-md bg-[#eceff4] dark:bg-[#1a1e28] font-mono text-[#4b5565] dark:text-[#a3a9b8]">
-                          {l}
-                        </span>
-                      ))}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setActiveVideo({ videoId: item.videoId, title: item.title })}
-                      className="text-xs font-medium text-[#2563eb] hover:text-[#1d4ed8] dark:hover:text-[#60a5fa] transition-colors cursor-pointer"
-                    >
-                      Play video
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Row 3: Three Cards (Personal Branding & Commercials) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {items.slice(3, 6).map((item: PortfolioItem, index: number) => (
-              <div
-                key={item.id}
-                className="rounded-2xl overflow-hidden bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] flex flex-col justify-between shadow-xs"
-              >
-                <div 
-                  className="relative aspect-video bg-[#07080d] overflow-hidden cursor-pointer group"
-                  onClick={() => setActiveVideo({ videoId: item.videoId, title: item.title })}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActiveVideo({ videoId: item.videoId, title: item.title })}
-                  aria-label={`Play ${item.title} video`}
-                >
-                  <img
-                    src={`https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg`}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-[#07080d]/35 group-hover:bg-[#07080d]/20 transition-colors duration-150 flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-lg bg-[#2563eb] text-white flex items-center justify-center shadow-md">
-                      <Play className="w-4 h-4 fill-current ml-0.5" />
-                    </div>
-                  </div>
-                  <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-[#07080d]/80 text-[10px] font-mono text-[#a3a9b8] border border-white/[0.08]">
-                    0{index + 4}
-                  </span>
-                </div>
-
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <span className="text-[11px] font-mono text-[#2563eb] block mb-1">
-                      {item.category || "Commercial work"}
-                    </span>
-                    <h3 className="text-base font-medium text-[#111827] dark:text-[#eef0f5] mb-1.5">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-4">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setActiveVideo({ videoId: item.videoId, title: item.title })}
-                    className="text-xs font-medium text-[#2563eb] hover:text-[#1d4ed8] dark:hover:text-[#60a5fa] transition-colors cursor-pointer text-left w-fit"
-                  >
-                    View project &rarr;
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+                )}
+                <span className="relative z-10">{cat}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Bottom CTA: 44px Height, 8px Radius, Sentence Case */}
-        <div className="text-center">
+        {/* Clean Work Grid: Focused on Visual Craft without Clutter */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16"
+        >
+          <AnimatePresence>
+            {filteredItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                layout
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -6 }}
+                onClick={() => setActiveVideo({ videoId: item.videoId, title: item.title, category: item.category })}
+                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 border border-black/[0.08] dark:border-white/[0.1] shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer aspect-video"
+              >
+                {/* Video Cover Thumbnail */}
+                <img
+                  src={`https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg`}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  loading="lazy"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`;
+                  }}
+                />
+
+                {/* Subtle dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 group-hover:via-black/10 transition-colors" />
+
+                {/* Top Badge: Category */}
+                <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between text-xs z-10">
+                  <span className="px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 font-mono text-[10px] font-bold uppercase tracking-wider text-white">
+                    {item.category || "Creative Production"}
+                  </span>
+                  <span className="w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/15 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </span>
+                </div>
+
+                {/* Center Magnetic Play Icon */}
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform duration-200">
+                    <Play className="w-6 h-6 fill-current ml-0.5" />
+                  </div>
+                </div>
+
+                {/* Bottom Title Bar */}
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 z-10">
+                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight truncate">
+                    {item.title}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* View All In Portfolio Link */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-sm">
+          <div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">
+              Want to see our full client archive?
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-normal">
+              Explore in-depth case studies, client results, and technical breakdown reels.
+            </p>
+          </div>
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-1.5 h-11 px-5 rounded-lg bg-[#ffffff] dark:bg-[#11141c] hover:bg-[#eceff4] dark:hover:bg-[#1a1e28] text-[#111827] dark:text-[#eef0f5] text-sm font-medium border border-black/[0.08] dark:border-[#eef0f5]/[0.08] transition-colors duration-150 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111827] text-white dark:bg-white dark:text-[#07080d] font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-[0.98] transition-all shrink-0"
           >
-            <span>Explore all projects</span>
-            <ArrowUpRight className="w-4 h-4 text-[#6b7487] dark:text-[#7a8296]" />
+            <span>Explore All Work</span>
+            <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
 
-      {/* Video Lightbox Player Modal */}
-      {activeVideo && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#07080d]/90 backdrop-blur-md"
-          onClick={() => setActiveVideo(null)}
-        >
+      {/* Pop-up Video Modal: Clean, Accessible & Easily Closeable */}
+      <AnimatePresence>
+        {activeVideo && (
           <div 
-            className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden bg-black border border-white/[0.12] shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl"
+            onClick={() => setActiveVideo(null)}
           >
-            <button
-              type="button"
-              onClick={() => setActiveVideo(null)}
-              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-lg bg-[#11141c]/90 hover:bg-[#1a1e28] text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10"
-              aria-label="Close video player"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-5xl bg-slate-950 rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
             >
-              <X className="w-4 h-4" />
-            </button>
-            <iframe
-              src={`https://www.youtube.com/embed/${activeVideo.videoId}?autoplay=1&rel=0&modestbranding=1`}
-              title={activeVideo.title}
-              className="w-full h-full border-0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+              {/* Top Modal Header */}
+              <div className="flex items-center justify-between px-5 py-4 bg-slate-900/90 border-b border-white/10 text-white">
+                <div className="flex items-center gap-2.5 min-w-0 pr-4">
+                  <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse shrink-0" />
+                  <span className="text-sm font-bold truncate">{activeVideo.title}</span>
+                  {activeVideo.category && (
+                    <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-white/10 text-[10px] font-mono text-slate-300 shrink-0">
+                      {activeVideo.category}
+                    </span>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveVideo(null)}
+                  className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer shrink-0"
+                  aria-label="Close video"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Responsive Video Frame */}
+              <div className="relative aspect-video w-full bg-black">
+                <iframe
+                  src={`https://www.youtube.com/embed/${activeVideo.videoId}?autoplay=1&rel=0`}
+                  title={activeVideo.title}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </section>
   );
 };

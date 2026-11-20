@@ -389,7 +389,7 @@ export interface PortfolioItem {
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     id: "port-1",
-    title: "Bolto",
+    title: "AI Workforce Platform",
     videoId: "KDK1jHJXPrk",
     category: "SaaS & Technology",
     labels: ["SaaS & Technology", "AI Platform", "Series A"],
@@ -398,11 +398,11 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   },
   {
     id: "port-2",
-    title: "ClickUp",
+    title: "All-in-One Workspace Launch",
     videoId: "pIEkY7YDIF0",
     category: "SaaS & Technology",
     labels: ["SaaS & Technology", "Productivity", "Product Launch"],
-    description: "The world's #1 work platform that replaces every productivity tool teams use.",
+    description: "Enterprise work platform that unifies productivity tools across teams.",
     order: 2
   },
   {
@@ -503,7 +503,7 @@ export const DEFAULT_TESTIMONIALS: TestimonialItem[] = [
     id: "test-3",
     name: "Chris Cunningham",
     role: "Head of Content",
-    company: "ClickUp",
+    company: "Productivity Suite",
     content: "Honestly the first video team that didn't make me chase them for updates.",
     rating: 5,
     order: 3,

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 import { STATIC_BLOGS } from "../../lib/staticBlogs";
 
 export const JournalSection: React.FC = () => {
@@ -45,10 +46,14 @@ export const JournalSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Featured Primary Article (7 Cols) */}
           {primaryArticle && (
-            <div className="lg:col-span-7 flex">
+            <motion.div 
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 flex"
+            >
               <Link
                 to={`/blog/${primaryArticle.id}`}
-                className="group flex flex-col justify-between w-full rounded-2xl overflow-hidden border border-black/[0.08] dark:border-[#eef0f5]/[0.08] bg-[#ffffff] dark:bg-[#11141c] shadow-xs"
+                className="group flex flex-col justify-between w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-black/[0.08] dark:border-[#eef0f5]/[0.08] hover:border-[#2563eb]/40 dark:hover:border-[#38bdf8]/40 bg-[#ffffff] dark:bg-[#11141c] shadow-xs hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#07080d]">
                   <img
@@ -92,17 +97,22 @@ export const JournalSection: React.FC = () => {
                   </div>
                 </div>
               </Link>
-            </div>
+            </motion.div>
           )}
 
           {/* Secondary Articles (5 Cols - Stacked) */}
           <div className="lg:col-span-5 flex flex-col gap-4 justify-between">
             {secondaryArticles.map((article) => (
-              <Link
+              <motion.div
                 key={article.id}
-                to={`/blog/${article.id}`}
-                className="group flex flex-col sm:flex-row gap-4 p-5 rounded-2xl border border-black/[0.08] dark:border-[#eef0f5]/[0.08] bg-[#ffffff] dark:bg-[#11141c] shadow-xs flex-1"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="flex-1 flex"
               >
+                <Link
+                  to={`/blog/${article.id}`}
+                  className="group flex flex-col sm:flex-row gap-4 p-5 rounded-2xl border border-black/[0.08] dark:border-[#eef0f5]/[0.08] hover:border-[#2563eb]/40 dark:hover:border-[#38bdf8]/40 bg-[#ffffff] dark:bg-[#11141c] shadow-xs hover:shadow-lg transition-all duration-300 w-full"
+                >
                 <div className="relative w-full sm:w-36 aspect-[16/10] sm:aspect-square shrink-0 rounded-xl overflow-hidden bg-[#07080d]">
                   <img
                     src={article.imageUrl}
@@ -133,7 +143,8 @@ export const JournalSection: React.FC = () => {
                   </div>
                 </div>
               </Link>
-            ))}
+            </motion.div>
+          ))}
 
             {/* Studio Note */}
             <div className="p-5 rounded-2xl border border-black/[0.08] dark:border-[#eef0f5]/[0.08] bg-[#eceff4] dark:bg-[#1a1e28]">

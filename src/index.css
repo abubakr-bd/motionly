@@ -94,7 +94,7 @@ body.dark {
 html {
   min-width: 320px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
   text-rendering: optimizeLegibility;

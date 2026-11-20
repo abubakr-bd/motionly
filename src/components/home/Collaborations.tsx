@@ -1,5 +1,6 @@
 import React from "react";
 import { usePartners } from "../../lib/useSiteData";
+import { Sparkles } from "lucide-react";
 
 export const Collaborations: React.FC = () => {
   const { partners } = usePartners();
@@ -12,38 +13,37 @@ export const Collaborations: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200">
+    <section className="py-20 sm:py-24 bg-white dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.08] dark:border-white/[0.08] transition-colors duration-200 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="max-w-2xl mb-10 sm:mb-12">
-          <div className="font-mono text-xs text-[#2563eb] mb-2">
-            Selected collaborations
+        {/* Header: User Section 3 Exact Copy */}
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>TRUSTED BY AMBITIOUS TEAMS</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-medium text-[#111827] dark:text-[#eef0f5] tracking-tight mb-2">
-            Working alongside ambitious teams
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
+            Working alongside creators, startups, and growing brands.
           </h2>
-          <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8]">
-            We collaborate with founders, product companies, and growing businesses to turn ideas into video assets
-          </p>
         </div>
 
-        {/* Clean, calibrated logo grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-center">
+        {/* Dynamic Partner Logo Display with Reactive Hover Illumination */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 items-center">
           {displayPartners.map((item, index) => (
             <div
               key={item.id || index}
-              className="h-20 rounded-xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.06] dark:border-[#eef0f5]/[0.08] p-4 flex items-center justify-center group"
+              className="h-24 rounded-2xl bg-slate-50 dark:bg-[#0c101d] border border-black/[0.06] dark:border-white/[0.08] p-5 flex items-center justify-center group hover:border-[#2563EB]/40 dark:hover:border-[#38BDF8]/40 shadow-xs hover:shadow-md transition-all duration-300"
             >
               {item.logoUrl ? (
                 <img
                   src={item.logoUrl}
                   alt={`${item.name} logo`}
-                  className="h-8 sm:h-9 w-auto max-w-[130px] object-contain opacity-70 dark:opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 dark:group-hover:opacity-100 transition-opacity duration-150"
+                  className="h-9 sm:h-10 w-auto max-w-[140px] object-contain opacity-60 dark:opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 dark:group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105"
                   onError={(e) => {
                     (e.target as HTMLElement).style.display = "none";
                   }}
                 />
               ) : (
-                <span className="text-xs font-mono text-[#4b5565] dark:text-[#a3a9b8]">
+                <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 group-hover:text-[#2563EB] dark:group-hover:text-[#38BDF8]">
                   {item.name}
                 </span>
               )}

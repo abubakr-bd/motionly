@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const FinalStudioCTA: React.FC = () => {
   return (
@@ -57,8 +58,12 @@ export const FinalStudioCTA: React.FC = () => {
           </div>
 
           {/* Real Studio Material (5 Cols - Offset Preview Card) */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl overflow-hidden border border-[#eef0f5]/[0.08] bg-[#11141c] shadow-lg">
+          <motion.div 
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5"
+          >
+            <div className="rounded-2xl overflow-hidden border border-[#eef0f5]/[0.08] hover:border-[#2563eb]/40 bg-[#11141c] shadow-lg hover:shadow-2xl transition-all duration-300">
               <div className="relative aspect-[16/10] overflow-hidden bg-[#07080d]">
                 <img
                   src="https://img.youtube.com/vi/KDK1jHJXPrk/maxresdefault.jpg"
@@ -99,7 +104,7 @@ export const FinalStudioCTA: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

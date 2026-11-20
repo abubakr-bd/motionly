@@ -1,5 +1,6 @@
 import React from "react";
 import { Check } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const WhoWeWorkWith: React.FC = () => {
   const audiences = [
@@ -48,10 +49,15 @@ export const WhoWeWorkWith: React.FC = () => {
 
         {/* 3 Audience Panels */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-          {audiences.map((aud) => (
-            <div
+          {audiences.map((aud, index) => (
+            <motion.div
               key={aud.category}
-              className="p-6 rounded-2xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] shadow-xs flex flex-col justify-between"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6 }}
+              className="group p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] hover:border-[#2563eb]/40 dark:hover:border-[#38bdf8]/40 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Visual Thumbnail */}
@@ -59,35 +65,35 @@ export const WhoWeWorkWith: React.FC = () => {
                   <img
                     src={aud.imagePreview}
                     alt={aud.category}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-[#07080d]/80 text-[10px] font-mono text-[#a3a9b8] border border-white/[0.08]">
+                  <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-md bg-[#07080d]/80 text-[10px] font-mono text-[#a3a9b8] border border-white/[0.08]">
                     {aud.tag}
                   </span>
                 </div>
 
-                <span className="text-xs font-mono text-[#2563eb] mb-1.5 block">
+                <span className="text-xs font-mono font-bold text-[#2563eb] dark:text-[#38bdf8] mb-1.5 block uppercase tracking-wider">
                   {aud.category}
                 </span>
 
-                <h3 className="text-lg font-medium text-[#111827] dark:text-[#eef0f5] mb-2 leading-snug">
+                <h3 className="text-xl font-bold text-[#111827] dark:text-[#eef0f5] mb-2 leading-snug tracking-tight">
                   {aud.headline}
                 </h3>
 
-                <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6">
+                <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6 font-normal">
                   {aud.desc}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08] space-y-2">
+              <div className="pt-4 border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08] space-y-2.5">
                 {aud.deliverables.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[#4b5565] dark:text-[#a3a9b8]">
-                    <Check className="w-3.5 h-3.5 text-[#2563eb] shrink-0" />
+                  <div key={i} className="flex items-center gap-2 text-xs text-[#4b5565] dark:text-[#a3a9b8] font-medium">
+                    <Check className="w-3.5 h-3.5 text-[#2563eb] dark:text-[#38bdf8] shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

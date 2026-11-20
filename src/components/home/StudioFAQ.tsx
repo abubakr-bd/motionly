@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Plus, Minus, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FAQItem {
   question: string;
@@ -125,13 +126,23 @@ export const StudioFAQ: React.FC = () => {
                       </span>
                     </button>
 
-                    {isOpen && (
-                      <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0">
-                        <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08] pt-4">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    )}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0">
+                            <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08] pt-4 font-normal">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}

@@ -356,7 +356,7 @@ export const PortfolioManager = ({ notify }: any) => {
         <div className="space-y-5">
           <AdminInput
             label="Project Title"
-            placeholder="e.g. Bolto, ClickUp, or Apple SaaS Explainer"
+            placeholder="e.g. AI Workforce Platform, SaaS Explainer, or Commercial Film"
             value={form.title}
             onChange={(e: any) => setForm({ ...form, title: e.target.value })}
           />

@@ -11,7 +11,7 @@ import { CreativeCapabilities } from "../components/home/CreativeCapabilities";
 import { StudioProcess } from "../components/home/StudioProcess";
 import { WhoWeWorkWith } from "../components/home/WhoWeWorkWith";
 import { WhyMotionly } from "../components/home/WhyMotionly";
-import { TeamEditorial } from "../components/home/TeamEditorial";
+import Team from "../components/sections/Team";
 import { JournalSection } from "../components/home/JournalSection";
 import { StudioFAQ } from "../components/home/StudioFAQ";
 import { FinalStudioCTA } from "../components/home/FinalStudioCTA";
@@ -56,8 +56,8 @@ const Landing: React.FC = () => {
         {/* 10. Why Motionly */}
         <WhyMotionly />
 
-        {/* 11. The Studio / Team */}
-        <TeamEditorial />
+        {/* 11. The Studio / Team (16:9 Automated Infinite Loop Carousel) */}
+        <Team />
 
         {/* 12. Journal */}
         <JournalSection />
