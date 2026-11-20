@@ -1,101 +1,93 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Sparkles, Check, ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Check } from "lucide-react";
 
 export const WhoWeWorkWith: React.FC = () => {
   const audiences = [
     {
       category: "Tech & SaaS",
-      headline: "For software companies, startups, and technology teams",
-      desc: "Communicate complex products, architectural breakthroughs, and high-utility features through clear, kinetic visual storytelling.",
-      deliverables: ["Product Launch Explainers", "Interactive UI Animations", "Feature Release Videos", "Product Hunt Video Kits"],
+      headline: "For software companies, startups, and product teams",
+      desc: "Communicate complex platforms, technical breakthroughs, and core workflows through clear visual walkthroughs.",
+      deliverables: ["Product launch explainers", "UI motion graphics", "Feature release cuts", "Product Hunt launch kits"],
       imagePreview: "https://img.youtube.com/vi/pIEkY7YDIF0/maxresdefault.jpg",
-      tag: "SaaS Systems"
+      tag: "SaaS systems"
     },
     {
-      category: "Founders & Creators",
-      headline: "For individuals building their personal brands",
-      desc: "Share your expertise, company journey, and unique perspectives without sacrificing hours every week to manual video editing.",
-      deliverables: ["Executive Video Sprints", "Podcast & Interview Cuts", "Short-Form Social Clips", "Click-Worthy Thumbnails"],
+      category: "Founders & creators",
+      headline: "For leaders building their personal brand",
+      desc: "Share your expertise, company journey, and industry perspectives without sacrificing days each week to manual editing.",
+      deliverables: ["Executive video sprints", "Podcast & interview cuts", "Short-form social clips", "Thumbnail packaging"],
       imagePreview: "/hero-thumb.webp",
-      tag: "Founder Media"
+      tag: "Founder media"
     },
     {
-      category: "Businesses & Brands",
-      headline: "For growing businesses and ambitious consumer brands",
+      category: "Businesses & brands",
+      headline: "For growing companies and commercial brands",
       desc: "Elevate your market presence with polished commercial editing, brand films, and high-retention advertising assets.",
-      deliverables: ["High-Converting Video Ads", "Cinematic Brand Films", "Commercial Production", "Multi-Platform Repurposing"],
+      deliverables: ["Paid social video ads", "Cinematic brand films", "Commercial post-production", "Multi-platform exports"],
       imagePreview: "https://img.youtube.com/vi/xygb6y5L9x8/maxresdefault.jpg",
       tag: "Commercials"
     }
   ];
 
   return (
-    <section className="py-20 sm:py-32 bg-[#05070F] text-white relative overflow-hidden border-t border-white/5">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="py-20 sm:py-28 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="max-w-3xl mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-bold tracking-widest uppercase mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Built for Ambitious Ideas</span>
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="font-mono text-xs text-[#2563eb] mb-3">
+            Who we work with
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-5 leading-tight">
-            Different Industries. <br />
-            Different Stories. <br />
-            <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-200">
-              One Creative Partner.
-            </span>
+          <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.1] mb-4">
+            Different industries, different stories, one creative partner
           </h2>
+          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed">
+            We adapt our production model and creative language to the specific demands of your sector and audience
+          </p>
         </div>
 
         {/* 3 Audience Panels */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {audiences.map((aud, index) => (
-            <motion.div
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          {audiences.map((aud) => (
+            <div
               key={aud.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="p-8 rounded-3xl bg-gradient-to-b from-[#0E152E]/90 to-[#070B19]/95 border border-white/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col justify-between shadow-xl group"
+              className="p-6 rounded-2xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] shadow-xs flex flex-col justify-between"
             >
               <div>
                 {/* Visual Thumbnail */}
-                <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-900 border border-white/5 mb-6 group-hover:border-blue-500/30 transition-colors">
+                <div className="relative aspect-video rounded-xl overflow-hidden bg-[#07080d] border border-black/[0.08] dark:border-white/[0.08] mb-5">
                   <img
                     src={aud.imagePreview}
                     alt={aud.category}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                   />
-                  <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-mono text-blue-400">
+                  <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-[#07080d]/80 text-[10px] font-mono text-[#a3a9b8] border border-white/[0.08]">
                     {aud.tag}
                   </span>
                 </div>
 
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-400 mb-1.5 block">
+                <span className="text-xs font-mono text-[#2563eb] mb-1.5 block">
                   {aud.category}
                 </span>
 
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-lg font-medium text-[#111827] dark:text-[#eef0f5] mb-2 leading-snug">
                   {aud.headline}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal mb-6">
+                <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6">
                   {aud.desc}
                 </p>
               </div>
 
-              <div className="pt-5 border-t border-white/5 space-y-2">
+              <div className="pt-4 border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08] space-y-2">
                 {aud.deliverables.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-slate-300 font-medium">
-                    <Check className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                  <div key={i} className="flex items-center gap-2 text-xs text-[#4b5565] dark:text-[#a3a9b8]">
+                    <Check className="w-3.5 h-3.5 text-[#2563eb] shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

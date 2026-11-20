@@ -114,10 +114,10 @@ const PORTFOLIO_DATA = [
 const PAGES = [
   {
     path: "/",
-    title: "MOTIONLY — Independent Creative Video & Content Studio",
+    title: "Motionly — Independent Creative Video & Content Studio",
     description: "From SaaS products to personal brands, we turn complex ideas and ambitious visions into compelling visual experiences through strategic video production, motion design, and creative storytelling.",
     keywords: "creative video studio, motion design studio, SaaS product videos, explainer video production, high-retention video editing, personal branding content, commercial video production, 3D motion graphics, creative agency, Motionly Media",
-    h1: "We Make Ideas Move. | Independent Creative Video & Content Studio",
+    h1: "We make ideas move | Independent creative video studio",
     bodyContent: `
       <header class="crit-nav" aria-label="Main Navigation">
         <a href="/" aria-label="Motionly Media Home">
@@ -126,24 +126,24 @@ const PAGES = [
             <img src="/nav_logo.webp" alt="Motionly Media" width="120" height="28" fetchpriority="high" />
           </picture>
         </a>
-        <a href="/contact" class="talk-btn">LET'S TALK! &nearr;</a>
+        <a href="/contact" class="talk-btn">Let's talk &nearr;</a>
       </header>
 
       <section class="crit-hero">
         <div class="site-container">
           <div class="crit-badge">
             <span class="crit-badge-dot"></span>
-            <span>INDEPENDENT CREATIVE VIDEO & CONTENT STUDIO</span>
-            <span style="color:#3b82f6">&rsaquo;</span>
+            <span>Independent creative studio</span>
+            <span style="color:#2563eb">&rsaquo;</span>
           </div>
           <h1 class="crit-h1">
-            We Make Ideas <span class="crit-gradient-text" style="font-family:serif;font-style:italic">Move.</span>
+            We make ideas move
           </h1>
           <p class="crit-lede">
             From SaaS products to personal brands, we turn complex ideas and ambitious visions into compelling visual experiences through strategic video production, motion design, and creative storytelling.
           </p>
           <div>
-            <a href="/contact" class="crit-cta-btn">LET'S WORK TOGETHER</a>
+            <a href="/contact" class="crit-cta-btn">Start a project</a>
           </div>
           <div class="crit-video-card">
             <img src="https://img.youtube.com/vi/q7hCvbfvRPU/maxresdefault.jpg" alt="Motionly Media showreel video thumbnail" width="1280" height="720" style="width:100%;height:100%;object-fit:cover" fetchpriority="high" decoding="async" />

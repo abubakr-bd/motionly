@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSiteSettings } from "../../lib/useSiteData";
 import { useTheme } from "../../lib/ThemeContext";
-import { Menu, X, ArrowUpRight, Sparkles, Sun, Moon } from "lucide-react";
+import { Menu, X, ArrowUpRight, Sun, Moon } from "lucide-react";
 import AcademyComingSoonModal from "./AcademyComingSoonModal";
 
 const navLinks = [
@@ -95,113 +95,110 @@ const Navbar = () => {
     <>
       <header
         ref={headerRef}
-      className={`fixed top-3 sm:top-5 left-0 right-0 z-50 max-w-6xl w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] mx-auto transition-all duration-300 ${
-        isDark
-          ? isScrolled
-            ? "bg-[#090D18]/90 backdrop-blur-2xl border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.7)] text-white"
-            : "bg-[#0A0E1A]/80 backdrop-blur-xl border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.5)] text-white"
-          : isScrolled
-            ? "bg-white/95 backdrop-blur-2xl border-slate-200/90 shadow-[0_12px_36px_rgba(37,99,235,0.08)] text-slate-900"
-            : "bg-white/85 backdrop-blur-xl border-slate-200/70 shadow-[0_8px_25px_rgba(37,99,235,0.05)] text-slate-900"
-      } border rounded-full px-4 sm:px-6 py-2 sm:py-2.5`}
-    >
-      <div className="flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group shrink-0" aria-label={`${siteName} home`}>
-          <img
-            src={isDark ? "/nav_logo_dark.png" : "/nav_logo.png"}
-            alt={siteName}
-            className="h-7 sm:h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-            width="140"
-            height="32"
-            decoding="async"
-            fetchPriority="high"
-            onError={(e) => {
-              // Graceful fallback to static logo if needed
-              (e.target as HTMLImageElement).src = isDark ? "/nav_logo_dark.png" : "/nav_logo.webp";
-            }}
-          />
-        </Link>
+        className={`fixed top-3 sm:top-4 left-0 right-0 z-50 max-w-5xl w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] mx-auto transition-colors duration-150 ${
+          isDark
+            ? isScrolled
+              ? "bg-[#0b0d14]/95 backdrop-blur-md border-[#eef0f5]/[0.1] shadow-xs text-[#eef0f5]"
+              : "bg-[#0b0d14]/85 backdrop-blur-md border-[#eef0f5]/[0.08] text-[#eef0f5]"
+            : isScrolled
+              ? "bg-white/95 backdrop-blur-md border-black/[0.08] shadow-xs text-[#111827]"
+              : "bg-white/90 backdrop-blur-md border-black/[0.06] text-[#111827]"
+        } border rounded-xl px-4 sm:px-5 py-2`}
+      >
+        <div className="flex items-center justify-between">
+          {/* Brand Logo */}
+          <Link to="/" className="flex items-center gap-2 group shrink-0" aria-label={`${siteName} home`}>
+            <img
+              src={isDark ? "/nav_logo_dark.png" : "/nav_logo.png"}
+              alt={siteName}
+              className="h-6 sm:h-7 w-auto object-contain"
+              width="130"
+              height="28"
+              decoding="async"
+              fetchPriority="high"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = isDark ? "/nav_logo_dark.png" : "/nav_logo.webp";
+              }}
+            />
+          </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main navigation">
-          {navLinks.map((link) => {
-            const active = isActive(link.path);
-            return (
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+            {navLinks.map((link) => {
+              const active = isActive(link.path);
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-normal whitespace-nowrap transition-colors duration-150 ${
+                    active
+                      ? isDark
+                        ? "text-[#eef0f5] bg-[#1a1e28] font-medium"
+                        : "text-[#111827] bg-[#eceff4] font-medium"
+                      : isDark
+                        ? "text-[#a3a9b8] hover:text-[#eef0f5] hover:bg-[#11141c]"
+                        : "text-[#4b5565] hover:text-[#111827] hover:bg-[#f4f4f5]"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right Action & Theme Toggle */}
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle Button */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-150 cursor-pointer ${
+                isDark
+                  ? "bg-[#11141c] hover:bg-[#1a1e28] text-[#a3a9b8] hover:text-[#eef0f5] border border-[#eef0f5]/[0.08]"
+                  : "bg-[#eceff4] hover:bg-[#e2e8f0] text-[#4b5565] hover:text-[#111827] border border-black/[0.06]"
+              }`}
+              title={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <Sun className="w-4 h-4 text-[#eef0f5]" />
+              ) : (
+                <Moon className="w-4 h-4 text-[#111827]" />
+              )}
+            </button>
+
+            {/* Desktop 'Let's talk' Button */}
+            <div className="hidden sm:flex items-center">
               <Link
-                key={link.path}
-                to={link.path}
-                className={`relative px-3 py-1.5 rounded-full text-xs xl:text-sm font-medium whitespace-nowrap transition-all ${
-                  active
-                    ? isDark
-                      ? "text-white bg-white/10 shadow-inner"
-                      : "text-blue-700 bg-blue-50 font-semibold shadow-inner"
-                    : isDark
-                      ? "text-slate-300 hover:text-white hover:bg-white/5"
-                      : "text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 font-medium"
+                to="/contact"
+                className={`inline-flex items-center justify-center gap-1.5 h-8 px-3.5 rounded-lg text-xs font-medium transition-colors duration-150 active:scale-[0.98] ${
+                  isDark
+                    ? "bg-[#eef0f5] text-[#07080d] hover:bg-white"
+                    : "bg-[#111827] text-white hover:bg-black"
                 }`}
               >
-                {link.name}
+                <span>Let&apos;s talk</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
-            );
-          })}
-        </nav>
+            </div>
 
-        {/* Right CTA & Black View Toggle */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Theme Toggle Button (Light White & Blue / Black View) */}
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className={`relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center cursor-pointer group active:scale-90 ${
-              isDark
-                ? "bg-white/[0.08] hover:bg-white/[0.15] text-amber-300 border border-white/10 hover:border-amber-400/40 shadow-[0_0_20px_rgba(251,191,36,0.15)]"
-                : "bg-blue-50/80 hover:bg-blue-100 text-blue-600 border border-blue-200/80 shadow-[0_2px_10px_rgba(37,99,235,0.08)]"
-            }`}
-            title={isDark ? "Switch to White & Blue View" : "Switch to Black View"}
-            aria-label="Toggle Black/White View"
-          >
-            {isDark ? (
-              <Sun className="w-4 h-4 transition-transform duration-500 group-hover:rotate-90 group-hover:scale-110" />
-            ) : (
-              <Moon className="w-4 h-4 fill-current transition-transform duration-500 group-hover:-rotate-45 group-hover:scale-110" />
-            )}
-          </button>
-
-          {/* Desktop 'LET'S TALK!' Button with Subtle Shimmer */}
-          <div className="hidden sm:flex items-center">
-            <Link
-              to="/contact"
-              className={`relative overflow-hidden inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 active:scale-95 group ${
+            {/* Mobile Menu Hamburger Toggle */}
+            <button
+              ref={triggerRef}
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              className={`lg:hidden flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${
                 isDark
-                  ? "bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] border border-blue-400/30"
-                  : "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-600/25"
+                  ? "bg-[#11141c] text-[#eef0f5] border border-[#eef0f5]/[0.08]"
+                  : "bg-[#eceff4] text-[#111827] border border-black/[0.06]"
               }`}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
             >
-              {/* Shimmer overlay */}
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-              <span className="relative z-10">LET&apos;S TALK!</span>
-              <ArrowUpRight className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+              {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
           </div>
-
-          {/* Mobile Menu Hamburger Toggle */}
-          <button
-            ref={triggerRef}
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden flex items-center justify-center w-9 h-9 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              isDark
-                ? "bg-white/10 text-white hover:bg-white/15"
-                : "bg-slate-100 text-slate-900 hover:bg-slate-200"
-            }`}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isOpen}
-          >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
         </div>
-      </div>
 
       {/* Mobile Drawer (Simplified, Clean & High-Contrast for Phone) */}
       {isOpen && (
@@ -253,20 +250,16 @@ const Navbar = () => {
               <Link
                 to="/personal-branding"
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-normal transition-colors ${
                   isDark
-                    ? "text-slate-200 hover:text-white hover:bg-white/5"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+                    ? "text-[#a3a9b8] hover:text-[#eef0f5] hover:bg-[#11141c]"
+                    : "text-[#4b5565] hover:text-[#111827] hover:bg-[#eceff4]"
                 }`}
               >
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-                  <span>Personal Branding</span>
-                </div>
-                <span className="text-[11px] font-mono text-slate-400">0{navLinks.length + 1}</span>
+                <span>Personal branding</span>
+                <span className="text-xs font-mono text-[#7a8296] tabular-nums">0{navLinks.length + 1}</span>
               </Link>
             )}
-
 
             <button
               type="button"
@@ -274,28 +267,25 @@ const Navbar = () => {
                 setIsOpen(false);
                 setIsAcademyModalOpen(true);
               }}
-              className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold bg-[#F47B35]/10 text-[#F47B35] border border-[#F47B35]/20 text-left cursor-pointer"
+              className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-normal bg-[#F47B35]/10 text-[#F47B35] border border-[#F47B35]/20 text-left cursor-pointer"
             >
-              <div className="flex items-center gap-2">
-                <span>✳</span>
-                <span>Motionly Academy</span>
-              </div>
-              <span className="text-[10px] font-bold uppercase bg-[#F47B35] text-white px-2 py-0.5 rounded-md">Coming Soon</span>
+              <span>Motionly Academy</span>
+              <span className="text-[11px] font-medium bg-[#F47B35] text-white px-2 py-0.5 rounded">Coming soon</span>
             </button>
           </nav>
 
-          <div className="mt-2 pt-2 border-t border-slate-200 dark:border-white/5">
+          <div className="mt-2 pt-2 border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08]">
             <Link
               to="/contact"
               onClick={() => setIsOpen(false)}
-              className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg ${
+              className={`w-full flex items-center justify-center gap-1.5 h-9 px-4 rounded-lg text-xs font-medium transition-colors ${
                 isDark
-                  ? "bg-white text-slate-950 shadow-white/10"
-                  : "bg-blue-600 text-white shadow-blue-600/30"
+                  ? "bg-[#eef0f5] text-[#07080d]"
+                  : "bg-[#111827] text-white"
               }`}
             >
-              <span>LET&apos;S TALK!</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <span>Let&apos;s talk</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

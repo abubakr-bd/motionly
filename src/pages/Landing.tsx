@@ -24,61 +24,48 @@ const Landing: React.FC = () => {
       <SEO
         title={
           settings.seo.title ||
-          "MOTIONLY — Independent Creative Video & Content Studio"
+          "Motionly — Independent Creative Video & Content Studio"
         }
         description={
           settings.seo.description ||
-          "We turn complex ideas and ambitious visions into compelling visual experiences through strategic video production, motion design, and creative storytelling."
+          "From SaaS products to personal brands, we turn complex ideas into compelling visual experiences through strategic video production, motion design, and creative storytelling."
         }
         image={settings.seo.image}
       />
 
-      <div className="bg-white text-slate-900 dark:bg-[#05070F] dark:text-slate-100 min-h-screen relative transition-colors duration-300">
-        {/* Subtle Ambient Studio Atmosphere Lighting */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed -top-40 left-1/2 -translate-x-1/2 w-[1100px] h-[650px] bg-gradient-to-b from-blue-600/10 via-blue-500/5 to-transparent blur-[140px] -z-10"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed top-[45%] right-[-10%] w-[650px] h-[650px] bg-blue-600/5 dark:bg-blue-600/10 blur-[160px] -z-10"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed top-[80%] left-[-10%] w-[650px] h-[650px] bg-indigo-600/5 dark:bg-indigo-600/10 blur-[160px] -z-10"
-        />
-
-        {/* 01 & 04. HERO SECTION */}
+      {/* Clean ink neutral background: quiet, deliberate, zero color washes or blobs */}
+      <div className="bg-[#f5f7fa] text-[#111827] dark:bg-[#07080d] dark:text-[#eef0f5] min-h-screen relative transition-colors duration-200">
+        {/* 01 & 04. Hero */}
         <HeroStudio />
 
-        {/* 05. SELECTED WORK GALLERY */}
+        {/* 05. Selected Work Gallery */}
         <SelectedWork />
 
-        {/* 06. COLLABORATIONS / CLIENT LOGOS */}
+        {/* 06. Collaborations */}
         <Collaborations />
 
-        {/* 07. CREATIVE CAPABILITIES */}
+        {/* 07. Creative Capabilities */}
         <CreativeCapabilities />
 
-        {/* 08. STUDIO PROCESS */}
+        {/* 08. Studio Process */}
         <StudioProcess />
 
-        {/* 09. WHO WE WORK WITH */}
+        {/* 09. Who We Work With */}
         <WhoWeWorkWith />
 
-        {/* 10. WHY MOTIONLY / DIFFERENTIATORS */}
+        {/* 10. Why Motionly */}
         <WhyMotionly />
 
-        {/* 11. THE STUDIO / TEAM */}
+        {/* 11. The Studio / Team */}
         <TeamEditorial />
 
-        {/* 12. JOURNAL / CREATIVE INSIGHTS */}
+        {/* 12. Journal */}
         <JournalSection />
 
         {/* 13. FAQ */}
         <StudioFAQ />
 
-        {/* 14. FINAL EMOTIONAL CTA */}
+        {/* 14. Final CTA */}
         <FinalStudioCTA />
       </div>
     </Layout>

@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { usePartners } from "../../lib/useSiteData";
 
 export const Collaborations: React.FC = () => {
@@ -13,47 +12,42 @@ export const Collaborations: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-white dark:bg-[#070B19] text-slate-900 dark:text-white transition-colors duration-300 relative border-t border-slate-200/80 dark:border-white/5">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-2 block">
-            Selected Collaborations
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
-            Working Alongside Ambitious Teams.
+    <section className="py-16 sm:py-20 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-2xl mb-10 sm:mb-12">
+          <div className="font-mono text-xs text-[#2563eb] mb-2">
+            Selected collaborations
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-medium text-[#111827] dark:text-[#eef0f5] tracking-tight mb-2">
+            Working alongside ambitious teams
           </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-300 font-normal">
-            We collaborate with founders, growing businesses, and creative teams to bring ideas to life.
+          <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8]">
+            We collaborate with founders, product companies, and growing businesses to turn ideas into video assets
           </p>
         </div>
 
-        {/* Clean, un-distorted logo display */}
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 md:gap-18">
+        {/* Clean, calibrated logo grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-center">
           {displayPartners.map((item, index) => (
-            <motion.div
+            <div
               key={item.id || index}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.4 }}
-              className="group flex flex-col items-center justify-center p-4 rounded-2xl transition-all duration-300"
+              className="h-20 rounded-xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.06] dark:border-[#eef0f5]/[0.08] p-4 flex items-center justify-center group"
             >
               {item.logoUrl ? (
                 <img
                   src={item.logoUrl}
                   alt={`${item.name} logo`}
-                  className="h-10 sm:h-12 w-auto max-w-[150px] sm:max-w-[180px] object-contain opacity-75 dark:opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 dark:group-hover:opacity-100 transition-all duration-300"
+                  className="h-8 sm:h-9 w-auto max-w-[130px] object-contain opacity-70 dark:opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 dark:group-hover:opacity-100 transition-opacity duration-150"
                   onError={(e) => {
-                    // Fallback to text if missing
                     (e.target as HTMLElement).style.display = "none";
                   }}
                 />
               ) : (
-                <span className="text-base sm:text-lg font-bold tracking-wider text-slate-700 dark:text-slate-300 font-mono">
+                <span className="text-xs font-mono text-[#4b5565] dark:text-[#a3a9b8]">
                   {item.name}
                 </span>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useTeam } from "../../lib/useSiteData";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export const TeamEditorial: React.FC = () => {
   const { team } = useTeam();
@@ -26,101 +25,90 @@ export const TeamEditorial: React.FC = () => {
 
   const getExpertise = (role: string) => {
     const r = role.toLowerCase();
-    if (r.includes("ceo") || r.includes("founder")) return "Creative Direction & Brand Vision";
-    if (r.includes("coo") || r.includes("growth")) return "Operations & Client Success";
-    if (r.includes("cco") || r.includes("production")) return "Cinematography & Directing";
-    if (r.includes("presenter") || r.includes("social")) return "On-Screen Storytelling & Community";
-    if (r.includes("cinematographer")) return "Lighting, Camera & Film Production";
-    if (r.includes("strategy")) return "Narrative Strategy & Positioning";
-    if (r.includes("designer")) return "Visual Systems & Graphic Design";
-    return "Pacing, Motion Graphics & Sound Design";
+    if (r.includes("ceo") || r.includes("founder")) return "Creative direction & brand vision";
+    if (r.includes("coo") || r.includes("growth")) return "Operations & client partnerships";
+    if (r.includes("lead") || r.includes("senior")) return "Post-production & narrative pacing";
+    if (r.includes("animat") || r.includes("3d")) return "3D CGI & advanced motion design";
+    if (r.includes("designer")) return "Visual systems & graphic direction";
+    return "Motion graphics & sound foley";
   };
 
-  // Featured team members for the homepage gallery
   const featuredTeam = team.slice(0, 8);
 
   return (
     <section 
       id="about" 
-      className="py-20 sm:py-32 bg-[#05070F] text-white relative overflow-hidden border-t border-white/5"
+      className="py-20 sm:py-28 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200"
     >
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-bold tracking-widest uppercase mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-              <span>The People Behind the Frames</span>
+            <div className="font-mono text-xs text-[#2563eb] mb-3">
+              The studio team
             </div>
 
-            <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-4 leading-tight">
-              Creative Minds. <br />
-              <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-200">
-                Different Perspectives.
-              </span>
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.1] mb-3">
+              Creative minds, different perspectives
             </h2>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-              Behind every project is a team of people who care about storytelling, design, and bringing ideas to life.
+            <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed">
+              Behind every project is a team focused on storytelling, motion design, and visual craft
             </p>
           </div>
 
           <div>
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider border border-white/10 hover:border-blue-400/30 transition-all"
+              className="inline-flex items-center gap-1.5 h-10 px-4 rounded-lg bg-[#ffffff] dark:bg-[#11141c] hover:bg-[#eceff4] dark:hover:bg-[#1a1e28] text-[#111827] dark:text-[#eef0f5] text-xs font-medium border border-black/[0.08] dark:border-[#eef0f5]/[0.08] transition-colors duration-150 active:scale-[0.98]"
             >
-              <span>Meet Our Team</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <span>Meet our team</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#6b7487] dark:text-[#7a8296]" />
             </Link>
           </div>
         </div>
 
         {/* Editorial Team Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-7 mb-14">
-          {featuredTeam.map((member, index) => {
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          {featuredTeam.map((member) => {
             const imgSrc = getMemberImage(member);
             const expertise = getExpertise(member.role);
 
             return (
-              <motion.div
+              <div
                 key={member.id}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.06, duration: 0.4 }}
-                className="group relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#0E152E]/90 to-[#070B19]/95 border border-white/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col justify-between shadow-lg"
+                className="rounded-2xl overflow-hidden bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] flex flex-col justify-between shadow-xs group"
               >
                 {/* Photo */}
-                <div className="relative aspect-[4/5] bg-slate-900 overflow-hidden">
+                <div className="relative aspect-[4/5] bg-[#07080d] overflow-hidden">
                   <img
                     src={imgSrc}
                     alt={member.name}
-                    className="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-150"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "/employes/abu_bakar.webp";
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07080d]/80 via-transparent to-transparent" />
 
-                  {/* Role Badge */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <p className="text-[11px] font-mono uppercase tracking-wider text-blue-400 mb-0.5">
+                  {/* Role and Name Overlay */}
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <p className="text-[11px] font-mono text-[#a3a9b8] mb-0.5">
                       {member.role}
                     </p>
-                    <h3 className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug">
+                    <h3 className="text-sm sm:text-base font-medium tracking-tight">
                       {member.name}
                     </h3>
                   </div>
                 </div>
 
-                {/* Expertise footer */}
-                <div className="p-3.5 bg-black/40 border-t border-white/5">
-                  <p className="text-[11px] text-slate-300 font-normal truncate">
+                {/* Expertise Footer */}
+                <div className="p-3 bg-[#f5f7fa] dark:bg-[#11141c] border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08]">
+                  <p className="text-xs text-[#6b7487] dark:text-[#7a8296] truncate">
                     {expertise}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

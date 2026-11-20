@@ -1,114 +1,104 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Sparkles, CheckCircle2, FileText, Layers, Film, Clapperboard, Check } from "lucide-react";
 
 export const StudioProcess: React.FC = () => {
   const steps = [
     {
       num: "01",
-      name: "DISCOVER",
-      title: "Core Objectives & Narrative Foundation",
-      desc: "We learn about your business, audience, objectives, and the story you want to communicate.",
-      visualBadge: "Discovery Brief // Audience Mapping",
-      deliverable: "Strategic brief, references & positioning alignment"
+      name: "Discover",
+      title: "Core objectives and narrative foundation",
+      desc: "We learn about your business, audience, objectives, and the specific message you want to communicate.",
+      visualBadge: "Discovery brief · Audience context",
+      deliverable: "Strategic brief, references, and positioning alignment"
     },
     {
       num: "02",
-      name: "STRATEGIZE",
-      title: "Creative Concept & Roadmap",
-      desc: "We establish the direction, messaging, creative concept, and production requirements.",
-      visualBadge: "Creative Concept // Treatment Document",
-      deliverable: "Pacing architecture, hooks, visual script & moodboard"
+      name: "Strategize",
+      title: "Creative concept and production roadmap",
+      desc: "We establish the creative direction, messaging architecture, script pacing, and production requirements.",
+      visualBadge: "Creative concept · Script document",
+      deliverable: "Pacing architecture, hooks, visual script, and moodboard"
     },
     {
       num: "03",
-      name: "CREATE",
-      title: "Storyboards & Visual Direction",
-      desc: "Our creative team develops the visual direction, scripts, storyboards, and production assets.",
-      visualBadge: "Styleframes // Kinetic Storyboards",
-      deliverable: "Full script, kinetic typography tests & styleframes"
+      name: "Create",
+      title: "Storyboards and visual direction",
+      desc: "Our creative team develops the visual style, styleframes, storyboards, and custom graphic assets.",
+      visualBadge: "Styleframes · Kinetic storyboards",
+      deliverable: "Full script, kinetic typography tests, and visual assets"
     },
     {
       num: "04",
-      name: "PRODUCE",
-      title: "Editing, Motion & Sound Design",
-      desc: "We bring the concept to life through editing, animation, motion graphics, and post-production.",
-      visualBadge: "NLE Timeline // 4K 60fps Animation",
-      deliverable: "V1 cut on Frame.io, 3D animations & bespoke audio layers"
+      name: "Produce",
+      title: "Editing, motion, and sound design",
+      desc: "We bring the concept to life through editing, animation, motion graphics, color grading, and custom foley.",
+      visualBadge: "NLE timeline · 4K 60fps animation",
+      deliverable: "V1 review cut on Frame.io, 3D animations, and audio mix"
     },
     {
       num: "05",
-      name: "DELIVER",
-      title: "Platform-Ready Mastering",
-      desc: "We refine, finalize, and deliver assets prepared for their intended platforms and audiences.",
-      visualBadge: "ProRes 422 & Social Formats",
-      deliverable: "16:9, 9:16 vertical cuts, thumbnails & raw project comps"
+      name: "Deliver",
+      title: "Platform-ready mastering",
+      desc: "We refine, polish, and export final video masters formatted for their intended distribution channels.",
+      visualBadge: "ProRes 422 & web deliverables",
+      deliverable: "16:9 widescreen, 9:16 vertical cuts, and source project files"
     }
   ];
 
   return (
-    <section className="py-20 sm:py-32 bg-white dark:bg-[#070B19] text-slate-900 dark:text-white transition-colors duration-300 relative border-t border-slate-200/80 dark:border-white/5">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+    <section className="py-20 sm:py-28 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="max-w-3xl mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-300 text-xs sm:text-sm font-bold tracking-widest uppercase mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-            <span>How We Bring Ideas to Life</span>
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="font-mono text-xs text-[#2563eb] mb-3">
+            How we work
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-950 dark:text-white mb-5 leading-tight">
-            Good Work Doesn&apos;t Happen <br />
-            <span className="font-serif italic font-normal text-blue-600 dark:text-blue-400">
-              by Accident.
-            </span>
+          <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.1] mb-4">
+            Good work does not happen by accident
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-            Every successful project starts with understanding the objective and finding the right creative direction.
+          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed">
+            Every successful project starts with understanding the objective and establishing the right creative direction
           </p>
         </div>
 
-        {/* 5 Connected Steps in a Refined Layout */}
-        <div className="space-y-6">
-          {steps.map((st, index) => (
-            <motion.div
+        {/* 5 Connected Steps */}
+        <div className="space-y-4">
+          {steps.map((st) => (
+            <div
               key={st.num}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.5 }}
-              className="p-7 sm:p-8 rounded-3xl bg-slate-50/90 dark:bg-white/[0.02] border border-slate-200/90 dark:border-white/10 hover:border-blue-500/40 dark:hover:border-blue-500/30 transition-all duration-300 shadow-xs hover:shadow-md"
+              className="p-6 sm:p-7 rounded-2xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-[#eef0f5]/[0.08] shadow-xs"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
                 <div className="lg:col-span-8 space-y-2">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="font-mono text-sm font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-3 py-1 rounded-lg border border-blue-200 dark:border-blue-500/20">
-                      {st.num} — {st.name}
+                    <span className="font-mono text-xs font-medium text-[#2563eb] bg-[#2563eb]/10 px-2.5 py-1 rounded-md tabular-nums">
+                      {st.num} {st.name}
                     </span>
-                    <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                    <span className="text-xs font-mono text-[#6b7487] dark:text-[#7a8296]">
                       {st.visualBadge}
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white pt-1">
+                  <h3 className="text-lg sm:text-xl font-medium text-[#111827] dark:text-[#eef0f5] pt-0.5">
                     {st.title}
                   </h3>
 
-                  <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal max-w-2xl">
+                  <p className="text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed max-w-2xl">
                     {st.desc}
                   </p>
                 </div>
 
-                <div className="lg:col-span-4 p-4 rounded-2xl bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">
-                    Production Output
+                <div className="lg:col-span-4 p-4 rounded-xl bg-[#eceff4] dark:bg-[#1a1e28] border border-black/[0.06] dark:border-[#eef0f5]/[0.08]">
+                  <span className="text-[11px] font-mono text-[#6b7487] dark:text-[#7a8296] block mb-1">
+                    Production output
                   </span>
-                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-200">
+                  <p className="text-xs font-medium text-[#111827] dark:text-[#eef0f5]">
                     {st.deliverable}
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

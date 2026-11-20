@@ -366,42 +366,26 @@ export const Footer = () => {
       ========================================================================= */}
       <div className="container max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-20 mb-16 sm:mb-24">
         {/* Eyebrow Tag Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300 bg-white/80 dark:bg-white/[0.05] border border-slate-300/80 dark:border-white/10 mb-6 sm:mb-8 shadow-xs backdrop-blur-md"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
-          <span>[ TALK TO US ]</span>
-        </motion.div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-[11px] font-mono font-medium text-[#4b5565] dark:text-[#a3a9b8] bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.06] dark:border-[#eef0f5]/[0.08] mb-6 sm:mb-8 shadow-xs">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb]" />
+          <span>Talk to us</span>
+        </div>
 
-        {/* Monumental Headline */}
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.08 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.05] mb-8 sm:mb-10 font-sans"
-        >
-          Ready for your<br className="hidden sm:inline" /> next breakthrough?
-        </motion.h2>
+        {/* Headline */}
+        <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-8 font-sans">
+          Ready for your next breakthrough?
+        </h2>
 
         {/* Solid Architectural CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.16 }}
-        >
+        <div>
           <Link
             to="/contact"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 sm:px-11 py-4 sm:py-4.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-slate-950 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 shadow-xl shadow-slate-950/20 dark:shadow-[0_0_35px_rgba(255,255,255,0.2)] transition-all duration-300 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg text-sm font-medium bg-[#111827] text-white hover:bg-black dark:bg-[#eef0f5] dark:text-[#07080d] dark:hover:bg-white shadow-xs transition-colors duration-150 active:scale-[0.98]"
           >
-            <span>Start A Project</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <span>Start a project</span>
+            <ArrowUpRight className="w-4 h-4" />
           </Link>
-        </motion.div>
+        </div>
       </div>
 
       {/* =========================================================================

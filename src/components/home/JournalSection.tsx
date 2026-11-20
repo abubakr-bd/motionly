@@ -1,78 +1,75 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, Clock, BookOpen } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Clock } from "lucide-react";
 import { STATIC_BLOGS } from "../../lib/staticBlogs";
 
 export const JournalSection: React.FC = () => {
-  // Use 3 top articles from static blogs
   const articles = STATIC_BLOGS.slice(0, 3);
   const primaryArticle = articles[0];
   const secondaryArticles = articles.slice(1, 3);
 
   return (
-    <section id="journal" className="py-24 md:py-32 bg-white dark:bg-[#0d121f] border-t border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="journal" 
+      className="py-20 sm:py-28 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.06] dark:border-[#eef0f5]/[0.08] transition-colors duration-200"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-800/40 text-blue-600 dark:text-blue-400 text-xs font-semibold tracking-widest uppercase mb-4">
-              <BookOpen className="w-3.5 h-3.5" />
-              THOUGHTS, IDEAS & PERSPECTIVES
+            <div className="font-mono text-xs text-[#2563eb] mb-3">
+              Thoughts, ideas &amp; perspectives
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-              A Little More About{" "}
-              <span className="font-serif italic font-normal text-blue-600 dark:text-blue-400">
-                the Work We Do.
-              </span>
+
+            <h2 className="text-3xl sm:text-5xl font-medium tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.1] mb-3">
+              A little more about the work we do
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              Exploring motion design, video marketing, creative production, storytelling, and the ideas shaping modern digital communication.
+
+            <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed">
+              Exploring motion design, video marketing, creative production, storytelling, and the ideas shaping modern digital communication
             </p>
           </div>
 
           <div className="hidden sm:block">
             <Link
               to="/blog"
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="inline-flex items-center gap-1.5 h-10 px-4 rounded-lg bg-[#ffffff] dark:bg-[#11141c] hover:bg-[#eceff4] dark:hover:bg-[#1a1e28] text-[#111827] dark:text-[#eef0f5] text-xs font-medium border border-black/[0.08] dark:border-[#eef0f5]/[0.08] transition-colors duration-150 active:scale-[0.98]"
             >
-              <span>Explore the Journal</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <span>Explore journal</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#6b7487] dark:text-[#7a8296]" />
             </Link>
           </div>
         </div>
 
-        {/* Editorial Articles Grid (Asymmetric 7:5 layout) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        {/* Editorial Articles Grid (7:5 Split) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Featured Primary Article (7 Cols) */}
           {primaryArticle && (
             <div className="lg:col-span-7 flex">
               <Link
                 to={`/blog/${primaryArticle.id}`}
-                className="group relative flex flex-col justify-between w-full rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-800/90 bg-slate-50 dark:bg-slate-900/50 hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5"
+                className="group flex flex-col justify-between w-full rounded-2xl overflow-hidden border border-black/[0.08] dark:border-[#eef0f5]/[0.08] bg-[#ffffff] dark:bg-[#11141c] shadow-xs"
               >
-                {/* Image Container with subtle zoom on hover */}
-                <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-slate-900">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#07080d]">
                   <img
                     src={primaryArticle.imageUrl}
                     alt={primaryArticle.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                  <div className="absolute top-4 left-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white backdrop-blur shadow-sm">
+                  <div className="absolute top-3 left-3">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono bg-[#07080d]/80 text-[#eef0f5] backdrop-blur-sm border border-white/[0.08]">
                       {primaryArticle.category}
                     </span>
                   </div>
-                  <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 backdrop-blur shadow-sm">
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-lg bg-[#07080d]/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-150 border border-white/[0.08]">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
 
-                {/* Article Body */}
-                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mb-3">
+                    <div className="flex items-center gap-2 text-xs font-mono text-[#6b7487] dark:text-[#7a8296] mb-2.5">
                       <span>{primaryArticle.date}</span>
                       <span>•</span>
                       <span className="inline-flex items-center gap-1">
@@ -80,19 +77,18 @@ export const JournalSection: React.FC = () => {
                         5 min read
                       </span>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+                    <h3 className="text-xl sm:text-2xl font-medium text-[#111827] dark:text-[#eef0f5] group-hover:text-[#2563eb] dark:group-hover:text-[#60a5fa] transition-colors leading-snug">
                       {primaryArticle.title}
                     </h3>
-                    <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                    <p className="mt-2.5 text-sm text-[#4b5565] dark:text-[#a3a9b8] line-clamp-3 leading-relaxed">
                       {primaryArticle.summary}
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 group-hover:underline">
-                      Read Complete Article
+                  <div className="mt-5 pt-4 border-t border-black/[0.06] dark:border-[#eef0f5]/[0.08] flex items-center justify-between">
+                    <span className="text-xs font-medium text-[#2563eb] dark:text-[#60a5fa]">
+                      Read article &rarr;
                     </span>
-                    <ArrowRight className="w-4 h-4 text-blue-600 dark:text-blue-400 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
@@ -100,88 +96,70 @@ export const JournalSection: React.FC = () => {
           )}
 
           {/* Secondary Articles (5 Cols - Stacked) */}
-          <div className="lg:col-span-5 flex flex-col gap-6 justify-between">
-            {secondaryArticles.map((article, idx) => (
+          <div className="lg:col-span-5 flex flex-col gap-4 justify-between">
+            {secondaryArticles.map((article) => (
               <Link
                 key={article.id}
                 to={`/blog/${article.id}`}
-                className="group relative flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-5 p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-slate-50 dark:bg-slate-900/50 hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5 flex-1"
+                className="group flex flex-col sm:flex-row gap-4 p-5 rounded-2xl border border-black/[0.08] dark:border-[#eef0f5]/[0.08] bg-[#ffffff] dark:bg-[#11141c] shadow-xs flex-1"
               >
-                {/* Thumbnail */}
-                <div className="relative w-full sm:w-44 lg:w-full xl:w-44 aspect-[16/10] sm:aspect-square lg:aspect-[16/10] xl:aspect-square shrink-0 rounded-xl overflow-hidden bg-slate-900">
+                <div className="relative w-full sm:w-36 aspect-[16/10] sm:aspect-square shrink-0 rounded-xl overflow-hidden bg-[#07080d]">
                   <img
                     src={article.imageUrl}
                     alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute top-3 left-3 sm:hidden xl:hidden">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white backdrop-blur shadow-sm">
-                      {article.category}
-                    </span>
-                  </div>
                 </div>
 
-                {/* Content */}
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-2">
-                      <span className="hidden sm:inline xl:inline font-semibold text-blue-600 dark:text-blue-400">
-                        {article.category}
-                      </span>
-                      <span className="hidden sm:inline xl:inline">•</span>
+                    <div className="flex items-center gap-2 text-xs font-mono text-[#6b7487] dark:text-[#7a8296] mb-1.5">
+                      <span className="text-[#2563eb]">{article.category}</span>
+                      <span>•</span>
                       <span>{article.date}</span>
                     </div>
-                    <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug line-clamp-2">
+                    <h4 className="text-sm sm:text-base font-medium text-[#111827] dark:text-[#eef0f5] group-hover:text-[#2563eb] dark:group-hover:text-[#60a5fa] transition-colors leading-snug line-clamp-2">
                       {article.title}
                     </h4>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                    <p className="mt-1.5 text-xs text-[#4b5565] dark:text-[#a3a9b8] line-clamp-2 leading-relaxed">
                       {article.summary}
                     </p>
                   </div>
 
-                  <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    <span>Read Article</span>
-                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                  <div className="mt-3 flex items-center gap-1 text-xs font-medium text-[#2563eb] dark:text-[#60a5fa]">
+                    <span>Read article</span>
+                    <ArrowRight className="w-3 h-3" />
                   </div>
                 </div>
               </Link>
             ))}
 
-            {/* Newsletter / RSS subtle insight callout */}
-            <div className="p-5 rounded-2xl border border-blue-100 dark:border-blue-900/40 bg-gradient-to-br from-blue-50/50 via-white to-slate-50 dark:from-blue-950/20 dark:via-slate-900/40 dark:to-slate-900/60">
+            {/* Studio Note */}
+            <div className="p-5 rounded-2xl border border-black/[0.08] dark:border-[#eef0f5]/[0.08] bg-[#eceff4] dark:bg-[#1a1e28]">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                    Studio Insights
+                  <p className="text-xs font-mono text-[#2563eb] mb-1">
+                    Studio teardowns
                   </p>
-                  <p className="text-sm text-slate-700 dark:text-slate-300 mt-1 font-medium">
-                    We share deep teardowns on SaaS video hooks, motion pacing, and founder storytelling regularly.
+                  <p className="text-xs text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed">
+                    We regularly publish deep teardowns on SaaS video retention hooks, motion pacing, and founder storytelling.
                   </p>
                 </div>
                 <Link
                   to="/blog"
-                  className="shrink-0 p-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500 transition-colors"
+                  className="shrink-0 p-2 rounded-lg bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.06] dark:border-[#eef0f5]/[0.08] text-[#111827] dark:text-[#eef0f5] hover:text-[#2563eb] transition-colors"
                   aria-label="View all posts"
                 >
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Mobile View All CTA */}
-        <div className="mt-10 text-center sm:hidden">
-          <Link
-            to="/blog"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 w-full"
-          >
-            <span>Explore All Journal Entries</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
       </div>
     </section>
   );
 };
+
+export default JournalSection;
