@@ -5,59 +5,68 @@ import { ArrowUpRight, ArrowUp, Globe, Sparkles, Star, MapPin } from "lucide-rea
 
 interface LocationCard {
   country: string;
+  code: string;
   address: string;
   city: string;
-  flag: string;
+  hub: string;
 }
 
 const GLOBAL_OFFICES: LocationCard[] = [
   {
     country: "United States",
-    address: "16 Cove Road",
-    city: "Mount Arlington, NJ 07856",
-    flag: "🇺🇸",
-  },
-  {
-    country: "Australia",
-    address: "155 Bennett Rd",
-    city: "St Clair NSW 2759",
-    flag: "🇦🇺",
+    code: "US",
+    address: "432 Park Ave S, Nomad",
+    city: "New York, NY 10016",
+    hub: "US Client Direction",
   },
   {
     country: "United Kingdom",
-    address: "20 Farringdon Road",
-    city: "London EC1M 3HE",
-    flag: "🇬🇧",
-  },
-  {
-    country: "Singapore",
-    address: "6 Raffles Blvd",
-    city: "Marina Square, 039594",
-    flag: "🇸🇬",
+    code: "UK",
+    address: "14 Soho Square",
+    city: "Soho, London W1D 3QG",
+    hub: "European Production",
   },
   {
     country: "Canada",
-    address: "100 King St W",
-    city: "Toronto, ON M5X 1A9",
-    flag: "🇨🇦",
+    code: "CA",
+    address: "200 Bay Street, Suite 1200",
+    city: "Toronto, ON M5J 2J2",
+    hub: "North America Sprints",
   },
   {
-    country: "Dubai, UAE",
-    address: "Al Fattan Downtown",
-    city: "Al Satwa, Dubai",
-    flag: "🇦🇪",
+    country: "Australia",
+    code: "AU",
+    address: "100 Barangaroo Avenue",
+    city: "Sydney, NSW 2000",
+    hub: "APAC Creative Sprints",
   },
   {
-    country: "South Africa",
-    address: "55 Mons Rd, Bellevue",
-    city: "Johannesburg, 2198",
-    flag: "🇿🇦",
+    country: "United Arab Emirates",
+    code: "AE",
+    address: "DIFC Gate Precinct 4",
+    city: "Downtown Dubai, UAE",
+    hub: "Middle East & GCC",
+  },
+  {
+    country: "Singapore",
+    code: "SG",
+    address: "10 Marina Boulevard, MBFC",
+    city: "Marina Bay, Singapore 018983",
+    hub: "Asia-Pacific Hub",
+  },
+  {
+    country: "Germany",
+    code: "DE",
+    address: "Friedrichstraße 68",
+    city: "10117 Berlin, Germany",
+    hub: "EU Tech & SaaS",
   },
   {
     country: "Bangladesh",
+    code: "BD",
     address: "Ventura Iconia, Plot 37 Road 11",
     city: "Banani, Dhaka 1213",
-    flag: "🇧🇩",
+    hub: "Creative Studio HQ",
   },
 ];
 
@@ -75,65 +84,68 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-[#05070d] text-[#eef0f5] overflow-hidden pt-16 sm:pt-24 border-t border-white/[0.08] transition-colors duration-200">
+    <footer className="relative bg-[#04060b] text-[#eef0f5] overflow-hidden pt-16 sm:pt-24 border-t border-white/[0.08] transition-colors duration-200">
       
-      {/* ── 01. Earth Horizon & Global Presence Section (Image 1 Reference) ── */}
+      {/* ── 01. Earth Atmosphere Horizon & Global Production Network ── */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 mb-20 sm:mb-28">
         
         {/* Curved Glowing Space Horizon Background */}
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[140%] max-w-[1400px] h-96 pointer-events-none overflow-hidden opacity-80 select-none">
-          {/* Earth Atmosphere Curve Image */}
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[150%] max-w-[1500px] h-[420px] pointer-events-none overflow-hidden select-none">
+          {/* Curved Earth NASA Imagery with vivid atmosphere rim */}
           <img
             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
             alt="Global Earth Horizon"
-            className="w-full h-full object-cover object-top opacity-50 mix-blend-screen scale-110"
+            className="w-full h-full object-cover object-top opacity-65 mix-blend-screen scale-110"
             loading="lazy"
           />
-          {/* Atmospheric Glow Gradients */}
-          <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#05070d]/60 to-[#05070d]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#05070d]/80 to-[#05070d]" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-28 bg-[#38d9d9]/20 blur-3xl rounded-full" />
+          {/* Atmospheric Radiant Blue Arc */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-36 bg-gradient-to-b from-[#38bdf8]/35 via-[#2563eb]/20 to-transparent blur-3xl rounded-[100%]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#04060b]/70 to-[#04060b]" />
         </div>
 
         {/* Global Presence Header */}
         <div className="relative text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.06] border border-white/10 text-xs font-mono text-[#38d9d9] backdrop-blur-md mb-3">
-            <Globe className="w-3.5 h-3.5 animate-spin [animation-duration:14s]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/25 text-xs font-mono text-[#38bdf8] backdrop-blur-md mb-4 shadow-sm">
+            <Globe className="w-3.5 h-3.5 animate-spin [animation-duration:16s]" />
             <span className="uppercase tracking-wider font-semibold">Global Production Network</span>
           </div>
-          <h3 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-2">
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3">
             Producing for Ambitious Teams Worldwide
           </h3>
-          <p className="text-xs sm:text-sm text-[#8a8f9e]">
-            Seamless international sprint turnarounds across US, UK, Europe, Australia, and Asia timezones.
+          <p className="text-sm sm:text-base text-[#94a3b8] max-w-xl mx-auto leading-relaxed font-normal">
+            Seamless sprint turnarounds and dedicated video directors across US, UK, Europe, Australia, and Asia timezones.
           </p>
         </div>
 
-        {/* Global Offices 8-Card Grid (Exact Reference from Design Monks Footer) */}
+        {/* Global Offices 8-Card Grid (Refined with Studio Hubs) */}
         <div className="relative grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {GLOBAL_OFFICES.map((office) => (
             <div
               key={office.country}
-              className="group p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.08] hover:border-[#38d9d9]/40 backdrop-blur-md transition-all duration-200 flex flex-col justify-between hover:-translate-y-0.5"
+              className="group p-4 sm:p-5 rounded-2xl bg-[#09111e]/85 hover:bg-[#0e1b2f] border border-[#1e2e46] hover:border-[#38bdf8]/60 backdrop-blur-md transition-all duration-200 flex flex-col justify-between hover:-translate-y-0.5 shadow-md hover:shadow-xl hover:shadow-[#0284c7]/10"
             >
               <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xs sm:text-sm font-bold text-white group-hover:text-[#38d9d9] transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs sm:text-sm font-bold text-white group-hover:text-[#38bdf8] transition-colors tracking-tight">
                     {office.country}
                   </span>
-                  <span className="text-sm">{office.flag}</span>
+                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-white/[0.08] text-[#94a3b8] group-hover:bg-[#38bdf8]/15 group-hover:text-[#38bdf8] transition-colors border border-white/5">
+                    {office.code}
+                  </span>
                 </div>
-                <p className="text-[11px] text-[#8a8f9e] leading-snug line-clamp-1">
+                <p className="text-xs text-[#cbd5e1] font-medium leading-snug">
                   {office.address}
                 </p>
-                <p className="text-[10px] text-[#636875] font-mono leading-snug">
+                <p className="text-[11px] text-[#7888a2] font-mono mt-0.5 leading-snug">
                   {office.city}
                 </p>
               </div>
 
-              <div className="mt-2.5 pt-2 border-t border-white/[0.05] flex items-center justify-between text-[10px] text-[#38d9d9] opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>Active Hub</span>
-                <MapPin className="w-3 h-3" />
+              <div className="mt-3 pt-2.5 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#38bdf8]">
+                <span className="opacity-80 group-hover:opacity-100 transition-opacity">
+                  {office.hub}
+                </span>
+                <MapPin className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
           ))}
@@ -150,7 +162,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
               Important Links
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#8a8f9e]">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
                 <Link to="/#booking" className="hover:text-white transition-colors">
                   Contact Us
@@ -194,7 +206,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
               Services
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#8a8f9e]">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
                 <Link to="/services" className="hover:text-white transition-colors">
                   Motion Graphics &amp; 3D
@@ -238,7 +250,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
               Specialized Industry
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#8a8f9e]">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
                 <Link to="/portfolio" className="hover:text-white transition-colors">
                   SaaS &amp; Tech Platforms
@@ -281,7 +293,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
               Compare
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#8a8f9e]">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
                 <a
                   href="/#comparison"
@@ -300,7 +312,7 @@ export const Footer: React.FC = () => {
                   Vs In-House Production
                 </a>
               </li>
-              <li className="pt-2 text-xs font-mono text-[#636875]">
+              <li className="pt-2 text-xs font-mono text-[#64748b] leading-relaxed">
                 Direct founder oversight on all client deliverables.
               </li>
             </ul>
@@ -312,7 +324,7 @@ export const Footer: React.FC = () => {
               Explore AI Summary
             </h4>
             
-            {/* AI Tools Icons Strip (Design Monks Style) */}
+            {/* AI Tools Icons Strip */}
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="Perplexity Ready">
                 <Sparkles className="w-4 h-4 text-cyan-400" />
@@ -339,20 +351,20 @@ export const Footer: React.FC = () => {
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
               <span>Search Motionly</span>
-              <ArrowUpRight className="w-3 h-3 text-[#8a8f9e] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-3 h-3 text-[#94a3b8] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
-            <div className="mt-4 text-[11px] text-[#636875] space-y-1">
-              <div>Email: <a href={`mailto:${email}`} className="text-[#a3a9b8] hover:text-[#38d9d9]">{email}</a></div>
-              <div>WhatsApp: <a href="https://wa.me/8801605049299" target="_blank" rel="noreferrer" className="text-[#a3a9b8] hover:text-[#38d9d9]">{whatsapp}</a></div>
+            <div className="mt-4 text-[11px] text-[#718096] space-y-1">
+              <div>Email: <a href={`mailto:${email}`} className="text-[#94a3b8] hover:text-[#38d9d9]">{email}</a></div>
+              <div>WhatsApp: <a href="https://wa.me/8801605049299" target="_blank" rel="noreferrer" className="text-[#94a3b8] hover:text-[#38d9d9]">{whatsapp}</a></div>
             </div>
           </div>
 
         </div>
       </div>
 
-      {/* ── 03. Copyright & Legal Strip (Image 2 Reference) ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#7a8296] relative z-10">
+      {/* ── 03. Copyright & Legal Strip ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#8a99ad] relative z-20">
         <div className="flex items-center gap-6">
           <Link to="/terms" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
           <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
@@ -367,30 +379,34 @@ export const Footer: React.FC = () => {
         <button
           type="button"
           onClick={scrollToTop}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white text-xs font-medium border border-white/10 transition-all active:scale-95 cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.15] text-white text-xs font-medium border border-white/15 transition-all active:scale-95 cursor-pointer"
         >
           <ArrowUp className="w-3.5 h-3.5" />
           <span>Back to Top</span>
         </button>
       </div>
 
-      {/* ── 04. Giant Typographic Watermark "motionly" with Animated Aurora Wave (Image 2 Reference) ── */}
-      <div className="relative w-full overflow-hidden select-none pointer-events-none mt-2 sm:mt-4">
-        {/* Massive Brand Name Heading */}
+      {/* ── 04. Giant Crystal-Clear Typographic Watermark "motionly" with Emerald/Cyan Aurora (Matching Design Monks) ── */}
+      <div className="relative w-full overflow-hidden select-none pointer-events-none pt-4 pb-28 sm:pb-36">
+        
+        {/* Crystal-Clear Lowercase Typographic Name (High contrast, clearly legible) */}
         <div className="relative text-center leading-none">
           <span 
-            className="block text-[19vw] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/[0.14] via-white/[0.04] to-transparent uppercase font-sans"
-            style={{ letterSpacing: "-0.04em", transform: "translateY(12%)" }}
+            className="block text-[18vw] font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-[#e2e8f0] to-[#64748b] font-sans opacity-85"
+            style={{ 
+              letterSpacing: "-0.05em",
+              textShadow: "0 0 60px rgba(56, 189, 248, 0.15)",
+            }}
           >
             motionly
           </span>
         </div>
 
-        {/* Emerald / Cyan Glowing Aurora Waves Layer */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-48 bg-gradient-to-t from-[#10b981]/20 via-[#38d9d9]/10 to-transparent blur-2xl opacity-60" />
+        {/* Horizontal Frosted Glass / Aurora Wave Beam cutting across the lower half */}
+        <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 h-16 sm:h-24 bg-gradient-to-r from-transparent via-[#10b981]/25 via-30% via-[#38bdf8]/30 to-transparent blur-2xl opacity-75" />
         
-        {/* Grounding Horizon Line */}
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#38d9d9]/40 to-transparent" />
+        {/* Crisp Laser Reflection Horizon Line */}
+        <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#34d399]/70 via-50% via-[#38bdf8]/70 to-transparent opacity-80" />
       </div>
 
     </footer>
