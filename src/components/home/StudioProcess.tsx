@@ -1,227 +1,215 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Compass, Sparkles, CheckCircle2, ArrowRight, Layers, Film, Send } from "lucide-react";
+import { Compass, Palette, Video, Sliders, CheckCircle2, ArrowRight } from "lucide-react";
+
+interface ProcessStep {
+  number: string;
+  title: string;
+  eyebrow: string;
+  description: string;
+  deliverables: string[];
+  visualImage: string;
+  visualLabel: string;
+}
+
+const PROCESS_STEPS: ProcessStep[] = [
+  {
+    number: "01",
+    title: "Strategy",
+    eyebrow: "Phase 1 &bull; Discovery &amp; Positioning",
+    description: "Every successful video begins with understanding. We audit your audience, existing content, competitor landscape, and core business objective to establish what to say, why it matters, and who needs to hear it.",
+    deliverables: [
+      "Audience persona & conversion intent analysis",
+      "Core narrative positioning & messaging angles",
+      "Cold opening hooks & retention benchmark plan"
+    ],
+    visualImage: "https://img.youtube.com/vi/KDK1jHJXPrk/maxresdefault.jpg",
+    visualLabel: "Strategic Brief &amp; Concept Roadmap"
+  },
+  {
+    number: "02",
+    title: "Creative Direction",
+    eyebrow: "Phase 2 &bull; Visual Tone &amp; Pacing",
+    description: "We translate strategy into tangible visual style. We craft video scripts, storyboard visual beats, design style frames, and choose typography, color palettes, and audio directions before production begins.",
+    deliverables: [
+      "Full script writing & dialogue pacing",
+      "Visual moodboards & style frames",
+      "Kinetic typography guidelines & art direction"
+    ],
+    visualImage: "https://img.youtube.com/vi/xA_msiryNvQ/maxresdefault.jpg",
+    visualLabel: "Storyboard &amp; Style Architecture"
+  },
+  {
+    number: "03",
+    title: "Production",
+    eyebrow: "Phase 3 &bull; Asset &amp; Footage Capture",
+    description: "Whether capturing clean 60fps software UI, recording executive voiceovers, or deploying multi-cam studio cinematography, we gather the high-fidelity raw ingredients needed for exceptional video.",
+    deliverables: [
+      "High-resolution UI screen motion captures",
+      "Studio voiceover & sound recordings",
+      "Cinematography & lighting packages (when required)"
+    ],
+    visualImage: "https://img.youtube.com/vi/0NHfOpolrjs/maxresdefault.jpg",
+    visualLabel: "High-Fidelity Footage Capture"
+  },
+  {
+    number: "04",
+    title: "Post-production",
+    eyebrow: "Phase 4 &bull; Assembly, Motion &amp; Finishing",
+    description: "Where raw footage turns into art. We sculpt the edit for maximum audience retention, integrate 2D/3D motion graphics, master the audio with custom sound design, and color grade in DaVinci Resolve.",
+    deliverables: [
+      "High-retention rhythmic timeline editing",
+      "2D/3D kinetic animation & UI motion",
+      "DaVinci Resolve color grading & spatial sound mix"
+    ],
+    visualImage: "https://img.youtube.com/vi/pIEkY7YDIF0/maxresdefault.jpg",
+    visualLabel: "Precision Timeline &amp; Sound Mix"
+  },
+  {
+    number: "05",
+    title: "Delivery",
+    eyebrow: "Phase 5 &bull; Refinement &amp; Masters",
+    description: "We invite your team into Frame.io for timestamped, precise feedback. Once approved, we export master files tailored for every platform, complete with thumbnails, subtitles, and launch assets.",
+    deliverables: [
+      "Frame.io timestamped collaborative review cycles",
+      "Platform-optimized master exports (16:9, 9:16, 1:1)",
+      "Full source files & commercial IP rights handover"
+    ],
+    visualImage: "https://img.youtube.com/vi/xygb6y5L9x8/maxresdefault.jpg",
+    visualLabel: "Multi-Platform Master Deliverables"
+  }
+];
 
 export const StudioProcess: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
-
-  const approachCards = [
-    {
-      number: "01",
-      eyebrow: "STRATEGIC DIRECTION",
-      title: "Understand Before We Create",
-      description: "We start by understanding your brand, audience, goals, and message. Every creative decision begins with a clear direction.",
-      icon: Compass,
-      deliverable: "Strategic brief, narrative hooks & audience retention audit"
-    },
-    {
-      number: "02",
-      eyebrow: "CREATIVE EXECUTION",
-      title: "Turn Ideas Into Visuals",
-      description: "From storytelling and high-retention editing to advanced 2D/3D motion graphics, we transform ideas into compelling visual experiences.",
-      icon: Film,
-      deliverable: "4K cinematography, kinetic typography & 3D photorealistic CGI"
-    },
-    {
-      number: "03",
-      eyebrow: "DELIVERY & GROWTH",
-      title: "Create. Refine. Deliver.",
-      description: "We refine every detail, maintain creative consistency, and deliver content ready for your website, social platforms, campaigns, and launches.",
-      icon: Send,
-      deliverable: "Multi-aspect exports (16:9, 9:16, 1:1), ProRes master & launch assets"
-    }
-  ];
-
-  const frameworkSteps = [
-    {
-      step: "01",
-      name: "DISCOVER",
-      phase: "Phase 1: Foundation",
-      description: "Understand the audience, define the objective, and establish the creative direction.",
-      details: [
-        "Audit existing retention drop-offs and competitor videos",
-        "Formulate core narrative message and cold opening hooks",
-        "Align on visual style, references, and timeline milestones"
-      ]
-    },
-    {
-      step: "02",
-      name: "CREATE",
-      phase: "Phase 2: Execution",
-      description: "Develop the story, produce the visuals, and bring everything together through thoughtful creative execution.",
-      details: [
-        "Craft script pacing and kinetic motion storyboards",
-        "High-retention editing, DaVinci Resolve color suites & sound design",
-        "Advanced 2D UI animations and Cinema 4D / Blender 3D disassemblies"
-      ]
-    },
-    {
-      step: "03",
-      name: "DELIVER",
-      phase: "Phase 3: Impact",
-      description: "Refine, finalize, and deliver content ready to make an impact across your chosen platforms.",
-      details: [
-        "Collaborative Frame.io review cycles with rapid turnarounds",
-        "Master exports formatted for web, ads, YouTube, and short-form feeds",
-        "Full source project files and IP ownership handover"
-      ]
-    }
-  ];
+  const current = PROCESS_STEPS[activeStep];
 
   return (
     <section 
       id="process" 
-      className="py-24 sm:py-32 bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.08] dark:border-white/[0.08] transition-colors duration-200 relative overflow-hidden"
+      className="py-24 sm:py-32 bg-[#f8f9fa] dark:bg-[#090b11] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.08] dark:border-white/[0.08] transition-colors duration-200"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        
-        {/* =========================================================================
-            PART 1: THE MOTIONLY APPROACH (User Section 6 Copy)
-        ========================================================================= */}
-        <div className="max-w-3xl mb-14 sm:mb-18">
-          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
-            <span>How we work</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
-            The Motionly approach
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="max-w-2xl mb-14 sm:mb-18">
+          <span className="text-xs font-mono uppercase tracking-widest text-[#315EFA] block mb-3">
+            How We Work
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
+            A structured workflow designed for clarity.
           </h2>
-
-          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] font-normal leading-relaxed">
-            Strategy, creativity, and execution come together to create videos that make a difference.
+          <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed font-normal">
+            A five-step collaborative process that keeps production predictable, transparent, and focused on creative excellence.
           </p>
         </div>
 
-        {/* 3 Approach Cards with Interactive Hover Spring Lift */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-24">
-          {approachCards.map((card, index) => {
-            const Icon = card.icon;
-            return (
-              <motion.div
-                key={card.number}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6 }}
-                className="p-8 rounded-3xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] hover:border-[#2563EB]/40 dark:hover:border-[#38BDF8]/40 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs font-bold text-[#2563EB] dark:text-[#38BDF8] bg-black/[0.03] dark:bg-white/[0.05] px-2.5 py-1 rounded-lg border border-black/[0.06] dark:border-white/[0.08]">
-                      {card.number}
-                    </span>
-                    <div className="w-10 h-10 rounded-xl bg-[#2563EB]/10 dark:bg-[#38BDF8]/10 text-[#2563EB] dark:text-[#38BDF8] flex items-center justify-center">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <span className="font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] block mb-2 font-semibold">
-                    {card.eyebrow}
-                  </span>
-
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight">
-                    {card.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal mb-6">
-                    {card.description}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-black/[0.06] dark:border-white/[0.08] text-xs font-mono text-slate-500 dark:text-slate-400">
-                  <span className="block text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 mb-0.5">Focus Outcome:</span>
-                  <span className="text-slate-800 dark:text-slate-200">{card.deliverable}</span>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* =========================================================================
-            PART 2: OUR CREATIVE FRAMEWORK (User Section 8 Copy)
-        ========================================================================= */}
-        <div className="p-8 sm:p-12 lg:p-16 rounded-3xl bg-[#ffffff] dark:bg-[#11141c] border border-black/[0.08] dark:border-white/[0.08] shadow-sm">
-          <div className="max-w-3xl mb-12">
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#2563eb] dark:text-[#38bdf8] mb-3">
-              <span>Our creative framework</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
-              From idea to impact
-            </h2>
-
-            <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] font-normal leading-relaxed">
-              A clear creative process designed to take your vision from concept to final delivery.
-            </p>
-          </div>
-
-          {/* Step Selector Tabs with layoutId Sliding Indicator */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            {frameworkSteps.map((stepItem, idx) => {
-              const isSelected = activeStep === idx;
+        {/* Horizontal Process Stepper */}
+        <div className="mb-10 sm:mb-14 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-max border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
+            {PROCESS_STEPS.map((step, idx) => {
+              const isActive = activeStep === idx;
               return (
                 <button
-                  key={stepItem.step}
+                  key={step.number}
                   type="button"
                   onClick={() => setActiveStep(idx)}
-                  className={`relative p-5 sm:p-6 rounded-2xl text-left transition-all duration-200 cursor-pointer border ${
-                    isSelected
-                      ? "bg-slate-50 dark:bg-white/[0.04] border-[#2563EB] dark:border-[#38BDF8] shadow-sm"
-                      : "bg-transparent hover:bg-black/[0.02] dark:hover:bg-white/[0.02] border-black/[0.06] dark:border-white/[0.06]"
+                  className={`group flex items-center gap-2.5 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? "bg-[#111827] text-white dark:bg-white dark:text-[#07080d] shadow-sm"
+                      : "bg-transparent text-[#4b5565] dark:text-[#a3a9b8] hover:bg-black/[0.04] dark:hover:bg-white/[0.05]"
                   }`}
                 >
-                  {isSelected && (
-                    <motion.div
-                      layoutId="activeFrameworkTab"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      className="absolute inset-0 rounded-2xl border-2 border-[#2563EB] dark:border-[#38BDF8] pointer-events-none"
-                    />
-                  )}
-
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-mono text-xs font-bold text-[#2563EB] dark:text-[#38BDF8]">
-                      STEP {stepItem.step}
-                    </span>
-                    <span className="text-[11px] font-mono text-slate-400">
-                      {stepItem.phase}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                    {stepItem.name}
-                  </h3>
+                  <span className={`font-mono text-xs ${isActive ? "text-[#315EFA] dark:text-[#315EFA]" : "text-[#9ca3af]"}`}>
+                    {step.number}
+                  </span>
+                  <span>{step.title}</span>
                 </button>
               );
             })}
           </div>
+        </div>
 
-          {/* Active Step Interactive Showcase Container */}
+        {/* Interactive Detail Stage Display */}
+        <div className="rounded-2xl sm:rounded-3xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] p-6 sm:p-10 lg:p-12 shadow-md">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeStep}
-              initial={{ opacity: 0, y: 10 }}
+              key={current.number}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="p-6 sm:p-8 rounded-2xl bg-black/[0.02] dark:bg-black/30 border border-black/[0.06] dark:border-white/[0.08]"
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              <div className="max-w-3xl">
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#2563EB] dark:text-[#38BDF8] block mb-2">
-                  {frameworkSteps[activeStep].phase} &bull; {frameworkSteps[activeStep].name}
-                </span>
+              {/* Text & Deliverables Column (7 Cols) */}
+              <div className="lg:col-span-7">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-xs font-mono font-bold text-[#315EFA]">
+                    STAGE {current.number} / 05
+                  </span>
+                  <span className="text-black/20 dark:text-white/20">&bull;</span>
+                  <span 
+                    className="text-xs font-mono text-[#6b7487] dark:text-[#7a8296]"
+                    dangerouslySetInnerHTML={{ __html: current.eyebrow }}
+                  />
+                </div>
 
-                <p className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-6 leading-snug">
-                  &ldquo;{frameworkSteps[activeStep].description}&rdquo;
+                <h3 className="text-2xl sm:text-4xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] mb-4">
+                  {current.title}
+                </h3>
+
+                <p className="text-base text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-8 font-normal">
+                  {current.description}
                 </p>
 
-                <div className="space-y-3 pt-2">
-                  {frameworkSteps[activeStep].details.map((detail, i) => (
-                    <div key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
-                      <CheckCircle2 className="w-4 h-4 text-[#2563EB] dark:text-[#38BDF8] shrink-0 mt-0.5" />
-                      <span>{detail}</span>
+                {/* Deliverables Checklist */}
+                <div className="space-y-3 mb-8 pt-4 border-t border-black/[0.08] dark:border-white/[0.08]">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#6b7487] dark:text-[#7a8296] block mb-2">
+                    Key Deliverables &amp; Outcomes:
+                  </span>
+                  {current.deliverables.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#374151] dark:text-[#cbd5e1]">
+                      <CheckCircle2 className="w-4 h-4 text-[#315EFA] shrink-0 mt-0.5" />
+                      <span>{item}</span>
                     </div>
                   ))}
+                </div>
+
+                {/* Step navigation buttons */}
+                <div className="flex items-center gap-3">
+                  {activeStep > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setActiveStep(activeStep - 1)}
+                      className="px-4 py-2 rounded-lg text-xs font-medium border border-black/[0.1] dark:border-white/[0.1] hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-colors cursor-pointer"
+                    >
+                      &larr; Previous Step
+                    </button>
+                  )}
+                  {activeStep < PROCESS_STEPS.length - 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setActiveStep(activeStep + 1)}
+                      className="px-4 py-2 rounded-lg text-xs font-medium bg-[#111827] text-white dark:bg-white dark:text-[#07080d] hover:opacity-90 transition-opacity flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>Next: {PROCESS_STEPS[activeStep + 1].title}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Supporting Visual (5 Cols) */}
+              <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-[4/3] bg-black border border-black/[0.08] dark:border-white/[0.1]">
+                <img
+                  src={current.visualImage}
+                  alt={current.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
+                  <span dangerouslySetInnerHTML={{ __html: current.visualLabel }} />
+                  <span className="text-[#315EFA]">Step {current.number}</span>
                 </div>
               </div>
             </motion.div>

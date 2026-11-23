@@ -3,17 +3,12 @@ import Layout from "../components/layout/Layout";
 import SEO from "../components/layout/SEO";
 import { useSiteSettings } from "../lib/useSiteData";
 
-// Studio Editorial Homepage Components
+// The 6 Art-Directed Editorial Homepage Sections
 import { HeroStudio } from "../components/home/HeroStudio";
 import { SelectedWork } from "../components/home/SelectedWork";
-import { Collaborations } from "../components/home/Collaborations";
 import { CreativeCapabilities } from "../components/home/CreativeCapabilities";
 import { StudioProcess } from "../components/home/StudioProcess";
-import { WhoWeWorkWith } from "../components/home/WhoWeWorkWith";
-import { WhyMotionly } from "../components/home/WhyMotionly";
-import Team from "../components/sections/Team";
-import { JournalSection } from "../components/home/JournalSection";
-import { StudioFAQ } from "../components/home/StudioFAQ";
+import { TrustAndProof } from "../components/home/TrustAndProof";
 import { FinalStudioCTA } from "../components/home/FinalStudioCTA";
 
 const Landing: React.FC = () => {
@@ -24,48 +19,32 @@ const Landing: React.FC = () => {
       <SEO
         title={
           settings.seo.title ||
-          "Motionly — Independent Creative Video & Content Studio"
+          "Motionly — Creative Video & Content Studio"
         }
         description={
           settings.seo.description ||
-          "From SaaS products to personal brands, we turn complex ideas into compelling visual experiences through strategic video production, motion design, and creative storytelling."
+          "Creative videos built to move brands. We help SaaS companies, founders, and ambitious businesses turn complex ideas into compelling visual stories."
         }
         image={settings.seo.image}
       />
 
-      {/* Clean ink neutral background: quiet, deliberate, zero color washes or blobs */}
-      <div className="bg-[#f5f7fa] text-[#111827] dark:bg-[#07080d] dark:text-[#eef0f5] min-h-screen relative transition-colors duration-200">
-        {/* 01 & 04. Hero */}
+      <div className="bg-white text-[#111827] dark:bg-[#07080d] dark:text-[#eef0f5] min-h-screen relative transition-colors duration-200">
+        {/* Section 1 — Hero */}
         <HeroStudio />
 
-        {/* 05. Selected Work Gallery */}
+        {/* Section 2 — Selected Work */}
         <SelectedWork />
 
-        {/* 06. Collaborations */}
-        <Collaborations />
-
-        {/* 07. Creative Capabilities */}
+        {/* Section 3 — Our Capabilities */}
         <CreativeCapabilities />
 
-        {/* 08. Studio Process */}
+        {/* Section 4 — How We Work */}
         <StudioProcess />
 
-        {/* 09. Who We Work With */}
-        <WhoWeWorkWith />
+        {/* Section 5 — Trust & Proof */}
+        <TrustAndProof />
 
-        {/* 10. Why Motionly */}
-        <WhyMotionly />
-
-        {/* 11. The Studio / Team (16:9 Automated Infinite Loop Carousel) */}
-        <Team />
-
-        {/* 12. Journal */}
-        <JournalSection />
-
-        {/* 13. FAQ */}
-        <StudioFAQ />
-
-        {/* 14. Final CTA */}
+        {/* Section 6 — Final CTA */}
         <FinalStudioCTA />
       </div>
     </Layout>
