@@ -23,22 +23,22 @@ export const FinalStudioCTA: React.FC = () => {
 
           {/* Description */}
           <p className="text-base sm:text-lg text-[#a3a9b8] leading-relaxed mb-10 max-w-2xl font-normal">
-            Have a product to launch, a personal brand to build, or a story that needs the right creative direction? Reach out to discuss your project, scope, and timeline.
+            Have an idea, a campaign or a story worth telling? Let&apos;s bring it to life.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center gap-4 mb-12">
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[#315EFA] hover:bg-[#254cd4] text-white text-sm font-medium shadow-sm active:scale-[0.98] transition-all group cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white text-sm font-semibold shadow-lg shadow-[#315EFA]/30 active:scale-[0.97] transition-all duration-150 group cursor-pointer"
             >
               <span>Start a Project</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
 
             <a
               href="mailto:hello@motionly.media"
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] text-white text-sm font-medium border border-white/[0.1] active:scale-[0.98] transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-white text-sm font-medium border border-white/[0.1] active:scale-[0.97] transition-all duration-150 cursor-pointer"
             >
               <Mail className="w-4 h-4 text-[#a3a9b8]" />
               <span>hello@motionly.media</span>

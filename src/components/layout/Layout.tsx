@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "../sections/Footer";
 import MaintenanceBanner from "../MaintenanceBanner";
+import FloatingNavDock from "./FloatingNavDock";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,16 +19,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.95,
+      wheelMultiplier: 1.0,
       touchMultiplier: 1.5,
     });
 
-    // Synchronize Lenis scroll position with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
     const tickerCallback = (time: number) => {
@@ -50,6 +50,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <main className="public-main flex-grow pt-24 bg-transparent">
         {children}
       </main>
+      <FloatingNavDock />
       <Footer />
     </div>
   );

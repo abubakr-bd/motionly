@@ -11,7 +11,7 @@ const navLinks = [
   { name: "Personal Branding", path: "/personal-branding" },
   { name: "About", path: "/about" },
   { name: "Journal", path: "/blog" },
-  { name: "Careers", path: "/careers" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -162,17 +162,17 @@ const Navbar = () => {
               )}
             </button>
 
-            {/* Desktop 'Let's talk' Button */}
+            {/* Desktop 'Start a Project' Button */}
             <div className="hidden sm:flex items-center">
               <Link
                 to="/contact"
-                className={`inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-150 active:scale-[0.98] ${
+                className={`inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-150 active:scale-[0.97] ${
                   isDark
-                    ? "bg-white text-slate-950 hover:bg-cyan-300 shadow-sm"
-                    : "bg-slate-950 text-white hover:bg-blue-600 shadow-sm"
+                    ? "bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm"
+                    : "bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm"
                 }`}
               >
-                <span>Let&apos;s talk</span>
+                <span>Start a Project</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>

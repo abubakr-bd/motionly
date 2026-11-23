@@ -3,12 +3,17 @@ import Layout from "../components/layout/Layout";
 import SEO from "../components/layout/SEO";
 import { useSiteSettings } from "../lib/useSiteData";
 
-// The 6 Art-Directed Editorial Homepage Sections
+// Design Monks Inspired Premium Agency Sections
 import { HeroStudio } from "../components/home/HeroStudio";
+import { ClientMarquee } from "../components/home/ClientMarquee";
 import { SelectedWork } from "../components/home/SelectedWork";
+import { IndustryShowcase } from "../components/home/IndustryShowcase";
+import { WhyMotionly } from "../components/home/WhyMotionly";
 import { CreativeCapabilities } from "../components/home/CreativeCapabilities";
 import { StudioProcess } from "../components/home/StudioProcess";
 import { TrustAndProof } from "../components/home/TrustAndProof";
+import { TeamBehindTheScenes } from "../components/home/TeamBehindTheScenes";
+import { JournalSection } from "../components/home/JournalSection";
 import { FinalStudioCTA } from "../components/home/FinalStudioCTA";
 
 const Landing: React.FC = () => {
@@ -29,22 +34,37 @@ const Landing: React.FC = () => {
       />
 
       <div className="bg-white text-[#111827] dark:bg-[#07080d] dark:text-[#eef0f5] min-h-screen relative transition-colors duration-200">
-        {/* Section 1 — Hero */}
+        {/* Section 04 — Hero Section */}
         <HeroStudio />
 
-        {/* Section 2 — Selected Work */}
+        {/* Section 06 — Trusted by Brands (Infinite Marquee) */}
+        <ClientMarquee />
+
+        {/* Section 05 — Creative Portfolio Showcase */}
         <SelectedWork />
 
-        {/* Section 3 — Our Capabilities */}
+        {/* Section 07 — Industry Showcase (Design Monks Pastel Cards) */}
+        <IndustryShowcase />
+
+        {/* Section 12 — Why Motionly (Comparison Matrix Table) */}
+        <WhyMotionly />
+
+        {/* Section 09 — What We Create (3 Capabilities) */}
         <CreativeCapabilities />
 
-        {/* Section 4 — How We Work */}
+        {/* Section 10 — Our Creative Process */}
         <StudioProcess />
 
-        {/* Section 5 — Trust & Proof */}
+        {/* Section 08 — Client Testimonials Slider */}
         <TrustAndProof />
 
-        {/* Section 6 — Final CTA */}
+        {/* Section 11 — Meet The Team / Behind The Scenes */}
+        <TeamBehindTheScenes />
+
+        {/* Section 12 — Journal / Insights */}
+        <JournalSection />
+
+        {/* Section 13 — Final Conversion CTA */}
         <FinalStudioCTA />
       </div>
     </Layout>
