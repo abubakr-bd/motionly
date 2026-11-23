@@ -1,226 +1,282 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Video, Layers, TrendingUp, CheckCircle2 } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+interface CapabilityService {
+  id: string;
+  number: string;
+  badge: string;
+  title: string;
+  tagline: string;
+  description: string;
+  deliverables: string[];
+  image: string;
+  formatBadge: string;
+  icon: React.ElementType;
+  contactParam: string;
+}
+
+const CAPABILITIES: CapabilityService[] = [
+  {
+    id: "video-production",
+    number: "01",
+    badge: "Core Discipline",
+    title: "Video Production & Editing",
+    tagline: "Cinematic commercial brand films, interview documentaries, and high-retention video stories.",
+    description:
+      "Turn raw recordings, customer interviews, and brand footage into cohesive, high-retention video stories. We handle narrative structure, precision pacing, DaVinci Resolve color grading, custom sound design, and broadcast audio mastering so your content feels cinematic and authoritative.",
+    deliverables: [
+      "Commercial & brand films",
+      "High-retention rhythmic video editing",
+      "Studio & on-location production",
+      "DaVinci Resolve color grading",
+      "Custom sound design & mixing",
+      "Frame.io rapid revision workflow",
+    ],
+    image: "https://img.youtube.com/vi/xygb6y5L9x8/maxresdefault.jpg",
+    formatBadge: "Cinematic 4K Master • ProRes 422HQ",
+    icon: Video,
+    contactParam: "video-production",
+  },
+  {
+    id: "motion-graphics",
+    number: "02",
+    badge: "Design & Motion",
+    title: "Motion Graphics & Animation",
+    tagline: "Kinetic typography, 2D UI motion captures, 3D product breakdowns, and animated explainers.",
+    description:
+      "Make complex software and abstract technical concepts instantly clear. We create kinetic typography, vector-perfect 2D UI animations, 3D product disassemblies, and animated product explainers that communicate what words alone cannot.",
+    deliverables: [
+      "SaaS product explainers & UI animation",
+      "3D product breakdown & visualization",
+      "Kinetic brand typography & lower thirds",
+      "Feature walkthrough micro-animations",
+      "Multi-platform aspect ratios (16:9, 9:16)",
+      "Full source file handover",
+    ],
+    image: "https://img.youtube.com/vi/xA_msiryNvQ/maxresdefault.jpg",
+    formatBadge: "2D/3D Kinetic Motion • 60fps Vector",
+    icon: Layers,
+    contactParam: "motion-graphics",
+  },
+  {
+    id: "video-marketing",
+    number: "03",
+    badge: "Distribution & Growth",
+    title: "Video Marketing & Strategy",
+    tagline: "Full-funnel video content architecture, high-CTR packaging, and social repurposing.",
+    description:
+      "Video without distribution is an expense. We develop content frameworks, optimize video hooks for peak watch time, design high-CTR thumbnails, and repurpose long-form recordings into viral social assets across YouTube, LinkedIn, X, and TikTok.",
+    deliverables: [
+      "Full-funnel video content architecture",
+      "YouTube long-form & channel strategy",
+      "Shorts, Reels & TikTok repurposing engine",
+      "CTR-optimized thumbnail design",
+      "Retention-focused script frameworks",
+      "Multi-platform distribution playbooks",
+    ],
+    image: "https://img.youtube.com/vi/KDK1jHJXPrk/maxresdefault.jpg",
+    formatBadge: "Strategic Content Engine • Growth Pipeline",
+    icon: TrendingUp,
+    contactParam: "video-marketing",
+  },
+];
 
 export const CreativeCapabilities: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeService = CAPABILITIES[activeIndex];
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleLineRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const ctx = gsap.context(() => {
+      if (!prefersReducedMotion && titleLineRef.current) {
+        gsap.fromTo(
+          titleLineRef.current,
+          { yPercent: 110, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section 
+      ref={sectionRef}
       id="capabilities" 
       className="py-24 sm:py-32 bg-white dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.08] dark:border-white/[0.08] transition-colors duration-200"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="max-w-2xl mb-16 sm:mb-20">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#315EFA] block mb-3">
+        <div className="max-w-2xl mb-14 sm:mb-18">
+          <span className="text-xs font-mono uppercase tracking-widest text-[#315EFA] block mb-2.5">
             Core Capabilities
           </span>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-4">
-            Creative execution across every stage of video.
+          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-3">
+            <span className="block overflow-hidden pb-1">
+              <span ref={titleLineRef} className="inline-block will-change-transform">
+                Creative execution across every stage.
+              </span>
+            </span>
           </h2>
           <p className="text-base sm:text-lg text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed font-normal">
-            We focus on three disciplines that together form a complete video engine for ambitious businesses, founders, and products.
+            Three interconnected disciplines that form an end-to-end video engine for ambitious businesses, founders, and products.
           </p>
         </div>
 
-        {/* 3 Asymmetrical Editorial Service Treatments */}
-        <div className="space-y-12 sm:space-y-16">
+        {/* Interactive Split Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* =========================================================================
-              01. VIDEO PRODUCTION & EDITING (Wide Horizontal Editorial Block)
-          ========================================================================= */}
-          <div className="rounded-2xl sm:rounded-3xl bg-[#f8f9fa] dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] overflow-hidden p-6 sm:p-10 lg:p-12 transition-all duration-300">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* Text Information (7 Cols) */}
-              <div className="lg:col-span-7">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-mono font-semibold text-[#315EFA]">01</span>
-                  <span className="text-black/20 dark:text-white/20">&bull;</span>
-                  <span className="text-xs font-mono text-[#6b7487] dark:text-[#7a8296] uppercase tracking-wider">
-                    Core Discipline
-                  </span>
-                </div>
+          {/* LEFT COLUMN: Interactive Service List (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-3.5 sm:gap-4">
+            {CAPABILITIES.map((service, index) => {
+              const isActive = activeIndex === index;
+              const IconComp = service.icon;
 
-                <h3 className="text-2xl sm:text-4xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] mb-4">
-                  Video Production &amp; Editing
-                </h3>
-
-                <p className="text-base text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6 font-normal">
-                  Turn raw recordings, customer interviews, and brand footage into cohesive, high-retention video stories. We handle narrative structure, precision pacing, color grading, sound design, and broadcast audio mastering so your content feels cinematic and authoritative.
-                </p>
-
-                {/* Deliverables Checklist */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                  {[
-                    "Commercial & brand films",
-                    "High-retention video editing",
-                    "Studio & on-location production",
-                    "DaVinci Resolve color grading",
-                    "Custom sound design & mixing",
-                    "Frame.io rapid revision workflow"
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-[#374151] dark:text-[#cbd5e1]">
-                      <CheckCircle2 className="w-4 h-4 text-[#315EFA] shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#315EFA] hover:text-[#254cd4] transition-colors group"
+              return (
+                <button
+                  key={service.id}
+                  type="button"
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() => setActiveIndex(index)}
+                  className={`text-left p-5 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all duration-300 cursor-pointer relative overflow-hidden group ${
+                    isActive
+                      ? "bg-[#f8f9fa] dark:bg-[#0c101d] border-[#315EFA]/50 shadow-md scale-[1.01]"
+                      : "bg-transparent hover:bg-black/[0.02] dark:hover:bg-white/[0.02] border-black/[0.08] dark:border-white/[0.08] opacity-80 hover:opacity-100"
+                  }`}
+                  aria-pressed={isActive}
                 >
-                  <span>Discuss a Production Project</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              </div>
+                  {/* Active Indicator Accent Bar */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-capability-pill"
+                      className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#315EFA]"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
 
-              {/* Graphic/Visual Showcase (5 Cols) */}
-              <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-[4/3] bg-black border border-black/[0.08] dark:border-white/[0.1] shadow-md">
-                <img
-                  src="https://img.youtube.com/vi/xygb6y5L9x8/maxresdefault.jpg"
-                  alt="Video production and editing showcase"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
-                  <div className="flex items-center gap-2">
-                    <Video className="w-4 h-4 text-[#315EFA]" />
-                    <span>Cinematic 4K Master</span>
+                  <div className="flex items-center justify-between mb-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <span className={`font-mono text-xs font-semibold ${isActive ? "text-[#315EFA]" : "text-[#6b7487] dark:text-[#7a8296]"}`}>
+                        {service.number}
+                      </span>
+                      <span className="text-black/20 dark:text-white/20">&bull;</span>
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#6b7487] dark:text-[#7a8296]">
+                        {service.badge}
+                      </span>
+                    </div>
+
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
+                      isActive 
+                        ? "bg-[#315EFA] text-white" 
+                        : "bg-black/[0.04] dark:bg-white/[0.05] text-[#6b7487] dark:text-[#7a8296] group-hover:text-[#111827] dark:group-hover:text-[#eef0f5]"
+                    }`}>
+                      <IconComp className="w-4 h-4" />
+                    </div>
                   </div>
-                  <span className="text-slate-300">ProRes 422HQ</span>
-                </div>
-              </div>
-            </div>
+
+                  <h3 className={`text-xl sm:text-2xl font-semibold tracking-tight transition-colors mb-2 ${
+                    isActive ? "text-[#111827] dark:text-[#eef0f5]" : "text-[#4b5565] dark:text-[#a3a9b8]"
+                  }`}>
+                    {service.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed line-clamp-2">
+                    {service.tagline}
+                  </p>
+                </button>
+              );
+            })}
           </div>
 
-          {/* =========================================================================
-              02 & 03. TWO-COLUMN SPLIT (Motion Graphics + Video Marketing)
-          ========================================================================= */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
-            
-            {/* 02. MOTION GRAPHICS & ANIMATION */}
-            <div className="rounded-2xl sm:rounded-3xl bg-[#f8f9fa] dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] p-6 sm:p-10 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-mono font-semibold text-[#315EFA]">02</span>
-                  <span className="text-black/20 dark:text-white/20">&bull;</span>
-                  <span className="text-xs font-mono text-[#6b7487] dark:text-[#7a8296] uppercase tracking-wider">
-                    Design &amp; Motion
-                  </span>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] mb-3">
-                  Motion Graphics &amp; Animation
-                </h3>
-
-                <p className="text-sm sm:text-base text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6 font-normal">
-                  Make complex software and abstract concepts instantly clear. We create kinetic typography, 2D UI motion captures, 3D product disassemblies, and animated explainers that communicate what words alone cannot.
-                </p>
-
-                {/* Visual Thumbnail */}
-                <div className="relative rounded-xl overflow-hidden aspect-[16/9] bg-black mb-6 border border-black/[0.08] dark:border-white/[0.08]">
-                  <img
-                    src="https://img.youtube.com/vi/xA_msiryNvQ/maxresdefault.jpg"
-                    alt="Motion Graphics and UI Animation"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 text-white text-xs font-mono flex items-center gap-2">
-                    <Layers className="w-3.5 h-3.5 text-[#315EFA]" />
-                    <span>2D/3D Kinetic Animation</span>
-                  </div>
-                </div>
-
-                {/* Deliverables */}
-                <ul className="space-y-2 mb-6 text-xs sm:text-sm text-[#374151] dark:text-[#cbd5e1]">
-                  {[
-                    "SaaS product explainers & UI animation",
-                    "3D product breakdown & visualization",
-                    "Kinetic typography sequences",
-                    "Brand idents & animated logos"
-                  ].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#315EFA]" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-4 border-t border-black/[0.08] dark:border-white/[0.08]">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#315EFA] hover:text-[#254cd4] transition-colors group"
+          {/* RIGHT COLUMN: Large Dynamic Visual Preview Card (7 cols, sticky) */}
+          <div className="lg:col-span-7 lg:sticky lg:top-28">
+            <div className="rounded-2xl sm:rounded-3xl bg-[#f8f9fa] dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] overflow-hidden shadow-lg p-6 sm:p-8 flex flex-col justify-between min-h-[480px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeService.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col justify-between h-full"
                 >
-                  <span>Explore Motion Graphics</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              </div>
-            </div>
+                  <div>
+                    {/* Visual Showcase Thumbnail */}
+                    <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video bg-black mb-6 border border-black/[0.08] dark:border-white/[0.1] shadow-inner group">
+                      <img
+                        src={activeService.image}
+                        alt={activeService.title}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      
+                      <div className="absolute bottom-3.5 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
+                        <span className="font-medium text-slate-200">{activeService.formatBadge}</span>
+                        <span className="text-[#315EFA] font-bold">4K Cinema Ready</span>
+                      </div>
+                    </div>
 
-            {/* 03. VIDEO MARKETING & STRATEGY */}
-            <div className="rounded-2xl sm:rounded-3xl bg-[#f8f9fa] dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] p-6 sm:p-10 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-mono font-semibold text-[#315EFA]">03</span>
-                  <span className="text-black/20 dark:text-white/20">&bull;</span>
-                  <span className="text-xs font-mono text-[#6b7487] dark:text-[#7a8296] uppercase tracking-wider">
-                    Strategy &amp; Growth
-                  </span>
-                </div>
+                    {/* Service Detailed Overview */}
+                    <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] mb-3">
+                      {activeService.title}
+                    </h4>
+                    <p className="text-sm sm:text-base text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6 font-normal">
+                      {activeService.description}
+                    </p>
 
-                <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] mb-3">
-                  Video Marketing &amp; Strategy
-                </h3>
-
-                <p className="text-sm sm:text-base text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6 font-normal">
-                  Great creative only moves the needle if it reaches and holds the right audience. We engineer cold opening hooks, audience retention pacing, multi-aspect ratio cutdowns, and distribution frameworks across YouTube, LinkedIn, and short-form channels.
-                </p>
-
-                {/* Visual Thumbnail */}
-                <div className="relative rounded-xl overflow-hidden aspect-[16/9] bg-black mb-6 border border-black/[0.08] dark:border-white/[0.08]">
-                  <img
-                    src="https://img.youtube.com/vi/0NHfOpolrjs/maxresdefault.jpg"
-                    alt="Video Marketing and Strategic Storytelling"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 text-white text-xs font-mono flex items-center gap-2">
-                    <TrendingUp className="w-3.5 h-3.5 text-[#315EFA]" />
-                    <span>Audience Retention &amp; Conversion</span>
+                    {/* Deliverables Checklist Tags */}
+                    <div className="mb-6">
+                      <span className="text-xs font-mono uppercase tracking-wider text-[#6b7487] dark:text-[#7a8296] block mb-3">
+                        Key Deliverables &amp; Formats
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        {activeService.deliverables.map((item, idx) => (
+                          <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-[#374151] dark:text-[#cbd5e1]">
+                            <CheckCircle2 className="w-4 h-4 text-[#315EFA] shrink-0" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                {/* Deliverables */}
-                <ul className="space-y-2 mb-6 text-xs sm:text-sm text-[#374151] dark:text-[#cbd5e1]">
-                  {[
-                    "Content pillar planning & scripting",
-                    "Founder personal branding systems",
-                    "Omnichannel aspect cutdowns (9:16 / 16:9)",
-                    "Retention curve & hook optimization"
-                  ].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#315EFA]" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-4 border-t border-black/[0.08] dark:border-white/[0.08]">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#315EFA] hover:text-[#254cd4] transition-colors group"
-                >
-                  <span>Build a Content Strategy</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              </div>
+                  {/* Direct Link CTA */}
+                  <div className="pt-6 border-t border-black/[0.08] dark:border-white/[0.08] flex items-center justify-between">
+                    <span className="text-xs font-mono text-[#6b7487] dark:text-[#7a8296]">
+                      Fast 24-48h sprint turnaround
+                    </span>
+                    <Link
+                      to={`/contact?service=${activeService.contactParam}`}
+                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#315EFA] hover:bg-[#254cd4] text-white text-xs sm:text-sm font-medium transition-colors shadow-sm group cursor-pointer"
+                    >
+                      <span>Discuss Project Scope</span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
-
           </div>
 
         </div>
