@@ -12,7 +12,6 @@ import { WhyMotionly } from "../components/home/WhyMotionly";
 import { StudioProcess } from "../components/home/StudioProcess";
 import { TrustAndProof } from "../components/home/TrustAndProof";
 import { TeamBehindTheScenes } from "../components/home/TeamBehindTheScenes";
-import { JournalSection } from "../components/home/JournalSection";
 import { FinalStudioCTA } from "../components/home/FinalStudioCTA";
 
 const Landing: React.FC = () => {
@@ -57,10 +56,7 @@ const Landing: React.FC = () => {
         {/* 08 — Meet The Team */}
         <TeamBehindTheScenes />
 
-        {/* 09 — Journal / Insights */}
-        <JournalSection />
-
-        {/* 10 — Final CTA */}
+        {/* 09 — Final CTA */}
         <FinalStudioCTA />
       </div>
     </Layout>
