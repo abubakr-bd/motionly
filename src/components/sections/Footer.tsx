@@ -1,73 +1,76 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSiteSettings } from "../../lib/useSiteData";
-import { ArrowUpRight, ArrowUp, Globe, Sparkles, Star, MapPin } from "lucide-react";
+import { ArrowUpRight, ArrowUp, Globe, Sparkles, Star } from "lucide-react";
 import { MilkyWayCosmos } from "../ui/MilkyWayCosmos";
 
-interface LocationCard {
+interface CountryItem {
   country: string;
   code: string;
-  address: string;
-  city: string;
-  hub: string;
+  flag: string;
+  region: string;
 }
 
-const GLOBAL_OFFICES: LocationCard[] = [
+const GLOBAL_COUNTRIES: CountryItem[] = [
   {
     country: "United States",
     code: "US",
-    address: "432 Park Ave S, Nomad",
-    city: "New York, NY 10016",
-    hub: "US Client Direction",
+    flag: "🇺🇸",
+    region: "North America",
   },
   {
     country: "United Kingdom",
     code: "UK",
-    address: "14 Soho Square",
-    city: "Soho, London W1D 3QG",
-    hub: "European Production",
+    flag: "🇬🇧",
+    region: "Europe",
   },
   {
     country: "Canada",
     code: "CA",
-    address: "200 Bay Street, Suite 1200",
-    city: "Toronto, ON M5J 2J2",
-    hub: "North America Sprints",
+    flag: "🇨🇦",
+    region: "North America",
   },
   {
     country: "Australia",
     code: "AU",
-    address: "100 Barangaroo Avenue",
-    city: "Sydney, NSW 2000",
-    hub: "APAC Creative Sprints",
-  },
-  {
-    country: "United Arab Emirates",
-    code: "AE",
-    address: "DIFC Gate Precinct 4",
-    city: "Downtown Dubai, UAE",
-    hub: "Middle East & GCC",
-  },
-  {
-    country: "Singapore",
-    code: "SG",
-    address: "10 Marina Boulevard, MBFC",
-    city: "Marina Bay, Singapore 018983",
-    hub: "Asia-Pacific Hub",
+    flag: "🇦🇺",
+    region: "Asia-Pacific",
   },
   {
     country: "Germany",
     code: "DE",
-    address: "Friedrichstraße 68",
-    city: "10117 Berlin, Germany",
-    hub: "EU Tech & SaaS",
+    flag: "🇩🇪",
+    region: "Europe",
+  },
+  {
+    country: "Singapore",
+    code: "SG",
+    flag: "🇸🇬",
+    region: "Southeast Asia",
+  },
+  {
+    country: "United Arab Emirates",
+    code: "AE",
+    flag: "🇦🇪",
+    region: "Middle East",
+  },
+  {
+    country: "Netherlands",
+    code: "NL",
+    flag: "🇳🇱",
+    region: "Europe",
+  },
+  {
+    country: "France",
+    code: "FR",
+    flag: "🇫🇷",
+    region: "Europe",
   },
   {
     country: "Bangladesh",
     code: "BD",
-    address: "Ventura Iconia, Plot 37 Road 11",
-    city: "Banani, Dhaka 1213",
-    hub: "Creative Studio HQ",
+    flag: "🇧🇩",
+    region: "Production Studio HQ",
   },
 ];
 
@@ -123,35 +126,30 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Global Offices 8-Card Grid (Glassmorphism over Milky Way) */}
-        <div className="relative grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          {GLOBAL_OFFICES.map((office) => (
+        {/* Global Countries 10-Card Grid (Clean, Refined, No Street Addresses) */}
+        <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
+          {GLOBAL_COUNTRIES.map((c) => (
             <div
-              key={office.country}
-              className="group p-4 sm:p-5 rounded-2xl bg-[#09111e]/90 hover:bg-[#0e1b2f] border border-[#1e2e46]/90 hover:border-[#38bdf8]/60 backdrop-blur-xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-0.5 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-[#0284c7]/15"
+              key={c.country}
+              className="group p-4 sm:p-5 rounded-2xl bg-[#09111e]/90 hover:bg-[#0e1b2f] border border-[#1e2e46]/90 hover:border-[#38bdf8]/60 backdrop-blur-xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-[#0284c7]/20"
             >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs sm:text-sm font-bold text-white group-hover:text-[#38bdf8] transition-colors tracking-tight">
-                    {office.country}
-                  </span>
-                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-white/[0.08] text-[#94a3b8] group-hover:bg-[#38bdf8]/15 group-hover:text-[#38bdf8] transition-colors border border-white/5">
-                    {office.code}
-                  </span>
-                </div>
-                <p className="text-xs text-[#cbd5e1] font-medium leading-snug">
-                  {office.address}
-                </p>
-                <p className="text-[11px] text-[#7888a2] font-mono mt-0.5 leading-snug">
-                  {office.city}
-                </p>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-2xl sm:text-3xl select-none" role="img" aria-label={c.country}>
+                  {c.flag}
+                </span>
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-white/[0.08] text-[#94a3b8] group-hover:bg-[#38bdf8]/15 group-hover:text-[#38bdf8] transition-colors border border-white/5">
+                  {c.code}
+                </span>
               </div>
 
-              <div className="mt-3 pt-2.5 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#38bdf8]">
-                <span className="opacity-80 group-hover:opacity-100 transition-opacity">
-                  {office.hub}
-                </span>
-                <MapPin className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-[#38bdf8] transition-colors tracking-tight leading-snug">
+                  {c.country}
+                </h4>
+                <p className="text-[11px] font-mono text-[#7888a2] mt-1 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 shrink-0" />
+                  <span className="truncate">{c.region}</span>
+                </p>
               </div>
             </div>
           ))}
