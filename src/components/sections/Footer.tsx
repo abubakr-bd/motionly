@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSiteSettings } from "../../lib/useSiteData";
 import { ArrowUpRight, ArrowUp, Globe, Sparkles, Star, MapPin } from "lucide-react";
+import { MilkyWayCosmos } from "../ui/MilkyWayCosmos";
 
 interface LocationCard {
   country: string;
@@ -84,45 +85,50 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-[#04060b] text-[#eef0f5] overflow-hidden pt-16 sm:pt-24 border-t border-white/[0.08] transition-colors duration-200">
+    <footer className="relative bg-[#030509] text-[#eef0f5] overflow-hidden pt-16 sm:pt-24 border-t border-white/[0.08] transition-colors duration-200">
       
+      {/* ── 00. Animated Milky Way Cosmic Background (Stars, Galactic Nebula & Meteors) ── */}
+      <MilkyWayCosmos />
+
       {/* ── 01. Earth Atmosphere Horizon & Global Production Network ── */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 mb-20 sm:mb-28">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 mb-20 sm:mb-28 z-10">
         
         {/* Curved Glowing Space Horizon Background */}
-        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[150%] max-w-[1500px] h-[420px] pointer-events-none overflow-hidden select-none">
-          {/* Curved Earth NASA Imagery with vivid atmosphere rim */}
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[160%] max-w-[1600px] h-[480px] pointer-events-none overflow-hidden select-none">
+          {/* Curved Earth with Atmosphere Rim */}
           <img
             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
             alt="Global Earth Horizon"
-            className="w-full h-full object-cover object-top opacity-65 mix-blend-screen scale-110"
+            className="w-full h-full object-cover object-top opacity-70 mix-blend-screen scale-110"
             loading="lazy"
           />
-          {/* Atmospheric Radiant Blue Arc */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-36 bg-gradient-to-b from-[#38bdf8]/35 via-[#2563eb]/20 to-transparent blur-3xl rounded-[100%]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#04060b]/70 to-[#04060b]" />
+          
+          {/* Intense Cyan/Blue Atmospheric Radiant Arc (Matching reference screenshot) */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-44 bg-gradient-to-b from-[#38d9d9]/40 via-[#2563eb]/25 to-transparent blur-3xl rounded-[100%]" />
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[75%] h-1 bg-[#38d9d9] blur-[2px] opacity-80 rounded-full" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030509]/60 to-[#030509]" />
         </div>
 
         {/* Global Presence Header */}
         <div className="relative text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/25 text-xs font-mono text-[#38bdf8] backdrop-blur-md mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/25 text-xs font-mono text-[#38bdf8] backdrop-blur-md mb-4 shadow-sm shadow-[#38bdf8]/10">
             <Globe className="w-3.5 h-3.5 animate-spin [animation-duration:16s]" />
             <span className="uppercase tracking-wider font-semibold">Global Production Network</span>
           </div>
-          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3">
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
             Producing for Ambitious Teams Worldwide
           </h3>
-          <p className="text-sm sm:text-base text-[#94a3b8] max-w-xl mx-auto leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-[#94a3b8] max-w-xl mx-auto leading-relaxed font-normal drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)]">
             Seamless sprint turnarounds and dedicated video directors across US, UK, Europe, Australia, and Asia timezones.
           </p>
         </div>
 
-        {/* Global Offices 8-Card Grid (Refined with Studio Hubs) */}
+        {/* Global Offices 8-Card Grid (Glassmorphism over Milky Way) */}
         <div className="relative grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {GLOBAL_OFFICES.map((office) => (
             <div
               key={office.country}
-              className="group p-4 sm:p-5 rounded-2xl bg-[#09111e]/85 hover:bg-[#0e1b2f] border border-[#1e2e46] hover:border-[#38bdf8]/60 backdrop-blur-md transition-all duration-200 flex flex-col justify-between hover:-translate-y-0.5 shadow-md hover:shadow-xl hover:shadow-[#0284c7]/10"
+              className="group p-4 sm:p-5 rounded-2xl bg-[#09111e]/90 hover:bg-[#0e1b2f] border border-[#1e2e46]/90 hover:border-[#38bdf8]/60 backdrop-blur-xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-0.5 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-[#0284c7]/15"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -154,7 +160,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ── 02. Footer Links Grid (Important Links, Services, Specialized Industry, Compare, AI Summary) ── */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pb-14 border-b border-white/[0.08]">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pb-14 border-b border-white/[0.08] z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10">
           
           {/* Col 1: Important Links */}
@@ -379,7 +385,7 @@ export const Footer: React.FC = () => {
         <button
           type="button"
           onClick={scrollToTop}
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.15] text-white text-xs font-medium border border-white/15 transition-all active:scale-95 cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.15] text-white text-xs font-medium border border-white/15 transition-all active:scale-95 cursor-pointer backdrop-blur-md"
         >
           <ArrowUp className="w-3.5 h-3.5" />
           <span>Back to Top</span>
@@ -387,7 +393,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ── 04. Giant Crystal-Clear Typographic Watermark "motionly" with Emerald/Cyan Aurora (Matching Design Monks) ── */}
-      <div className="relative w-full overflow-hidden select-none pointer-events-none pt-4 pb-28 sm:pb-36">
+      <div className="relative w-full overflow-hidden select-none pointer-events-none pt-4 pb-28 sm:pb-36 z-10">
         
         {/* Crystal-Clear Lowercase Typographic Name (High contrast, clearly legible) */}
         <div className="relative text-center leading-none">
