@@ -38,7 +38,7 @@ export const FloatingNavDock: React.FC = () => {
         </a>
 
         <a
-          href="#capabilities"
+          href="#services"
           className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150 active:scale-95"
         >
           Services

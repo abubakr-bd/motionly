@@ -1,264 +1,122 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, X, ArrowUpRight } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useCollection, type PortfolioItem, DEFAULT_PORTFOLIO } from "../../lib/useSiteData";
 
+/* ------------------------------------------------------------------ */
+/*  Category filter tabs                                               */
+/* ------------------------------------------------------------------ */
+const ALL_LABEL = "All";
+
+function extractCategories(items: PortfolioItem[]): string[] {
+  const seen = new Set<string>();
+  items.forEach((p) => {
+    if (p.category) seen.add(p.category);
+  });
+  return [ALL_LABEL, ...Array.from(seen)];
+}
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
 export const SelectedWork: React.FC = () => {
   const { items: fetchedItems } = useCollection<PortfolioItem>("portfolio");
-  const portfolio = fetchedItems && fetchedItems.length > 0 ? fetchedItems : DEFAULT_PORTFOLIO;
-  
-  // Curated showcase projects
-  const selectedProjects = portfolio.slice(0, 5);
-  const featuredLead = selectedProjects[0] || DEFAULT_PORTFOLIO[0];
-  const gridProjects = selectedProjects.slice(1);
+  const portfolio =
+    fetchedItems && fetchedItems.length > 0 ? fetchedItems : DEFAULT_PORTFOLIO;
 
-  const [activeVideo, setActiveVideo] = useState<{ videoId: string; title: string; category?: string } | null>(null);
+  const categories = useMemo(() => extractCategories(portfolio), [portfolio]);
+  const [activeCategory, setActiveCategory] = useState(ALL_LABEL);
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleLineRef = useRef<HTMLSpanElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const filtered = useMemo(() => {
+    if (activeCategory === ALL_LABEL) return portfolio;
+    return portfolio.filter((p) => p.category === activeCategory);
+  }, [portfolio, activeCategory]);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      // 01. Masked Header Entrance
-      if (titleLineRef.current) {
-        gsap.fromTo(
-          titleLineRef.current,
-          { yPercent: 110, opacity: 0 },
-          {
-            yPercent: 0,
-            opacity: 1,
-            duration: 0.5,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 85%",
-              once: true,
-            },
-          }
-        );
-      }
-
-      // 02. Frictionless Viewport Reveal (No pinning, no trapping)
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
-      cards.forEach((card, idx) => {
-        gsap.fromTo(
-          card,
-          { y: 20, opacity: 0, scale: 0.98 },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.45,
-            delay: (idx % 2) * 0.08,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 88%",
-              once: true,
-            },
-          }
-        );
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [selectedProjects.length]);
+  const [activeVideo, setActiveVideo] = useState<{
+    videoId: string;
+    title: string;
+    category?: string;
+  } | null>(null);
 
   return (
-    <section 
-      ref={sectionRef}
-      id="work" 
-      className="py-20 sm:py-28 bg-[#f8f9fa] dark:bg-[#090b11] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.08] dark:border-white/[0.08] transition-colors duration-200"
+    <section
+      id="work"
+      className="py-20 sm:py-28 bg-[#0a0e17] text-white"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-          <div className="max-w-2xl">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#315EFA] block mb-2.5">
-              Selected Work
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-3">
-              <span className="block overflow-hidden pb-1">
-                <span ref={titleLineRef} className="inline-block will-change-transform">
-                  Work that moves audiences.
-                </span>
-              </span>
-            </h2>
-            <p className="text-sm sm:text-base text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed font-normal">
-              A curated selection of SaaS product explainers, commercial brand films, and high-retention video systems built for international teams.
-            </p>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* ── Section Header ── */}
+        <div className="text-center mb-10 sm:mb-14">
+          <h2 className="text-4xl sm:text-6xl font-bold tracking-tight mb-4">
+            Port<span className="text-[#38d9d9] italic font-serif font-normal">folio</span>
+          </h2>
+          <p className="text-sm sm:text-base text-[#8a8f9e] max-w-xl mx-auto leading-relaxed">
+            SaaS explainers, brand commercials, motion graphics, and personal branding.
+            One&nbsp;studio behind every frame.
+          </p>
+        </div>
 
+        {/* ── Category Filter Tabs ── */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10 sm:mb-14">
+          {categories.map((cat) => {
+            const isActive = cat === activeCategory;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-150 cursor-pointer ${
+                  isActive
+                    ? "bg-[#38d9d9] text-[#0a0e17]"
+                    : "bg-white/[0.06] text-[#a3a9b8] hover:bg-white/[0.1] hover:text-white border border-white/[0.08]"
+                }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ── 3-Column Portfolio Grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1], delay: idx * 0.04 }}
+              >
+                <PortfolioCard
+                  project={project}
+                  onPlay={() =>
+                    setActiveVideo({
+                      videoId: project.videoId,
+                      title: project.title,
+                      category: project.category,
+                    })
+                  }
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* ── View All Link ── */}
+        <div className="mt-12 sm:mt-16 text-center">
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#111827] dark:text-[#eef0f5] hover:text-[#315EFA] dark:hover:text-[#315EFA] transition-colors shrink-0 group self-start md:self-end cursor-pointer"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white/[0.06] border border-white/[0.1] text-sm font-medium text-white hover:bg-white/[0.1] transition-colors duration-150 group cursor-pointer"
           >
             <span>View All Projects</span>
             <ArrowUpRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
-
-        {/* 01. Flagship Lead Project Card (Design Monks Style Asymmetric Bento Hero) */}
-        {featuredLead && (
-          <div 
-            ref={(el) => { cardsRef.current[0] = el; }}
-            onClick={() => setActiveVideo({ videoId: featuredLead.videoId, title: featuredLead.title, category: featuredLead.category })}
-            className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.1] shadow-md hover:shadow-xl hover:border-[#315EFA]/40 transition-all duration-200 cursor-pointer mb-8 sm:mb-10"
-            role="button"
-            tabIndex={0}
-            aria-label={`Watch ${featuredLead.title}`}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setActiveVideo({ videoId: featuredLead.videoId, title: featuredLead.title, category: featuredLead.category });
-              }
-            }}
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-              {/* Large Visual Thumbnail (7 cols) */}
-              <div className="lg:col-span-7 relative aspect-video overflow-hidden bg-black">
-                <img
-                  src={`https://img.youtube.com/vi/${featuredLead.videoId}/maxresdefault.jpg`}
-                  alt={featuredLead.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300 ease-out"
-                  loading="lazy"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${featuredLead.videoId}/hqdefault.jpg`;
-                  }}
-                />
-                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-200" />
-                
-                {/* Center Play Indicator */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#315EFA] text-white flex items-center justify-center shadow-lg group-hover:scale-105 active:scale-95 transition-transform duration-150">
-                    <Play className="w-6 h-6 fill-current ml-0.5" />
-                  </div>
-                </div>
-
-                {/* Corner Category Tag */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-black/75 backdrop-blur-md text-white border border-white/10">
-                    {featuredLead.category || "Featured Case Study"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Editorial Info Block (5 cols) */}
-              <div className="lg:col-span-5 p-6 sm:p-9 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#315EFA] mb-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#315EFA]" />
-                    <span>Lead Showcase</span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] mb-3 leading-snug">
-                    {featuredLead.title}
-                  </h3>
-
-                  <p className="text-sm sm:text-base text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-6 font-normal">
-                    {featuredLead.description || "A complete visual product narrative engineered to clarify complex capabilities and drive user conversion."}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-black/[0.08] dark:border-white/[0.08] flex items-center justify-between text-xs">
-                  <span className="font-mono text-[#6b7487] dark:text-[#7a8296]">
-                    4K Master &bull; ProRes 422HQ
-                  </span>
-                  <div className="inline-flex items-center gap-1.5 font-medium text-[#315EFA] group-hover:translate-x-0.5 transition-transform duration-150">
-                    <span>Watch Film</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* 02. Secondary 2-Column Showcase Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {gridProjects.map((project, index) => (
-            <div
-              key={project.id}
-              ref={(el) => { cardsRef.current[index + 1] = el; }}
-              onClick={() => setActiveVideo({ videoId: project.videoId, title: project.title, category: project.category })}
-              className="group rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.1] shadow-md hover:shadow-xl hover:border-[#315EFA]/40 transition-all duration-200 cursor-pointer flex flex-col justify-between"
-              role="button"
-              tabIndex={0}
-              aria-label={`Watch ${project.title}`}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setActiveVideo({ videoId: project.videoId, title: project.title, category: project.category });
-                }
-              }}
-            >
-              {/* Visual Thumbnail */}
-              <div className="relative aspect-video overflow-hidden bg-black">
-                <img
-                  src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300 ease-out"
-                  loading="lazy"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`;
-                  }}
-                />
-                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-200" />
-                
-                {/* Corner Category Tag */}
-                <div className="absolute top-3.5 left-3.5">
-                  <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-black/75 backdrop-blur-md text-white border border-white/10">
-                    {project.category || "Video Showcase"}
-                  </span>
-                </div>
-
-                {/* Center Play Icon */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-85 group-hover:opacity-100 transition-opacity">
-                  <div className="w-12 h-12 rounded-xl bg-[#315EFA] text-white flex items-center justify-center shadow-md group-hover:scale-105 active:scale-95 transition-transform duration-150">
-                    <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Meta Information */}
-              <div className="p-5 sm:p-7 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] mb-2 leading-snug">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#4b5565] dark:text-[#a3a9b8] leading-relaxed mb-5 font-normal line-clamp-2">
-                    {project.description || "Video production, motion graphics, and creative direction engineered for commercial engagement."}
-                  </p>
-                </div>
-
-                <div className="pt-3.5 border-t border-black/[0.08] dark:border-white/[0.08] flex items-center justify-between text-xs">
-                  <span className="font-mono text-[#6b7487] dark:text-[#7a8296]">
-                    Case Study &bull; 4K Master
-                  </span>
-                  <span className="inline-flex items-center gap-1 font-medium text-[#315EFA] group-hover:translate-x-0.5 transition-transform duration-150">
-                    <span>Watch Preview</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
       </div>
 
-      {/* Video Modal Player */}
+      {/* ── Video Modal Player ── */}
       <AnimatePresence>
         {activeVideo && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md">
@@ -271,8 +129,12 @@ export const SelectedWork: React.FC = () => {
             >
               <div className="flex items-center justify-between px-5 py-3.5 bg-black/40 border-b border-white/10 text-white">
                 <div>
-                  <span className="text-xs font-mono text-[#315EFA] block">{activeVideo.category || "Project Video"}</span>
-                  <span className="text-sm sm:text-base font-medium">{activeVideo.title}</span>
+                  <span className="text-xs font-mono text-[#38d9d9] block">
+                    {activeVideo.category || "Project Video"}
+                  </span>
+                  <span className="text-sm sm:text-base font-medium">
+                    {activeVideo.title}
+                  </span>
                 </div>
                 <button
                   type="button"
@@ -298,6 +160,91 @@ export const SelectedWork: React.FC = () => {
         )}
       </AnimatePresence>
     </section>
+  );
+};
+
+/* ------------------------------------------------------------------ */
+/*  Portfolio Card                                                     */
+/* ------------------------------------------------------------------ */
+interface PortfolioCardProps {
+  project: PortfolioItem;
+  onPlay: () => void;
+}
+
+const PortfolioCard: React.FC<PortfolioCardProps> = ({ project, onPlay }) => {
+  const [imgLoaded, setImgLoaded] = useState(false);
+
+  return (
+    <div
+      onClick={onPlay}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onPlay();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`Watch ${project.title}`}
+      className="group cursor-pointer flex flex-col"
+    >
+      {/* Thumbnail */}
+      <div className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-[#141822]">
+        {/* Skeleton pulse while loading */}
+        {!imgLoaded && (
+          <div className="absolute inset-0 bg-[#1a1f2e] animate-pulse" />
+        )}
+        <img
+          src={`https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`}
+          alt={project.title}
+          className={`w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] ${
+            imgLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          loading="eager"
+          onLoad={() => setImgLoaded(true)}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`;
+            setImgLoaded(true);
+          }}
+        />
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-200" />
+
+        {/* Category badge — top left */}
+        <div className="absolute top-3 left-3">
+          <span className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-[#1a2235]/80 backdrop-blur-sm text-[#38d9d9] border border-[#38d9d9]/20">
+            {project.category || "Video"}
+          </span>
+        </div>
+
+        {/* Featured badge — top right (first 2 items) */}
+        {project.order <= 2 && (
+          <div className="absolute top-3 right-3">
+            <span className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-[#38d9d9]/15 backdrop-blur-sm text-[#38d9d9] border border-[#38d9d9]/25">
+              ★ Featured
+            </span>
+          </div>
+        )}
+
+        {/* Center play button */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="w-12 h-12 rounded-full bg-[#38d9d9] text-[#0a0e17] flex items-center justify-center shadow-lg active:scale-95 transition-transform duration-150">
+            <Play className="w-5 h-5 fill-current ml-0.5" />
+          </div>
+        </div>
+      </div>
+
+      {/* Meta: title + play link */}
+      <div className="flex items-start justify-between mt-3.5 px-0.5">
+        <h3 className="text-sm sm:text-base font-semibold text-white/90 leading-snug pr-4 group-hover:text-white transition-colors duration-150">
+          {project.title}
+        </h3>
+        <span className="text-[11px] font-mono uppercase tracking-wider text-[#38d9d9] opacity-0 group-hover:opacity-100 transition-opacity duration-150 shrink-0 mt-0.5 flex items-center gap-1">
+          Play <ArrowUpRight className="w-3 h-3" />
+        </span>
+      </div>
+    </div>
   );
 };
 
