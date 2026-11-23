@@ -209,6 +209,23 @@ const PAGES = [
         </article>
       </section>
 
+      <section class="site-workflow-pipeline">
+        <h2>Our Workflow: From Your Brief to the Final Cut</h2>
+        <p>Every project follows the same clear steps. Our team plans, writes, shoots, and edits, using AI and pro tools to move faster:</p>
+        <ol>
+          <li><strong>01 &bull; Brief from your brand (Day 1):</strong> Strategic alignment on goals, audience, and creative objectives.</li>
+          <li><strong>02 &bull; Content Plan:</strong> What to make, and how much &bull; The content your marketing needs.</li>
+          <li><strong>03 &bull; Plan to Client:</strong> Formats, volume, and timeline delivered.</li>
+          <li><strong>04 &bull; Client Approval:</strong> You review and approve the strategic blueprint.</li>
+          <li><strong>05 &bull; Scripting:</strong> Hooks, scripts, and shot lists with narrative human touch.</li>
+          <li><strong>06 &bull; Production &amp; Shoot:</strong> On-set cinematography crew or digital 3D motion &amp; 60fps UI capture.</li>
+          <li><strong>07 &bull; Editing:</strong> Cut, motion graphics, DaVinci Resolve color grading, and visual pacing.</li>
+          <li><strong>08 &bull; Sound &amp; SFX:</strong> Psychoacoustic sound design, voice mastering, and licensed commercial audio.</li>
+          <li><strong>09 &bull; Feedback &amp; Review:</strong> Frame-accurate timestamped notes directly inside Frame.io.</li>
+          <li><strong>10 &bull; Master Delivery:</strong> 4K ProRes 422 masters and multi-platform cutdowns uploaded to Google Drive.</li>
+        </ol>
+      </section>
+
       <section class="site-comparison-matrix">
         <h2>The Motionly Difference: Comparison Matrix</h2>
         <p>Why market leaders choose Motionly Media over traditional agencies or freelance marketplaces:</p>
