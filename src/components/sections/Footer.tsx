@@ -7,70 +7,70 @@ import { MilkyWayCosmos } from "../ui/MilkyWayCosmos";
 interface CountryItem {
   country: string;
   code: string;
-  flag: string;
+  timezone: string;
   region: string;
 }
 
 const GLOBAL_COUNTRIES: CountryItem[] = [
   {
     country: "United States",
-    code: "US",
-    flag: "🇺🇸",
+    code: "USA",
+    timezone: "EST / PST",
     region: "North America",
   },
   {
     country: "United Kingdom",
-    code: "UK",
-    flag: "🇬🇧",
+    code: "GBR",
+    timezone: "GMT / BST",
     region: "Europe",
   },
   {
     country: "Canada",
-    code: "CA",
-    flag: "🇨🇦",
+    code: "CAN",
+    timezone: "EST / CST",
     region: "North America",
   },
   {
     country: "Australia",
-    code: "AU",
-    flag: "🇦🇺",
+    code: "AUS",
+    timezone: "AEST / AWST",
     region: "Asia-Pacific",
   },
   {
     country: "Germany",
-    code: "DE",
-    flag: "🇩🇪",
+    code: "DEU",
+    timezone: "CET / CEST",
     region: "Europe",
   },
   {
     country: "Singapore",
-    code: "SG",
-    flag: "🇸🇬",
+    code: "SGP",
+    timezone: "SGT (UTC+8)",
     region: "Southeast Asia",
   },
   {
     country: "United Arab Emirates",
-    code: "AE",
-    flag: "🇦🇪",
+    code: "ARE",
+    timezone: "GST (UTC+4)",
     region: "Middle East",
   },
   {
     country: "Netherlands",
-    code: "NL",
-    flag: "🇳🇱",
+    code: "NLD",
+    timezone: "CET (UTC+1)",
     region: "Europe",
   },
   {
     country: "France",
-    code: "FR",
-    flag: "🇫🇷",
+    code: "FRA",
+    timezone: "CET (UTC+1)",
     region: "Europe",
   },
   {
     country: "Bangladesh",
-    code: "BD",
-    flag: "🇧🇩",
-    region: "Production Studio HQ",
+    code: "BGD",
+    timezone: "BST (UTC+6)",
+    region: "Studio HQ",
   },
 ];
 
@@ -90,26 +90,26 @@ export const Footer: React.FC = () => {
   return (
     <footer className="relative bg-[#030509] text-[#eef0f5] overflow-hidden pt-16 sm:pt-24 border-t border-white/[0.08] transition-colors duration-200">
       
-      {/* ── 00. Animated Milky Way Cosmic Background (Stars, Galactic Nebula & Meteors) ── */}
+      {/* ── 00. Animated Milky Way Cosmos Engine (Stars, Galactic Nebulae & Meteors) ── */}
       <MilkyWayCosmos />
 
       {/* ── 01. Earth Atmosphere Horizon & Global Production Network ── */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 mb-20 sm:mb-28 z-10">
         
         {/* Curved Glowing Space Horizon Background */}
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[160%] max-w-[1600px] h-[480px] pointer-events-none overflow-hidden select-none">
-          {/* Curved Earth with Atmosphere Rim */}
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[160%] max-w-[1600px] h-[520px] pointer-events-none overflow-hidden select-none">
+          {/* Curved Earth Atmosphere Image */}
           <img
             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
             alt="Global Earth Horizon"
-            className="w-full h-full object-cover object-top opacity-70 mix-blend-screen scale-110"
+            className="w-full h-full object-cover object-top opacity-75 mix-blend-screen scale-110"
             loading="lazy"
           />
           
-          {/* Intense Cyan/Blue Atmospheric Radiant Arc (Matching reference screenshot) */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-44 bg-gradient-to-b from-[#38d9d9]/40 via-[#2563eb]/25 to-transparent blur-3xl rounded-[100%]" />
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[75%] h-1 bg-[#38d9d9] blur-[2px] opacity-80 rounded-full" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030509]/60 to-[#030509]" />
+          {/* Atmospheric Radiant Cyan/Blue Arc */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] h-48 bg-gradient-to-b from-[#38d9d9]/45 via-[#2563eb]/25 to-transparent blur-3xl rounded-[100%]" />
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[80%] h-1.5 bg-[#38d9d9] blur-[3px] opacity-85 rounded-full" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030509]/65 to-[#030509]" />
         </div>
 
         {/* Global Presence Header */}
@@ -118,7 +118,7 @@ export const Footer: React.FC = () => {
             <Globe className="w-3.5 h-3.5 animate-spin [animation-duration:16s]" />
             <span className="uppercase tracking-wider font-semibold">Global Production Network</span>
           </div>
-          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3 drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
             Producing for Ambitious Teams Worldwide
           </h3>
           <p className="text-sm sm:text-base text-[#94a3b8] max-w-xl mx-auto leading-relaxed font-normal drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)]">
@@ -126,30 +126,28 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Global Countries 10-Card Grid (Clean, Refined, No Street Addresses) */}
+        {/* Global Countries 10-Card Grid (Refined, Symmetrical, No Redundant Windows Emoji Glitch) */}
         <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
           {GLOBAL_COUNTRIES.map((c) => (
             <div
               key={c.country}
-              className="group p-4 sm:p-5 rounded-2xl bg-[#09111e]/90 hover:bg-[#0e1b2f] border border-[#1e2e46]/90 hover:border-[#38bdf8]/60 backdrop-blur-xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-[#0284c7]/20"
+              className="group p-4 sm:p-4.5 rounded-2xl bg-[#09111e]/90 hover:bg-[#0e1b2f] border border-[#1e2e46]/90 hover:border-[#38d9d9]/60 backdrop-blur-xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-[#0284c7]/20"
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-2xl sm:text-3xl select-none" role="img" aria-label={c.country}>
-                  {c.flag}
-                </span>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-white/[0.08] text-[#94a3b8] group-hover:bg-[#38bdf8]/15 group-hover:text-[#38bdf8] transition-colors border border-white/5">
+                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#38d9d9]/10 text-[#38d9d9] group-hover:bg-[#38d9d9]/20 transition-colors border border-[#38d9d9]/25">
                   {c.code}
                 </span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Active Client Region" />
               </div>
 
               <div>
-                <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-[#38bdf8] transition-colors tracking-tight leading-snug">
+                <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-[#38d9d9] transition-colors tracking-tight leading-snug">
                   {c.country}
                 </h4>
-                <p className="text-[11px] font-mono text-[#7888a2] mt-1 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 shrink-0" />
-                  <span className="truncate">{c.region}</span>
-                </p>
+                <div className="mt-1 flex items-center justify-between text-[11px] font-mono text-[#7888a2]">
+                  <span>{c.region}</span>
+                  <span className="text-[10px] text-[#38d9d9]/80">{c.timezone}</span>
+                </div>
               </div>
             </div>
           ))}
@@ -163,8 +161,9 @@ export const Footer: React.FC = () => {
           
           {/* Col 1: Important Links */}
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
-              Important Links
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38d9d9]" />
+              <span>Important Links</span>
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
@@ -207,8 +206,9 @@ export const Footer: React.FC = () => {
 
           {/* Col 2: Services */}
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
-              Services
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38d9d9]" />
+              <span>Services</span>
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
@@ -251,8 +251,9 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Specialized Industry */}
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
-              Specialized Industry
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38d9d9]" />
+              <span>Specialized Industry</span>
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
@@ -294,29 +295,36 @@ export const Footer: React.FC = () => {
 
           {/* Col 4: Compare */}
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
-              Compare
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38d9d9]" />
+              <span>Compare</span>
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
+            <ul className="space-y-2 text-xs sm:text-sm text-[#94a3b8]">
               <li>
                 <a
                   href="/#comparison"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/10 text-white font-medium hover:border-[#38d9d9]/40 hover:text-[#38d9d9] transition-colors"
+                  className="inline-block px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#38d9d9]/40 text-slate-200 hover:text-white transition-colors font-medium"
                 >
-                  <span>Vs Traditional Agencies</span>
+                  Vs Traditional Agencies
                 </a>
               </li>
               <li>
-                <a href="/#comparison" className="hover:text-white transition-colors">
+                <a
+                  href="/#comparison"
+                  className="inline-block px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#38d9d9]/40 text-slate-200 hover:text-white transition-colors font-medium"
+                >
                   Vs Freelancers
                 </a>
               </li>
               <li>
-                <a href="/#comparison" className="hover:text-white transition-colors">
+                <a
+                  href="/#comparison"
+                  className="inline-block px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#38d9d9]/40 text-slate-200 hover:text-white transition-colors font-medium"
+                >
                   Vs In-House Production
                 </a>
               </li>
-              <li className="pt-2 text-xs font-mono text-[#64748b] leading-relaxed">
+              <li className="pt-2 text-[11px] font-mono text-[#64748b] leading-relaxed">
                 Direct founder oversight on all client deliverables.
               </li>
             </ul>
@@ -324,8 +332,9 @@ export const Footer: React.FC = () => {
 
           {/* Col 5: Explore AI Summary & Verification */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4">
-              Explore AI Summary
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-bold mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38d9d9]" />
+              <span>Explore AI Summary</span>
             </h4>
             
             {/* AI Tools Icons Strip */}
@@ -390,16 +399,17 @@ export const Footer: React.FC = () => {
         </button>
       </div>
 
-      {/* ── 04. Giant Crystal-Clear Typographic Watermark "motionly" with Emerald/Cyan Aurora (Matching Design Monks) ── */}
-      <div className="relative w-full overflow-hidden select-none pointer-events-none pt-4 pb-28 sm:pb-36 z-10">
+      {/* ── 04. Giant Crystal-Clear Typographic Watermark "motionly" with Emerald/Cyan Aurora ── */}
+      {/* Generous bottom padding (pb-36 sm:pb-48) ensures floating dock never overlaps or covers the name */}
+      <div className="relative w-full overflow-hidden select-none pointer-events-none pt-4 pb-36 sm:pb-48 z-10">
         
         {/* Crystal-Clear Lowercase Typographic Name (High contrast, clearly legible) */}
         <div className="relative text-center leading-none">
           <span 
-            className="block text-[18vw] font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-[#e2e8f0] to-[#64748b] font-sans opacity-85"
+            className="block text-[17vw] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-[#f1f5f9] to-[#94a3b8]/40 font-sans opacity-95"
             style={{ 
               letterSpacing: "-0.05em",
-              textShadow: "0 0 60px rgba(56, 189, 248, 0.15)",
+              textShadow: "0 0 80px rgba(56, 189, 248, 0.2)",
             }}
           >
             motionly
@@ -407,10 +417,10 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Horizontal Frosted Glass / Aurora Wave Beam cutting across the lower half */}
-        <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 h-16 sm:h-24 bg-gradient-to-r from-transparent via-[#10b981]/25 via-30% via-[#38bdf8]/30 to-transparent blur-2xl opacity-75" />
+        <div className="absolute bottom-24 sm:bottom-32 left-0 right-0 h-16 sm:h-24 bg-gradient-to-r from-transparent via-[#10b981]/25 via-30% via-[#38bdf8]/30 to-transparent blur-2xl opacity-75" />
         
         {/* Crisp Laser Reflection Horizon Line */}
-        <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#34d399]/70 via-50% via-[#38bdf8]/70 to-transparent opacity-80" />
+        <div className="absolute bottom-24 sm:bottom-32 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#34d399]/70 via-50% via-[#38bdf8]/70 to-transparent opacity-80" />
       </div>
 
     </footer>
