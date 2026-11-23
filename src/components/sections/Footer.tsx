@@ -74,6 +74,67 @@ const GLOBAL_COUNTRIES: CountryItem[] = [
   },
 ];
 
+const AI_QUERY =
+  "Web search Visit https://motionly.media/ and answer: What does Motionly Media do, who is it for, what makes it different, and why should I work with them?";
+
+const POPULAR_AI_TOOLS = [
+  {
+    name: "ChatGPT",
+    url: `https://chatgpt.com/?q=${encodeURIComponent(AI_QUERY)}`,
+    title: "Ask ChatGPT about Motionly",
+    color: "hover:border-[#10a37f]/50 hover:bg-[#10a37f]/10 text-[#10a37f]",
+    icon: (
+      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d="M22.28 9.54a5.52 5.52 0 0 0-.47-4.47 5.6 5.6 0 0 0-4.52-2.73 5.52 5.52 0 0 0-4.06 1.7A5.54 5.54 0 0 0 8.6 2.3a5.6 5.6 0 0 0-4.53 2.73 5.52 5.52 0 0 0-.47 4.47 5.55 5.55 0 0 0-1.89 3.98 5.6 5.6 0 0 0 1.25 4.54 5.52 5.52 0 0 0 .47 4.47 5.6 5.6 0 0 0 4.53 2.73 5.52 5.52 0 0 0 4.06-1.7 5.54 5.54 0 0 0 4.63 1.74 5.6 5.6 0 0 0 4.52-2.73 5.52 5.52 0 0 0 .47-4.47 5.55 5.55 0 0 0 1.89-3.98 5.6 5.6 0 0 0-1.25-4.54zM13.1 20.25a3.84 3.84 0 0 1-2.48-.9l.17-.1 4.14-2.4a.88.88 0 0 0 .44-.76V10.3l1.83 1.06a.07.07 0 0 1 .04.05v4.98a3.86 3.86 0 0 1-4.14 3.86zm-8.3-3.6a3.84 3.84 0 0 1-.49-2.6 3.9 3.9 0 0 1 1.07-2.32l.14.08 4.14 2.4a.87.87 0 0 0 .88 0l5.02-2.9v2.12a.08.08 0 0 1-.03.06l-4.32 2.5a3.86 3.86 0 0 1-6.41.66zm-.9-9.15a3.83 3.83 0 0 1 1.99-1.7 3.88 3.88 0 0 1 2.53-.16l-.03.17-4.14 2.4a.88.88 0 0 0-.44.76v5.8l-1.83-1.06a.07.07 0 0 1-.04-.06V10.3a3.84 3.84 0 0 1 1.96-2.8zm11.75 3.32L10.63 7.92l4.32-2.5a3.86 3.86 0 0 1 5.92 4.1 3.84 3.84 0 0 1-.5 2.6l-.14-.08-4.14-2.4a.87.87 0 0 0-.88 0zm2.25 4.38a3.84 3.84 0 0 1-1.99 1.7 3.88 3.88 0 0 1-2.53.16l.03-.17 4.14-2.4a.88.88 0 0 0 .44-.76v-5.8l1.83 1.06a.07.07 0 0 1 .04.06v4.61a3.84 3.84 0 0 1-1.96 2.8zM9.54 12.82l-1.83-1.06a.07.07 0 0 1-.04-.05V6.73a3.86 3.86 0 0 1 6.62-2.96l-.17.1-4.14 2.4a.88.88 0 0 0-.44.76v5.79zm1.09-1.72 2.25-1.3 2.25 1.3v2.6l-2.25 1.3-2.25-1.3z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Perplexity",
+    url: `https://www.perplexity.ai/search?q=${encodeURIComponent(AI_QUERY)}`,
+    title: "Ask Perplexity AI",
+    color: "hover:border-[#22d3ee]/50 hover:bg-[#22d3ee]/10 text-[#22d3ee]",
+    icon: (
+      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d="M12 2a1 1 0 0 1 1 1v4.06l3.72-3.72a1 1 0 1 1 1.42 1.42L14.06 8.5H18a1 1 0 1 1 0 2h-3.94l4.08 4.08a1 1 0 0 1-1.42 1.42L13 12.28V21a1 1 0 1 1-2 0v-8.72l-3.72 3.72a1 1 0 0 1-1.42-1.42L9.94 10.5H6a1 1 0 1 1 0-2h3.94L5.86 4.76a1 1 0 0 1 1.42-1.42L11 7.06V3a1 1 0 0 1 1-1z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Claude",
+    url: `https://claude.ai/new?q=${encodeURIComponent(AI_QUERY)}`,
+    title: "Ask Claude AI",
+    color: "hover:border-[#d97706]/50 hover:bg-[#d97706]/10 text-[#d97706]",
+    icon: (
+      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d="M12 2a1 1 0 0 1 1 1v2.5a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm6.364 3.636a1 1 0 0 1 0 1.414l-1.768 1.768a1 1 0 0 1-1.414-1.414l1.768-1.768a1 1 0 0 1 1.414 0zM22 12a1 1 0 0 1-1 1h-2.5a1 1 0 0 1 0-2H21a1 1 0 0 1 1 1zm-3.636 6.364a1 1 0 0 1-1.414 0l-1.768-1.768a1 1 0 0 1 1.414-1.414l1.768 1.768a1 1 0 0 1 0 1.414zM12 22a1 1 0 0 1-1-1v-2.5a1 1 0 0 1 2 0V21a1 1 0 0 1-1 1zm-6.364-3.636a1 1 0 0 1 0-1.414l1.768-1.768a1 1 0 0 1 1.414 1.414l-1.768 1.768a1 1 0 0 1-1.414 0zM2 12a1 1 0 0 1 1-1h2.5a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1zm3.636-6.364a1 1 0 0 1 1.414 0l1.768 1.768a1 1 0 0 1-1.414 1.414L5.636 7.05a1 1 0 0 1 0-1.414zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Gemini",
+    url: `https://gemini.google.com/app?text=${encodeURIComponent(AI_QUERY)}`,
+    title: "Ask Google Gemini",
+    color: "hover:border-[#60a5fa]/50 hover:bg-[#60a5fa]/10 text-[#60a5fa]",
+    icon: (
+      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d="M12 2c-.3 4.8-1.2 7.7-4 9.5-2.8 1.8-5.7 2.2-7.5 2.5 1.8.3 4.7.7 7.5 2.5 2.8 1.8 3.7 4.7 4 9.5.3-4.8 1.2-7.7 4-9.5 2.8-1.8 5.7-2.2 7.5-2.5-1.8-.3-4.7-.7-7.5-2.5-2.8-1.8-3.7-4.7-4-9.5z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Grok",
+    url: `https://x.com/i/grok?text=${encodeURIComponent(AI_QUERY)}`,
+    title: "Ask Grok on X",
+    color: "hover:border-white/50 hover:bg-white/10 text-white",
+    icon: (
+      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+];
+
 export const Footer: React.FC = () => {
   const { settings } = useSiteSettings();
   const currentYear = new Date().getFullYear();
@@ -337,17 +398,20 @@ export const Footer: React.FC = () => {
               <span>Explore AI Summary</span>
             </h4>
             
-            {/* AI Tools Icons Strip */}
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="Perplexity Ready">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-              </div>
-              <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="Gemini & Claude Optimized">
-                <Star className="w-4 h-4 text-amber-400" />
-              </div>
-              <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="ChatGPT Verified">
-                <Globe className="w-4 h-4 text-emerald-400" />
-              </div>
+            {/* AI Tools Icons Strip (Auto-Prompt Search on Click) */}
+            <div className="flex items-center gap-1.5 mb-4">
+              {POPULAR_AI_TOOLS.map((ai) => (
+                <a
+                  key={ai.name}
+                  href={ai.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={ai.title}
+                  className={`w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-95 shadow-xs ${ai.color}`}
+                >
+                  {ai.icon}
+                </a>
+              ))}
             </div>
 
             {/* Google / Agency Search Badge */}
