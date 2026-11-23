@@ -120,13 +120,18 @@ export const HeroStudio: React.FC = () => {
 
           {/* Primary & Secondary CTAs */}
           <div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/contact"
+            <a
+              href="#booking"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                window.history.pushState(null, "", "#booking");
+              }}
               className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white text-sm font-semibold shadow-lg shadow-[#315EFA]/30 transition-all duration-150 active:scale-[0.97] group cursor-pointer"
             >
               <span>Start a Project</span>
               <ArrowUpRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+            </a>
 
             <a
               href="#work"

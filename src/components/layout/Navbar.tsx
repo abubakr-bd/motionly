@@ -164,9 +164,16 @@ const Navbar = () => {
 
             {/* Desktop 'Start a Project' Button */}
             <div className="hidden sm:flex items-center">
-              <Link
-                to="/contact"
-                className={`inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-150 active:scale-[0.97] ${
+              <a
+                href="/#booking"
+                onClick={(e) => {
+                  if (location.pathname === "/") {
+                    e.preventDefault();
+                    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, "", "#booking");
+                  }
+                }}
+                className={`inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-150 active:scale-[0.97] cursor-pointer ${
                   isDark
                     ? "bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm"
                     : "bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm"
@@ -174,7 +181,7 @@ const Navbar = () => {
               >
                 <span>Start a Project</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
+              </a>
             </div>
 
             {/* Mobile Menu Hamburger Toggle */}
@@ -227,14 +234,21 @@ const Navbar = () => {
               })}
 
               <div className="pt-2 mt-2 border-t border-white/10 dark:border-white/10">
-                <Link
-                  to="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-blue-600 text-white hover:bg-blue-500 shadow-sm transition-colors"
+                <a
+                  href="/#booking"
+                  onClick={(e) => {
+                    setIsOpen(false);
+                    if (location.pathname === "/") {
+                      e.preventDefault();
+                      document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                      window.history.pushState(null, "", "#booking");
+                    }
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-blue-600 text-white hover:bg-blue-500 shadow-sm transition-colors cursor-pointer"
                 >
-                  <span>Book Strategy Call</span>
+                  <span>Start a Project</span>
                   <ArrowUpRight className="w-4 h-4" />
-                </Link>
+                </a>
               </div>
             </nav>
           </div>

@@ -45,13 +45,20 @@ export const FloatingNavDock: React.FC = () => {
         </a>
 
         {/* Central Prominent CTA */}
-        <Link
-          to="/contact"
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white font-semibold shadow-md shadow-[#315EFA]/30 transition-all duration-150 active:scale-[0.97]"
+        <a
+          href="/#booking"
+          onClick={(e) => {
+            if (location.pathname === "/") {
+              e.preventDefault();
+              document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+              window.history.pushState(null, "", "#booking");
+            }
+          }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white font-semibold shadow-md shadow-[#315EFA]/30 transition-all duration-150 active:scale-[0.97] cursor-pointer"
         >
           <MessageSquare className="w-3.5 h-3.5 fill-current" />
           <span>Start a Project</span>
-        </Link>
+        </a>
 
         <a
           href="#comparison"
