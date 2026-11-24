@@ -83,12 +83,19 @@ export const SelectedWork: React.FC = () => {
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-150 cursor-pointer shrink-0 snap-center ${
+                className={`relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-150 cursor-pointer shrink-0 snap-center active:scale-95 ${
                   isActive
-                    ? "bg-[#38d9d9] text-[#0a0e17] font-semibold shadow-xs"
-                    : "bg-white/[0.06] text-[#a3a9b8] hover:bg-white/[0.1] hover:text-white border border-white/[0.08]"
+                    ? "text-[#0a0e17] font-semibold"
+                    : "text-[#a3a9b8] hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08]"
                 }`}
               >
+                {isActive && (
+                  <motion.span
+                    layoutId="selectedwork-active-pill"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-[#38d9d9] shadow-sm -z-10"
+                  />
+                )}
                 {cat}
               </button>
             );
@@ -135,15 +142,21 @@ export const SelectedWork: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Video Modal Player ── */}
+      {/* ── Video Modal Player with Apple Spring Physics ── */}
       <AnimatePresence>
         {activeVideo && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md"
+          >
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.18, ease: [0.23, 1, 0.32, 1] }}
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ type: "spring", damping: 28, stiffness: 320 }}
               className="relative w-full max-w-5xl bg-[#0c101d] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
             >
               <div className="flex items-center justify-between px-5 py-3.5 bg-black/40 border-b border-white/10 text-white">
@@ -175,7 +188,7 @@ export const SelectedWork: React.FC = () => {
                 />
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>

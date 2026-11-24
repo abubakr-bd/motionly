@@ -191,12 +191,19 @@ const PortfolioPage: React.FC = () => {
                       key={cat}
                       type="button"
                       onClick={() => setActiveCategory(cat)}
-                      className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer shrink-0 ${
+                      className={`relative px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-150 cursor-pointer shrink-0 active:scale-95 ${
                         isActive
-                          ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_20px_rgba(56,189,248,0.3)]"
-                          : "bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/10"
+                          ? "text-[#070b14] font-bold"
+                          : "text-slate-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10"
                       }`}
                     >
+                      {isActive && (
+                        <motion.span
+                          layoutId="portfolio-active-pill"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          className="absolute inset-0 rounded-full bg-[#38bdf8] shadow-[0_0_20px_rgba(56,189,248,0.3)] -z-10"
+                        />
+                      )}
                       {cat}
                     </button>
                   );
