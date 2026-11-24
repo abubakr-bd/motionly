@@ -39,6 +39,24 @@ export const SelectedWork: React.FC = () => {
     category?: string;
   } | null>(null);
 
+  // Keyboard navigation & body scroll lock for theater modal UX
+  React.useEffect(() => {
+    if (!activeVideo) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveVideo(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [activeVideo]);
+
   return (
     <section
       id="work"

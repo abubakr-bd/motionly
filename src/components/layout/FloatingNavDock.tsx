@@ -20,6 +20,11 @@ export const FloatingNavDock: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Only show floating dock on homepage where anchor sections exist
+  if (location.pathname !== "/") {
+    return null;
+  }
+
   return (
     <div
       className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 pointer-events-none hidden md:block ${

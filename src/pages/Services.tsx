@@ -24,7 +24,7 @@ import {
   Cpu,
   ShieldCheck,
   Zap,
-  HelpCircle
+  Calculator
 } from "lucide-react";
 
 interface ServicePillar {
@@ -150,7 +150,6 @@ const technicalSpecs = [
   { label: "Source File Policy", value: "Full IP ownership; clean Adobe Premiere / After Effects / project archives provided" }
 ];
 
-// Creative Tech Stack (Tool Podium inspired by Lumas Creative)
 const toolStack = [
   { name: "Premiere Pro", role: "Long-form narrative & assembly", color: "#9999FF" },
   { name: "After Effects", role: "UI motion & VFX compositing", color: "#CF9FFF" },
@@ -160,7 +159,6 @@ const toolStack = [
   { name: "Runway & AI", role: "Generative expansion & speed", color: "#38BDF8" }
 ];
 
-// Comparison Matrix Data (inspired by Designmonks reference)
 const comparisonRows = [
   { feature: "Dedicated Creative Director", inHouse: "Requires $140k+ salary", freelancer: "Rarely (Self-directed)", motionly: "Included on every project" },
   { feature: "Turnaround Speed", inHouse: "2–4 weeks (Queue bottleneck)", freelancer: "Unpredictable / ghosting risk", motionly: "5–7 Days First Cut SLA" },
@@ -173,6 +171,10 @@ const comparisonRows = [
 const Services: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("saas");
   const currentPillar = servicePillars.find((p) => p.id === activeTab) || servicePillars[0];
+
+  // Interactive Scope Calculator states
+  const [calcTier, setCalcTier] = useState<"sprint" | "retainer" | "3d">("sprint");
+  const [calcVolume, setCalcVolume] = useState<number>(1);
 
   const schemas = [
     {
@@ -210,20 +212,20 @@ const Services: React.FC = () => {
       />
 
       <div className="bg-[#070b14] text-[#eef0f5] min-h-screen relative overflow-hidden transition-colors duration-200">
-        {/* Subtle Ambient Glow Lighting inspired by Designmonks & Lumas Creative */}
+        {/* GPU-Accelerated Subtle Ambient Glow Lighting */}
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
         />
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-[800px] right-0 w-[500px] h-[500px] bg-[#38bdf8]/10 rounded-full blur-[140px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-[700px] right-0 w-[450px] h-[450px] bg-[#38bdf8]/10 rounded-full blur-[130px] -z-10" 
         />
 
         {/* =========================================================================
             1. EDITORIAL HERO SECTION
         ========================================================================= */}
-        <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 border-b border-white/[0.08]">
+        <section className="relative pt-6 sm:pt-12 pb-16 sm:pb-24 border-b border-white/[0.08]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
               {/* Eyebrow Pill */}
@@ -266,7 +268,7 @@ const Services: React.FC = () => {
               </div>
             </div>
 
-            {/* Studio Metrics & SLA Strip (Front-page card style) */}
+            {/* Studio Metrics & SLA Strip */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 sm:p-6 rounded-3xl bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-lg">
               <div>
                 <p className="text-[11px] font-mono uppercase tracking-wider text-[#38bdf8]">Core Deliverable</p>
@@ -293,7 +295,7 @@ const Services: React.FC = () => {
         </section>
 
         {/* =========================================================================
-            2. CREATIVE TECH STACK PODIUM (Inspired by Lumas Creative Image 3)
+            2. CREATIVE TECH STACK PODIUM
         ========================================================================= */}
         <section className="py-16 sm:py-24 border-b border-white/[0.08] relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -339,7 +341,7 @@ const Services: React.FC = () => {
         </section>
 
         {/* =========================================================================
-            3. INTERACTIVE SERVICE PILLARS (DEEP DIVE SELECTOR)
+            3. INTERACTIVE SERVICE PILLARS
         ========================================================================= */}
         <section className="py-20 sm:py-28 border-b border-white/[0.08] relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -358,13 +360,15 @@ const Services: React.FC = () => {
             </div>
 
             {/* Service Tab Switcher */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8" role="tablist">
               {servicePillars.map((pillar) => {
                 const isActive = activeTab === pillar.id;
                 return (
                   <button
                     key={pillar.id}
                     type="button"
+                    role="tab"
+                    aria-selected={isActive}
                     onClick={() => setActiveTab(pillar.id)}
                     className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-200 relative cursor-pointer ${
                       isActive
@@ -482,7 +486,99 @@ const Services: React.FC = () => {
         </section>
 
         {/* =========================================================================
-            4. COMPARISON MATRIX (Inspired by Designmonks Image 1)
+            4. INTERACTIVE ESTIMATOR WIDGET (Inspired by Designmonks Image 1)
+        ========================================================================= */}
+        <section className="py-16 sm:py-24 border-b border-white/[0.08] relative">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-white/[0.05] via-[#315EFA]/10 to-transparent border border-white/10 backdrop-blur-md shadow-2xl">
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-white/5 text-[#38bdf8] border border-white/10 w-fit mb-4">
+                <Calculator className="w-3.5 h-3.5" />
+                <span>Interactive Production Scope Estimator</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight mb-2">
+                Estimate your project timeline &amp; deliverables.
+              </h2>
+              <p className="text-sm text-slate-300 max-w-xl mb-8 font-normal">
+                Select your format to see real-world delivery turnaround, included revisions, and project squad allocation.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+                <button
+                  type="button"
+                  onClick={() => { setCalcTier("sprint"); setCalcVolume(1); }}
+                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                    calcTier === "sprint"
+                      ? "bg-[#38bdf8]/15 border-[#38bdf8] text-white shadow-[0_0_15px_rgba(56,189,248,0.2)]"
+                      : "bg-white/[0.02] border-white/10 text-slate-300 hover:border-white/20"
+                  }`}
+                >
+                  <p className="text-xs font-mono text-[#38bdf8] font-bold">OPTION A</p>
+                  <p className="text-sm font-bold text-white mt-1">SaaS Launch Sprint</p>
+                  <p className="text-xs text-slate-400 mt-1">Single milestone explainer</p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => { setCalcTier("retainer"); setCalcVolume(4); }}
+                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                    calcTier === "retainer"
+                      ? "bg-[#38bdf8]/15 border-[#38bdf8] text-white shadow-[0_0_15px_rgba(56,189,248,0.2)]"
+                      : "bg-white/[0.02] border-white/10 text-slate-300 hover:border-white/20"
+                  }`}
+                >
+                  <p className="text-xs font-mono text-[#38bdf8] font-bold">OPTION B</p>
+                  <p className="text-sm font-bold text-white mt-1">Monthly Video Retainer</p>
+                  <p className="text-xs text-slate-400 mt-1">Embedded creative squad</p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => { setCalcTier("3d"); setCalcVolume(1); }}
+                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                    calcTier === "3d"
+                      ? "bg-[#38bdf8]/15 border-[#38bdf8] text-white shadow-[0_0_15px_rgba(56,189,248,0.2)]"
+                      : "bg-white/[0.02] border-white/10 text-slate-300 hover:border-white/20"
+                  }`}
+                >
+                  <p className="text-xs font-mono text-[#38bdf8] font-bold">OPTION C</p>
+                  <p className="text-sm font-bold text-white mt-1">3D Device &amp; CGI</p>
+                  <p className="text-xs text-slate-400 mt-1">Photoreal hardware &amp; HUD</p>
+                </button>
+              </div>
+
+              {/* Dynamic Output Box */}
+              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+                <div>
+                  <span className="text-[11px] font-mono uppercase text-[#38bdf8] block">Turnaround SLA</span>
+                  <p className="text-lg font-bold text-white mt-0.5">
+                    {calcTier === "sprint" ? "5–7 Days First Cut" : calcTier === "retainer" ? "Weekly Releases (48h edits)" : "7–10 Days 3D Passes"}
+                  </p>
+                </div>
+
+                <div>
+                  <span className="text-[11px] font-mono uppercase text-[#38bdf8] block">Included Outputs</span>
+                  <p className="text-lg font-bold text-white mt-0.5">
+                    {calcTier === "sprint" ? "1 Hero 4K + 3 Social Cuts" : calcTier === "retainer" ? "4–8 Videos + Shorts/month" : "4K Device Render + Stills"}
+                  </p>
+                </div>
+
+                <div className="sm:text-right">
+                  <Link
+                    to={`/contact?plan=${calcTier}`}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all active:scale-[0.98]"
+                  >
+                    <span>Book This Scope</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            5. COMPARISON MATRIX
         ========================================================================= */}
         <section className="py-20 sm:py-28 border-b border-white/[0.08] relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -529,7 +625,7 @@ const Services: React.FC = () => {
         </section>
 
         {/* =========================================================================
-            5. HOW WE ENGAGE (SPRINT VS RETAINER VS ENTERPRISE)
+            6. HOW WE ENGAGE
         ========================================================================= */}
         <section className="py-20 sm:py-28 border-b border-white/[0.08] relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -577,7 +673,7 @@ const Services: React.FC = () => {
                 </div>
               </div>
 
-              {/* Option 2: Monthly Creative Partner (Highlighted) */}
+              {/* Option 2: Monthly Creative Partner */}
               <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#315EFA]/20 to-[#315EFA]/5 border-2 border-[#38bdf8] shadow-[0_0_40px_rgba(56,189,248,0.2)] flex flex-col justify-between relative">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#38bdf8] text-[#070b14] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
                   Recommended For Scale
@@ -646,7 +742,7 @@ const Services: React.FC = () => {
         </section>
 
         {/* =========================================================================
-            6. TECHNICAL SPECIFICATIONS & PRODUCTION QUALITY MATRIX
+            7. TECHNICAL SPECIFICATIONS
         ========================================================================= */}
         <section className="py-20 sm:py-28 border-b border-white/[0.08] relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -684,10 +780,10 @@ const Services: React.FC = () => {
         </section>
 
         {/* =========================================================================
-            7. FINAL SCOPING CALL TO ACTION
+            8. FINAL SCOPING CALL TO ACTION
         ========================================================================= */}
         <section className="py-20 sm:py-28 relative overflow-hidden text-center">
-          <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" />
+          <div className="pointer-events-none transform-gpu will-change-transform absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-white/5 text-[#38bdf8] border border-white/10 mb-4">

@@ -181,20 +181,20 @@ const Careers: React.FC = () => {
       />
 
       <div className="bg-[#070b14] text-[#eef0f5] min-h-screen relative overflow-hidden transition-colors duration-200">
-        {/* Subtle Ambient Glow Lighting */}
+        {/* GPU-Accelerated Subtle Ambient Glow Lighting */}
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
         />
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-[700px] left-0 w-[500px] h-[500px] bg-[#38bdf8]/10 rounded-full blur-[140px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-[700px] left-0 w-[450px] h-[450px] bg-[#38bdf8]/10 rounded-full blur-[130px] -z-10" 
         />
 
         {/* =========================================================================
             1. HERO SECTION
         ========================================================================= */}
-        <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 border-b border-white/[0.08]">
+        <section className="relative pt-6 sm:pt-12 pb-16 sm:pb-24 border-b border-white/[0.08]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="max-w-3xl mb-14">
               {/* Eyebrow Pill */}

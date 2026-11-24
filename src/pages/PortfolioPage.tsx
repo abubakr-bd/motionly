@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../components/layout/Layout";
@@ -9,15 +9,10 @@ import {
   X, 
   ArrowRight, 
   ArrowUpRight, 
-  Sparkles, 
-  Film, 
-  Monitor, 
-  Users2, 
-  Rocket, 
-  Eye, 
-  CheckCircle2, 
+  Search, 
   Star,
-  Quote
+  Quote,
+  Film
 } from "lucide-react";
 
 const ALL_LABEL = "All Projects";
@@ -52,17 +47,43 @@ const PortfolioPage: React.FC = () => {
 
   const categories = useMemo(() => extractCategories(portfolio), [portfolio]);
   const [activeCategory, setActiveCategory] = useState(ALL_LABEL);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = useMemo(() => {
-    if (activeCategory === ALL_LABEL) return portfolio;
-    return portfolio.filter((p) => p.category === activeCategory);
-  }, [portfolio, activeCategory]);
+    return portfolio.filter((p) => {
+      const matchesCategory = activeCategory === ALL_LABEL || p.category === activeCategory;
+      const q = searchQuery.toLowerCase().trim();
+      const matchesSearch = !q || 
+        p.title.toLowerCase().includes(q) || 
+        (p.description && p.description.toLowerCase().includes(q)) ||
+        (p.category && p.category.toLowerCase().includes(q));
+      return matchesCategory && matchesSearch;
+    });
+  }, [portfolio, activeCategory, searchQuery]);
 
   const [activeVideo, setActiveVideo] = useState<{
     videoId: string;
     title: string;
     category?: string;
   } | null>(null);
+
+  // Keyboard navigation & body scroll lock for theater modal UX
+  useEffect(() => {
+    if (!activeVideo) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveVideo(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [activeVideo]);
 
   return (
     <Layout>
@@ -74,20 +95,20 @@ const PortfolioPage: React.FC = () => {
       />
 
       <div className="bg-[#070b14] text-[#eef0f5] min-h-screen relative overflow-hidden transition-colors duration-200">
-        {/* Subtle Ambient Glow Lighting inspired by Designmonks & Lumas Creative */}
+        {/* GPU-Accelerated Subtle Ambient Glow Lighting */}
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
         />
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-[700px] left-0 w-[500px] h-[500px] bg-[#38bdf8]/10 rounded-full blur-[140px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-[650px] left-0 w-[450px] h-[450px] bg-[#38bdf8]/10 rounded-full blur-[130px] -z-10" 
         />
 
         {/* =========================================================================
             1. EDITORIAL HERO HEADER
         ========================================================================= */}
-        <section className="relative pt-24 sm:pt-32 pb-14 sm:pb-20 border-b border-white/[0.08]">
+        <section className="relative pt-6 sm:pt-12 pb-14 sm:pb-20 border-b border-white/[0.08]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
               <div className="max-w-2xl">
@@ -127,7 +148,7 @@ const PortfolioPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Metrics Ribbon (inspired by Lumas Creative Image 3: 500M+ views, 200+ clients) */}
+            {/* Metrics Ribbon */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 sm:p-6 rounded-3xl bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-lg">
               <div>
                 <p className="text-[11px] font-mono uppercase tracking-wider text-[#38bdf8]">Total Impact</p>
@@ -159,97 +180,92 @@ const PortfolioPage: React.FC = () => {
         <section className="py-16 sm:py-24 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             
-            {/* Category Filter Pills (Front-page style) */}
-            <div className="flex sm:flex-wrap items-center sm:justify-center gap-2 mb-10 sm:mb-14 overflow-x-auto no-scrollbar py-1 px-4 sm:px-0 -mx-4 sm:mx-0 snap-x">
-              {categories.map((cat) => {
-                const isActive = cat === activeCategory;
-                return (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer shrink-0 snap-center ${
-                      isActive
-                        ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_20px_rgba(56,189,248,0.3)]"
-                        : "bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/10"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
+            {/* Filter Pills & Interactive Search Bar */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/[0.08]">
+              {/* Category Filter Pills */}
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                {categories.map((cat) => {
+                  const isActive = cat === activeCategory;
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setActiveCategory(cat)}
+                      className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer shrink-0 ${
+                        isActive
+                          ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_20px_rgba(56,189,248,0.3)]"
+                          : "bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/10"
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Keyword Search */}
+              <div className="w-full md:w-64 relative shrink-0">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search projects..."
+                  className="w-full pl-10 pr-4 py-2 rounded-full text-xs font-medium bg-white/[0.04] border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-white/[0.08] transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Project Count Indicator */}
+            <div className="flex items-center justify-between mb-6 text-xs font-mono text-slate-400">
+              <span>Showing {filtered.length} project{filtered.length === 1 ? "" : "s"}</span>
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="text-[#38bdf8] hover:underline"
+                >
+                  Clear search
+                </button>
+              )}
             </div>
 
             {/* 3-Column Video Card Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-              <AnimatePresence mode="popLayout">
-                {filtered.map((project, idx) => {
-                  const rawId = project.videoId || "";
-                  const match = rawId.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
-                  const cleanVideoId = match ? match[1] : rawId;
+            {filtered.length === 0 ? (
+              <div className="py-16 text-center rounded-3xl bg-white/[0.02] border border-white/10 p-8">
+                <Film className="w-12 h-12 text-slate-500 mx-auto mb-3" />
+                <h3 className="text-lg font-bold text-white">No projects found</h3>
+                <p className="text-sm text-slate-400 mt-1">Try selecting a different category or clearing your search term.</p>
+                <button
+                  type="button"
+                  onClick={() => { setActiveCategory(ALL_LABEL); setSearchQuery(""); }}
+                  className="mt-4 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/15 text-white border border-white/10"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+                <AnimatePresence mode="popLayout">
+                  {filtered.map((project, idx) => {
+                    const rawId = project.videoId || "";
+                    const match = rawId.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+                    const cleanVideoId = match ? match[1] : rawId;
 
-                  return (
-                    <motion.div
-                      key={project.id}
-                      layout
-                      initial={{ opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.96 }}
-                      transition={{ duration: 0.25, delay: idx * 0.03 }}
-                    >
-                      <div className="group rounded-3xl overflow-hidden bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-all duration-300 flex flex-col justify-between">
-                        {/* Video Thumbnail Box */}
-                        <div
-                          className="relative aspect-video w-full overflow-hidden bg-slate-950 cursor-pointer"
-                          onClick={() =>
-                            setActiveVideo({
-                              videoId: cleanVideoId,
-                              title: project.title,
-                              category: project.category,
-                            })
-                          }
-                        >
-                          <img
-                            src={`https://img.youtube.com/vi/${cleanVideoId}/maxresdefault.jpg`}
-                            alt={project.title}
-                            loading="lazy"
-                            className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${cleanVideoId}/hqdefault.jpg`;
-                            }}
-                          />
-
-                          {/* Category Badge on Video */}
-                          {project.category && (
-                            <div className="absolute top-3 left-3 z-10 pointer-events-none">
-                              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#38bdf8] border border-white/10">
-                                {project.category}
-                              </span>
-                            </div>
-                          )}
-
-                          {/* Play Button Overlay */}
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
-                            <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-white/90 text-slate-950 group-hover:bg-[#38bdf8] group-hover:text-black group-hover:scale-110 shadow-2xl flex items-center justify-center transition-all duration-300">
-                              <Play className="w-5 h-5 ml-0.5 fill-current" />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Card Info Details */}
-                        <div className="p-5 sm:p-6 flex items-start justify-between gap-3">
-                          <div>
-                            <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#38bdf8] transition-colors line-clamp-1">
-                              {project.title}
-                            </h3>
-                            {project.description && (
-                              <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
-                                {project.description}
-                              </p>
-                            )}
-                          </div>
+                    return (
+                      <motion.div
+                        key={project.id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.96 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.96 }}
+                        transition={{ duration: 0.25, delay: idx * 0.02 }}
+                      >
+                        <div className="group rounded-3xl overflow-hidden bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-all duration-300 flex flex-col justify-between">
+                          {/* Video Thumbnail Box */}
                           <button
                             type="button"
+                            className="relative aspect-video w-full overflow-hidden bg-slate-950 cursor-pointer block text-left border-0 p-0"
                             onClick={() =>
                               setActiveVideo({
                                 videoId: cleanVideoId,
@@ -257,23 +273,77 @@ const PortfolioPage: React.FC = () => {
                                 category: project.category,
                               })
                             }
-                            className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:border-white/20 shrink-0 transition-colors cursor-pointer"
-                            aria-label="Open video modal"
+                            aria-label={`Play showcase video: ${project.title}`}
                           >
-                            <ArrowUpRight className="w-4 h-4" />
+                            <img
+                              src={`https://img.youtube.com/vi/${cleanVideoId}/maxresdefault.jpg`}
+                              alt={project.title}
+                              width={640}
+                              height={360}
+                              loading="lazy"
+                              decoding="async"
+                              className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${cleanVideoId}/hqdefault.jpg`;
+                              }}
+                            />
+
+                            {/* Category Badge on Video */}
+                            {project.category && (
+                              <div className="absolute top-3 left-3 z-10 pointer-events-none">
+                                <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#38bdf8] border border-white/10">
+                                  {project.category}
+                                </span>
+                              </div>
+                            )}
+
+                            {/* Play Button Overlay */}
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
+                              <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-white/90 text-slate-950 group-hover:bg-[#38bdf8] group-hover:text-black group-hover:scale-110 shadow-2xl flex items-center justify-center transition-all duration-300">
+                                <Play className="w-5 h-5 ml-0.5 fill-current" />
+                              </div>
+                            </div>
                           </button>
+
+                          {/* Card Info Details */}
+                          <div className="p-5 sm:p-6 flex items-start justify-between gap-3">
+                            <div>
+                              <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#38bdf8] transition-colors line-clamp-1">
+                                {project.title}
+                              </h3>
+                              {project.description && (
+                                <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                                  {project.description}
+                                </p>
+                              )}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setActiveVideo({
+                                  videoId: cleanVideoId,
+                                  title: project.title,
+                                  category: project.category,
+                                })
+                              }
+                              className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:border-white/20 shrink-0 transition-colors cursor-pointer"
+                              aria-label="Open video modal"
+                            >
+                              <ArrowUpRight className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            )}
           </div>
         </section>
 
         {/* =========================================================================
-            3. FEATURED CLIENT PROOF (Inspired by Lumas Creative Image 3)
+            3. FEATURED CLIENT PROOF
         ========================================================================= */}
         <section className="py-16 sm:py-24 border-t border-b border-white/[0.08] relative">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -316,7 +386,7 @@ const PortfolioPage: React.FC = () => {
             4. BOTTOM STRATEGIC CTA
         ========================================================================= */}
         <section className="py-20 sm:py-28 relative overflow-hidden text-center">
-          <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" />
+          <div className="pointer-events-none transform-gpu will-change-transform absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
             <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#38bdf8] mb-3">
@@ -347,7 +417,7 @@ const PortfolioPage: React.FC = () => {
         </section>
 
         {/* =========================================================================
-            THEATER VIDEO MODAL
+            THEATER VIDEO MODAL (With Keyboard Trap & Backdrop UX)
         ========================================================================= */}
         <AnimatePresence>
           {activeVideo && (
@@ -357,6 +427,9 @@ const PortfolioPage: React.FC = () => {
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 sm:p-6"
               onClick={() => setActiveVideo(null)}
+              role="dialog"
+              aria-modal="true"
+              aria-label={activeVideo.title}
             >
               <div
                 className="relative w-full max-w-5xl rounded-3xl overflow-hidden bg-slate-950 border border-white/10 shadow-2xl"
@@ -378,12 +451,13 @@ const PortfolioPage: React.FC = () => {
                     type="button"
                     onClick={() => setActiveVideo(null)}
                     className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    aria-label="Close modal"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
 
-                {/* Video Iframe */}
+                {/* Video Iframe with high-performance parameters */}
                 <div className="aspect-video w-full bg-black">
                   <iframe
                     src={`https://www.youtube-nocookie.com/embed/${activeVideo.videoId}?autoplay=1&rel=0&modestbranding=1`}

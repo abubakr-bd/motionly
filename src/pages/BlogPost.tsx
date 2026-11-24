@@ -263,11 +263,11 @@ const BlogPost: React.FC = () => {
         className="fixed top-0 left-0 right-0 h-[3px] bg-[#38bdf8] origin-left z-50 pointer-events-none"
       />
 
-      <article className="min-h-screen bg-[#070b14] text-[#eef0f5] transition-colors duration-200 pt-28 sm:pt-36 pb-24 relative overflow-hidden">
-        {/* Subtle Ambient Glow Lighting */}
+      <article className="min-h-screen bg-[#070b14] text-[#eef0f5] transition-colors duration-200 pt-6 sm:pt-12 pb-24 relative overflow-hidden">
+        {/* GPU-Accelerated Subtle Ambient Glow Lighting */}
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
         />
 
         {/* Article Header Container */}

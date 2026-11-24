@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import Layout from "../components/layout/Layout";
@@ -11,6 +11,7 @@ import {
   Video,
   CheckCircle2,
   ArrowUpRight,
+  ArrowDown,
   Mail,
   ExternalLink,
   Copy,
@@ -20,7 +21,8 @@ import {
   Zap,
   Sparkles,
   Layers,
-  Sliders
+  Sliders,
+  MessageSquare
 } from "lucide-react";
 
 const projectTypes = [
@@ -41,7 +43,6 @@ const budgetRanges = [
 const ContactPage = () => {
   const { settings } = useSiteSettings();
   const { theme } = useTheme();
-  const isDark = theme === "dark";
   const contact = settings.contact;
 
   const rawCal = contact.calLink || contact.calendlyUrl || "motionly-media-rdgfxc/30min";
@@ -50,12 +51,38 @@ const ContactPage = () => {
   const email = contact.email || "hello@motionly.media";
 
   const [copied, setCopied] = useState(false);
-  const [calLoaded, setCalLoaded] = useState(false);
   const [selectedType, setSelectedType] = useState<string>("SaaS Launch Video");
   const [selectedBudget, setSelectedBudget] = useState<string>("$5k – $10k");
+  
+  // Lazy mount Cal embed only when visible or requested to boost initial page speed
+  const [shouldMountCal, setShouldMountCal] = useState(false);
+  const calendarSectionRef = useRef<HTMLElement>(null);
 
-  // Initialize Cal API configuration (Layout, Themes, Namespace)
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Use IntersectionObserver to defer Cal.com until user scrolls near calendar
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldMountCal(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px" }
+    );
+
+    if (calendarSectionRef.current) {
+      observer.observe(calendarSectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Initialize Cal API configuration when mounted
+  useEffect(() => {
+    if (!shouldMountCal) return;
+
     (async function initCal() {
       try {
         const cal = await getCalApi({ namespace: calNamespace });
@@ -69,13 +96,11 @@ const ContactPage = () => {
             },
           },
         });
-        setCalLoaded(true);
       } catch (err) {
         console.warn("Cal.com embed initialized via fallback:", err);
-        setCalLoaded(true);
       }
     })();
-  }, [calNamespace]);
+  }, [shouldMountCal, calNamespace]);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -83,6 +108,14 @@ const ContactPage = () => {
       navigator.clipboard.writeText(email);
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
+  const scrollToCalendar = () => {
+    setShouldMountCal(true);
+    const el = document.getElementById("booking");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -121,26 +154,28 @@ const ContactPage = () => {
       />
 
       <div className="bg-[#070b14] text-[#eef0f5] min-h-screen relative overflow-hidden transition-colors duration-200">
-        {/* Subtle Ambient Glow Lighting */}
+        {/* GPU-Accelerated Subtle Ambient Glow Lighting */}
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
         />
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-[700px] right-0 w-[500px] h-[500px] bg-[#38bdf8]/10 rounded-full blur-[140px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-[650px] right-0 w-[450px] h-[450px] bg-[#38bdf8]/10 rounded-full blur-[130px] -z-10" 
         />
 
         {/* Top Hero Section */}
-        <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 border-b border-white/[0.08]">
+        <section className="relative pt-6 sm:pt-12 pb-16 sm:pb-24 border-b border-white/[0.08]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
               
               {/* Left Column: Heading & Value Proposition */}
               <div className="lg:col-span-7">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-6 shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
                   <span className="text-[#38bdf8] font-bold uppercase tracking-wider">Creative Briefing &bull; 30-Min Strategy</span>
+                  <span className="text-white/20">•</span>
+                  <span className="text-emerald-400">Slots Open This Week</span>
                 </div>
 
                 <h1 className="text-3xl sm:text-6xl font-bold tracking-tight text-white leading-[1.12] mb-6">
@@ -154,7 +189,7 @@ const ContactPage = () => {
                   Tell us what you are launching. We&apos;ll audit your current retention curves, outline scroll-stopping hooks, and build a production blueprint tailored to your release goals.
                 </p>
 
-                {/* Scope & Deliverables Selector (inspired by Lumas Creative Image 3) */}
+                {/* Scope & Deliverables Selector (Interactive UX Bridge) */}
                 <div className="p-5 sm:p-6 rounded-3xl bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-lg mb-8">
                   <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-[#38bdf8] mb-3 flex items-center gap-2">
                     <Layers className="w-4 h-4" />
@@ -170,7 +205,7 @@ const ContactPage = () => {
                           onClick={() => setSelectedType(type)}
                           className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer ${
                             isSelected
-                              ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-sm"
+                              ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)] scale-[1.02]"
                               : "bg-white/5 text-slate-300 hover:text-white border border-white/10"
                           }`}
                         >
@@ -184,7 +219,7 @@ const ContactPage = () => {
                     <Sliders className="w-4 h-4" />
                     2. Approximate Budget Range
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {budgetRanges.map((range) => {
                       const isSelected = selectedBudget === range;
                       return (
@@ -194,7 +229,7 @@ const ContactPage = () => {
                           onClick={() => setSelectedBudget(range)}
                           className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer ${
                             isSelected
-                              ? "bg-[#315EFA] text-white font-bold shadow-sm"
+                              ? "bg-[#315EFA] text-white font-bold shadow-[0_0_15px_rgba(49,94,250,0.4)] scale-[1.02]"
                               : "bg-white/5 text-slate-300 hover:text-white border border-white/10"
                           }`}
                         >
@@ -203,6 +238,16 @@ const ContactPage = () => {
                       );
                     })}
                   </div>
+
+                  {/* Interactive Dynamic Action Button */}
+                  <button
+                    type="button"
+                    onClick={scrollToCalendar}
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                  >
+                    <span>Schedule Call for {selectedType} ({selectedBudget})</span>
+                    <ArrowDown className="w-4 h-4 animate-bounce" />
+                  </button>
                 </div>
 
                 {/* Quick Feature Badges */}
@@ -298,21 +343,19 @@ const ContactPage = () => {
                     </button>
                   </div>
 
-                  {/* Quick Modal Launcher Button */}
+                  {/* Quick Booking Buttons */}
                   <div className="pt-2">
                     <p className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                      Quick Booking Options:
+                      Calendar Options:
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2.5">
                       <button
                         type="button"
-                        data-cal-namespace={calNamespace}
-                        data-cal-link={calLink}
-                        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                        onClick={scrollToCalendar}
                         className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md active:scale-[0.98] transition-all cursor-pointer"
                       >
                         <Calendar className="w-3.5 h-3.5" />
-                        <span>Open Popup Scheduler</span>
+                        <span>Select Date &amp; Time</span>
                       </button>
 
                       <a
@@ -352,8 +395,12 @@ const ContactPage = () => {
           </div>
         </section>
 
-        {/* Main Interactive Cal.com Embedded Scheduler Section */}
-        <section id="booking" className="py-20 sm:py-28 relative">
+        {/* Main Interactive Cal.com Embedded Scheduler Section (Lazy Mounted for Speed) */}
+        <section 
+          id="booking" 
+          ref={calendarSectionRef}
+          className="py-20 sm:py-28 relative border-t border-white/[0.08]"
+        >
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             
             {/* Section Header */}
@@ -365,12 +412,12 @@ const ContactPage = () => {
                 Book your session <span className="font-serif italic font-normal text-[#38bdf8]">online</span>.
               </h2>
               <p className="text-sm sm:text-base text-slate-300 font-normal">
-                Select a date and time slot below. You will immediately receive a calendar invitation and Google Meet connection details.
+                Select a date and time slot below for {selectedType} ({selectedBudget}). You will immediately receive a Google Meet connection.
               </p>
             </div>
 
             {/* Interactive Cal.com Calendar Card */}
-            <div className="relative w-full rounded-3xl overflow-hidden bg-white/[0.02] backdrop-blur-md border border-white/10 shadow-2xl min-h-[680px] p-2 sm:p-6 transition-all">
+            <div className="relative w-full rounded-3xl overflow-hidden bg-white/[0.02] backdrop-blur-md border border-white/10 shadow-2xl min-h-[640px] p-2 sm:p-6 transition-all">
               
               {/* Top Toolbar within Frame */}
               <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10 px-2 sm:px-0">
@@ -382,17 +429,6 @@ const ContactPage = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    data-cal-namespace={calNamespace}
-                    data-cal-link={calLink}
-                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                    className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-colors cursor-pointer"
-                  >
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>Open Fullscreen</span>
-                  </button>
-
                   <a
                     href={`https://cal.com/${calLink}`}
                     target="_blank"
@@ -405,18 +441,33 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              {/* Cal.com React Embed Component */}
-              <div className="w-full min-h-[620px] rounded-2xl overflow-hidden bg-transparent">
-                <Cal
-                  namespace={calNamespace}
-                  calLink={calLink}
-                  style={{ width: "100%", height: "100%", minHeight: "620px", overflow: "hidden" }}
-                  config={{
-                    layout: "month_view",
-                    useSlotsViewOnSmallScreen: "true",
-                    theme: "dark",
-                  }}
-                />
+              {/* Cal.com Embed or Quick Skeleton Placeholder while loading */}
+              <div className="w-full min-h-[580px] rounded-2xl overflow-hidden bg-transparent">
+                {shouldMountCal ? (
+                  <Cal
+                    namespace={calNamespace}
+                    calLink={calLink}
+                    style={{ width: "100%", height: "100%", minHeight: "580px", overflow: "hidden" }}
+                    config={{
+                      layout: "month_view",
+                      useSlotsViewOnSmallScreen: "true",
+                      theme: "dark",
+                    }}
+                  />
+                ) : (
+                  <div className="min-h-[580px] flex flex-col items-center justify-center p-8 text-center">
+                    <div className="w-10 h-10 border-2 border-[#38bdf8] border-t-transparent rounded-full animate-spin mb-4" />
+                    <p className="text-sm font-semibold text-white">Connecting to Studio Calendar...</p>
+                    <p className="text-xs text-slate-400 mt-1">Direct Google Meet &amp; timezone synchronization</p>
+                    <button
+                      type="button"
+                      onClick={() => setShouldMountCal(true)}
+                      className="mt-4 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/15 text-white border border-white/10"
+                    >
+                      Load Calendar Now
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Bottom Fallback / Help Notice */}

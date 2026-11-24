@@ -9,18 +9,36 @@ export const HeroStudio: React.FC = () => {
   const [isPlayingModal, setIsPlayingModal] = useState(false);
   const showreelId = (heroSettings.showreelVideoId || "q7hCvbfvRPU").trim();
 
+  // Keyboard navigation & body scroll lock for showreel modal UX
+  React.useEffect(() => {
+    if (!isPlayingModal) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsPlayingModal(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isPlayingModal]);
+
   return (
     <section 
-      className="relative pt-24 sm:pt-32 pb-20 sm:pb-28 border-b border-black/[0.08] dark:border-white/[0.08] bg-[#070b14] text-[#eef0f5] transition-colors duration-200 overflow-hidden"
+      className="relative pt-6 sm:pt-14 pb-20 sm:pb-28 border-b border-black/[0.08] dark:border-white/[0.08] bg-[#070b14] text-[#eef0f5] transition-colors duration-200 overflow-hidden"
     >
       {/* Subtle Glow Lighting inspired by Design Monks */}
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
+        className="pointer-events-none transform-gpu will-change-transform absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
       />
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-gradient-to-t from-emerald-500/10 via-[#315EFA]/10 to-transparent blur-[120px] -z-10" 
+        className="pointer-events-none transform-gpu will-change-transform absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-gradient-to-t from-emerald-500/10 via-[#315EFA]/10 to-transparent blur-[120px] -z-10" 
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">

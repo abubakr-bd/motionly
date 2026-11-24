@@ -6,23 +6,15 @@ import Layout from "../components/layout/Layout";
 import SEO from "../components/layout/SEO";
 import { 
   Search, 
-  Sparkles, 
-  Clock, 
   ArrowRight, 
   ArrowUpRight, 
   BookOpen, 
-  Tag, 
-  Compass, 
   User,
-  Radio,
-  Layers,
-  Video,
-  FileText
+  X
 } from "lucide-react";
 
 const excerpt = (value: string) => value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
-// Distinct visual badges for article cards (inspired by MZ Media reference)
 const cardBlueprints: Record<string, { tagline: string; icon: string }> = {
   "saas-launch-video-guide": { tagline: "One workflow. A clear story.", icon: "layers" },
   "founder-led-video-growth": { tagline: "Make the expert visible.", icon: "user" },
@@ -33,7 +25,7 @@ const cardBlueprints: Record<string, { tagline: string; icon: string }> = {
 };
 
 const Blog = () => {
-  const { items: rawPosts, loading } = useCollection<BlogItem>("blogs");
+  const { items: rawPosts } = useCollection<BlogItem>("blogs");
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -87,20 +79,20 @@ const Blog = () => {
       />
 
       <div className="bg-[#070b14] text-[#eef0f5] min-h-screen relative overflow-hidden transition-colors duration-200">
-        {/* Subtle Ambient Glow Lighting inspired by MZ Media & Designmonks */}
+        {/* GPU-Accelerated Subtle Ambient Glow Lighting */}
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" 
         />
         <div 
           aria-hidden="true" 
-          className="pointer-events-none absolute top-[700px] right-0 w-[500px] h-[500px] bg-[#38bdf8]/10 rounded-full blur-[140px] -z-10" 
+          className="pointer-events-none transform-gpu will-change-transform absolute top-[650px] right-0 w-[450px] h-[450px] bg-[#38bdf8]/10 rounded-full blur-[130px] -z-10" 
         />
 
         {/* =========================================================================
-            1. EDITORIAL HEADER (Inspired by MZ Media Blog Image 2)
+            1. EDITORIAL HEADER
         ========================================================================= */}
-        <section className="relative pt-24 sm:pt-32 pb-12 sm:pb-16 border-b border-white/[0.08]">
+        <section className="relative pt-6 sm:pt-12 pb-12 sm:pb-16 border-b border-white/[0.08]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
               <div>
@@ -119,9 +111,7 @@ const Blog = () => {
               </div>
             </div>
 
-            {/* =========================================================================
-                FEATURED GUIDE BANNER (Inspired by MZ Media Image 2)
-            ========================================================================= */}
+            {/* FEATURED GUIDE BANNER */}
             {featuredPost && (
               <div className="rounded-3xl bg-gradient-to-br from-white/[0.05] via-[#315EFA]/10 to-transparent border border-white/10 p-6 sm:p-10 shadow-2xl relative overflow-hidden group hover:border-[#38bdf8]/40 transition-all duration-300">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -133,7 +123,6 @@ const Blog = () => {
                       <div className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
                     </div>
 
-                    {/* Stylized Visual Tech Vector */}
                     <div className="my-auto py-6 flex flex-col items-center justify-center text-center">
                       <div className="w-20 h-20 rounded-2xl bg-[#315EFA]/20 border border-[#38bdf8]/40 flex items-center justify-center shadow-[0_0_30px_rgba(56,189,248,0.25)] mb-4">
                         <User className="w-10 h-10 text-[#38bdf8]" />
@@ -192,13 +181,13 @@ const Blog = () => {
         </section>
 
         {/* =========================================================================
-            2. LATEST ARTICLES (Inspired by MZ Media Blog Image 2)
+            2. LATEST ARTICLES
         ========================================================================= */}
         <section className="py-16 sm:py-24 relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             
             {/* Header Strip with Search & Categories */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-white/[0.08]">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/[0.08]">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   Latest articles
@@ -208,7 +197,7 @@ const Blog = () => {
                 </p>
               </div>
 
-              {/* Search Bar */}
+              {/* Search Bar with Reset UX */}
               <div className="w-full md:w-72 relative">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
@@ -216,110 +205,140 @@ const Blog = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search articles..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-full text-xs font-medium bg-white/[0.04] border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-white/[0.08] transition-all"
+                  className="w-full pl-10 pr-9 py-2.5 rounded-full text-xs font-medium bg-white/[0.04] border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-white/[0.08] transition-all"
                 />
+                {searchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchTerm("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             </div>
 
-            {/* Category Pills */}
-            <div className="flex items-center gap-2 mb-10 overflow-x-auto no-scrollbar py-1">
-              {categories.map((cat) => {
-                const isActive = activeCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all duration-150 cursor-pointer shrink-0 ${
-                      isActive
-                        ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]"
-                        : "bg-white/[0.03] text-slate-400 hover:text-white border border-white/10"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
+            {/* Category Pills & Live Count */}
+            <div className="flex items-center justify-between gap-4 mb-8">
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                {categories.map((cat) => {
+                  const isActive = activeCategory === cat;
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setActiveCategory(cat)}
+                      className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all duration-150 cursor-pointer shrink-0 ${
+                        isActive
+                          ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                          : "bg-white/[0.03] text-slate-400 hover:text-white border border-white/10"
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <span className="text-xs font-mono text-slate-400 shrink-0 hidden sm:inline">
+                {filteredPosts.length} article{filteredPosts.length === 1 ? "" : "s"}
+              </span>
             </div>
 
             {/* 3-Column Articles Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {regularPosts.map((post) => {
-                const blueprint = cardBlueprints[post.id] || { tagline: "One workflow. A clear story.", icon: "layers" };
-                const summaryText = post.summary || excerpt(post.content).slice(0, 140) + "...";
+            {filteredPosts.length === 0 ? (
+              <div className="py-16 text-center rounded-3xl bg-white/[0.02] border border-white/10 p-8">
+                <BookOpen className="w-10 h-10 text-slate-500 mx-auto mb-3" />
+                <h3 className="text-lg font-bold text-white">No articles found</h3>
+                <p className="text-sm text-slate-400 mt-1">Try adjusting your search query or category filter.</p>
+                <button
+                  type="button"
+                  onClick={() => { setActiveCategory("All"); setSearchTerm(""); }}
+                  className="mt-4 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/15 text-white border border-white/10"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {regularPosts.map((post) => {
+                  const blueprint = cardBlueprints[post.id] || { tagline: "One workflow. A clear story.", icon: "layers" };
+                  const summaryText = post.summary || excerpt(post.content).slice(0, 140) + "...";
 
-                return (
-                  <motion.article
-                    key={post.id}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="group rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] p-5 sm:p-6 transition-all duration-300 flex flex-col justify-between"
-                  >
-                    <div>
-                      {/* Visual Blueprint Card Header (MZ Media style) */}
-                      <Link to={`/blog/${post.id}`} className="block">
-                        <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-[#0c1424] via-[#080d1a] to-[#04060c] border border-white/10 p-5 mb-5 flex flex-col justify-between group-hover:border-[#38bdf8]/40 transition-colors">
-                          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
-                            <span>MOTIONLY // DOC</span>
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]/60 group-hover:bg-[#38bdf8] transition-colors" />
-                          </div>
+                  return (
+                    <motion.article
+                      key={post.id}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="group rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] p-5 sm:p-6 transition-all duration-300 flex flex-col justify-between"
+                    >
+                      <div>
+                        {/* Visual Blueprint Card Header */}
+                        <Link to={`/blog/${post.id}`} className="block">
+                          <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-[#0c1424] via-[#080d1a] to-[#04060c] border border-white/10 p-5 mb-5 flex flex-col justify-between group-hover:border-[#38bdf8]/40 transition-colors">
+                            <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
+                              <span>MOTIONLY // DOC</span>
+                              <div className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]/60 group-hover:bg-[#38bdf8] transition-colors" />
+                            </div>
 
-                          <div className="my-auto text-center py-2">
-                            <p className="text-sm font-bold text-white tracking-tight">
-                              {blueprint.tagline}
-                            </p>
-                            <div className="w-12 h-0.5 bg-[#38bdf8]/40 mx-auto mt-2 rounded-full group-hover:w-16 group-hover:bg-[#38bdf8] transition-all" />
-                          </div>
+                            <div className="my-auto text-center py-2">
+                              <p className="text-sm font-bold text-white tracking-tight">
+                                {blueprint.tagline}
+                              </p>
+                              <div className="w-12 h-0.5 bg-[#38bdf8]/40 mx-auto mt-2 rounded-full group-hover:w-16 group-hover:bg-[#38bdf8] transition-all" />
+                            </div>
 
-                          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
-                            <span>SaaS &amp; Tech</span>
-                            <span>Guide</span>
+                            <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
+                              <span>SaaS &amp; Tech</span>
+                              <span>Guide</span>
+                            </div>
                           </div>
+                        </Link>
+
+                        {/* Metadata tag */}
+                        <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-[#38bdf8] mb-2.5">
+                          <span>{post.category || "VIDEO MARKETING"}</span>
+                          <span className="text-white/20">•</span>
+                          <span className="text-slate-400 font-normal">5 MIN READ</span>
                         </div>
-                      </Link>
 
-                      {/* Metadata tag */}
-                      <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-[#38bdf8] mb-2.5">
-                        <span>{post.category || "VIDEO MARKETING"}</span>
-                        <span className="text-white/20">•</span>
-                        <span className="text-slate-400 font-normal">5 MIN READ</span>
+                        {/* Title */}
+                        <Link to={`/blog/${post.id}`}>
+                          <h3 className="text-lg font-bold text-white group-hover:text-[#38bdf8] transition-colors leading-snug tracking-tight mb-2.5 line-clamp-2">
+                            {post.title}
+                          </h3>
+                        </Link>
+
+                        {/* Summary */}
+                        <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed line-clamp-3 mb-6">
+                          {summaryText}
+                        </p>
                       </div>
 
-                      {/* Title */}
-                      <Link to={`/blog/${post.id}`}>
-                        <h3 className="text-lg font-bold text-white group-hover:text-[#38bdf8] transition-colors leading-snug tracking-tight mb-2.5 line-clamp-2">
-                          {post.title}
-                        </h3>
-                      </Link>
-
-                      {/* Summary */}
-                      <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed line-clamp-3 mb-6">
-                        {summaryText}
-                      </p>
-                    </div>
-
-                    {/* Author & Read Link Footer */}
-                    <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-[#315EFA]/20 border border-[#38bdf8]/30 flex items-center justify-center text-[10px] font-bold text-[#38bdf8]">
-                          M
+                      {/* Author & Read Link Footer */}
+                      <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-full bg-[#315EFA]/20 border border-[#38bdf8]/30 flex items-center justify-center text-[10px] font-bold text-[#38bdf8]">
+                            M
+                          </div>
+                          <span className="text-slate-400 font-medium">Motionly Studio</span>
                         </div>
-                        <span className="text-slate-400 font-medium">Motionly Studio</span>
-                      </div>
 
-                      <Link
-                        to={`/blog/${post.id}`}
-                        className="inline-flex items-center gap-1 font-bold text-slate-300 group-hover:text-[#38bdf8] transition-colors"
-                      >
-                        <span>Read</span>
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </div>
-                  </motion.article>
-                );
-              })}
-            </div>
+                        <Link
+                          to={`/blog/${post.id}`}
+                          className="inline-flex items-center gap-1 font-bold text-slate-300 group-hover:text-[#38bdf8] transition-colors"
+                        >
+                          <span>Read</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
+                    </motion.article>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </section>
 
@@ -327,7 +346,7 @@ const Blog = () => {
             3. BOTTOM NEWSLETTER / STRATEGY CTA
         ========================================================================= */}
         <section className="py-20 sm:py-28 relative overflow-hidden text-center border-t border-white/[0.08]">
-          <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" />
+          <div className="pointer-events-none transform-gpu will-change-transform absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" />
 
           <div className="max-w-3xl mx-auto px-4 sm:px-6 relative z-10">
             <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#38bdf8] mb-3">
