@@ -23,6 +23,13 @@ export default defineConfig({
     target: "es2020",
     cssCodeSplit: true,
     chunkSizeWarningLimit: 800,
+    modulePreload: {
+      resolveDependencies: (_filename, deps) => {
+        return deps.filter(
+          (dep) => !dep.includes("vendor-calcom") && !dep.includes("vendor-firebase")
+        );
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks(id) {
