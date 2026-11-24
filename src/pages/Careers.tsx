@@ -256,29 +256,41 @@ const Careers: React.FC = () => {
 
               {/* Department Filter Pills */}
               <div className="flex flex-wrap gap-2">
-                {departments.map((dept) => (
-                  <button
-                    key={dept}
-                    type="button"
-                    onClick={() => setSelectedDept(dept)}
-                    className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-150 cursor-pointer ${
-                      selectedDept === dept
-                        ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]"
-                        : "bg-white/[0.03] text-slate-400 hover:text-white border border-white/10"
-                    }`}
-                  >
-                    {dept}
-                  </button>
-                ))}
+                {departments.map((dept) => {
+                  const isSelected = selectedDept === dept;
+                  return (
+                    <button
+                      key={dept}
+                      type="button"
+                      onClick={() => setSelectedDept(dept)}
+                      className={`relative px-4 py-2 rounded-full text-xs font-mono font-medium transition-colors duration-150 cursor-pointer active:scale-95 ${
+                        isSelected
+                          ? "text-[#070b14] font-bold"
+                          : "bg-white/[0.03] text-slate-400 hover:text-white border border-white/10"
+                      }`}
+                    >
+                      {isSelected && (
+                        <motion.span
+                          layoutId="careers-dept-pill"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          className="absolute inset-0 rounded-full bg-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.3)] -z-10"
+                        />
+                      )}
+                      {dept}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Job Listings Grid */}
             <div className="space-y-6">
               {filteredJobs.map((job) => (
-                <div
+                <motion.div
                   key={job.id}
-                  className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] transition-all duration-300 shadow-xl"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] transition-colors duration-300 shadow-xl"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-6">
                     <div>
@@ -347,7 +359,7 @@ const Careers: React.FC = () => {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
