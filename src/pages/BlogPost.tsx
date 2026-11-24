@@ -330,6 +330,7 @@ const BlogPost: React.FC = () => {
               onClick={handleShare}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 transition-colors cursor-pointer"
               title="Copy article link"
+              aria-label="Copy article link to clipboard"
             >
               {copied ? (
                 <>
@@ -356,6 +357,8 @@ const BlogPost: React.FC = () => {
                 className="w-full h-full object-cover"
                 loading="eager"
                 decoding="async"
+                width="1200"
+                height="675"
               />
             </div>
           </div>
@@ -467,6 +470,9 @@ const BlogPost: React.FC = () => {
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
+                        decoding="async"
+                        width="480"
+                        height="300"
                       />
                     </div>
                   )}

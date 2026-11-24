@@ -205,12 +205,14 @@ const Blog = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search articles..."
+                  aria-label="Search articles"
                   className="w-full pl-10 pr-9 py-2.5 rounded-full text-xs font-medium bg-white/[0.04] border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-white/[0.08] transition-all"
                 />
                 {searchTerm && (
                   <button
                     type="button"
                     onClick={() => setSearchTerm("")}
+                    aria-label="Clear search query"
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
                   >
                     <X className="w-3.5 h-3.5" />

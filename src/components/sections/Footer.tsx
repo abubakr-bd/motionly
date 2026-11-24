@@ -407,6 +407,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={ai.title}
+                  aria-label={ai.title}
                   className={`w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center transition-all duration-150 cursor-pointer active:scale-95 shadow-xs ${ai.color}`}
                 >
                   {ai.icon}

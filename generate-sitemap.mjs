@@ -9,16 +9,16 @@ const BASE_URL = 'https://motionly.media';
 
 const staticRoutes = [
   { url: '/', priority: '1.0', changefreq: 'weekly' },
-  { url: '/services', priority: '0.9', changefreq: 'monthly' },
-  { url: '/portfolio', priority: '0.9', changefreq: 'weekly' },
-  { url: '/about', priority: '0.8', changefreq: 'monthly' },
-  { url: '/personal-branding', priority: '0.8', changefreq: 'monthly' },
-  { url: '/careers', priority: '0.7', changefreq: 'monthly' },
-  { url: '/blog', priority: '0.9', changefreq: 'daily' },
-  { url: '/contact', priority: '0.8', changefreq: 'monthly' },
-  { url: '/privacy', priority: '0.3', changefreq: 'yearly' },
-  { url: '/terms', priority: '0.3', changefreq: 'yearly' },
-  { url: '/refund', priority: '0.3', changefreq: 'yearly' },
+  { url: '/services/', priority: '0.9', changefreq: 'monthly' },
+  { url: '/portfolio/', priority: '0.9', changefreq: 'weekly' },
+  { url: '/about/', priority: '0.8', changefreq: 'monthly' },
+  { url: '/personal-branding/', priority: '0.8', changefreq: 'monthly' },
+  { url: '/careers/', priority: '0.7', changefreq: 'monthly' },
+  { url: '/blog/', priority: '0.9', changefreq: 'daily' },
+  { url: '/contact/', priority: '0.8', changefreq: 'monthly' },
+  { url: '/privacy/', priority: '0.3', changefreq: 'yearly' },
+  { url: '/terms/', priority: '0.3', changefreq: 'yearly' },
+  { url: '/refund/', priority: '0.3', changefreq: 'yearly' },
 ];
 
 const STATIC_BLOGS = [
@@ -91,15 +91,15 @@ async function generateSitemap() {
     console.warn('Using static portfolio fallback for sitemap:', error.message);
   }
 
-  // Merge static and dynamic blogs
+  // Merge static and dynamic blogs with trailing slash normalization
   const allBlogsMap = new Map();
-  STATIC_BLOGS.forEach(b => allBlogsMap.set(b.id, { url: `/blog/${b.id}`, priority: '0.7', changefreq: 'monthly', lastmod: b.date }));
-  dynamicBlogs.forEach(b => allBlogsMap.set(b.id, { url: `/blog/${b.id}`, priority: '0.7', changefreq: 'monthly', lastmod: b.date }));
+  STATIC_BLOGS.forEach(b => allBlogsMap.set(b.id, { url: `/blog/${b.id}/`, priority: '0.7', changefreq: 'monthly', lastmod: b.date }));
+  dynamicBlogs.forEach(b => allBlogsMap.set(b.id, { url: `/blog/${b.id}/`, priority: '0.7', changefreq: 'monthly', lastmod: b.date }));
 
-  // Merge static and dynamic portfolio
+  // Merge static and dynamic portfolio with trailing slash normalization
   const allPortfolioMap = new Map();
-  STATIC_PORTFOLIO.forEach(p => allPortfolioMap.set(p.id, { url: `/portfolio/${p.id}`, priority: '0.8', changefreq: 'monthly', lastmod: p.date }));
-  dynamicPortfolio.forEach(p => allPortfolioMap.set(p.id, { url: `/portfolio/${p.id}`, priority: '0.8', changefreq: 'monthly', lastmod: p.date }));
+  STATIC_PORTFOLIO.forEach(p => allPortfolioMap.set(p.id, { url: `/portfolio/${p.id}/`, priority: '0.8', changefreq: 'monthly', lastmod: p.date }));
+  dynamicPortfolio.forEach(p => allPortfolioMap.set(p.id, { url: `/portfolio/${p.id}/`, priority: '0.8', changefreq: 'monthly', lastmod: p.date }));
 
   const blogRoutes = Array.from(allBlogsMap.values());
   const portfolioRoutes = Array.from(allPortfolioMap.values());

@@ -25,16 +25,19 @@ const SEO: React.FC<SEOProps> = ({
 }) => {
   const { settings } = useSiteSettings();
   const siteName = settings.global.siteName || "Motionly Media";
-  const siteDesc = settings.global.siteDescription || "Motionly is a creative and video marketing agency helping SaaS companies, founders, creators, and ambitious brands turn ideas into impactful visual experiences.";
+  const siteDesc = settings.global.siteDescription || "Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency. Serving market leaders in the US, UK, Canada, Australia, and #1 in Bangladesh.";
   
   const finalTitle = title || siteName;
   const finalDescription = description || siteDesc;
   const fullTitle = finalTitle.includes(siteName) ? finalTitle : `${finalTitle} | ${siteName}`;
-  const metaKeywords = keywords || "creative agency, video marketing agency, SaaS video production, motion graphics, video editing, personal branding, commercial video, Motionly Media";
+  const metaKeywords = keywords || "video editing agency, video marketing agency, video production company, high-retention video editing, video editing agency in Bangladesh, video production BD, SaaS video production, YouTube video editor, VSL production, commercial video agency, Motionly Media";
   
-  // Clean canonical URL without search query params or hashes
+  // Clean canonical URL without search query params or hashes, normalized with trailing slash for Cloudflare Pages
   const rawUrl = url || (typeof window !== "undefined" ? (window.location.origin + window.location.pathname) : "https://motionly.media/");
-  const canonicalUrl = rawUrl.split("?")[0].split("#")[0];
+  const baseCanonical = rawUrl.split("?")[0].split("#")[0];
+  const canonicalUrl = (!baseCanonical.endsWith('/') && !baseCanonical.match(/\.[a-zA-Z0-9]+$/)) 
+    ? `${baseCanonical}/` 
+    : baseCanonical;
 
   // Base Schema for Organization & ProfessionalService
   const baseSchema = {

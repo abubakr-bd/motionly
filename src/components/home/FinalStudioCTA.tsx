@@ -139,6 +139,7 @@ export const FinalStudioCTA: React.FC = () => {
                   onClick={handleCopyEmail}
                   className="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/15 text-white flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 active:scale-95"
                   title="Copy email to clipboard"
+                  aria-label="Copy email address to clipboard"
                 >
                   {copied ? (
                     <>

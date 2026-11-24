@@ -126,7 +126,7 @@ const PAGES = [
             <img src="/nav_logo.webp" alt="Motionly Media" width="120" height="28" fetchpriority="high" />
           </picture>
         </a>
-        <a href="/contact" class="talk-btn">Let's talk &nearr;</a>
+        <a href="/contact/" class="talk-btn">Let's talk &nearr;</a>
       </header>
 
       <section class="crit-hero">
@@ -143,7 +143,7 @@ const PAGES = [
             From SaaS products to personal brands, we turn complex ideas and ambitious visions into compelling visual experiences through strategic video production, motion design, and creative storytelling.
           </p>
           <div>
-            <a href="/contact" class="crit-cta-btn">Start a project</a>
+            <a href="/contact/" class="crit-cta-btn">Start a project</a>
           </div>
           <div class="crit-video-card">
             <img src="https://img.youtube.com/vi/q7hCvbfvRPU/maxresdefault.jpg" alt="Motionly Media showreel video thumbnail" width="1280" height="720" style="width:100%;height:100%;object-fit:cover" fetchpriority="high" decoding="async" />
@@ -305,7 +305,7 @@ const PAGES = [
       <section class="site-cta-banner">
         <h2>Ready to Scale Your Brand with High-Retention Video?</h2>
         <p>Book a discovery strategy call with our creative directors or explore our client case studies today.</p>
-        <p><a href="/contact">Book a discovery call &rarr;</a> | <a href="/portfolio">Browse video case studies &rarr;</a> | <a href="/services">Explore creative services &rarr;</a></p>
+        <p><a href="/contact/">Book a discovery call &rarr;</a> | <a href="/portfolio/">Browse video case studies &rarr;</a> | <a href="/services/">Explore creative services &rarr;</a></p>
       </section>
     `
   },
@@ -321,8 +321,8 @@ const PAGES = [
         <h1>Full-Cycle Video Editing, Video Marketing &amp; Commercial Video Production Services</h1>
         <p class="site-page-hero__lede">From the first idea to the final master render, Motionly Media unifies strategic video marketing with Hollywood-level post-production. Serving ambitious brands in the United States, United Kingdom, Canada, Australia, and market leaders worldwide.</p>
         <div>
-          <a href="/contact" class="site-button">Discuss a video project</a>
-          <a href="/portfolio" class="site-button">View video case studies</a>
+          <a href="/contact/" class="site-button">Discuss a video project</a>
+          <a href="/portfolio/" class="site-button">View video case studies</a>
         </div>
       </section>
 
@@ -383,7 +383,7 @@ const PAGES = [
         </ul>
       </section>
 
-      <p><a href="/contact">Book a strategy call &rarr;</a> | <a href="/portfolio">View video portfolio &rarr;</a></p>
+      <p><a href="/contact/">Book a strategy call &rarr;</a> | <a href="/portfolio/">View video portfolio &rarr;</a></p>
     `
   },
   {
@@ -403,14 +403,14 @@ const PAGES = [
         <ul>
           ${PORTFOLIO_DATA.map(p => `
             <li>
-              <h3><a href="/portfolio/${p.id}">${p.title}</a> (${p.category})</h3>
+              <h3><a href="/portfolio/${p.id}/">${p.title}</a> (${p.category})</h3>
               <p>${p.description}</p>
-              <a href="/portfolio/${p.id}">View case study details &rarr;</a>
+              <a href="/portfolio/${p.id}/">View case study details &rarr;</a>
             </li>
           `).join('')}
         </ul>
       </section>
-      <p><a href="/services">Explore our services &rarr;</a> | <a href="/contact">Start a project &rarr;</a></p>
+      <p><a href="/services/">Explore our services &rarr;</a> | <a href="/contact/">Start a project &rarr;</a></p>
     `
   },
   {
@@ -515,42 +515,127 @@ const PAGES = [
   },
   {
     path: "/contact",
-    title: "Contact Motionly Media | Book a Discovery Call",
-    description: "Ready to elevate your video content? Book a discovery call with Motionly Media to discuss video editing, channel strategy, and high-retention production.",
-    keywords: "contact Motionly Media, book video strategy call, hire video editor, video agency contact",
-    h1: "Contact Motionly Media | Book a Discovery Call",
+    title: "Contact Motionly Media | Book a Video Strategy Call",
+    description: "Book a high-retention video strategy session with Motionly Media. Direct contact, studio hub in Dhaka, Bangladesh, and async delivery for US, UK, Canada, Australia.",
+    keywords: "contact Motionly Media, book video strategy call, hire video editor, video agency contact, video production Bangladesh contact",
+    h1: "Contact Motionly Media | Book a High-Retention Strategy Call",
     bodyContent: `
       <section class="site-page-hero">
-        <p class="site-kicker">Get in Touch with Motionly Media</p>
-        <h1>Contact Motionly Media | Book a Video Strategy Call</h1>
-        <p class="site-page-hero__lede">Schedule a 30-minute high-retention video strategy call with Motionly Media or write directly to <a href="mailto:hello@motionly.media">hello@motionly.media</a>.</p>
-        <p><a href="https://cal.com/motionly-media-rdgfxc/30min" class="site-button">Book Strategy Session on Cal.com &rarr;</a></p>
+        <p class="site-kicker">Get in Touch &bull; Start Your Video Engine</p>
+        <h1>Contact Motionly Media | Book a High-Retention Strategy Call</h1>
+        <p class="site-page-hero__lede">Partner with the #1 video editing and video production agency in Bangladesh, trusted by venture-backed startups, high-growth SaaS founders, and creators across the US, UK, Canada, and Australia.</p>
+        <p><a href="https://cal.com/motionly-media-rdgfxc/30min" class="site-button">Schedule 30-Min Discovery Session on Cal.com &rarr;</a></p>
+      </section>
+
+      <section class="site-contact-details" style="margin-top:2.5rem;">
+        <h2>Direct Contact &amp; Studio Inquiries</h2>
+        <p>Whether you need a dedicated video editing retainer, a commercial SaaS product launch video, or a high-converting VSL, our creative direction team is ready to assist.</p>
+        <ul>
+          <li><strong>Direct Email:</strong> <a href="mailto:contact@motionly.media">contact@motionly.media</a> (Inquiries answered within 12 hours)</li>
+          <li><strong>Editorial Studio Hub:</strong> Dhaka, Bangladesh (BD)</li>
+          <li><strong>International Coverage:</strong> North America (EST/PST), United Kingdom (GMT), Europe (CET), Australia (AEST)</li>
+          <li><strong>Turnaround Standards:</strong> 24 to 48 hours for short-form edits; 3 to 5 business days for comprehensive long-form videos</li>
+          <li><strong>Collaboration Stack:</strong> Frame.io for frame-accurate reviews, Slack / Discord for async communication, Notion for sprint tracking</li>
+        </ul>
+      </section>
+
+      <section class="site-contact-faq" style="margin-top:2.5rem;">
+        <h2>Frequently Asked Questions About Working Together</h2>
+        <article>
+          <h3>How does the onboarding process work?</h3>
+          <p>After your discovery call, we set up a dedicated Slack/Discord channel and Frame.io workspace within 24 hours. You upload your raw footage, brand kit, and brief, and our creative directors immediately assign your dedicated editor and start your first sprint.</p>
+        </article>
+        <article>
+          <h3>Do you sign Mutual Non-Disclosure Agreements (NDAs)?</h3>
+          <p>Yes. We routinely work with stealth startups, unreleased software features, and sensitive enterprise IP. We execute mutual NDAs prior to accessing your raw footage and assets.</p>
+        </article>
+        <article>
+          <h3>What payment methods are supported?</h3>
+          <p>We support secure international payment rails including Stripe (Credit/Debit Cards), Wire Transfer / ACH, Payoneer, and Wise for our global clients across the US, UK, Canada, Australia, and worldwide.</p>
+        </article>
+        <article>
+          <h3>What is your revision policy?</h3>
+          <p>All project sprints and monthly retainers include unlimited revisions. We refine pacing, kinetic typography, sound design, and color grading until the asset meets your exact standard.</p>
+        </article>
       </section>
     `
   },
   {
     path: "/privacy",
     title: "Privacy Policy | Motionly Media",
-    description: "Read the Privacy Policy of Motionly Media regarding personal data protection, analytics, and client information.",
-    keywords: "privacy policy, Motionly Media privacy",
+    description: "Read the Privacy Policy of Motionly Media regarding personal data protection, video asset security, client confidentiality, and compliance.",
+    keywords: "privacy policy, Motionly Media privacy, client confidentiality, video data protection",
     h1: "Privacy Policy",
-    bodyContent: `<section><h1>Privacy Policy</h1><p>Motionly Media values your privacy. Learn how we handle your data.</p></section>`
+    bodyContent: `
+      <section class="site-page-hero">
+        <p class="site-kicker">Legal &amp; Data Protection</p>
+        <h1>Privacy Policy | Motionly Media</h1>
+        <p class="site-page-hero__lede">Last updated: October 2026. Motionly Media (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is committed to protecting the privacy, confidentiality, and security of our clients, creators, and website visitors.</p>
+      </section>
+      <section class="site-page-section" style="margin-top:2rem;">
+        <h2>1. Information We Collect</h2>
+        <p>When you interact with Motionly Media via motionly.media, schedule strategy calls, or engage our creative production services, we collect:</p>
+        <ul>
+          <li><strong>Contact Details:</strong> Name, work email address, company name, phone number, and social media handles.</li>
+          <li><strong>Creative Assets &amp; Media:</strong> Raw video footage, brand identity assets, project briefs, and scripts uploaded for editing and production purposes.</li>
+          <li><strong>Usage &amp; Analytics Data:</strong> Anonymous technical diagnostics including browser type, referring URLs, and performance signals to ensure Core Web Vitals reliability.</li>
+        </ul>
+        <h2>2. How We Use Your Data</h2>
+        <p>Your information is used strictly to deliver high-retention video production services, process transactions, communicate sprint milestones, and provide customer support. We never sell, rent, or trade your personal data or creative media to third parties.</p>
+        <h2>3. Confidentiality &amp; Raw Footage Security</h2>
+        <p>Client video footage, unpublished B-roll, and proprietary software captures are stored in encrypted cloud storage environments with role-based access control. Only creative directors and video editors assigned to your project have access to your raw media.</p>
+        <h2>4. Your Data Rights</h2>
+        <p>You may request access to, correction of, or permanent deletion of your personal data and uploaded assets at any time by contacting us at <a href="mailto:contact@motionly.media">contact@motionly.media</a>.</p>
+      </section>
+    `
   },
   {
     path: "/terms",
     title: "Terms of Service | Motionly Media",
-    description: "Terms of Service governing creative video services, client contracts, and deliverables by Motionly Media.",
-    keywords: "terms of service, Motionly Media terms",
+    description: "Terms of Service governing creative video editing, SaaS product launch videos, VSL retainers, and client contracts by Motionly Media.",
+    keywords: "terms of service, Motionly Media terms, client agreement, video production terms",
     h1: "Terms of Service",
-    bodyContent: `<section><h1>Terms of Service</h1><p>Terms and agreements for creative partnerships with Motionly Media.</p></section>`
+    bodyContent: `
+      <section class="site-page-hero">
+        <p class="site-kicker">Service Agreement</p>
+        <h1>Terms of Service | Motionly Media</h1>
+        <p class="site-page-hero__lede">These Terms of Service govern your access to and use of creative video editing, video marketing, and motion graphics services provided by Motionly Media.</p>
+      </section>
+      <section class="site-page-section" style="margin-top:2rem;">
+        <h2>1. Creative Retainers &amp; Project Sprints</h2>
+        <p>Motionly Media delivers video editing, VSL production, and motion graphics via fixed project sprints or monthly recurring subscription retainers. Work commences upon receipt of project onboarding materials and agreed milestone payments.</p>
+        <h2>2. Intellectual Property &amp; Ownership</h2>
+        <p>Upon full settlement of invoices, all finished video deliverables, rendered media, project files, and associated intellectual property are transferred 100% to the client. The client retains sole ownership of all raw footage, proprietary marks, and brand assets provided to Motionly Media.</p>
+        <h2>3. Turnaround Times &amp; Revisions</h2>
+        <p>Turnaround estimates (24-48 hours for short-form, 3-5 days for long-form) apply to standard sprint volumes. Motionly Media provides unlimited revisions on all active retainers, subject to timely client feedback via Frame.io or designated communication channels.</p>
+        <h2>4. Client Responsibilities &amp; Licensing</h2>
+        <p>Clients represent that they hold all necessary rights, licenses, and permissions for assets, audio, and footage supplied for editing. Motionly Media provides commercially licensed background score, sound effects, and typography for all commercial releases.</p>
+      </section>
+    `
   },
   {
     path: "/refund",
     title: "Refund Policy | Motionly Media",
-    description: "Refund and cancellation terms for video production retainers and project milestones with Motionly Media.",
-    keywords: "refund policy, Motionly Media refunds",
+    description: "Refund and cancellation terms for video editing retainers, project sprints, and milestone guarantees with Motionly Media.",
+    keywords: "refund policy, Motionly Media refunds, satisfaction guarantee, retainer cancellation",
     h1: "Refund Policy",
-    bodyContent: `<section><h1>Refund Policy</h1><p>Our commitment to transparent, milestone-based creative delivery.</p></section>`
+    bodyContent: `
+      <section class="site-page-hero">
+        <p class="site-kicker">Client Guarantee &amp; Transparency</p>
+        <h1>Refund &amp; Cancellation Policy | Motionly Media</h1>
+        <p class="site-page-hero__lede">Our commitment is to deliver world-class video production with complete transparency, risk mitigation, and client satisfaction.</p>
+      </section>
+      <section class="site-page-section" style="margin-top:2rem;">
+        <h2>1. 14-Day Satisfaction Guarantee for Retainers</h2>
+        <p>For new clients enrolling in our monthly video editing retainers, if you are not completely satisfied with our creative direction and initial video sprint within the first 14 days, you may cancel your retainer and request a prorated refund for unrendered work.</p>
+        <h2>2. Milestone-Based Project Sprints</h2>
+        <p>Fixed-price custom productions (such as comprehensive 3D SaaS product launches or commercial VSL packages) are billed on milestone phases (Script/Storyboarding, First Cut, and Final Delivery). If a project is cancelled prior to final cut rendering, unused milestone funds are refunded.</p>
+        <h2>3. Unlimited Revisions Guarantee</h2>
+        <p>Before considering a cancellation, our team provides unlimited revisions on every asset. We are dedicated to dialing in pacing, kinetic typography, and sound design until your video meets the highest commercial standard.</p>
+        <h2>4. Contacting Billing Support</h2>
+        <p>For any billing inquiries, retainer modifications, or refund requests, please email our finance team directly at <a href="mailto:contact@motionly.media">contact@motionly.media</a>.</p>
+      </section>
+    `
   }
 ];
 

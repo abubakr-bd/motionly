@@ -211,6 +211,7 @@ const PortfolioPage: React.FC = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search projects..."
+                  aria-label="Search projects"
                   className="w-full pl-10 pr-4 py-2 rounded-full text-xs font-medium bg-white/[0.04] border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#38bdf8]/50 focus:bg-white/[0.08] transition-all"
                 />
               </div>
@@ -327,7 +328,7 @@ const PortfolioPage: React.FC = () => {
                                 })
                               }
                               className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:border-white/20 shrink-0 transition-colors cursor-pointer"
-                              aria-label="Open video modal"
+                              aria-label={`Open video player for ${project.title}`}
                             >
                               <ArrowUpRight className="w-4 h-4" />
                             </button>

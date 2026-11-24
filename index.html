@@ -32,7 +32,8 @@
     <!-- Favicon / Theme -->
     <link rel="apple-touch-icon" href="/favicon-small.png" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#2563eb" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#070b14" />
 
     <link rel="canonical" href="https://motionly.media/" />
 
@@ -47,11 +48,10 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" />
     </noscript>
 
-    <!-- Preconnect to YouTube CDN & Preload Critical LCP Assets -->
+    <!-- Preconnect to YouTube CDN & Preload Critical LCP Hero Image -->
     <link rel="preconnect" href="https://img.youtube.com" crossorigin />
     <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
     <link rel="preload" as="image" href="https://img.youtube.com/vi/q7hCvbfvRPU/maxresdefault.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="/nav_logo.webp" fetchpriority="high" />
 
     <!-- Structured Data (Organization, ProfessionalService, WebSite & FAQPage for GEO/AEO/SEO) -->
     <script type="application/ld+json">

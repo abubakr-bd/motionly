@@ -328,6 +328,7 @@ const ContactPage = () => {
                       onClick={handleCopyEmail}
                       className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-200 flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
                       title="Copy email to clipboard"
+                      aria-label="Copy email address to clipboard"
                     >
                       {copied ? (
                         <>
