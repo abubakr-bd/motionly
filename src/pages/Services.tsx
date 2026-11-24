@@ -514,75 +514,73 @@ const Services: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
-                <button
-                  type="button"
-                  onClick={() => { setCalcTier("sprint"); setCalcVolume(1); }}
-                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
-                    calcTier === "sprint"
-                      ? "bg-[#38bdf8]/15 border-[#38bdf8] text-white shadow-[0_0_15px_rgba(56,189,248,0.2)]"
-                      : "bg-white/[0.02] border-white/10 text-slate-300 hover:border-white/20"
-                  }`}
-                >
-                  <p className="text-xs font-mono text-[#38bdf8] font-bold">OPTION A</p>
-                  <p className="text-sm font-bold text-white mt-1">SaaS Launch Sprint</p>
-                  <p className="text-xs text-slate-400 mt-1">Single milestone explainer</p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => { setCalcTier("retainer"); setCalcVolume(4); }}
-                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
-                    calcTier === "retainer"
-                      ? "bg-[#38bdf8]/15 border-[#38bdf8] text-white shadow-[0_0_15px_rgba(56,189,248,0.2)]"
-                      : "bg-white/[0.02] border-white/10 text-slate-300 hover:border-white/20"
-                  }`}
-                >
-                  <p className="text-xs font-mono text-[#38bdf8] font-bold">OPTION B</p>
-                  <p className="text-sm font-bold text-white mt-1">Monthly Video Retainer</p>
-                  <p className="text-xs text-slate-400 mt-1">Embedded creative squad</p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => { setCalcTier("3d"); setCalcVolume(1); }}
-                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
-                    calcTier === "3d"
-                      ? "bg-[#38bdf8]/15 border-[#38bdf8] text-white shadow-[0_0_15px_rgba(56,189,248,0.2)]"
-                      : "bg-white/[0.02] border-white/10 text-slate-300 hover:border-white/20"
-                  }`}
-                >
-                  <p className="text-xs font-mono text-[#38bdf8] font-bold">OPTION C</p>
-                  <p className="text-sm font-bold text-white mt-1">3D Device &amp; CGI</p>
-                  <p className="text-xs text-slate-400 mt-1">Photoreal hardware &amp; HUD</p>
-                </button>
+                {[
+                  { id: "sprint", option: "OPTION A", title: "SaaS Launch Sprint", desc: "Single milestone explainer", vol: 1 },
+                  { id: "retainer", option: "OPTION B", title: "Monthly Video Retainer", desc: "Embedded creative squad", vol: 4 },
+                  { id: "3d", option: "OPTION C", title: "3D Device & CGI", desc: "Photoreal hardware & HUD", vol: 1 },
+                ].map((item) => {
+                  const isSelected = calcTier === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => { setCalcTier(item.id as any); setCalcVolume(item.vol); }}
+                      className={`relative p-4 rounded-2xl border text-left transition-colors duration-150 cursor-pointer active:scale-98 ${
+                        isSelected
+                          ? "text-white border-[#38bdf8] shadow-[0_0_20px_rgba(56,189,248,0.25)]"
+                          : "bg-white/[0.02] border-white/10 text-slate-300 hover:border-white/20 hover:bg-white/[0.04]"
+                      }`}
+                    >
+                      {isSelected && (
+                        <motion.span
+                          layoutId="services-calc-tier"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          className="absolute inset-0 rounded-2xl bg-[#38bdf8]/15 -z-10"
+                        />
+                      )}
+                      <p className="text-xs font-mono text-[#38bdf8] font-bold">{item.option}</p>
+                      <p className="text-sm font-bold text-white mt-1">{item.title}</p>
+                      <p className="text-xs text-slate-400 mt-1">{item.desc}</p>
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* Dynamic Output Box */}
-              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-                <div>
-                  <span className="text-[11px] font-mono uppercase text-[#38bdf8] block">Turnaround SLA</span>
-                  <p className="text-lg font-bold text-white mt-0.5">
-                    {calcTier === "sprint" ? "5–7 Days First Cut" : calcTier === "retainer" ? "Weekly Releases (48h edits)" : "7–10 Days 3D Passes"}
-                  </p>
-                </div>
+              {/* Dynamic Output Box with Apple Spring Transition */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={calcTier}
+                  initial={{ opacity: 0, y: 10, scale: 0.99 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.99 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 320 }}
+                  className="p-6 rounded-2xl bg-black/40 border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center"
+                >
+                  <div>
+                    <span className="text-[11px] font-mono uppercase text-[#38bdf8] block">Turnaround SLA</span>
+                    <p className="text-lg font-bold text-white mt-0.5">
+                      {calcTier === "sprint" ? "5–7 Days First Cut" : calcTier === "retainer" ? "Weekly Releases (48h edits)" : "7–10 Days 3D Passes"}
+                    </p>
+                  </div>
 
-                <div>
-                  <span className="text-[11px] font-mono uppercase text-[#38bdf8] block">Included Outputs</span>
-                  <p className="text-lg font-bold text-white mt-0.5">
-                    {calcTier === "sprint" ? "1 Hero 4K + 3 Social Cuts" : calcTier === "retainer" ? "4–8 Videos + Shorts/month" : "4K Device Render + Stills"}
-                  </p>
-                </div>
+                  <div>
+                    <span className="text-[11px] font-mono uppercase text-[#38bdf8] block">Included Outputs</span>
+                    <p className="text-lg font-bold text-white mt-0.5">
+                      {calcTier === "sprint" ? "1 Hero 4K + 3 Social Cuts" : calcTier === "retainer" ? "4–8 Videos + Shorts/month" : "4K Device Render + Stills"}
+                    </p>
+                  </div>
 
-                <div className="sm:text-right">
-                  <Link
-                    to={`/contact?plan=${calcTier}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all active:scale-[0.98]"
-                  >
-                    <span>Book This Scope</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+                  <div className="sm:text-right">
+                    <Link
+                      to={`/contact/?plan=${calcTier}`}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all active:scale-[0.98]"
+                    >
+                      <span>Book This Scope</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </section>

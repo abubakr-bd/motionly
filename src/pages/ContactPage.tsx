@@ -203,12 +203,19 @@ const ContactPage = () => {
                           key={type}
                           type="button"
                           onClick={() => setSelectedType(type)}
-                          className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer ${
+                          className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors duration-150 cursor-pointer active:scale-95 ${
                             isSelected
-                              ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)] scale-[1.02]"
+                              ? "text-[#070b14] font-bold"
                               : "bg-white/5 text-slate-300 hover:text-white border border-white/10"
                           }`}
                         >
+                          {isSelected && (
+                            <motion.span
+                              layoutId="contact-scope-pill"
+                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                              className="absolute inset-0 rounded-full bg-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.3)] -z-10"
+                            />
+                          )}
                           {type}
                         </button>
                       );
@@ -227,12 +234,19 @@ const ContactPage = () => {
                           key={range}
                           type="button"
                           onClick={() => setSelectedBudget(range)}
-                          className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer ${
+                          className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors duration-150 cursor-pointer active:scale-95 ${
                             isSelected
-                              ? "bg-[#315EFA] text-white font-bold shadow-[0_0_15px_rgba(49,94,250,0.4)] scale-[1.02]"
+                              ? "text-white font-bold"
                               : "bg-white/5 text-slate-300 hover:text-white border border-white/10"
                           }`}
                         >
+                          {isSelected && (
+                            <motion.span
+                              layoutId="contact-budget-pill"
+                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                              className="absolute inset-0 rounded-full bg-[#315EFA] shadow-[0_0_15px_rgba(49,94,250,0.4)] -z-10"
+                            />
+                          )}
                           {range}
                         </button>
                       );
@@ -240,14 +254,17 @@ const ContactPage = () => {
                   </div>
 
                   {/* Interactive Dynamic Action Button */}
-                  <button
+                  <motion.button
                     type="button"
                     onClick={scrollToCalendar}
-                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md cursor-pointer"
                   >
                     <span>Schedule Call for {selectedType} ({selectedBudget})</span>
                     <ArrowDown className="w-4 h-4 animate-bounce" />
-                  </button>
+                  </motion.button>
                 </div>
 
                 {/* Quick Feature Badges */}
