@@ -33,13 +33,21 @@ export const MilkyWayCosmos: React.FC = () => {
     if (!ctx) return;
 
     let animId: number;
-    let isVisible = true;
+    let isVisible = false;
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
     const prefersReducedMotion =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 768px), (pointer: coarse)").matches;
+
+    // On mobile devices and reduced motion, skip expensive canvas particle loops
+    if (prefersReducedMotion || isMobile) {
+      return;
+    }
 
     // Handle Resize
     const resize = () => {
@@ -108,7 +116,11 @@ export const MilkyWayCosmos: React.FC = () => {
     // 03. Intersection Observer to Pause Loop when offscreen
     const observer = new IntersectionObserver(
       ([entry]) => {
+        const wasVisible = isVisible;
         isVisible = entry.isIntersecting;
+        if (isVisible && !wasVisible) {
+          animId = requestAnimationFrame(render);
+        }
       },
       { threshold: 0.05 }
     );
@@ -117,10 +129,7 @@ export const MilkyWayCosmos: React.FC = () => {
     // 04. Animation Loop
     let time = 0;
     const render = () => {
-      if (!isVisible) {
-        animId = requestAnimationFrame(render);
-        return;
-      }
+      if (!isVisible) return;
 
       time += 0.015;
       ctx.clearRect(0, 0, width, height);
@@ -269,8 +278,6 @@ export const MilkyWayCosmos: React.FC = () => {
 
       animId = requestAnimationFrame(render);
     };
-
-    render();
 
     return () => {
       cancelAnimationFrame(animId);

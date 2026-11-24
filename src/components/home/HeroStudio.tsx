@@ -169,6 +169,7 @@ export const HeroStudio: React.FC = () => {
         >
           {/* Main 16:9 Showcase Player with Physical Perspective Tilt */}
           <motion.div 
+            initial={false}
             style={{
               rotateX,
               rotateY,
