@@ -425,8 +425,8 @@ const PAGES = [
         <h1>About Motionly Media | Global Video Marketing &amp; Production Studio</h1>
         <p class="site-page-hero__lede">Motionly Media is an independent creative agency and production studio partnering with creators, tech leaders, and growing brands worldwide. Born with an international ambition, we operate from Dhaka, Bangladesh with Silicon Valley production standards, serving market leaders across the United States, United Kingdom, Canada, Australia, and Europe.</p>
         <div>
-          <a href="/contact" class="site-button">Connect with our team</a>
-          <a href="/portfolio" class="site-button">Explore our work</a>
+          <a href="/contact/" class="site-button">Connect with our team</a>
+          <a href="/portfolio/" class="site-button">Explore our work</a>
         </div>
       </section>
 
@@ -445,7 +445,7 @@ const PAGES = [
         <h2>Worldwide Collaboration</h2>
         <p>Whether you are a SaaS founder in San Francisco, an e-commerce brand in London, or an enterprise in Dhaka, our asynchronous Frame.io review loops and 24-48 hour sprint timelines make working together frictionless.</p>
 
-        <p><a href="/services">View our services &rarr;</a> | <a href="/portfolio">Browse our portfolio &rarr;</a> | <a href="/contact">Book a strategy call &rarr;</a></p>
+        <p><a href="/services/">View our services &rarr;</a> | <a href="/portfolio/">Browse our portfolio &rarr;</a> | <a href="/contact/">Book a strategy call &rarr;</a></p>
       </section>
     `
   },
@@ -501,7 +501,7 @@ const PAGES = [
         <p class="site-kicker">PERSONAL BRANDING BY MOTIONLY</p>
         <h1>Your Expertise. Our Creativity. <em>A Brand That Stands Out.</em></h1>
         <p class="site-page-hero__lede">You have the knowledge, experience, and ideas. We help the world see them. Motionly turns your expertise into engaging content through strategic planning, professional video editing, creative storytelling, and consistent content distribution.</p>
-        <p><a href="/contact" class="site-button">Let's Build Your Brand</a></p>
+        <p><a href="/contact/" class="site-button">Let's Build Your Brand</a></p>
       </section>
       <section class="site-page-section">
         <h2>You Have Something Worth Sharing. But Are You Sharing It?</h2>
