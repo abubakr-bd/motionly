@@ -74,21 +74,24 @@ export const HeroStudio: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Main Editorial Header (Centered Design Monks Composition) */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
           {/* Eyebrow: Rating Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-5 sm:mb-6 shadow-sm max-w-full">
             <div className="flex items-center text-amber-400">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                <Star key={i} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-current" />
               ))}
             </div>
             <span className="font-semibold text-white">4.9 / 5</span>
             <span className="text-white/20">&bull;</span>
-            <span className="text-[#38bdf8] uppercase tracking-wider font-bold">Leading Video &amp; Motion Design Studio</span>
+            <span className="text-[#38bdf8] uppercase tracking-wider font-bold truncate">
+              <span className="hidden sm:inline">Leading Video &amp; Motion Design Studio</span>
+              <span className="sm:hidden">Video &amp; Motion Studio</span>
+            </span>
           </div>
 
           {/* Headline with Masked Typography */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] mb-6">
+          <h1 className="text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.12] sm:leading-[1.08] mb-5 sm:mb-6">
             <span className="block overflow-hidden pb-1">
               <span ref={titleLine1Ref} className="inline-block will-change-transform">
                 Creative videos.
@@ -107,19 +110,19 @@ export const HeroStudio: React.FC = () => {
           {/* Supporting Copy */}
           <p 
             ref={descRef}
-            className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-7 font-normal"
+            className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-7 font-normal px-2 sm:px-0"
           >
             We bring ideas to life through strategic storytelling, exceptional video production and thoughtful creative execution.
           </p>
 
           {/* Global Reach Pill Badge (Design Monks Style) */}
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300 mb-8">
-            <span>Producing for ambitious brands across 10+ countries</span>
-            <span>🇺🇸 🇬🇧 🇩🇪 🇨🇦 🇦🇺 🇸🇬 🇦🇪</span>
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-[11px] sm:text-xs font-mono text-slate-300 mb-6 sm:mb-8 max-w-full text-center">
+            <span>Producing for ambitious brands in 10+ countries</span>
+            <span className="tracking-widest">🇺🇸 🇬🇧 🇩🇪 🇨🇦 🇦🇺 🇸🇬 🇦🇪</span>
           </div>
 
           {/* Primary & Secondary CTAs */}
-          <div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-4">
+          <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
             <a
               href="#booking"
               onClick={(e) => {
@@ -174,20 +177,20 @@ export const HeroStudio: React.FC = () => {
 
             {/* Central Play Badge with Subtle Pulse */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#315EFA] text-white flex items-center justify-center shadow-xl group-hover:scale-105 active:scale-95 transition-transform duration-200 border-2 border-white/30">
-                <Play className="w-7 h-7 fill-current ml-1" />
+              <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-[#315EFA] text-white flex items-center justify-center shadow-xl group-hover:scale-105 active:scale-95 transition-transform duration-200 border-2 border-white/30">
+                <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-1" />
               </div>
             </div>
 
             {/* Bottom Metabar */}
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-white/90 bg-black/60 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10">
-              <div className="flex items-center gap-2">
+            <div className="absolute bottom-2.5 sm:bottom-4 left-2.5 sm:left-4 right-2.5 sm:right-4 flex items-center justify-between text-[11px] sm:text-xs font-mono text-white/90 bg-black/60 backdrop-blur-md px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-white/10">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-                <span className="font-semibold">Motionly Showreel 2026</span>
-                <span className="text-white/40">&bull;</span>
-                <span className="text-slate-300">4K Master • 60fps</span>
+                <span className="font-semibold truncate">Motionly Showreel 2026</span>
+                <span className="text-white/40 hidden sm:inline">&bull;</span>
+                <span className="text-slate-300 hidden sm:inline">4K Master • 60fps</span>
               </div>
-              <span className="text-[#38bdf8] font-medium hidden sm:inline">Click to watch film</span>
+              <span className="text-[#38bdf8] font-medium text-[10px] sm:text-xs shrink-0">Watch film</span>
             </div>
           </div>
         </div>

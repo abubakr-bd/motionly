@@ -56,8 +56,8 @@ export const SelectedWork: React.FC = () => {
           </p>
         </div>
 
-        {/* ── Category Filter Tabs ── */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10 sm:mb-14">
+        {/* ── Category Filter Tabs (Swipeable on Mobile, Centered on Desktop) ── */}
+        <div className="flex sm:flex-wrap items-center sm:justify-center gap-2 mb-8 sm:mb-14 overflow-x-auto no-scrollbar py-1 px-4 sm:px-0 -mx-4 sm:mx-0 snap-x">
           {categories.map((cat) => {
             const isActive = cat === activeCategory;
             return (
@@ -65,9 +65,9 @@ export const SelectedWork: React.FC = () => {
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-150 cursor-pointer ${
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-150 cursor-pointer shrink-0 snap-center ${
                   isActive
-                    ? "bg-[#38d9d9] text-[#0a0e17]"
+                    ? "bg-[#38d9d9] text-[#0a0e17] font-semibold shadow-xs"
                     : "bg-white/[0.06] text-[#a3a9b8] hover:bg-white/[0.1] hover:text-white border border-white/[0.08]"
                 }`}
               >

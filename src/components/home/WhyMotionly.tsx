@@ -34,8 +34,124 @@ export const WhyMotionly: React.FC = () => {
           </p>
         </div>
 
-        {/* Comparison Matrix Table */}
-        <div className="overflow-x-auto pb-4 scrollbar-none">
+        {/* ── Mobile-Optimized Comparison Cards (block md:hidden) ── */}
+        <div className="block md:hidden space-y-4 mb-6">
+          {/* Motionly Card */}
+          <div className="rounded-2xl p-5 bg-gradient-to-b from-[#0f172a] via-[#151f38] to-[#0f172a] border-2 border-[#315EFA]/70 shadow-[0_0_30px_rgba(49,94,250,0.25)]">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-[#315EFA] text-white flex items-center justify-center shrink-0 shadow-md">
+                <Video className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-base font-bold text-white">Motionly Studio</h3>
+                  <span className="text-[9px] uppercase font-mono font-bold bg-[#38bdf8]/20 text-[#38bdf8] px-2 py-0.5 rounded-full border border-[#38bdf8]/30">
+                    Recommended
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-300 mt-0.5">Dedicated creative squad &amp; fast sprint cycles</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-3 border-t border-white/10 text-xs font-mono">
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.04]">
+                <span className="text-slate-400">Speed</span>
+                <span className="text-emerald-400 font-bold flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> Fast (48h)</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.04]">
+                <span className="text-slate-400">Flexibility</span>
+                <span className="text-emerald-400 font-bold flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> Unlimited</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.04]">
+                <span className="text-slate-400">Quality</span>
+                <span className="text-emerald-400 font-bold flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> Top 1%</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.04]">
+                <span className="text-slate-400">Scalability</span>
+                <span className="text-emerald-400 font-bold flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> Infinite</span>
+              </div>
+              <div className="col-span-2 flex items-center justify-between p-2 rounded-lg bg-white/[0.04]">
+                <span className="text-slate-400">Predictable Cost</span>
+                <span className="text-emerald-400 font-bold flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> Fixed Flat Pricing</span>
+              </div>
+            </div>
+          </div>
+
+          {/* In-House Hire Card */}
+          <div className="rounded-2xl p-5 bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-white/5 text-slate-400 flex items-center justify-center shrink-0">
+                <Users2 className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-white">In-House Video Editor</h3>
+                <p className="text-[11px] text-slate-400 mt-0.5">High overhead, single skill set, slow recruitment</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-3 border-t border-white/10 text-xs font-mono">
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Speed</span>
+                <span className="text-rose-400 flex items-center gap-1"><X className="w-3.5 h-3.5 stroke-[2.5]" /> Slow</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Flexibility</span>
+                <span className="text-rose-400 flex items-center gap-1"><X className="w-3.5 h-3.5 stroke-[2.5]" /> Low</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Quality</span>
+                <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> Good</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Scalability</span>
+                <span className="text-rose-400 flex items-center gap-1"><X className="w-3.5 h-3.5 stroke-[2.5]" /> Bottleneck</span>
+              </div>
+              <div className="col-span-2 flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Predictable Cost</span>
+                <span className="text-rose-400 flex items-center gap-1"><X className="w-3.5 h-3.5 stroke-[2.5]" /> $80k+ / yr salary + benefits</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Traditional Agency Card */}
+          <div className="rounded-2xl p-5 bg-white/[0.03] border border-white/10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-white/5 text-slate-400 flex items-center justify-center shrink-0">
+                <Building2 className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-white">Traditional Creative Agency</h3>
+                <p className="text-[11px] text-slate-400 mt-0.5">Heavy management, bloated retainers, junior handoff</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-3 border-t border-white/10 text-xs font-mono">
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Speed</span>
+                <span className="text-rose-400 flex items-center gap-1"><X className="w-3.5 h-3.5 stroke-[2.5]" /> 6-8 Weeks</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Flexibility</span>
+                <span className="text-rose-400 flex items-center gap-1"><X className="w-3.5 h-3.5 stroke-[2.5]" /> Rigid</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Quality</span>
+                <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> High</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Scalability</span>
+                <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3.5 h-3.5 stroke-[3]" /> Medium</span>
+              </div>
+              <div className="col-span-2 flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <span className="text-slate-400">Predictable Cost</span>
+                <span className="text-rose-400 flex items-center gap-1"><X className="w-3.5 h-3.5 stroke-[2.5]" /> $15k+/mo retainer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Desktop Comparison Matrix Table (hidden md:block) ── */}
+        <div className="hidden md:block overflow-x-auto pb-4 scrollbar-none">
           <div className="min-w-[760px] space-y-4">
             
             {/* Table Header Row */}

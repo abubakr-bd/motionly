@@ -118,42 +118,42 @@ export const ServicesShowcase: React.FC = () => {
         </div>
 
         {/* ── Large Landscape Shape Cards (Matching User's Reference Layout) ── */}
-        <div className="space-y-8 sm:space-y-10">
+        <div className="space-y-6 sm:space-y-10">
           {SERVICES.map((item) => (
             <div
               key={item.id}
-              className={`rounded-3xl p-6 sm:p-10 border border-black/5 dark:border-white/10 shadow-sm transition-all duration-300 hover:shadow-xl ${item.bgClass} ${item.darkBgClass}`}
+              className={`rounded-2xl sm:rounded-3xl p-5 sm:p-10 border border-black/5 dark:border-white/10 shadow-sm transition-all duration-300 hover:shadow-xl ${item.bgClass} ${item.darkBgClass}`}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
                 
-                {/* Left Information (7 cols) */}
-                <div className="lg:col-span-7 flex flex-col justify-between">
+                {/* Information Column (7 cols) */}
+                <div className="lg:col-span-7 flex flex-col justify-between order-2 lg:order-1">
                   <div>
                     {/* Category in Italic Serif */}
-                    <span className={`text-base sm:text-lg font-serif italic ${item.accentColor} block mb-2`}>
+                    <span className={`text-sm sm:text-lg font-serif italic ${item.accentColor} block mb-1.5 sm:mb-2`}>
                       {item.category}
                     </span>
 
                     {/* Headline */}
-                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 leading-snug">
+                    <h3 className="text-xl sm:text-3xl font-bold tracking-tight mb-3 sm:mb-4 leading-snug">
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm sm:text-base opacity-80 leading-relaxed mb-8 max-w-xl font-normal">
+                    <p className="text-xs sm:text-base opacity-80 leading-relaxed mb-6 sm:mb-8 max-w-xl font-normal">
                       {item.description}
                     </p>
 
                     {/* Scope & Duration Meta Grid */}
-                    <div className="grid grid-cols-2 gap-4 pb-6 mb-6 border-b border-black/10 dark:border-white/10 text-xs sm:text-sm">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4 pb-5 sm:pb-6 mb-5 sm:mb-6 border-b border-black/10 dark:border-white/10 text-xs sm:text-sm">
                       <div>
-                        <span className="font-mono text-[11px] uppercase tracking-wider opacity-60 block mb-1">
+                        <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider opacity-60 block mb-0.5 sm:mb-1">
                           Scope
                         </span>
                         <span className="font-semibold">{item.scope}</span>
                       </div>
                       <div>
-                        <span className="font-mono text-[11px] uppercase tracking-wider opacity-60 block mb-1">
+                        <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider opacity-60 block mb-0.5 sm:mb-1">
                           Timeline
                         </span>
                         <span className="font-semibold">{item.duration}</span>
@@ -164,30 +164,30 @@ export const ServicesShowcase: React.FC = () => {
                   {/* Action / Inquiry Pill Link */}
                   <Link
                     to={`/contact?service=${item.contactParam}`}
-                    className="inline-flex items-center justify-between p-2.5 sm:p-3 rounded-2xl bg-white/80 dark:bg-black/40 border border-black/5 dark:border-white/10 shadow-xs hover:shadow-md transition-all duration-150 group max-w-md cursor-pointer active:scale-[0.98]"
+                    className="w-full sm:w-auto inline-flex items-center justify-between p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-white/80 dark:bg-black/40 border border-black/5 dark:border-white/10 shadow-xs hover:shadow-md transition-all duration-150 group max-w-md cursor-pointer active:scale-[0.98]"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-[#315EFA]/10 text-[#315EFA] flex items-center justify-center font-mono font-bold text-xs">
-                        <Sparkles className="w-4 h-4" />
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                      <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-[#315EFA]/10 text-[#315EFA] flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                        <Sparkles className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                       </div>
-                      <div>
-                        <p className="text-xs sm:text-sm font-semibold leading-tight">
+                      <div className="min-w-0">
+                        <p className="text-xs sm:text-sm font-semibold leading-tight truncate">
                           Book {item.category}
                         </p>
-                        <p className="text-[11px] font-mono opacity-60">
+                        <p className="text-[10px] sm:text-[11px] font-mono opacity-60 truncate">
                           {item.deliverableBadge}
                         </p>
                       </div>
                     </div>
 
-                    <div className="w-8 h-8 rounded-xl bg-[#315EFA] text-white flex items-center justify-center group-hover:scale-105 transition-transform duration-150 ml-3">
-                      <ArrowUpRight className="w-4 h-4" />
+                    <div className="w-7 sm:w-8 h-7 sm:h-8 rounded-lg sm:rounded-xl bg-[#315EFA] text-white flex items-center justify-center group-hover:scale-105 transition-transform duration-150 ml-2 sm:ml-3 shrink-0">
+                      <ArrowUpRight className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                     </div>
                   </Link>
                 </div>
 
-                {/* Right Visual Image (5 cols) */}
-                <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-[4/3] bg-black border border-black/10 dark:border-white/10 shadow-lg group">
+                {/* Visual Image Preview (5 cols) */}
+                <div className="lg:col-span-5 relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video sm:aspect-[4/3] bg-black border border-black/10 dark:border-white/10 shadow-lg group order-1 lg:order-2">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -197,15 +197,15 @@ export const ServicesShowcase: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                   
                   {/* Subtle Corner Badge */}
-                  <div className="absolute top-3.5 left-3.5">
-                    <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-black/75 backdrop-blur-md text-white border border-white/10">
+                  <div className="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5">
+                    <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md text-[10px] sm:text-[11px] font-mono font-medium bg-black/75 backdrop-blur-md text-white border border-white/10">
                       {item.category}
                     </span>
                   </div>
 
-                  <div className="absolute bottom-3.5 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
-                    <span className="font-medium opacity-90">{item.deliverableBadge}</span>
-                    <span className="text-[#38bdf8] font-bold inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                  <div className="absolute bottom-2.5 sm:bottom-3.5 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between text-white text-[11px] sm:text-xs font-mono">
+                    <span className="font-medium opacity-90 truncate max-w-[180px]">{item.deliverableBadge}</span>
+                    <span className="text-[#38bdf8] font-bold inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform shrink-0">
                       <span>Explore</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </span>

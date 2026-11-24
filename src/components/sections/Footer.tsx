@@ -158,7 +158,7 @@ export const Footer: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 mb-20 sm:mb-28 z-10">
         
         {/* Curved Glowing Space Horizon Background */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[160%] max-w-[1600px] h-[520px] pointer-events-none overflow-hidden select-none">
+        <div className="absolute -top-24 sm:-top-32 left-1/2 -translate-x-1/2 w-[160%] max-w-[1600px] h-[340px] sm:h-[520px] pointer-events-none overflow-hidden select-none">
           {/* Curved Earth Atmosphere Image */}
           <img
             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
@@ -168,46 +168,46 @@ export const Footer: React.FC = () => {
           />
           
           {/* Atmospheric Radiant Cyan/Blue Arc */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] h-48 bg-gradient-to-b from-[#38d9d9]/45 via-[#2563eb]/25 to-transparent blur-3xl rounded-[100%]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] h-36 sm:h-48 bg-gradient-to-b from-[#38d9d9]/45 via-[#2563eb]/25 to-transparent blur-3xl rounded-[100%]" />
           <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[80%] h-1.5 bg-[#38d9d9] blur-[3px] opacity-85 rounded-full" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030509]/65 to-[#030509]" />
         </div>
 
         {/* Global Presence Header */}
-        <div className="relative text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/25 text-xs font-mono text-[#38bdf8] backdrop-blur-md mb-4 shadow-sm shadow-[#38bdf8]/10">
+        <div className="relative text-center max-w-2xl mx-auto mb-8 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#38bdf8]/10 border border-[#38bdf8]/25 text-xs font-mono text-[#38bdf8] backdrop-blur-md mb-3 sm:mb-4 shadow-sm shadow-[#38bdf8]/10">
             <Globe className="w-3.5 h-3.5 animate-spin [animation-duration:16s]" />
-            <span className="uppercase tracking-wider font-semibold">Global Production Network</span>
+            <span className="uppercase tracking-wider font-semibold text-[11px] sm:text-xs">Global Production Network</span>
           </div>
-          <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3 drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
+          <h3 className="text-2xl sm:text-5xl font-bold tracking-tight text-white mb-2.5 sm:mb-3 drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
             Producing for Ambitious Teams Worldwide
           </h3>
-          <p className="text-sm sm:text-base text-[#94a3b8] max-w-xl mx-auto leading-relaxed font-normal drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)]">
+          <p className="text-xs sm:text-base text-[#94a3b8] max-w-xl mx-auto leading-relaxed font-normal drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)] px-2 sm:px-0">
             Seamless sprint turnarounds and dedicated video directors across US, UK, Europe, Australia, and Asia timezones.
           </p>
         </div>
 
         {/* Global Countries 10-Card Grid (Refined, Symmetrical, No Redundant Windows Emoji Glitch) */}
-        <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
+        <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4">
           {GLOBAL_COUNTRIES.map((c) => (
             <div
               key={c.country}
-              className="group p-4 sm:p-4.5 rounded-2xl bg-[#09111e]/90 hover:bg-[#0e1b2f] border border-[#1e2e46]/90 hover:border-[#38d9d9]/60 backdrop-blur-xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-[#0284c7]/20"
+              className="group p-3 sm:p-4.5 rounded-xl sm:rounded-2xl bg-[#09111e]/90 hover:bg-[#0e1b2f] border border-[#1e2e46]/90 hover:border-[#38d9d9]/60 backdrop-blur-xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1 shadow-lg shadow-black/40 hover:shadow-xl hover:shadow-[#0284c7]/20"
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#38d9d9]/10 text-[#38d9d9] group-hover:bg-[#38d9d9]/20 transition-colors border border-[#38d9d9]/25">
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
+                <span className="text-[10px] sm:text-[11px] font-mono font-bold px-1.5 sm:px-2 py-0.5 rounded-md bg-[#38d9d9]/10 text-[#38d9d9] group-hover:bg-[#38d9d9]/20 transition-colors border border-[#38d9d9]/25">
                   {c.code}
                 </span>
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Active Client Region" />
+                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-emerald-400 animate-pulse" title="Active Client Region" />
               </div>
 
               <div>
-                <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-[#38d9d9] transition-colors tracking-tight leading-snug">
+                <h4 className="text-xs sm:text-base font-bold text-white group-hover:text-[#38d9d9] transition-colors tracking-tight leading-snug">
                   {c.country}
                 </h4>
-                <div className="mt-1 flex items-center justify-between text-[11px] font-mono text-[#7888a2]">
-                  <span>{c.region}</span>
-                  <span className="text-[10px] text-[#38d9d9]/80">{c.timezone}</span>
+                <div className="mt-0.5 sm:mt-1 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-[#7888a2]">
+                  <span className="truncate max-w-[70px] sm:max-w-none">{c.region}</span>
+                  <span className="text-[9px] sm:text-[10px] text-[#38d9d9]/80 shrink-0">{c.timezone}</span>
                 </div>
               </div>
             </div>
@@ -217,8 +217,8 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ── 02. Footer Links Grid (Important Links, Services, Specialized Industry, Compare, AI Summary) ── */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pb-14 border-b border-white/[0.08] z-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-14 border-b border-white/[0.08] z-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-10">
           
           {/* Col 1: Important Links */}
           <div>
@@ -441,8 +441,8 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ── 03. Copyright & Legal Strip ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#8a99ad] relative z-20">
-        <div className="flex items-center gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#8a99ad] relative z-20 text-center sm:text-left">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 sm:gap-6">
           <Link to="/terms" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
           <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
           <Link to="/refund" className="hover:text-white transition-colors">Refund Policy</Link>

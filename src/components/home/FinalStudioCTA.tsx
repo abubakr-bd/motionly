@@ -74,8 +74,8 @@ export const FinalStudioCTA: React.FC = () => {
               </p>
 
               {/* Session Perks Strip */}
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-6 sm:mb-8">
+                <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center gap-3">
                   <Clock className="w-4 h-4 text-[#38d9d9] shrink-0" />
                   <div className="text-xs">
                     <span className="font-semibold block text-white">30 Minutes</span>
@@ -83,7 +83,7 @@ export const FinalStudioCTA: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center gap-3">
+                <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center gap-3">
                   <Video className="w-4 h-4 text-[#38d9d9] shrink-0" />
                   <div className="text-xs">
                     <span className="font-semibold block text-white">Google Meet</span>
@@ -93,9 +93,9 @@ export const FinalStudioCTA: React.FC = () => {
               </div>
 
               {/* Direct Email Action Box */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-3 mb-8">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-[#315EFA]/15 text-[#38d9d9] flex items-center justify-center shrink-0">
+              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-3 mb-6 sm:mb-8">
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg sm:rounded-xl bg-[#315EFA]/15 text-[#38d9d9] flex items-center justify-center shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
@@ -114,7 +114,7 @@ export const FinalStudioCTA: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/15 text-white flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 active:scale-95"
+                  className="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/15 text-white flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 active:scale-95"
                   title="Copy email to clipboard"
                 >
                   {copied ? (
@@ -133,19 +133,19 @@ export const FinalStudioCTA: React.FC = () => {
             </div>
 
             {/* Availability Status */}
-            <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-3 text-xs font-mono text-[#7a8296]">
+            <div className="pt-5 sm:pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-[#7a8296]">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
                 <span className="text-[#cbd5e1]">Currently booking select projects</span>
               </div>
-              <span>&bull;</span>
-              <div>Direct founder review on all inquiries</div>
+              <span className="hidden sm:inline">&bull;</span>
+              <div className="w-full sm:w-auto">Direct founder review on all inquiries</div>
             </div>
           </div>
 
           {/* Right Column: Live Cal.com Calendar Card */}
           <div className="lg:col-span-7 w-full">
-            <div className="rounded-3xl bg-[#0c101d] border border-white/[0.1] shadow-2xl p-3 sm:p-5 overflow-hidden">
+            <div className="rounded-2xl sm:rounded-3xl bg-[#0c101d] border border-white/[0.1] shadow-2xl p-2.5 sm:p-5 overflow-hidden">
               
               {/* Header within Card Frame */}
               <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/[0.08] px-2 sm:px-1">

@@ -90,7 +90,7 @@ const Navbar = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-3 sm:top-4 left-0 right-0 z-50 max-w-5xl w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] mx-auto transition-all duration-200 ${
+        className={`fixed top-2.5 sm:top-4 left-0 right-0 z-50 max-w-5xl w-[calc(100%-1.25rem)] sm:w-[calc(100%-2rem)] mx-auto transition-all duration-200 ${
           isDark
             ? isScrolled
               ? "bg-[#070b14]/95 backdrop-blur-md border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.6)] text-white"
@@ -98,7 +98,7 @@ const Navbar = () => {
             : isScrolled
               ? "bg-white/95 backdrop-blur-md border-slate-200/80 shadow-[0_8px_30px_rgba(15,23,42,0.06)] text-slate-900"
               : "bg-white/85 backdrop-blur-md border-slate-200/60 text-slate-900"
-        } border rounded-2xl px-4 sm:px-5 py-2.5`}
+        } border rounded-2xl px-3.5 sm:px-5 py-2 sm:py-2.5`}
       >
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
