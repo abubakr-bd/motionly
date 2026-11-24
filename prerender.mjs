@@ -730,7 +730,7 @@ PORTFOLIO_DATA.forEach(p => {
     },
     bodyContent: `
       <article>
-        <p><a href="/portfolio">&larr; Back to all case studies</a> &bull; <span>${p.category}</span></p>
+        <p><a href="/portfolio/">&larr; Back to all case studies</a> &bull; <span>${p.category}</span></p>
         <h1>${p.title}</h1>
         <p class="site-page-hero__lede">${p.description}</p>
         <section>
@@ -738,10 +738,10 @@ PORTFOLIO_DATA.forEach(p => {
           <p>For this ${p.category.toLowerCase()} release, our focus was maintaining viewer attention through deliberate pacing, crisp sound design, and narrative clarity.</p>
           <h3>Services Utilized:</h3>
           <ul>
-            ${p.services.map(s => `<li><a href="/services">${s}</a></li>`).join('')}
+            ${p.services.map(s => `<li><a href="/services/">${s}</a></li>`).join('')}
           </ul>
         </section>
-        <p><a href="/contact">Start a video project with Motionly Media &rarr;</a> | <a href="/portfolio">View all portfolio case studies &rarr;</a></p>
+        <p><a href="/contact/">Start a video project with Motionly Media &rarr;</a> | <a href="/portfolio/">View all portfolio case studies &rarr;</a></p>
       </article>
     `
   });
@@ -803,7 +803,8 @@ async function prerender() {
     );
 
   for (const page of PAGES) {
-    const canonicalUrl = `${BASE_URL}${page.path === '/' ? '/' : page.path}`;
+    const normalizedPath = page.path === '/' ? '/' : (page.path.endsWith('/') ? page.path : `${page.path}/`);
+    const canonicalUrl = `${BASE_URL}${normalizedPath}`;
     const pageImage = page.image || 'https://motionly.media/og-image-v2.png';
 
     let html = optimizedBaseHtml;
@@ -850,32 +851,42 @@ async function prerender() {
             <header class="ssr-nav sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
               <nav aria-label="Main Navigation">
                 <a href="/">Home</a>
-                <a href="/services">Services</a>
-                <a href="/portfolio">Portfolio</a>
-                <a href="/about">About</a>
-                <a href="/blog">Blog</a>
-                <a href="/careers">Careers</a>
-                <a href="/contact">Contact</a>
+                <a href="/services/">Services</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/about/">About</a>
+                <a href="/personal-branding/">Personal Branding</a>
+                <a href="/blog/">Blog</a>
+                <a href="/careers/">Careers</a>
+                <a href="/contact/">Contact</a>
               </nav>
             </header>
             <main>
               ${page.bodyContent}
             </main>
+            <footer class="ssr-footer sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
+              <nav aria-label="Footer Legal and Information Navigation">
+                <a href="/privacy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Service</a>
+                <a href="/refund/">Refund Policy</a>
+                <a href="/contact/">Contact Motionly Media</a>
+              </nav>
+            </footer>
           </div>
         </div>
       `;
       html = html.replace('<div id="root"></div>', semanticRoot.trim());
     }
 
-    // Determine target file path
+    // Determine target file path safely regardless of leading or trailing slashes
     let targetDir;
     let targetFile;
 
-    if (page.path === '/') {
+    const cleanPath = page.path.replace(/^\/+/, '').replace(/\/+$/, '');
+    if (!cleanPath) {
       targetDir = DIST_DIR;
       targetFile = path.join(DIST_DIR, 'index.html');
     } else {
-      targetDir = path.join(DIST_DIR, page.path.replace(/^\//, ''));
+      targetDir = path.join(DIST_DIR, cleanPath);
       targetFile = path.join(targetDir, 'index.html');
     }
 

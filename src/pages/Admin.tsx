@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route, Navigate, Link } from "react-router-dom";
+import "../components/admin/admin.css";
 import { useAuth, AuthProvider } from "../lib/auth";
 import { getLegacyAuth } from "../lib/firebase";
 import { AdminLayout } from "../components/admin/layout/AdminLayout";
