@@ -233,32 +233,32 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-white transition-colors">
+                <Link to="/about/" className="hover:text-white transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/portfolio" className="hover:text-white transition-colors">
+                <Link to="/portfolio/" className="hover:text-white transition-colors">
                   Selected Work
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/personal-branding" className="hover:text-white transition-colors">
+                <Link to="/personal-branding/" className="hover:text-white transition-colors">
                   Personal Branding
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-white transition-colors">
+                <Link to="/blog/" className="hover:text-white transition-colors">
                   Journal &amp; Insights
                 </Link>
               </li>
               <li>
-                <Link to="/careers" className="hover:text-white transition-colors">
+                <Link to="/careers/" className="hover:text-white transition-colors">
                   Careers
                 </Link>
               </li>
@@ -273,37 +273,37 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   Motion Graphics &amp; 3D
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   Studio Production
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   Online Video Content (OVC)
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   Precision Video Editing
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   SaaS Product Explainers
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   DaVinci Resolve Color Grading
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services/" className="hover:text-white transition-colors">
                   High-Retention Ad Creative
                 </Link>
               </li>
@@ -318,33 +318,33 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#94a3b8]">
               <li>
-                <Link to="/portfolio" className="hover:text-white transition-colors">
+                <Link to="/portfolio/" className="hover:text-white transition-colors">
                   SaaS &amp; Tech Platforms
                 </Link>
               </li>
               <li>
-                <Link to="/personal-branding" className="hover:text-white transition-colors">
+                <Link to="/personal-branding/" className="hover:text-white transition-colors">
                   Founders &amp; Executives
                 </Link>
               </li>
               <li>
-                <Link to="/portfolio" className="hover:text-white transition-colors">
+                <Link to="/portfolio/" className="hover:text-white transition-colors">
                   Commercial Brands
                 </Link>
               </li>
               <li>
-                <Link to="/portfolio" className="hover:text-white transition-colors">
+                <Link to="/portfolio/" className="hover:text-white transition-colors">
                   Coaches &amp; Creators
                 </Link>
               </li>
               <li>
-                <Link to="/portfolio" className="hover:text-white transition-colors">
+                <Link to="/portfolio/" className="hover:text-white transition-colors">
                   Mobile App Launches
                 </Link>
               </li>
               <li>
                 <a
-                  href="/contact"
+                  href="/contact/"
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#38d9d9] hover:underline pt-1"
                 >
                   <span>Company Showreel</span>
@@ -444,9 +444,9 @@ export const Footer: React.FC = () => {
       {/* ── 03. Copyright & Legal Strip ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#8a99ad] relative z-20 text-center sm:text-left">
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 sm:gap-6">
-          <Link to="/terms" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
-          <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-          <Link to="/refund" className="hover:text-white transition-colors">Refund Policy</Link>
+          <Link to="/terms/" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
+          <Link to="/privacy/" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <Link to="/refund/" className="hover:text-white transition-colors">Refund Policy</Link>
         </div>
 
         <div>
