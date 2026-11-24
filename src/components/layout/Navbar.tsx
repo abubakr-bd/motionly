@@ -11,7 +11,7 @@ const navLinks = [
   { name: "Personal Branding", path: "/personal-branding" },
   { name: "About", path: "/about" },
   { name: "Journal", path: "/blog" },
-  { name: "Contact", path: "/contact" },
+  { name: "Careers", path: "/careers" },
 ];
 
 const Navbar = () => {
@@ -80,6 +80,9 @@ const Navbar = () => {
   const isActive = (path: string) => {
     if (path === "/portfolio") {
       return location.pathname === "/portfolio" || location.pathname.startsWith("/portfolio/") || location.hash === "#work";
+    }
+    if (path === "/careers") {
+      return location.pathname === "/careers" || location.pathname === "/career";
     }
     return location.pathname === path;
   };
