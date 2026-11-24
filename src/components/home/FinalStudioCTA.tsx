@@ -190,18 +190,41 @@ export const FinalStudioCTA: React.FC = () => {
                 </a>
               </div>
 
-              {/* Embedded Cal.com React Component */}
-              <div className="w-full min-h-[580px] rounded-2xl overflow-hidden bg-transparent">
-                <Cal
-                  namespace={calNamespace}
-                  calLink={calLink}
-                  style={{ width: "100%", height: "100%", minHeight: "580px", overflow: "hidden" }}
-                  config={{
-                    layout: "month_view",
-                    useSlotsViewOnSmallScreen: "true",
-                    theme: isDark ? "dark" : "light",
-                  }}
-                />
+              {/* Embedded Cal.com React Component (Lazy-loaded on viewport intersection) */}
+              <div ref={calendarRef} className="w-full min-h-[580px] rounded-2xl overflow-hidden bg-transparent">
+                {shouldLoadCal ? (
+                  <Suspense
+                    fallback={
+                      <div className="w-full h-[580px] flex flex-col items-center justify-center text-slate-400 gap-3 bg-white/[0.02] rounded-2xl border border-white/5">
+                        <div className="w-8 h-8 rounded-full border-2 border-[#315EFA] border-t-transparent animate-spin" />
+                        <span className="text-xs font-mono text-slate-300">Loading booking schedule...</span>
+                      </div>
+                    }
+                  >
+                    <Cal
+                      namespace={calNamespace}
+                      calLink={calLink}
+                      style={{ width: "100%", height: "100%", minHeight: "580px", overflow: "hidden" }}
+                      config={{
+                        layout: "month_view",
+                        useSlotsViewOnSmallScreen: "true",
+                        theme: isDark ? "dark" : "light",
+                      }}
+                    />
+                  </Suspense>
+                ) : (
+                  <div className="w-full h-[580px] flex flex-col items-center justify-center text-slate-400 gap-3 bg-white/[0.02] rounded-2xl border border-white/5">
+                    <Calendar className="w-8 h-8 text-[#315EFA]" />
+                    <span className="text-xs font-mono text-slate-300">Calendar loads as you scroll here</span>
+                    <button
+                      type="button"
+                      onClick={() => setShouldLoadCal(true)}
+                      className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-xs text-white font-medium transition-colors cursor-pointer active:scale-95"
+                    >
+                      Load calendar now
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Bottom Security & Calendar info */}

@@ -47,6 +47,9 @@ export default defineConfig({
             if (normalized.includes("/firebase/")) {
               return "vendor-firebase";
             }
+            if (normalized.includes("/@calcom/")) {
+              return "vendor-calcom";
+            }
           }
         },
       },
