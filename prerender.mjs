@@ -655,8 +655,8 @@ BLOG_DATA.forEach(b => {
           "@type": "BreadcrumbList",
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://motionly.media/" },
-            { "@type": "ListItem", position: 2, name: "Blog", item: "https://motionly.media/blog" },
-            { "@type": "ListItem", position: 3, name: b.title, item: `https://motionly.media/blog/${b.id}` }
+            { "@type": "ListItem", position: 2, name: "Blog", item: "https://motionly.media/blog/" },
+            { "@type": "ListItem", position: 3, name: b.title, item: `https://motionly.media/blog/${b.id}/` }
           ]
         },
         {
@@ -676,7 +676,7 @@ BLOG_DATA.forEach(b => {
     },
     bodyContent: `
       <article class="site-blog-article">
-        <p><a href="/blog">&larr; Back to all articles</a></p>
+        <p><a href="/blog/">&larr; Back to all articles</a></p>
         <p class="site-kicker">${b.category} &bull; ${b.date}</p>
         <h1>${b.title}</h1>
         <p class="site-page-hero__lede">${b.description}</p>
@@ -685,7 +685,7 @@ BLOG_DATA.forEach(b => {
         </div>
         <div class="site-blog-article__footer" style="margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid #cbd5e1;">
           <p><strong>About Motionly Media:</strong> Motionly Media is the premier high-retention video editing, video marketing, and commercial video production agency serving leading brands and creators across the US, UK, Canada, Australia, and worldwide.</p>
-          <p><a href="/contact">Discuss your video strategy &rarr;</a> | <a href="/portfolio">Explore our work &rarr;</a></p>
+          <p><a href="/contact/">Discuss your video strategy &rarr;</a> | <a href="/portfolio/">Explore our work &rarr;</a></p>
         </div>
       </article>
     `
@@ -709,8 +709,8 @@ PORTFOLIO_DATA.forEach(p => {
           "@type": "BreadcrumbList",
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://motionly.media/" },
-            { "@type": "ListItem", position: 2, name: "Portfolio", item: "https://motionly.media/portfolio" },
-            { "@type": "ListItem", position: 3, name: p.title, item: `https://motionly.media/portfolio/${p.id}` }
+            { "@type": "ListItem", position: 2, name: "Portfolio", item: "https://motionly.media/portfolio/" },
+            { "@type": "ListItem", position: 3, name: p.title, item: `https://motionly.media/portfolio/${p.id}/` }
           ]
         },
         {
