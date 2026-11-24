@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { MessageSquare, ArrowUpRight } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageSquare } from "lucide-react";
 
 export const FloatingNavDock: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,60 +27,76 @@ export const FloatingNavDock: React.FC = () => {
   }
 
   return (
-    <div
-      className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 pointer-events-none hidden md:block ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      }`}
-    >
-      <nav
-        aria-label="Quick Navigation"
-        className="pointer-events-auto flex items-center gap-1.5 p-1.5 rounded-full bg-[#070b14]/90 dark:bg-[#070b14]/95 text-white backdrop-blur-xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.5)] text-xs font-medium"
-      >
-        <a
-          href="#work"
-          className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150 active:scale-95"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.94 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 24, scale: 0.94 }}
+          transition={{ type: "spring", damping: 26, stiffness: 320 }}
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden md:block"
         >
-          Work
-        </a>
+          <nav
+            aria-label="Quick Navigation"
+            className="flex items-center gap-1.5 p-1.5 rounded-full bg-[#070b14]/85 text-white backdrop-blur-xl border border-white/15 border-t-white/25 shadow-[0_16px_40px_rgba(0,0,0,0.6)] text-xs font-medium"
+          >
+            <motion.a
+              href="#work"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150"
+            >
+              Work
+            </motion.a>
 
-        <a
-          href="#services"
-          className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150 active:scale-95"
-        >
-          Services
-        </a>
+            <motion.a
+              href="#services"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150"
+            >
+              Services
+            </motion.a>
 
-        {/* Central Prominent CTA */}
-        <a
-          href="/#booking"
-          onClick={(e) => {
-            if (location.pathname === "/") {
-              e.preventDefault();
-              document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
-              window.history.pushState(null, "", "#booking");
-            }
-          }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white font-semibold shadow-md shadow-[#315EFA]/30 transition-all duration-150 active:scale-[0.97] cursor-pointer"
-        >
-          <MessageSquare className="w-3.5 h-3.5 fill-current" />
-          <span>Start a Project</span>
-        </a>
+            {/* Central Prominent CTA */}
+            <motion.a
+              href="/#booking"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={(e) => {
+                if (location.pathname === "/") {
+                  e.preventDefault();
+                  document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                  window.history.pushState(null, "", "#booking");
+                }
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white font-semibold shadow-md shadow-[#315EFA]/30 transition-colors duration-150 cursor-pointer"
+            >
+              <MessageSquare className="w-3.5 h-3.5 fill-current" />
+              <span>Start a Project</span>
+            </motion.a>
 
-        <a
-          href="#comparison"
-          className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150 active:scale-95"
-        >
-          Why Motionly
-        </a>
+            <motion.a
+              href="#comparison"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150"
+            >
+              Why Motionly
+            </motion.a>
 
-        <a
-          href="#process"
-          className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150 active:scale-95"
-        >
-          Process
-        </a>
-      </nav>
-    </div>
+            <motion.a
+              href="#process"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-3.5 py-2 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors duration-150"
+            >
+              Process
+            </motion.a>
+          </nav>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

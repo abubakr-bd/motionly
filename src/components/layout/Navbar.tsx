@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useSiteSettings } from "../../lib/useSiteData";
 import { useTheme } from "../../lib/ThemeContext";
 import { Menu, X, ArrowUpRight, Sun, Moon } from "lucide-react";
@@ -93,19 +94,19 @@ const Navbar = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-2.5 sm:top-4 left-0 right-0 z-50 max-w-5xl w-[calc(100%-1.25rem)] sm:w-[calc(100%-2rem)] mx-auto transition-all duration-200 ${
+        className={`fixed top-2.5 sm:top-4 left-0 right-0 z-50 max-w-5xl w-[calc(100%-1.25rem)] sm:w-[calc(100%-2rem)] mx-auto transition-all duration-300 ${
           isDark
             ? isScrolled
-              ? "bg-[#070b14]/95 backdrop-blur-md border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.6)] text-white"
-              : "bg-[#070b14]/80 backdrop-blur-md border-white/[0.06] text-white"
+              ? "bg-[#070b14]/90 backdrop-blur-xl border-white/10 border-t-white/20 shadow-[0_12px_36px_rgba(0,0,0,0.55)] text-white"
+              : "bg-[#070b14]/75 backdrop-blur-lg border-white/[0.08] border-t-white/15 text-white"
             : isScrolled
-              ? "bg-white/95 backdrop-blur-md border-slate-200/80 shadow-[0_8px_30px_rgba(15,23,42,0.06)] text-slate-900"
-              : "bg-white/85 backdrop-blur-md border-slate-200/60 text-slate-900"
+              ? "bg-white/95 backdrop-blur-xl border-slate-200/80 border-t-white shadow-[0_8px_30px_rgba(15,23,42,0.06)] text-slate-900"
+              : "bg-white/85 backdrop-blur-lg border-slate-200/60 text-slate-900"
         } border rounded-2xl px-3.5 sm:px-5 py-2 sm:py-2.5`}
       >
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2 group shrink-0" aria-label={`${siteName} home`}>
+          <Link to="/" className="flex items-center gap-2 group shrink-0 active:scale-[0.98] transition-transform duration-100" aria-label={`${siteName} home`}>
             <img
               src={isDark ? "/nav_logo_dark.png" : "/nav_logo.png"}
               alt={siteName}
@@ -128,16 +129,25 @@ const Navbar = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide whitespace-nowrap transition-colors duration-150 ${
+                  className={`relative px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide whitespace-nowrap transition-colors duration-150 active:scale-95 ${
                     active
                       ? isDark
-                        ? "text-cyan-400 bg-white/[0.08] font-bold"
-                        : "text-blue-600 bg-blue-50 font-bold"
+                        ? "text-cyan-400 font-bold"
+                        : "text-blue-600 font-bold"
                       : isDark
-                        ? "text-slate-300 hover:text-white hover:bg-white/[0.04]"
-                        : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+                        ? "text-slate-300 hover:text-white"
+                        : "text-slate-600 hover:text-slate-950"
                   }`}
                 >
+                  {active && (
+                    <motion.span
+                      layoutId="navbar-active-pill"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      className={`absolute inset-0 rounded-lg -z-10 ${
+                        isDark ? "bg-white/[0.08]" : "bg-blue-50"
+                      }`}
+                    />
+                  )}
                   {link.name}
                 </Link>
               );
@@ -147,9 +157,10 @@ const Navbar = () => {
           {/* Right Action & Theme Toggle */}
           <div className="flex items-center gap-2.5">
             {/* Theme Toggle Button */}
-            <button
+            <motion.button
               type="button"
               onClick={toggleTheme}
+              whileTap={{ scale: 0.92 }}
               className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-150 cursor-pointer ${
                 isDark
                   ? "bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white border border-white/[0.08]"
@@ -163,7 +174,7 @@ const Navbar = () => {
               ) : (
                 <Moon className="w-4 h-4 text-slate-800" />
               )}
-            </button>
+            </motion.button>
 
             {/* Desktop 'Start a Project' Button */}
             <div className="hidden sm:flex items-center">
@@ -176,7 +187,7 @@ const Navbar = () => {
                     window.history.pushState(null, "", "#booking");
                   }
                 }}
-                className="inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm transition-all duration-150 active:scale-[0.97] cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm transition-all duration-150 active:scale-[0.96] cursor-pointer"
               >
                 <span>Start a Project</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -184,10 +195,11 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Hamburger Toggle */}
-            <button
+            <motion.button
               ref={triggerRef}
               type="button"
               onClick={() => setIsOpen(!isOpen)}
+              whileTap={{ scale: 0.92 }}
               className={`lg:hidden flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${
                 isDark
                   ? "bg-white/[0.05] text-white border border-white/[0.08]"
@@ -197,7 +209,7 @@ const Navbar = () => {
               aria-expanded={isOpen}
             >
               {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </button>
+            </motion.button>
           </div>
         </div>
 

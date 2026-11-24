@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Play, X, ArrowUpRight, ArrowDown, Star } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useHeroSettings } from "../../lib/useSiteData";
 
 export const HeroStudio: React.FC = () => {
   const heroSettings = useHeroSettings();
   const [isPlayingModal, setIsPlayingModal] = useState(false);
   const showreelId = (heroSettings.showreelVideoId || "q7hCvbfvRPU").trim();
+
+  // Apple-grade physical tilt springs on pointer movement
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [3, -3]), { stiffness: 320, damping: 28 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-3, 3]), { stiffness: 320, damping: 28 });
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "touch") return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(xPct);
+    mouseY.set(yPct);
+  };
+
+  const handlePointerLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   // Keyboard navigation & body scroll lock for showreel modal UX
   React.useEffect(() => {
@@ -147,10 +167,17 @@ export const HeroStudio: React.FC = () => {
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="relative max-w-5xl mx-auto"
         >
-          {/* Main 16:9 Showcase Player */}
-          <div 
+          {/* Main 16:9 Showcase Player with Physical Perspective Tilt */}
+          <motion.div 
+            style={{
+              rotateX,
+              rotateY,
+              transformStyle: "preserve-3d",
+            }}
+            onPointerMove={handlePointerMove}
+            onPointerLeave={handlePointerLeave}
             onClick={() => setIsPlayingModal(true)}
-            className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-black border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.7)] hover:border-[#38bdf8]/50 transition-all duration-300 cursor-pointer aspect-video w-full"
+            className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-black border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.7)] hover:border-[#38bdf8]/50 transition-colors duration-300 cursor-pointer aspect-video w-full"
             role="button"
             tabIndex={0}
             aria-label="Play Motionly studio showreel"
@@ -180,11 +207,16 @@ export const HeroStudio: React.FC = () => {
 
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors duration-300" />
 
-            {/* Central Play Badge with Subtle Pulse */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-[#315EFA] text-white flex items-center justify-center shadow-xl group-hover:scale-105 active:scale-95 transition-transform duration-200 border-2 border-white/30">
+            {/* Central Play Badge with Direct Touch Feedback */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <motion.div
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.93 }}
+                transition={{ type: "spring", stiffness: 380, damping: 20 }}
+                className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-[#315EFA] text-white flex items-center justify-center shadow-xl border-2 border-white/30"
+              >
                 <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-1" />
-              </div>
+              </motion.div>
             </div>
 
             {/* Bottom Metabar */}
@@ -197,20 +229,26 @@ export const HeroStudio: React.FC = () => {
               </div>
               <span className="text-[#38bdf8] font-medium text-[10px] sm:text-xs shrink-0">Watch film</span>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
       </div>
 
-      {/* Video Modal Player */}
+      {/* Video Modal Player with Apple Spring Physics */}
       <AnimatePresence>
         {isPlayingModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md"
+          >
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.18, ease: [0.23, 1, 0.32, 1] }}
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ type: "spring", damping: 28, stiffness: 320 }}
               className="relative w-full max-w-5xl bg-[#0c101d] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
             >
               <div className="flex items-center justify-between px-5 py-3.5 bg-black/60 border-b border-white/10 text-white">
@@ -235,7 +273,7 @@ export const HeroStudio: React.FC = () => {
                 />
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>
