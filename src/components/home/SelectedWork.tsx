@@ -91,6 +91,7 @@ export const SelectedWork: React.FC = () => {
               >
                 <PortfolioCard
                   project={project}
+                  isAboveFold={idx < 3}
                   onPlay={() =>
                     setActiveVideo({
                       videoId: project.videoId,
@@ -168,10 +169,11 @@ export const SelectedWork: React.FC = () => {
 /* ------------------------------------------------------------------ */
 interface PortfolioCardProps {
   project: PortfolioItem;
+  isAboveFold?: boolean;
   onPlay: () => void;
 }
 
-const PortfolioCard: React.FC<PortfolioCardProps> = ({ project, onPlay }) => {
+const PortfolioCard: React.FC<PortfolioCardProps> = ({ project, isAboveFold, onPlay }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
@@ -200,7 +202,10 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ project, onPlay }) => {
           className={`w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] ${
             imgLoaded ? "opacity-100" : "opacity-0"
           }`}
-          loading="eager"
+          loading={isAboveFold ? "eager" : "lazy"}
+          decoding="async"
+          width="640"
+          height="360"
           onLoad={() => setImgLoaded(true)}
           onError={(e) => {
             (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`;

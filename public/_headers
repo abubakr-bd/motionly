@@ -1,22 +1,49 @@
+# Immutable Vite hashed production assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static media and images (30-day cache with background revalidation)
 /*.png
   Content-Type: image/png
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
 /*.webp
   Content-Type: image/webp
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
 /*.jpg
   Content-Type: image/jpeg
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
 /*.svg
   Content-Type: image/svg+xml
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
+/*.ico
+  Content-Type: image/x-icon
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/employes/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+# Structured feeds and maps
 /*.xml
   Content-Type: application/xml
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=86400
 
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
+/*.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+# HTML documents: immediate revalidation so updates show instantly
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Global Security and Performance Headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin

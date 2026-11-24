@@ -16,7 +16,10 @@ import {
   HeartHandshake,
   Clock,
   Globe2,
-  Laptop
+  Laptop,
+  Check,
+  Send,
+  Zap
 } from "lucide-react";
 
 const APPLY_URL = "https://app.youform.com/forms/zrg6xump";
@@ -177,23 +180,40 @@ const Careers: React.FC = () => {
         schema={careersSchema}
       />
 
-      <div className="bg-white dark:bg-[#05070F] text-slate-900 dark:text-white transition-colors duration-300">
+      <div className="bg-[#070b14] text-[#eef0f5] min-h-screen relative overflow-hidden transition-colors duration-200">
+        {/* Subtle Ambient Glow Lighting */}
+        <div 
+          aria-hidden="true" 
+          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+        />
+        <div 
+          aria-hidden="true" 
+          className="pointer-events-none absolute top-[700px] left-0 w-[500px] h-[500px] bg-[#38bdf8]/10 rounded-full blur-[140px] -z-10" 
+        />
+
         {/* =========================================================================
             1. HERO SECTION
         ========================================================================= */}
-        <section className="relative pt-12 sm:pt-20 pb-16 sm:pb-24 border-b border-slate-200/80 dark:border-white/10 overflow-hidden">
-          <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/5 dark:bg-blue-600/10 blur-[130px] -z-10" />
-
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="max-w-3xl mb-12">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-500/20 mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
-                STUDIO TALENT &amp; CAREERS
+        <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 border-b border-white/[0.08]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div className="max-w-3xl mb-14">
+              {/* Eyebrow Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-6 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
+                <span className="text-[#38bdf8] font-bold uppercase tracking-wider">Studio Talent &amp; Careers</span>
+                <span className="text-white/20">•</span>
+                <span className="text-white/70">Join The Squad</span>
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-950 dark:text-white tracking-tight leading-[1.08]">
-                Build work that defines the industry.
+
+              {/* Headline with Serif Italic Accent */}
+              <h1 className="text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.12]">
+                Build work that
+                <span className="block font-serif italic font-normal text-[#38bdf8] mt-1">
+                  defines the industry.
+                </span>
               </h1>
-              <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+
+              <p className="mt-6 text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
                 We are a tight-knit creative squad of editors, 3D artists, cinematographers, and strategists. If you obsess over frame rates, sound design, narrative flow, and pushing visual boundaries, you belong here.
               </p>
             </div>
@@ -205,13 +225,13 @@ const Careers: React.FC = () => {
                 return (
                   <div
                     key={idx}
-                    className="p-5 rounded-2xl bg-slate-50 dark:bg-[#0A0F1D] border border-slate-200/80 dark:border-white/10 shadow-xs"
+                    className="p-5 sm:p-6 rounded-3xl bg-white/[0.03] backdrop-blur-md border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-all shadow-lg"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/40 flex items-center justify-center text-blue-600 dark:text-cyan-400 mb-3">
+                    <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#38bdf8] mb-3">
                       <Icon className="w-4 h-4" />
                     </div>
-                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">{perk.title}</h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{perk.description}</p>
+                    <h3 className="text-sm font-bold text-white">{perk.title}</h3>
+                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">{perk.description}</p>
                   </div>
                 );
               })}
@@ -222,15 +242,15 @@ const Careers: React.FC = () => {
         {/* =========================================================================
             2. OPEN ROLES & DEPARTMENT FILTER
         ========================================================================= */}
-        <section className="py-16 sm:py-24 border-b border-slate-200/80 dark:border-white/10">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+        <section className="py-20 sm:py-28 border-b border-white/[0.08] relative">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
               <div>
-                <p className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">
+                <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#38bdf8] mb-2">
                   OPPORTUNITIES
                 </p>
-                <h2 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
-                  Open Positions ({filteredJobs.length})
+                <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+                  Open Positions <span className="font-serif italic font-normal text-[#38bdf8]">({filteredJobs.length})</span>
                 </h2>
               </div>
 
@@ -241,10 +261,10 @@ const Careers: React.FC = () => {
                     key={dept}
                     type="button"
                     onClick={() => setSelectedDept(dept)}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-colors ${
+                    className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-150 cursor-pointer ${
                       selectedDept === dept
-                        ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-bold shadow-xs"
-                        : "bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-300"
+                        ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                        : "bg-white/[0.03] text-slate-400 hover:text-white border border-white/10"
                     }`}
                   >
                     {dept}
@@ -253,62 +273,59 @@ const Careers: React.FC = () => {
               </div>
             </div>
 
-            {/* Jobs List */}
+            {/* Job Listings Grid */}
             <div className="space-y-6">
               {filteredJobs.map((job) => (
                 <div
                   key={job.id}
-                  className={`p-6 sm:p-8 rounded-3xl border transition-all ${
-                    job.featured
-                      ? "bg-slate-50/80 dark:bg-[#0A0F1D] border-blue-500/50 shadow-md shadow-blue-500/5"
-                      : "bg-white dark:bg-[#080C18] border-slate-200/80 dark:border-white/10 shadow-xs"
-                  }`}
+                  className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] transition-all duration-300 shadow-xl"
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-white/10">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-6">
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <span className="text-[10px] font-mono font-bold uppercase bg-blue-100 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 px-2.5 py-0.5 rounded-full">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/5 text-[#38bdf8] border border-white/10">
                           {job.department}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
-                          {job.location} &bull; {job.type}
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10">
+                          {job.type}
                         </span>
-                        {job.featured && (
-                          <span className="text-[10px] font-mono font-bold uppercase bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full">
-                            Priority Hire
-                          </span>
-                        )}
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10">
+                          {job.location}
+                        </span>
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10">
+                          {job.experience}
+                        </span>
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white tracking-tight">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                         {job.title}
                       </h3>
-                      <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-normal">
-                        {job.summary}
-                      </p>
                     </div>
 
-                    <div className="shrink-0">
-                      <a
-                        href={APPLY_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white shadow-sm transition-all duration-150 active:scale-[0.98]"
-                      >
-                        <span>Apply Online</span>
-                        <ArrowUpRight className="w-4 h-4" />
-                      </a>
-                    </div>
+                    <a
+                      href={APPLY_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all shrink-0 active:scale-[0.98]"
+                    >
+                      <span>Apply For Role</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
+                  <p className="text-sm text-slate-300 leading-relaxed font-normal mb-6">
+                    {job.summary}
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/10">
                     <div>
-                      <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">
-                        Key Responsibilities:
+                      <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-white mb-3 flex items-center gap-2">
+                        <Layers className="w-3.5 h-3.5 text-[#38bdf8]" />
+                        Key Responsibilities
                       </h4>
-                      <ul className="space-y-2">
-                        {job.responsibilities.map((resp, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0 mt-0.5" />
+                      <ul className="space-y-2 text-xs text-slate-300">
+                        {job.responsibilities.map((resp, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <Check className="w-3.5 h-3.5 text-[#38bdf8] shrink-0 mt-0.5" />
                             <span>{resp}</span>
                           </li>
                         ))}
@@ -316,13 +333,14 @@ const Careers: React.FC = () => {
                     </div>
 
                     <div>
-                      <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">
-                        Ideal Candidate Requirements:
+                      <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-white mb-3 flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#38bdf8]" />
+                        Requirements &amp; Craft
                       </h4>
-                      <ul className="space-y-2">
-                        {job.requirements.map((req, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300">
-                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500 shrink-0 mt-1.5" />
+                      <ul className="space-y-2 text-xs text-slate-300">
+                        {job.requirements.map((req, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <Check className="w-3.5 h-3.5 text-[#38bdf8] shrink-0 mt-0.5" />
                             <span>{req}</span>
                           </li>
                         ))}
@@ -332,29 +350,56 @@ const Careers: React.FC = () => {
                 </div>
               ))}
             </div>
+
+            {/* General Open Application Card */}
+            <div className="mt-12 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-white/[0.04] to-white/[0.01] border border-white/10 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#38bdf8] block mb-2">
+                  UNSOLICITED TALENT
+                </span>
+                <h3 className="text-2xl font-bold text-white tracking-tight">
+                  Don&apos;t see your discipline listed?
+                </h3>
+                <p className="text-sm text-slate-300 mt-1 max-w-xl">
+                  We are always seeking exceptional editors, VFX generalists, sound designers, and motion directors. Send us your reel and a brief introduction.
+                </p>
+              </div>
+
+              <a
+                href={APPLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/15 text-white border border-white/10 transition-colors shrink-0"
+              >
+                <span>Pitch Your Reel</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </section>
 
         {/* =========================================================================
-            3. GENERAL APPLICATION BANNER
+            3. BOTTOM CTA
         ========================================================================= */}
-        <section className="py-20 text-center">
-          <div className="container max-w-4xl mx-auto px-4 sm:px-6">
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
-              Don&apos;t see your exact role listed?
+        <section className="py-20 sm:py-28 relative overflow-hidden text-center">
+          <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#315EFA]/15 rounded-full blur-[140px] -z-10" />
+
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+              Work with people who <span className="font-serif italic font-normal text-[#38bdf8]">care about every frame</span>.
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-6">
-              We are constantly scouting exceptional editors, sound designers, 3D generalists, and creative directors. Submit an open speculative portfolio.
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto mb-8 font-normal leading-relaxed">
+              Explore our current project showcase to see the standard of craft expected at Motionly.
             </p>
-            <a
-              href={APPLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-blue-600 dark:hover:bg-cyan-300 transition-colors"
-            >
-              <span>Submit General Application</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-[0_0_30px_rgba(49,94,250,0.4)] transition-all duration-150 active:scale-[0.98]"
+              >
+                <span>Browse Studio Portfolio</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </section>
       </div>

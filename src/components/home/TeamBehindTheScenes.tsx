@@ -103,6 +103,9 @@ export const TeamBehindTheScenes: React.FC = () => {
                 alt={item.name}
                 className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
+                width="400"
+                height="500"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "/employes/abu_bakar.webp";
                 }}

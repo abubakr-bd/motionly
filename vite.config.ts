@@ -27,16 +27,24 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("react/") || id.includes("react-dom/") || id.includes("react-router")) {
+            const normalized = id.replace(/\\/g, "/");
+            if (
+              normalized.includes("/react/") ||
+              normalized.includes("/react-dom/") ||
+              normalized.includes("/react-router")
+            ) {
               return "vendor-react";
             }
-            if (id.includes("framer-motion")) {
+            if (normalized.includes("/framer-motion/")) {
               return "vendor-framer-motion";
             }
-            if (id.includes("lucide-react")) {
+            if (normalized.includes("/lucide-react/")) {
               return "vendor-lucide";
             }
-            if (id.includes("firebase")) {
+            if (normalized.includes("/lenis/")) {
+              return "vendor-lenis";
+            }
+            if (normalized.includes("/firebase/")) {
               return "vendor-firebase";
             }
           }

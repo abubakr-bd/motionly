@@ -37,6 +37,10 @@ export const ClientMarquee: React.FC = () => {
                   src={partner.logoUrl}
                   alt={partner.name}
                   className="h-7 sm:h-8 w-auto max-w-[130px] object-contain opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-200"
+                  loading="lazy"
+                  decoding="async"
+                  width="120"
+                  height="32"
                   onError={(e) => {
                     (e.target as HTMLElement).style.display = "none";
                   }}

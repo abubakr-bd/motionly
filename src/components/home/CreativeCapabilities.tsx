@@ -1,9 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Video, Layers, TrendingUp, CheckCircle2 } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface CapabilityService {
   id: string;
@@ -89,40 +87,8 @@ export const CreativeCapabilities: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeService = CAPABILITIES[activeIndex];
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleLineRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const ctx = gsap.context(() => {
-      if (!prefersReducedMotion && titleLineRef.current) {
-        gsap.fromTo(
-          titleLineRef.current,
-          { yPercent: 110, opacity: 0 },
-          {
-            yPercent: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 80%",
-            },
-          }
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section 
-      ref={sectionRef}
       id="capabilities" 
       className="py-24 sm:py-32 bg-white dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] border-b border-black/[0.08] dark:border-white/[0.08] transition-colors duration-200"
     >
@@ -134,7 +100,7 @@ export const CreativeCapabilities: React.FC = () => {
           </span>
           <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-[#111827] dark:text-[#eef0f5] leading-[1.08] mb-3">
             <span className="block overflow-hidden pb-1">
-              <span ref={titleLineRef} className="inline-block will-change-transform">
+              <span className="inline-block will-change-transform">
                 Creative execution across every stage.
               </span>
             </span>

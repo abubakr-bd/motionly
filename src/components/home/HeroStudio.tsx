@@ -1,8 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Play, X, ArrowUpRight, ArrowDown, Star, Sparkles } from "lucide-react";
+import { Play, X, ArrowUpRight, ArrowDown, Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import gsap from "gsap";
 import { useHeroSettings } from "../../lib/useSiteData";
 
 export const HeroStudio: React.FC = () => {
@@ -10,55 +9,8 @@ export const HeroStudio: React.FC = () => {
   const [isPlayingModal, setIsPlayingModal] = useState(false);
   const showreelId = (heroSettings.showreelVideoId || "q7hCvbfvRPU").trim();
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleLine1Ref = useRef<HTMLSpanElement>(null);
-  const titleLine2Ref = useRef<HTMLSpanElement>(null);
-  const descRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const showreelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      if (titleLine1Ref.current && titleLine2Ref.current) {
-        tl.fromTo(
-          [titleLine1Ref.current, titleLine2Ref.current],
-          { yPercent: 110, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.55, stagger: 0.08 }
-        );
-      }
-
-      if (descRef.current && ctaRef.current) {
-        tl.fromTo(
-          [descRef.current, ctaRef.current],
-          { y: 16, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.45, stagger: 0.06 },
-          "-=0.25"
-        );
-      }
-
-      if (showreelRef.current) {
-        tl.fromTo(
-          showreelRef.current,
-          { y: 24, opacity: 0, scale: 0.98 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.55 },
-          "-=0.2"
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section 
-      ref={sectionRef}
       className="relative pt-24 sm:pt-32 pb-20 sm:pb-28 border-b border-black/[0.08] dark:border-white/[0.08] bg-[#070b14] text-[#eef0f5] transition-colors duration-200 overflow-hidden"
     >
       {/* Subtle Glow Lighting inspired by Design Monks */}
@@ -76,7 +28,12 @@ export const HeroStudio: React.FC = () => {
         {/* Main Editorial Header (Centered Design Monks Composition) */}
         <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
           {/* Eyebrow: Rating Badge */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-5 sm:mb-6 shadow-sm max-w-full">
+          <motion.div 
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-5 sm:mb-6 shadow-sm max-w-full"
+          >
             <div className="flex items-center text-amber-400">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-current" />
@@ -88,41 +45,60 @@ export const HeroStudio: React.FC = () => {
               <span className="hidden sm:inline">Leading Video &amp; Motion Design Studio</span>
               <span className="sm:hidden">Video &amp; Motion Studio</span>
             </span>
-          </div>
+          </motion.div>
 
           {/* Headline with Masked Typography */}
           <h1 className="text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.12] sm:leading-[1.08] mb-5 sm:mb-6">
             <span className="block overflow-hidden pb-1">
-              <span ref={titleLine1Ref} className="inline-block will-change-transform">
+              <motion.span 
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+                className="inline-block will-change-transform"
+              >
                 Creative videos.
-              </span>
+              </motion.span>
             </span>
             <span className="block overflow-hidden pb-1">
-              <span 
-                ref={titleLine2Ref} 
+              <motion.span 
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}
                 className="inline-block font-serif italic font-normal text-[#38bdf8] will-change-transform"
               >
                 Built to move brands.
-              </span>
+              </motion.span>
             </span>
           </h1>
 
           {/* Supporting Copy */}
-          <p 
-            ref={descRef}
+          <motion.p 
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
             className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-7 font-normal px-2 sm:px-0"
           >
             We bring ideas to life through strategic storytelling, exceptional video production and thoughtful creative execution.
-          </p>
+          </motion.p>
 
           {/* Global Reach Pill Badge (Design Monks Style) */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-[11px] sm:text-xs font-mono text-slate-300 mb-6 sm:mb-8 max-w-full text-center">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+            className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-[11px] sm:text-xs font-mono text-slate-300 mb-6 sm:mb-8 max-w-full text-center"
+          >
             <span>Producing for ambitious brands in 10+ countries</span>
             <span className="tracking-widest">🇺🇸 🇬🇧 🇩🇪 🇨🇦 🇦🇺 🇸🇬 🇦🇪</span>
-          </div>
+          </motion.div>
 
           {/* Primary & Secondary CTAs */}
-          <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.26 }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
+          >
             <a
               href="#booking"
               onClick={(e) => {
@@ -143,11 +119,16 @@ export const HeroStudio: React.FC = () => {
               <span>Explore Our Work</span>
               <ArrowDown className="w-4 h-4 text-slate-400" />
             </a>
-          </div>
+          </motion.div>
         </div>
 
         {/* Featured Video / Multi-Device Showreel Composition */}
-        <div ref={showreelRef} className="relative max-w-5xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 24, scale: 0.99 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          className="relative max-w-5xl mx-auto"
+        >
           {/* Main 16:9 Showcase Player */}
           <div 
             onClick={() => setIsPlayingModal(true)}
@@ -162,12 +143,16 @@ export const HeroStudio: React.FC = () => {
               }
             }}
           >
-            {/* Showreel Thumbnail */}
+            {/* Showreel Thumbnail (Critical LCP image) */}
             <img
               src={`https://img.youtube.com/vi/${showreelId}/maxresdefault.jpg`}
               alt="Motionly Creative Showreel"
               className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015]"
               loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              width="1280"
+              height="720"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${showreelId}/hqdefault.jpg`;
               }}
@@ -193,7 +178,7 @@ export const HeroStudio: React.FC = () => {
               <span className="text-[#38bdf8] font-medium text-[10px] sm:text-xs shrink-0">Watch film</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
 

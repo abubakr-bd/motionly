@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Cal, { getCalApi } from "@calcom/embed-react";
+import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { ArrowUpRight, Mail, Calendar, Clock, Video, ShieldCheck, Check, Copy } from "lucide-react";
 import { useSiteSettings } from "../../lib/useSiteData";
 import { useTheme } from "../../lib/ThemeContext";
+
+const Cal = lazy(() => import("@calcom/embed-react"));
 
 export const FinalStudioCTA: React.FC = () => {
   const { settings } = useSiteSettings();
@@ -16,10 +17,32 @@ export const FinalStudioCTA: React.FC = () => {
   const email = contact.email || "hello@motionly.media";
 
   const [copied, setCopied] = useState(false);
+  const [shouldLoadCal, setShouldLoadCal] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (shouldLoadCal) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadCal(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    if (calendarRef.current) {
+      observer.observe(calendarRef.current);
+    }
+    return () => observer.disconnect();
+  }, [shouldLoadCal]);
+
+  useEffect(() => {
+    if (!shouldLoadCal) return;
     (async function initCal() {
       try {
+        const { getCalApi } = await import("@calcom/embed-react");
         const cal = await getCalApi({ namespace: calNamespace });
         cal("ui", {
           hideEventTypeDetails: false,
@@ -35,7 +58,7 @@ export const FinalStudioCTA: React.FC = () => {
         console.warn("Cal.com embed initialized via fallback:", err);
       }
     })();
-  }, [calNamespace, isDark]);
+  }, [shouldLoadCal, calNamespace, isDark]);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();

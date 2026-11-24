@@ -260,57 +260,63 @@ const BlogPost: React.FC = () => {
       {/* Top Reading Progress Bar */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-[3px] bg-[#2563EB] dark:bg-[#38BDF8] origin-left z-50 pointer-events-none"
+        className="fixed top-0 left-0 right-0 h-[3px] bg-[#38bdf8] origin-left z-50 pointer-events-none"
       />
 
-      <article className="min-h-screen bg-[#f5f7fa] dark:bg-[#07080d] text-[#111827] dark:text-[#eef0f5] transition-colors duration-200 pt-28 sm:pt-36 pb-24">
+      <article className="min-h-screen bg-[#070b14] text-[#eef0f5] transition-colors duration-200 pt-28 sm:pt-36 pb-24 relative overflow-hidden">
+        {/* Subtle Ambient Glow Lighting */}
+        <div 
+          aria-hidden="true" 
+          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-[#315EFA]/15 rounded-full blur-[150px] -z-10" 
+        />
+
         {/* Article Header Container */}
         <header className="max-w-4xl mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
           {/* Breadcrumb & Navigation */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#38BDF8] transition-colors group"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-400 hover:text-[#38bdf8] transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
               <span>Back to Studio Journal</span>
             </Link>
 
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2563EB]/10 dark:bg-[#38BDF8]/10 text-[#2563EB] dark:text-[#38BDF8] text-xs font-mono font-semibold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#38bdf8] text-xs font-mono font-semibold uppercase tracking-wider">
               {post.category || "Video Strategy"}
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6">
             {post.title}
           </h1>
 
           {/* Subheading / Summary */}
           {post.summary && (
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-8">
+            <p className="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed mb-8">
               {post.summary}
             </p>
           )}
 
           {/* Metadata Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-black/[0.08] dark:border-white/[0.08] text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+          <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-white/[0.08] text-xs sm:text-sm text-slate-400">
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#2563EB] to-[#38BDF8] text-white flex items-center justify-center font-bold text-xs uppercase shadow-xs">
+                <div className="w-7 h-7 rounded-full bg-[#315EFA]/30 border border-[#38bdf8]/40 text-[#38bdf8] flex items-center justify-center font-bold text-xs uppercase shadow-xs">
                   M
                 </div>
-                <span className="font-semibold text-slate-900 dark:text-white">Motionly Editorial</span>
+                <span className="font-semibold text-white">Motionly Studio</span>
               </div>
 
-              <span className="hidden sm:inline text-slate-300 dark:text-slate-700">&bull;</span>
+              <span className="hidden sm:inline text-slate-600">&bull;</span>
 
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4 text-slate-400" />
                 <span>{post.date}</span>
               </div>
 
-              <span className="hidden sm:inline text-slate-300 dark:text-slate-700">&bull;</span>
+              <span className="hidden sm:inline text-slate-600">&bull;</span>
 
               <div className="flex items-center gap-1.5">
                 <Clock className="w-4 h-4 text-slate-400" />
@@ -322,13 +328,13 @@ const BlogPost: React.FC = () => {
             <button
               type="button"
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-xs font-semibold text-slate-800 dark:text-slate-200 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 transition-colors cursor-pointer"
               title="Copy article link"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-500" />
-                  <span className="text-emerald-500 font-mono">Copied</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-400 font-mono">Copied</span>
                 </>
               ) : (
                 <>
@@ -343,7 +349,7 @@ const BlogPost: React.FC = () => {
         {/* Featured Image */}
         {post.imageUrl && (
           <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-slate-900 shadow-xl aspect-[16/9] max-h-[580px]">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-slate-900 shadow-2xl aspect-[16/9] max-h-[580px]">
               <img
                 src={post.imageUrl}
                 alt={`${post.title} cover`}
@@ -394,7 +400,7 @@ const BlogPost: React.FC = () => {
 
             <Link
               to="/blog"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#38BDF8] transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-[#38bdf8] transition-colors"
             >
               <span>Explore all articles</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -402,24 +408,24 @@ const BlogPost: React.FC = () => {
           </div>
 
           {/* Author & Studio Info Card */}
-          <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-5">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#38BDF8] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md">
+          <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 shadow-lg flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#315EFA] to-[#38bdf8] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md">
               M
             </div>
             <div className="flex-1">
-              <span className="font-mono text-[11px] uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] block mb-1">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-[#38bdf8] block mb-1">
                 Written by Motionly Editorial
               </span>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">
+              <h3 className="text-base font-bold text-white mb-1">
                 Motionly Media &bull; Video &amp; Creative Studio
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                 We design high-retention video pipelines, SaaS explainers, 2D/3D motion graphics, and personal branding systems for ambitious companies worldwide.
               </p>
             </div>
             <Link
               to="/contact"
-              className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#2563EB] hover:bg-blue-600 text-white font-semibold text-xs tracking-wider uppercase text-center active:scale-[0.98] transition-all shrink-0"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#315EFA] hover:bg-[#254edb] text-white font-semibold text-xs tracking-wider uppercase text-center active:scale-[0.98] transition-all shrink-0"
             >
               Work With Us
             </Link>
@@ -428,19 +434,19 @@ const BlogPost: React.FC = () => {
 
         {/* More Articles from the Journal */}
         {popularPosts.length > 0 && (
-          <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-20 pt-16 border-t border-black/[0.08] dark:border-white/[0.08]">
+          <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-20 pt-16 border-t border-white/[0.08]">
             <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
               <div>
-                <span className="font-mono text-xs uppercase tracking-widest text-[#2563EB] dark:text-[#38BDF8] block mb-2">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#38bdf8] block mb-2">
                   Continue Reading
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   More From the Journal
                 </h2>
               </div>
               <Link
                 to="/blog"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#38BDF8] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-[#38bdf8] transition-colors"
               >
                 <span>View all entries</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -452,10 +458,10 @@ const BlogPost: React.FC = () => {
                 <Link
                   key={item.id}
                   to={`/blog/${item.id}`}
-                  className="group flex flex-col p-5 rounded-2xl bg-white dark:bg-[#0c101d] border border-black/[0.08] dark:border-white/[0.08] hover:border-[#2563EB]/40 dark:hover:border-[#38BDF8]/40 transition-all duration-300 shadow-xs hover:shadow-md"
+                  className="group flex flex-col p-5 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-all duration-300 shadow-lg"
                 >
                   {item.imageUrl && (
-                    <div className="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-900 border border-black/[0.04] dark:border-white/[0.04]">
+                    <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-4 bg-slate-900 border border-white/5">
                       <img
                         src={item.imageUrl}
                         alt={item.title}
@@ -464,21 +470,21 @@ const BlogPost: React.FC = () => {
                       />
                     </div>
                   )}
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 mb-2">
-                    <span className="text-[#2563EB] dark:text-[#38BDF8] uppercase font-semibold">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-2">
+                    <span className="text-[#38bdf8] uppercase font-semibold">
                       {item.category || "Strategy"}
                     </span>
                     <span>{item.date}</span>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-[#38BDF8] transition-colors line-clamp-2 mb-2 leading-snug">
+                  <h3 className="text-base font-bold text-white group-hover:text-[#38bdf8] transition-colors line-clamp-2 mb-2 leading-snug">
                     {item.title}
                   </h3>
                   {item.summary && (
-                    <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4">
+                    <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-4">
                       {item.summary}
                     </p>
                   )}
-                  <div className="mt-auto pt-3 border-t border-black/[0.04] dark:border-white/[0.04] flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 group-hover:text-[#2563EB] dark:group-hover:text-[#38BDF8]">
+                  <div className="mt-auto pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-[#38bdf8]">
                     <span>Read Article</span>
                     <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
