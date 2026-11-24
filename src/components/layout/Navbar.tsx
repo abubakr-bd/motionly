@@ -6,12 +6,12 @@ import { Menu, X, ArrowUpRight, Sun, Moon } from "lucide-react";
 import AcademyComingSoonModal from "./AcademyComingSoonModal";
 
 const navLinks = [
-  { name: "Work", path: "/portfolio" },
-  { name: "Services", path: "/services" },
-  { name: "Personal Branding", path: "/personal-branding" },
-  { name: "About", path: "/about" },
-  { name: "Journal", path: "/blog" },
-  { name: "Careers", path: "/careers" },
+  { name: "Work", path: "/portfolio/" },
+  { name: "Services", path: "/services/" },
+  { name: "Personal Branding", path: "/personal-branding/" },
+  { name: "About", path: "/about/" },
+  { name: "Journal", path: "/blog/" },
+  { name: "Careers", path: "/careers/" },
 ];
 
 const Navbar = () => {
@@ -168,7 +168,7 @@ const Navbar = () => {
             {/* Desktop 'Start a Project' Button */}
             <div className="hidden sm:flex items-center">
               <Link
-                to="/contact"
+                to="/contact/"
                 onClick={(e) => {
                   if (location.pathname === "/") {
                     e.preventDefault();
@@ -234,7 +234,7 @@ const Navbar = () => {
 
               <div className="pt-2 mt-2 border-t border-white/10 dark:border-white/10">
                 <Link
-                  to="/contact"
+                  to="/contact/"
                   onClick={(e) => {
                     setIsOpen(false);
                     if (location.pathname === "/") {

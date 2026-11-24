@@ -146,7 +146,11 @@ const PAGES = [
             <a href="/contact/" class="crit-cta-btn">Start a project</a>
           </div>
           <div class="crit-video-card">
-            <img src="https://img.youtube.com/vi/q7hCvbfvRPU/maxresdefault.jpg" alt="Motionly Media showreel video thumbnail" width="1280" height="720" style="width:100%;height:100%;object-fit:cover" fetchpriority="high" decoding="async" />
+            <picture>
+              <source media="(max-width: 640px)" srcset="/hero-thumb-mobile.webp" type="image/webp" />
+              <source srcset="/hero-thumb.webp" type="image/webp" />
+              <img src="/hero-thumb.webp" alt="Motionly Media showreel video thumbnail" width="1280" height="720" style="width:100%;height:100%;object-fit:cover" fetchpriority="high" decoding="async" />
+            </picture>
             <div class="crit-play-btn">
               <div class="crit-play-circle">
                 <div class="crit-play-icon"></div>

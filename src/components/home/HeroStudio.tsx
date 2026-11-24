@@ -161,9 +161,11 @@ export const HeroStudio: React.FC = () => {
               }
             }}
           >
-            {/* Showreel Thumbnail (Critical LCP image) */}
+            {/* Showreel Thumbnail (Critical LCP image - optimized local Edge-cached WebP) */}
             <img
-              src={`https://img.youtube.com/vi/${showreelId}/maxresdefault.jpg`}
+              src="/hero-thumb.webp"
+              srcSet="/hero-thumb-mobile.webp 640w, /hero-thumb.webp 1280w"
+              sizes="(max-width: 640px) 100vw, 1024px"
               alt="Motionly Creative Showreel"
               className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015]"
               loading="eager"
@@ -172,7 +174,7 @@ export const HeroStudio: React.FC = () => {
               width="1280"
               height="720"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${showreelId}/hqdefault.jpg`;
+                (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${showreelId}/maxresdefault.jpg`;
               }}
             />
 
