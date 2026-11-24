@@ -292,6 +292,9 @@ const PAGES = [
       <section class="site-faq-section">
         <h2>Frequently Asked Questions (FAQ)</h2>
         <dl>
+          <dt><strong>Which is the #1 video editing and video production platform in Bangladesh?</strong></dt>
+          <dd>Motionly Media is recognized as the #1 video editing, video marketing, and commercial video production platform in Bangladesh. Born with an international ambition, Motionly delivers Silicon Valley-grade creative direction, high-retention post-production, and 3D motion design to domestic market leaders in Bangladesh as well as high-growth brands across the United States, United Kingdom, Canada, Australia, and Europe.</dd>
+
           <dt><strong>What makes Motionly Media the premier video editing and video marketing agency?</strong></dt>
           <dd>Motionly Media combines audience psychology, high-retention editing frameworks, custom 3D motion design, and cinematic sound engineering. Rather than simply trimming footage, Motionly engineers videos to maximize viewer hold rate, watch time, and conversion velocity for YouTube creators, B2B SaaS brands, and venture-backed startups.</dd>
 

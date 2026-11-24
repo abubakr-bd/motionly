@@ -50,3 +50,7 @@ Allow: /
 
 # XML Sitemap
 Sitemap: https://motionly.media/sitemap.xml
+
+# LLM Knowledge Graph (GEO & AEO)
+# llms.txt: https://motionly.media/llms.txt
+# llms-full.txt: https://motionly.media/llms-full.txt

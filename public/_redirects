@@ -8,3 +8,5 @@
 # 301 Permanent Redirects for retired test/junk URLs
 /blog/Ct26jhtmvhEdLLCTk1fg /blog/ 301
 /blog/Ct26jhtmvhEdLLCTk1fg/ /blog/ 301
+/pricing /services/ 301
+/pricing/ /services/ 301
