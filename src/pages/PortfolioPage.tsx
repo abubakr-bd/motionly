@@ -269,7 +269,12 @@ const PortfolioPage: React.FC = () => {
                         exit={{ opacity: 0, scale: 0.96 }}
                         transition={{ duration: 0.25, delay: idx * 0.02 }}
                       >
-                        <div className="group rounded-3xl overflow-hidden bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-all duration-300 flex flex-col justify-between">
+                        <motion.div
+                          whileHover={{ y: -6 }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                          className="group rounded-3xl overflow-hidden bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-colors duration-300 flex flex-col justify-between"
+                        >
                           {/* Video Thumbnail Box */}
                           <button
                             type="button"
@@ -340,7 +345,7 @@ const PortfolioPage: React.FC = () => {
                               <ArrowUpRight className="w-4 h-4" />
                             </button>
                           </div>
-                        </div>
+                        </motion.div>
                       </motion.div>
                     );
                   })}
@@ -439,7 +444,11 @@ const PortfolioPage: React.FC = () => {
               aria-modal="true"
               aria-label={activeVideo.title}
             >
-              <div
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 16 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 16 }}
+                transition={{ type: "spring", damping: 28, stiffness: 320 }}
                 className="relative w-full max-w-5xl rounded-3xl overflow-hidden bg-slate-950 border border-white/10 shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -475,7 +484,7 @@ const PortfolioPage: React.FC = () => {
                     className="w-full h-full border-0"
                   />
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
