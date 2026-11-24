@@ -67,7 +67,7 @@ export const HeroStudio: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
           {/* Eyebrow: Rating Badge */}
           <motion.div 
-            initial={{ opacity: 0, y: 12 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-5 sm:mb-6 shadow-sm max-w-full"
@@ -89,9 +89,9 @@ export const HeroStudio: React.FC = () => {
           <h1 className="text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.12] sm:leading-[1.08] mb-5 sm:mb-6">
             <span className="block overflow-hidden pb-1">
               <motion.span 
-                initial={{ opacity: 0, y: 28 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="inline-block will-change-transform"
               >
                 Creative videos.
@@ -99,9 +99,9 @@ export const HeroStudio: React.FC = () => {
             </span>
             <span className="block overflow-hidden pb-1">
               <motion.span 
-                initial={{ opacity: 0, y: 28 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="inline-block font-serif italic font-normal text-[#38bdf8] will-change-transform"
               >
                 Built to move brands.
@@ -111,9 +111,9 @@ export const HeroStudio: React.FC = () => {
 
           {/* Supporting Copy */}
           <motion.p 
-            initial={{ opacity: 0, y: 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-7 font-normal px-2 sm:px-0"
           >
             We bring ideas to life through strategic storytelling, exceptional video production and thoughtful creative execution.
@@ -121,9 +121,9 @@ export const HeroStudio: React.FC = () => {
 
           {/* Global Reach Pill Badge (Design Monks Style) */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-[11px] sm:text-xs font-mono text-slate-300 mb-6 sm:mb-8 max-w-full text-center"
           >
             <span>Producing for ambitious brands in 10+ countries</span>
@@ -132,9 +132,9 @@ export const HeroStudio: React.FC = () => {
 
           {/* Primary & Secondary CTAs */}
           <motion.div 
-            initial={{ opacity: 0, y: 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.26 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
           >
             <a
@@ -162,9 +162,9 @@ export const HeroStudio: React.FC = () => {
 
         {/* Featured Video / Multi-Device Showreel Composition */}
         <motion.div 
-          initial={{ opacity: 0, y: 24, scale: 0.99 }}
+          initial={false}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           className="relative max-w-5xl mx-auto"
         >
           {/* Main 16:9 Showcase Player with Physical Perspective Tilt */}

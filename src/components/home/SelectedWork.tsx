@@ -233,7 +233,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ project, isAboveFold, onP
           className={`w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] ${
             imgLoaded ? "opacity-100" : "opacity-0"
           }`}
-          loading={isAboveFold ? "eager" : "lazy"}
+          loading="lazy"
           decoding="async"
           width="640"
           height="360"

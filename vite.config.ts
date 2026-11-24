@@ -26,7 +26,7 @@ export default defineConfig({
     modulePreload: {
       resolveDependencies: (_filename, deps) => {
         return deps.filter(
-          (dep) => !dep.includes("vendor-calcom") && !dep.includes("vendor-firebase")
+          (dep) => !dep.includes("vendor-calcom") && !dep.includes("vendor-firebase") && !dep.includes("vendor-lenis")
         );
       },
     },

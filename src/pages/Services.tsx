@@ -316,9 +316,12 @@ const Services: React.FC = () => {
             <div className="relative p-6 sm:p-10 rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.01] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-md">
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 relative z-10">
                 {toolStack.map((tool, idx) => (
-                  <div
+                  <motion.div
                     key={idx}
-                    className="group p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.06] transition-all duration-300 text-center flex flex-col items-center justify-between"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    whileTap={{ scale: 0.96 }}
+                    transition={{ type: "spring", stiffness: 380, damping: 25 }}
+                    className="group p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.06] transition-colors duration-200 text-center flex flex-col items-center justify-between cursor-default"
                   >
                     <div 
                       className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-base mb-3 shadow-lg group-hover:scale-110 transition-transform duration-300"
@@ -330,7 +333,7 @@ const Services: React.FC = () => {
                       <p className="text-sm font-bold text-white tracking-tight">{tool.name}</p>
                       <p className="text-[11px] text-slate-400 mt-1 leading-tight">{tool.role}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -370,12 +373,19 @@ const Services: React.FC = () => {
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => setActiveTab(pillar.id)}
-                    className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-200 relative cursor-pointer ${
+                    className={`text-left p-4 sm:p-5 rounded-2xl border transition-colors duration-150 relative cursor-pointer active:scale-98 ${
                       isActive
-                        ? "bg-white/[0.08] text-white border-[#38bdf8] shadow-[0_0_20px_rgba(56,189,248,0.2)]"
+                        ? "text-white border-[#38bdf8] shadow-[0_0_25px_rgba(56,189,248,0.2)]"
                         : "bg-white/[0.02] text-slate-300 border-white/10 hover:border-white/20 hover:bg-white/[0.04]"
                     }`}
                   >
+                    {isActive && (
+                      <motion.span
+                        layoutId="services-pillar-tab"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        className="absolute inset-0 rounded-2xl bg-white/[0.08] -z-10"
+                      />
+                    )}
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-mono text-xs font-bold text-[#38bdf8]">{pillar.number}</span>
                       {pillar.highlightBadge && (
@@ -391,14 +401,14 @@ const Services: React.FC = () => {
               })}
             </div>
 
-            {/* Selected Pillar Detailed Inspection Box */}
+            {/* Selected Pillar Detailed Inspection Box with Apple Spring Physics */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentPillar.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.25 }}
+                initial={{ opacity: 0, scale: 0.98, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98, y: -12 }}
+                transition={{ type: "spring", damping: 28, stiffness: 340 }}
                 className="p-6 sm:p-10 rounded-3xl bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-2xl"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">

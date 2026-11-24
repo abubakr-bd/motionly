@@ -231,12 +231,19 @@ const Blog = () => {
                       key={cat}
                       type="button"
                       onClick={() => setActiveCategory(cat)}
-                      className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all duration-150 cursor-pointer shrink-0 ${
+                      className={`relative px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-colors duration-150 cursor-pointer shrink-0 active:scale-95 ${
                         isActive
-                          ? "bg-[#38bdf8] text-[#070b14] font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                          ? "text-[#070b14] font-bold"
                           : "bg-white/[0.03] text-slate-400 hover:text-white border border-white/10"
                       }`}
                     >
+                      {isActive && (
+                        <motion.span
+                          layoutId="blog-active-pill"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          className="absolute inset-0 rounded-full bg-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.3)] -z-10"
+                        />
+                      )}
                       {cat}
                     </button>
                   );
@@ -273,8 +280,10 @@ const Blog = () => {
                       key={post.id}
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="group rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] p-5 sm:p-6 transition-all duration-300 flex flex-col justify-between"
+                      whileHover={{ y: -6 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 25 }}
+                      className="group rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] p-5 sm:p-6 transition-colors duration-300 flex flex-col justify-between"
                     >
                       <div>
                         {/* Visual Blueprint Card Header */}

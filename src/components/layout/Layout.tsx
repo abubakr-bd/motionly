@@ -4,8 +4,6 @@ import Navbar from "./Navbar";
 import Footer from "../sections/Footer";
 import MaintenanceBanner from "../MaintenanceBanner";
 import FloatingNavDock from "./FloatingNavDock";
-import Lenis from "lenis";
-import "lenis/dist/lenis.css";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -23,35 +21,44 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       return () => clearTimeout(timer);
     }
   }, [location.pathname, location.hash]);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Respect user motion preferences & keep native smooth scroll on touch devices
+    // Respect user motion preferences & keep native smooth scroll on touch devices (zero overhead on mobile)
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (prefersReducedMotion || isTouch) return;
 
-    const lenis = new Lenis({
-      duration: 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.0,
-    });
-
+    let destroyed = false;
+    let lenisInstance: any = null;
     let rafId: number;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
 
-    rafId = requestAnimationFrame(raf);
+    // Asynchronously import Lenis exclusively on desktop pointers
+    import("lenis").then(({ default: Lenis }) => {
+      if (destroyed) return;
+      lenisInstance = new Lenis({
+        duration: 1.05,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: true,
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.0,
+      });
+
+      const raf = (time: number) => {
+        lenisInstance?.raf(time);
+        rafId = requestAnimationFrame(raf);
+      };
+
+      rafId = requestAnimationFrame(raf);
+    }).catch(() => {});
 
     return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
+      destroyed = true;
+      if (rafId) cancelAnimationFrame(rafId);
+      lenisInstance?.destroy();
     };
   }, []);
 

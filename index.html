@@ -48,9 +48,16 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" />
     </noscript>
 
-    <!-- Preload Critical LCP Showreel Hero Image (Local Edge-Cached WebP Assets) -->
-    <link rel="preload" as="image" href="/hero-thumb-mobile.webp" media="(max-width: 640px)" fetchpriority="high" type="image/webp" />
-    <link rel="preload" as="image" href="/hero-thumb.webp" media="(min-width: 641px)" fetchpriority="high" type="image/webp" />
+    <!-- Preload Critical LCP Showreel Hero Image with responsive srcset and sizes -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-thumb.webp"
+      imagesrcset="/hero-thumb-mobile.webp 640w, /hero-thumb.webp 1280w"
+      imagesizes="(max-width: 640px) 100vw, 1024px"
+      fetchpriority="high"
+      type="image/webp"
+    />
 
     <!-- Structured Data (Organization, ProfessionalService, WebSite & FAQPage for GEO/AEO/SEO) -->
     <script type="application/ld+json">
