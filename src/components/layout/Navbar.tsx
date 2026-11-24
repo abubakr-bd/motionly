@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useSiteSettings } from "../../lib/useSiteData";
 import { useTheme } from "../../lib/ThemeContext";
 import { Menu, X, ArrowUpRight, Sun, Moon } from "lucide-react";
@@ -94,7 +94,7 @@ const Navbar = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-2.5 sm:top-4 left-0 right-0 z-50 max-w-5xl w-[calc(100%-1.25rem)] sm:w-[calc(100%-2rem)] mx-auto transition-all duration-300 ${
+        className={`fixed top-2.5 sm:top-4 left-0 right-0 z-50 max-w-5xl w-[calc(100%-1.25rem)] sm:w-[calc(100%-2rem)] mx-auto transition-[background-color,border-color,box-shadow,color] duration-300 ${
           isDark
             ? isScrolled
               ? "bg-[#070b14]/90 backdrop-blur-xl border-white/10 border-t-white/20 shadow-[0_12px_36px_rgba(0,0,0,0.55)] text-white"
@@ -187,7 +187,7 @@ const Navbar = () => {
                     window.history.pushState(null, "", "#booking");
                   }
                 }}
-                className="inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm transition-all duration-150 active:scale-[0.96] cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 h-8 px-4 rounded-lg text-xs font-bold uppercase tracking-wider bg-[#315EFA] text-white hover:bg-[#254cd4] shadow-sm transition-[background-color,color,box-shadow,transform] duration-150 active:scale-[0.96] cursor-pointer"
               >
                 <span>Start a Project</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -213,57 +213,63 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Drawer (Clean, High-Contrast & Accessible) */}
-        {isOpen && (
-          <div
-            className={`lg:hidden mt-3 pt-4 pb-3 border-t flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-150 ${
-              isDark ? "border-white/10" : "border-slate-200"
-            }`}
-          >
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((link, idx) => {
-                const active = isActive(link.path);
-                return (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
-                      active
-                        ? isDark
-                          ? "text-cyan-400 bg-white/[0.08]"
-                          : "text-blue-600 bg-blue-50"
-                        : isDark
-                          ? "text-slate-300 hover:text-white hover:bg-white/5"
-                          : "text-slate-700 hover:text-slate-950 hover:bg-slate-100"
-                    }`}
-                  >
-                    <span>{link.name}</span>
-                    <span className="text-[10px] font-mono text-slate-400">0{idx + 1}</span>
-                  </Link>
-                );
-              })}
+        {/* Mobile Drawer (Clean, High-Contrast & Accessible with AnimatePresence) */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className={`lg:hidden mt-3 pt-4 pb-3 border-t flex flex-col gap-2 overflow-hidden ${
+                isDark ? "border-white/10" : "border-slate-200"
+              }`}
+            >
+              <nav className="flex flex-col gap-1">
+                {navLinks.map((link, idx) => {
+                  const active = isActive(link.path);
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                        active
+                          ? isDark
+                            ? "text-cyan-400 bg-white/[0.08]"
+                            : "text-blue-600 bg-blue-50"
+                          : isDark
+                            ? "text-slate-300 hover:text-white hover:bg-white/5"
+                            : "text-slate-700 hover:text-slate-950 hover:bg-slate-100"
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      <span className="text-[10px] font-mono text-slate-400">0{idx + 1}</span>
+                    </Link>
+                  );
+                })}
 
-              <div className="pt-2 mt-2 border-t border-white/10 dark:border-white/10">
-                <Link
-                  to="/contact/"
-                  onClick={(e) => {
-                    setIsOpen(false);
-                    if (location.pathname === "/") {
-                      e.preventDefault();
-                      document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
-                      window.history.pushState(null, "", "#booking");
-                    }
-                  }}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#315EFA] text-white hover:bg-[#254edb] shadow-sm transition-colors cursor-pointer"
-                >
-                  <span>Start a Project</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
+                <div className="pt-2 mt-2 border-t border-white/10 dark:border-white/10">
+                  <Link
+                    to="/contact/"
+                    onClick={(e) => {
+                      setIsOpen(false);
+                      if (location.pathname === "/") {
+                        e.preventDefault();
+                        document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                        window.history.pushState(null, "", "#booking");
+                      }
+                    }}
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#315EFA] text-white hover:bg-[#254edb] shadow-sm transition-colors cursor-pointer"
+                  >
+                    <span>Start a Project</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Academy Modal */}

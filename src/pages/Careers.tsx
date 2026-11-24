@@ -293,22 +293,22 @@ const Careers: React.FC = () => {
                   className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.04] transition-colors duration-300 shadow-xl"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-6">
-                    <div>
+                    <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/5 text-[#38bdf8] border border-white/10">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/5 text-[#38bdf8] border border-white/10 shrink-0">
                           {job.department}
                         </span>
-                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10 shrink-0">
                           {job.type}
                         </span>
-                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10 shrink-0">
                           {job.location}
                         </span>
-                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-white/5 border border-white/10 shrink-0">
                           {job.experience}
                         </span>
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight break-words">
                         {job.title}
                       </h3>
                     </div>
@@ -317,7 +317,7 @@ const Careers: React.FC = () => {
                       href={APPLY_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all shrink-0 active:scale-[0.98]"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-[background-color,box-shadow,transform] duration-150 shrink-0 active:scale-[0.98]"
                     >
                       <span>Apply For Role</span>
                       <ArrowRight className="w-4 h-4" />

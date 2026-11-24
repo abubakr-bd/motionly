@@ -573,7 +573,7 @@ const Services: React.FC = () => {
                   <div className="sm:text-right">
                     <Link
                       to={`/contact/?plan=${calcTier}`}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-all active:scale-[0.98]"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.98]"
                     >
                       <span>Book This Scope</span>
                       <ArrowRight className="w-4 h-4" />

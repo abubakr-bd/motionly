@@ -260,10 +260,10 @@ const ContactPage = () => {
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md cursor-pointer"
+                    className="group w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-md cursor-pointer transition-colors duration-150"
                   >
                     <span>Schedule Call for {selectedType} ({selectedBudget})</span>
-                    <ArrowDown className="w-4 h-4 animate-bounce" />
+                    <ArrowDown className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5" />
                   </motion.button>
                 </div>
 

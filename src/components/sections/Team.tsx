@@ -342,7 +342,7 @@ const Team = () => {
                   >
                     {/* Portrait Photo Card */}
                     <div
-                      className={`relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#ffffff] dark:bg-[#11141c] border transition-all duration-300 ${
+                      className={`relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#ffffff] dark:bg-[#11141c] border transition-[border-color,box-shadow] duration-200 ${
                         isCardActive
                           ? "border-[#2563eb] dark:border-[#38bdf8] shadow-md"
                           : "border-black/[0.08] dark:border-white/10 group-hover:border-[#2563eb]/60 group-hover:shadow-md"
@@ -397,7 +397,7 @@ const Team = () => {
                     {/* Member Info Below Card - Cleanly Separated from Graphic with Zero Clashing */}
                     <div className="mt-3.5 px-1">
                       <div className="flex items-center justify-between gap-2">
-                        <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 min-w-0">
                           {member.name}
                         </h3>
                         <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500 shrink-0">

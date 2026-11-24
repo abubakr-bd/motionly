@@ -247,7 +247,7 @@ export const AcademyComingSoonModal: React.FC<AcademyComingSoonModalProps> = ({
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="inline-flex items-center justify-center gap-1.5 bg-[#F47B35] hover:bg-[#e06622] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm shrink-0 disabled:opacity-50 cursor-pointer"
+                      className="inline-flex items-center justify-center gap-1.5 bg-[#F47B35] hover:bg-[#e06622] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-[background-color,box-shadow,transform] duration-150 active:scale-95 shadow-sm shrink-0 disabled:opacity-50 cursor-pointer"
                     >
                       {isLoading ? (
                         <span>Saving...</span>

@@ -298,7 +298,7 @@ const Blog = () => {
                               <p className="text-sm font-bold text-white tracking-tight">
                                 {blueprint.tagline}
                               </p>
-                              <div className="w-12 h-0.5 bg-[#38bdf8]/40 mx-auto mt-2 rounded-full group-hover:w-16 group-hover:bg-[#38bdf8] transition-all" />
+                              <div className="w-16 h-0.5 bg-[#38bdf8]/40 mx-auto mt-2 rounded-full scale-x-75 group-hover:scale-x-100 group-hover:bg-[#38bdf8] transition-[transform,background-color] duration-200 ease-out origin-center" />
                             </div>
 
                             <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">

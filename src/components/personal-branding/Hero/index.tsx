@@ -140,9 +140,9 @@ export const Hero: React.FC<HeroProps> = ({ data = DEFAULT_HERO }) => {
           {/* Center Avatar / 'YOU' */}
           <motion.div 
             className={styles.centerAvatar}
-            initial={{ scale: 0, opacity: 0, filter: "blur(20px)" }}
+            initial={{ scale: 0.94, opacity: 0, filter: "blur(10px)" }}
             animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-            transition={{ type: "spring", stiffness: 50, damping: 20, delay: 0.8 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
             whileHover={{ scale: 1.05 }}
           >
             <motion.div variants={profileIdle} animate="animate" className="w-full h-full">

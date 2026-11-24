@@ -127,9 +127,9 @@ const About: React.FC = () => {
               {studioStats.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="p-5 sm:p-6 rounded-3xl bg-white/[0.03] backdrop-blur-md border border-white/10 hover:border-[#38bdf8]/30 transition-all shadow-lg"
+                  className="p-5 sm:p-6 rounded-3xl bg-white/[0.03] backdrop-blur-md border border-white/10 hover:border-[#38bdf8]/30 transition-colors duration-200 shadow-lg"
                 >
-                  <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight text-[#38bdf8]">
+                  <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight text-[#38bdf8] tabular-nums">
                     {stat.value}
                   </p>
                   <p className="text-xs sm:text-sm font-bold text-white mt-1">
@@ -162,7 +162,7 @@ const About: React.FC = () => {
               {studioPrinciples.map((principle) => (
                 <div
                   key={principle.number}
-                  className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-all duration-300 shadow-lg"
+                  className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-[#38bdf8]/40 hover:bg-white/[0.05] transition-colors duration-200 shadow-lg"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-mono text-sm font-bold text-[#38bdf8]">
@@ -279,7 +279,7 @@ const About: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-[0_0_30px_rgba(49,94,250,0.4)] transition-all duration-150 active:scale-[0.98]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#315EFA] hover:bg-[#254edb] text-white shadow-[0_0_30px_rgba(49,94,250,0.4)] transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.98]"
               >
                 <span>Book 30-Min Strategy Call</span>
                 <ArrowRight className="w-4 h-4" />

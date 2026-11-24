@@ -111,8 +111,8 @@ export const SelectedWork: React.FC = () => {
                 layout
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1], delay: idx * 0.04 }}
+                exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.15 } }}
+                transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1], delay: Math.min(idx * 0.025, 0.12) }}
               >
                 <PortfolioCard
                   project={project}
@@ -272,8 +272,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ project, isAboveFold, onP
       </div>
 
       {/* Meta: title + play link */}
-      <div className="flex items-start justify-between mt-3.5 px-0.5">
-        <h3 className="text-sm sm:text-base font-semibold text-white/90 leading-snug pr-4 group-hover:text-white transition-colors duration-150">
+      <div className="flex items-start justify-between mt-3.5 px-0.5 gap-2">
+        <h3 className="text-sm sm:text-base font-semibold text-white/90 leading-snug group-hover:text-white transition-colors duration-150 min-w-0 line-clamp-2 break-words">
           {project.title}
         </h3>
         <span className="text-[11px] font-mono uppercase tracking-wider text-[#38d9d9] opacity-0 group-hover:opacity-100 transition-opacity duration-150 shrink-0 mt-0.5 flex items-center gap-1">

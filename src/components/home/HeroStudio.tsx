@@ -72,13 +72,13 @@ export const HeroStudio: React.FC = () => {
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/90 mb-5 sm:mb-6 shadow-sm max-w-full"
           >
-            <div className="flex items-center text-amber-400">
+            <div className="flex items-center text-amber-400 shrink-0">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-current" />
               ))}
             </div>
-            <span className="font-semibold text-white">4.9 / 5</span>
-            <span className="text-white/20">&bull;</span>
+            <span className="font-semibold text-white shrink-0 tabular-nums">4.9 / 5</span>
+            <span className="text-white/20 shrink-0">&bull;</span>
             <span className="text-[#38bdf8] uppercase tracking-wider font-bold truncate">
               <span className="hidden sm:inline">Leading Video &amp; Motion Design Studio</span>
               <span className="sm:hidden">Video &amp; Motion Studio</span>
@@ -144,7 +144,7 @@ export const HeroStudio: React.FC = () => {
                 document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
                 window.history.pushState(null, "", "#booking");
               }}
-              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white text-sm font-semibold shadow-lg shadow-[#315EFA]/30 transition-all duration-150 active:scale-[0.97] group cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-[#315EFA] hover:bg-[#254cd4] text-white text-sm font-semibold shadow-lg shadow-[#315EFA]/30 transition-[background-color,border-color,color,box-shadow,transform] duration-150 active:scale-[0.97] group cursor-pointer"
             >
               <span>Start a Project</span>
               <ArrowUpRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -152,7 +152,7 @@ export const HeroStudio: React.FC = () => {
 
             <a
               href="#work"
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-white text-sm font-medium border border-white/15 transition-all duration-150 active:scale-[0.97] cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-white text-sm font-medium border border-white/15 transition-[background-color,border-color,color,box-shadow,transform] duration-150 active:scale-[0.97] cursor-pointer"
             >
               <span>Explore Our Work</span>
               <ArrowDown className="w-4 h-4 text-slate-400" />

@@ -266,8 +266,8 @@ const PortfolioPage: React.FC = () => {
                         layout
                         initial={{ opacity: 0, scale: 0.96 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.96 }}
-                        transition={{ duration: 0.25, delay: idx * 0.02 }}
+                        exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.15 } }}
+                        transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1], delay: Math.min(idx * 0.02, 0.1) }}
                       >
                         <motion.div
                           whileHover={{ y: -6 }}
@@ -295,7 +295,7 @@ const PortfolioPage: React.FC = () => {
                               height={360}
                               loading="lazy"
                               decoding="async"
-                              className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                              className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-[opacity,transform] duration-500 ease-out"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${cleanVideoId}/hqdefault.jpg`;
                               }}
